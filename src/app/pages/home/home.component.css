@@ -1,0 +1,9 @@
+.text-span {
+  font-family: sans-serif;
+  font-style: oblique;
+}
+
+.responsive {
+  height: 500px;
+  width: 100%;
+}

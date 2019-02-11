@@ -1,0 +1,159 @@
+
+
+<div [@itemState]>
+<h2 style="text-align: center">Our Product Offering</h2>
+<mat-divider></mat-divider>
+
+<h4>If you want something similar for your own venture as seen below, why not enquire and let us know what you want developed?</h4>
+<h3><button mat-raised-button style="text-align: center" color="accent" routerLink="/enquire">Enquire</button></h3>
+
+<h3>Front-End Technologies</h3>
+<mat-accordion>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Ionic Framework (Mobile App)
+    </mat-panel-title>
+    <mat-panel-description>
+      IOS, Android and Web App.
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+
+  <p>  Ionic Framework is an open source UI toolkit for building performant, high-quality mobile and desktop apps using web technologies (HTML, CSS, and JavaScript).
+    Ionic Framework is focused on the frontend user experience, or UI interaction of an app (controls, interactions, gestures, animations). Allowing you to give your customers the best experience and an even better first impression.
+  Build and deploy apps that work across multiple platforms, such as native iOS, Android, desktop, and the web as a Progressive Web App - all with one code base. Write once, run anywhere.
+  It is an optimal IT solution that covers all your business requirements.</p>
+  <a href="https://ionicmap-8b1d0.firebaseapp.com/"><button mat-raised-button color="accent">Check out this Ionic App</button></a>
+
+ </mat-expansion-panel>
+ <mat-expansion-panel (opened)="panelOpenState = true"
+                      (closed)="panelOpenState = false">
+   <mat-expansion-panel-header>
+     <mat-panel-title>
+       Angular Framework (Website)
+     </mat-panel-title>
+     <mat-panel-description>
+       Primarily Web based solution
+     </mat-panel-description>
+   </mat-expansion-panel-header>
+   <p>Angular is a platform that makes it easy to build applications with the web. Angular combines declarative templates, dependency injection, end to end tooling, and integrated best practices to solve development challenges. Angular aims to build applications that live on the web, mobile, or the desktop.
+   This solution allows for greater design control when targeting the web, primarily targeting a bespoke UI/UX for a PC audience. </p>
+  <a href="https://news-app-ivqrtyynf.now.sh/"> <button mat-raised-button color="accent">Check out this Angular App</button></a>
+
+ </mat-expansion-panel>
+
+ <h3>Back-End Technologies</h3>
+ <mat-expansion-panel (opened)="panelOpenState = true"
+                      (closed)="panelOpenState = false">
+   <mat-expansion-panel-header>
+     <mat-panel-title>
+       Firebase
+     </mat-panel-title>
+     <mat-panel-description>
+       Database & Hosting
+     </mat-panel-description>
+   </mat-expansion-panel-header>
+   <p>When you connect your app to Firebase, you’re not connecting through normal HTTP. You’re connecting through a WebSocket. WebSockets are much, much faster than HTTP.
+    All of your data syncs automatically through that single WebSocket as fast as your client’s network can carry it.
+  Firebase sends you new data as soon as it’s updated. When your client saves a change to the data, all connected clients receive the updated data almost instantly.</p>
+  <ul>
+    <li>Authentication</li>
+    <li>Hosting</li>
+    <li>Realtime DB</li>
+    <li>Google Analytics</li>
+
+  </ul>
+  <p>These are some of the features provided.</p>
+ </mat-expansion-panel>
+
+ <mat-expansion-panel (opened)="panelOpenState = true"
+                      (closed)="panelOpenState = false">
+   <mat-expansion-panel-header>
+     <mat-panel-title>
+       Now Server
+     </mat-panel-title>
+     <mat-panel-description>
+       Hosting Only
+     </mat-panel-description>
+   </mat-expansion-panel-header>
+   <p>Server option, if you don't require Authentication or a Database, this option is optimal for your needs.</p>
+
+ </mat-expansion-panel>
+</mat-accordion>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-tab-group mat-stretch-tabs>
+  <mat-tab label="Ionic Application (Mobile)">
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>Ionic Hybrid Framework</mat-card-title>
+        <mat-card-subtitle>Mobile</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="assets\Ionic Logo.png" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+
+  </mat-tab>
+  <mat-tab label="Angular (Website)">
+
+    <mat-card class="angular-example-card">
+      <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>Angular Framework</mat-card-title>
+        <mat-card-subtitle>Website</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="assets\angular.png" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.
+        </p>
+      </mat-card-content>
+
+    </mat-card>
+
+   </mat-tab>
+</mat-tab-group> -->

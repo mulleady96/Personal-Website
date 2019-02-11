@@ -1,20 +1,79 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+
+  <mat-sidenav-container class="main-container">
+
+    <mat-sidenav mode="side" [opened]="navBarOpen">
+      <h1>
+      {{ title }}
+      </h1>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/home">
+        <mat-icon color="accent">home</mat-icon>
+        Home
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/products">
+        <mat-icon color="accent">desktop_mac</mat-icon>
+        Products
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/about">
+        <mat-icon color="accent">person_pin</mat-icon>
+        About
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/enquire">
+        <mat-icon color="accent">edit</mat-icon>
+        Get In Touch
+      </button>
+      <br>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+
+          <!-- TWO OPTIONS BELOW FOR MENUS -->
+          <button mat-icon-button color="accent" (click)="toggleNav()">
+            <mat-icon>list</mat-icon>
+          </button>
+          <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>list</mat-icon>
+          </button> -->
+
+          <img src="assets\GravitaTech Logo.png" routerLink="/home" style="cursor: pointer">
+          <h1>
+          {{ title }}
+          </h1>
+          <span class="example-spacer">
+          </span>
+
+        </mat-toolbar-row>
+        </mat-toolbar>
+
+      <div style="padding-left: 10px;">
+      <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+<div style="text-align: center">
+<!-- <mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/home">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </button>
+  <button mat-menu-item routerLink="/products">
+    <mat-icon>desktop_mac</mat-icon>
+    <span>Products</span>
+  </button>
+  <button mat-menu-item routerLink="/about">
+    <mat-icon>person_pin</mat-icon>
+    <span>About</span>
+  </button>
+  <button mat-menu-item routerLink="/enquire">
+    <mat-icon>edit</mat-icon>
+    <span>Get In Touch</span>
+  </button>
+</mat-menu> -->
+</div>

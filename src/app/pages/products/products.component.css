@@ -1,0 +1,29 @@
+.example-card {
+  max-width: 400px;
+  padding-left: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  text-align: center;
+  font-family: 'Bungee';
+  
+}
+
+h4 {
+  text-align: center;
+  font-family: 'Quicksand';
+}
+
+.angular-example-card {
+  max-width: 400px;
+  padding-left: 900px;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
