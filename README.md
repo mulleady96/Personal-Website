@@ -2,6 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
+* Progressive Web App designed with Angular material, https://material.angular.io/.
+* Firebase Hosting & Realtime DB.
+* Material Design icons & Google fonts used throughout.
+* Angular Animations on page load.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
