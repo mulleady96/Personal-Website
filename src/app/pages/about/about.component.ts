@@ -24,4 +24,18 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
   }
 
+  sendClickEvent(url){
+    // Event to track how many users click Github button.
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Github button clicked',
+      transport: 'beacon',
+      hitCallback: function(){
+        this.redirect("https://github.com/mulleady96")
+      },
+      eventLabel: 'Clicked',
+      eventAction: 'User redirected',
+      eventValue: 5
+    });
+  }
+
 }

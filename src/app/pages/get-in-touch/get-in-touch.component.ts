@@ -75,4 +75,14 @@ export class GetInTouchComponent implements OnInit {
   ngOnInit() {
   }
 
+  sendEvent(){
+    // Event to track how many users complete & submit Enquiry form.
+    (<any>window).ga('send', 'event', {
+      eventCategory: 'Enquiry Form Submit',
+      eventLabel: 'formSubmitted',
+      eventAction: 'Form sent to DB',
+      eventValue: 10
+    });
+  }
+
 }

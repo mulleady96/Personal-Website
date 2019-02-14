@@ -73,7 +73,7 @@
 
                    </table>
 
-                  <button mat-raised-button (click)="createEnquiry()" color="primary" [disabled]="!enquiryForm.valid">Submit</button>
+                  <button mat-raised-button (click)="createEnquiry()" (click)="sendEvent()" color="primary" [disabled]="!enquiryForm.valid">Submit</button>
                  </form>
                  <br>
                  <button mat-raised-button (click)="clearForm()" color="accent">Clear</button>
