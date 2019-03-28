@@ -36,7 +36,7 @@ export class AppComponent {
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
         (<any>window).ga('send', 'pageview');
       }
-    })
+    });
   }
 
   navBarOpen = false;
@@ -49,7 +49,6 @@ export class AppComponent {
   navBarToggle(){
     this.navToggle.emit();
   }
-
 
 
   toggleNav(){

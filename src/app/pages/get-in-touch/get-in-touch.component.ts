@@ -41,7 +41,7 @@ export class GetInTouchComponent implements OnInit {
    }
 
 
-   createEnquiry(){
+   createEnquiry() {
      const firstName = this.enquiryForm.value.firstName;
      console.log(firstName); // Retrieving values successfully
      const lastName = this.enquiryForm.value.lastName;
@@ -54,7 +54,7 @@ export class GetInTouchComponent implements OnInit {
      const description = this.enquiryForm.value.description;
 
 
-     // call service and submit the values for vars into the service to be submitted into the DB.
+     // call service and submit the values from form into the DB.
      this.gravita.createEnquiry(firstName, lastName, email, phoneNo, companyName, address, description, angularChecked, ionicChecked);
 
      // SnackBar success message showing the form has been submitted.
@@ -65,7 +65,7 @@ export class GetInTouchComponent implements OnInit {
      this.enquiryForm.reset();
    }
 
-   clearForm(){
+   clearForm() {
      // Reset form back to default values.
      this.enquiryForm.reset();
      // Mark as pristine

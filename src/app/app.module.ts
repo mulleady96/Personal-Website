@@ -17,6 +17,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { AngularFireModule } from '@angular/fire';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { config } from './credentials';
 
@@ -41,6 +42,7 @@ import { GetInTouchComponent } from './pages/get-in-touch/get-in-touch.component
     AppRoutingModule,
     AngularFireModule.initializeApp(config),
     FormsModule,
+    PdfViewerModule,
     MatInputModule,
     MatGridListModule,
     MatToolbarModule,
