@@ -1,6 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-
   <mat-sidenav-container class="main-container">
 
     <mat-sidenav mode="side" [opened]="navBarOpen">
@@ -28,10 +27,15 @@
         Get In Touch
       </button>
       <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/upload">
+        <mat-icon color="accent">cloud_upload</mat-icon>
+        Upload
+      </button>
+      <br>
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar color="primary">
-        <mat-toolbar-row>
+        <mat-toolbar-row class="example-spacer">
 
           <!-- TWO OPTIONS BELOW FOR MENUS -->
           <button mat-icon-button color="accent" (click)="toggleNav()" (click)="menuToggleEvent()">
@@ -42,23 +46,21 @@
           </button> -->
 
           <img src="assets\GravitaTech Logo.png" routerLink="/home" style="cursor: pointer">
-          <h1 class="animated fadeInDown">
+          <h1 class="animated fadeInDown title is-6">
           {{ title }}
           </h1>
-          <span class="example-spacer">
-          </span>
-
+        
         </mat-toolbar-row>
         </mat-toolbar>
 
-      <div style="padding-left: 10px;">
+      
+        <!-- <ng-progress id="myProgress"></ng-progress> -->
       <router-outlet></router-outlet>
-      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 
-<div style="text-align: center">
-<!-- <mat-menu #menu="matMenu">
+<!-- <div style="text-align: center">
+<mat-menu #menu="matMenu">
   <button mat-menu-item routerLink="/home">
     <mat-icon>home</mat-icon>
     <span>Home</span>
@@ -75,5 +77,5 @@
     <mat-icon>edit</mat-icon>
     <span>Get In Touch</span>
   </button>
-</mat-menu> -->
-</div>
+</mat-menu>
+</div> -->

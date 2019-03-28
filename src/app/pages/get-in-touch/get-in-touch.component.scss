@@ -18,13 +18,22 @@
     width: 100%;
 }
 
-mat-checkbox {
 
+$remaining: 450;
 
+.remaining {
+        font-size: 80%;
+        position: relative;
+        right: 50px;
+        font-family: 'Quicksand';
+        padding-left: 50px;
+        @if($remaining <= 200){
+            color: red;
+        }
 }
 
 h3 {
-  font-family: 'Bungee'
+  font-family: 'Bungee';
 }
 
 body {

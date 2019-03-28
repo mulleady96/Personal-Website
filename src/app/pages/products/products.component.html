@@ -1,11 +1,16 @@
+<br>
+<br>
 <div class="animated fadeInUp">
   <h2 style="text-align: center">Our Product Offering</h2>
-  <mat-divider></mat-divider>
 
-  <h4>If you want something similar for your own venture as seen below, why not enquire and let us know what you would like?</h4>
+  <hr>
+  <h4>If you want something similar for your own venture as seen below, why not enquire and let us know what you would
+    like?</h4>
+  <br>
   <h3><button mat-raised-button style="text-align: center" color="accent" routerLink="/enquire">Enquire</button></h3>
-
+  <br>
   <h3>Front-End Technologies</h3>
+  <br>
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -16,13 +21,18 @@
           IOS, Android and Web App.
         </mat-panel-description>
       </mat-expansion-panel-header>
+      
 
-
-      <p> Ionic Framework is an open source UI toolkit for building performant, high-quality mobile and desktop apps using web technologies (HTML, CSS, and JavaScript).
-        Ionic Framework is focused on the frontend user experience, or UI interaction of an app (controls, interactions, gestures, animations). Allowing you to give your customers the best experience and an even better first impression.
-        Build and deploy apps that work across multiple platforms, such as native iOS, Android, desktop, and the web as a Progressive Web App - all with one code base. Write once, run anywhere.
+      <p> Ionic Framework is an open source UI toolkit for building performant, high-quality mobile and desktop apps
+        using web technologies (HTML, CSS, and JavaScript).
+        Ionic Framework is focused on the frontend user experience, or UI interaction of an app (controls, interactions,
+        gestures, animations). Allowing you to give your customers the best experience and an even better first
+        impression.
+        Build and deploy apps that work across multiple platforms, such as native iOS, Android, desktop, and the web as
+        a Progressive Web App - all with one code base. Write once, run anywhere.
         It is an optimal IT solution that covers all your business requirements.</p>
-      <a href="https://ionicmap-8b1d0.firebaseapp.com/"><button mat-raised-button color="accent">Check out this Ionic App</button></a>
+      <a href="https://ionicmap-8b1d0.firebaseapp.com/" target="_blank"><button mat-raised-button color="accent">Check out this Ionic
+          App</button></a>
 
     </mat-expansion-panel>
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -34,14 +44,19 @@
           Primarily Web based solution
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>Angular is a platform that makes it easy to build applications with the web. Angular combines declarative templates, dependency injection, end to end tooling, and integrated best practices to solve development challenges. Angular aims to
+      <p>Angular is a platform that makes it easy to build applications with the web. Angular combines declarative
+        templates, dependency injection, end to end tooling, and integrated best practices to solve development
+        challenges. Angular aims to
         build applications that live on the web, mobile, or the desktop.
-        This solution allows for greater design control when targeting the web, primarily targeting a bespoke UI/UX for a PC audience. </p>
-      <a href="https://news-app-ivqrtyynf.now.sh/"> <button mat-raised-button color="accent">Check out this Angular App</button></a>
+        This solution allows for greater design control when targeting the web, primarily targeting a bespoke UI/UX for
+        a PC audience. </p>
+      <a href="https://news-app-ivqrtyynf.now.sh/" target="_blank"> <button mat-raised-button color="accent">Check out this Angular
+          App</button></a>
 
     </mat-expansion-panel>
-
+<br>
     <h3>Back-End Technologies</h3>
+    <br>
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -51,14 +66,17 @@
           Database & Hosting
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>When you connect your app to Firebase, you’re not connecting through normal HTTP. You’re connecting through a WebSocket. WebSockets are much, much faster than HTTP.
-        All of your data syncs automatically through that single WebSocket as fast as your client’s network can carry it.
-        Firebase sends you new data as soon as it’s updated. When your client saves a change to the data, all connected clients receive the updated data almost instantly.</p>
+      <p>When you connect your app to Firebase, you’re not connecting through normal HTTP. You’re connecting through a
+        WebSocket. WebSockets are much, much faster than HTTP.
+        All of your data syncs automatically through that single WebSocket as fast as your client’s network can carry
+        it.
+        Firebase sends you new data as soon as it’s updated. When your client saves a change to the data, all connected
+        clients receive the updated data almost instantly.</p>
       <ul>
-        <li>Authentication</li>
-        <li>Hosting</li>
-        <li>Realtime DB</li>
-        <li>Google Analytics</li>
+        <li><i class="fas fa-chevron-right"></i>Authentication</li>
+        <li><i class="fas fa-chevron-right"></i>Hosting</li>
+        <li><i class="fas fa-chevron-right"></i>Realtime DB</li>
+        <li><i class="fas fa-chevron-right"></i>Google Analytics</li>
 
       </ul>
       <p>These are some of the features provided.</p>
@@ -79,6 +97,49 @@
   </mat-accordion>
 
 </div>
+
+
+
+<!-- Using Material expansion panel with tiles from Bulma -->
+<!-- <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <article class="tile is-child box">
+        <p class="title">Hello World</p>
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Ionic Framework (Mobile App)
+                </mat-panel-title>
+                <mat-panel-description>
+                  IOS, Android and Web App.
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+        
+        
+              <p> Ionic Framework is an open source UI toolkit for building performant, high-quality mobile and desktop apps
+                using web technologies (HTML, CSS, and JavaScript).
+                Ionic Framework is focused on the frontend user experience, or UI interaction of an app (controls, interactions,
+                gestures, animations). Allowing you to give your customers the best experience and an even better first
+                impression.
+                Build and deploy apps that work across multiple platforms, such as native iOS, Android, desktop, and the web as
+                a Progressive Web App - all with one code base. Write once, run anywhere.
+                It is an optimal IT solution that covers all your business requirements.</p>
+              <a href="https://ionicmap-8b1d0.firebaseapp.com/"><button mat-raised-button color="accent">Check out this Ionic
+                  App</button></a>
+        
+            </mat-expansion-panel>
+            </mat-accordion>
+      </article>
+    </div>
+    <div class="tile is-parent">
+      <article class="tile is-child box">
+        <p class="title">Foo</p>
+        <p class="subtitle">Bar</p>
+      </article>
+    </div>
+    
+    </div> -->
 
 
 

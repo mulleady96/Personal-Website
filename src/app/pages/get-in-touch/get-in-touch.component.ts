@@ -7,7 +7,7 @@ import { GravitaService } from '../../Services/gravita.service';
 @Component({
   selector: 'app-get-in-touch',
   templateUrl: './get-in-touch.component.html',
-  styleUrls: ['./get-in-touch.component.css'],
+  styleUrls: ['./get-in-touch.component.scss'],
   animations: [ // Slide items up from the bottom of screen.
         trigger('itemState', [
             transition('void => *', [
@@ -23,6 +23,9 @@ import { GravitaService } from '../../Services/gravita.service';
 export class GetInTouchComponent implements OnInit {
 
   public enquiryForm: FormGroup;
+
+  public MaxLength = 500;
+  public remaining = 500;
 
   constructor(public formBuilder: FormBuilder, public gravita: GravitaService,
   public snackBar: MatSnackBar) {
@@ -75,7 +78,14 @@ export class GetInTouchComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendEvent(){
+  onTextarea(text: Object) {
+    // Calculates characters remaining in textarea field.
+    this.remaining = this.MaxLength - Object.keys(text).length;
+  //  console.log(text);
+  //  console.log(this.remaining);
+  }
+
+  sendEvent() {
     // Event to track how many users complete & submit Enquiry form.
     (<any>window).ga('send', 'event', {
       eventCategory: 'Enquiry Form Submit',

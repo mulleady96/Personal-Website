@@ -1,20 +1,38 @@
-<div class="animated fadeInUp" style="text-align: center">
-  <h1> What We Can Do for You </h1>
-  <mat-divider></mat-divider>
-  <h3>
-    At Gravita web technologies, we develop fully functional websites & Progressive Web Apps for small to medium SME's who may not have the budget to
-    enlist the help of well known Web development corporations.
+<div style="text-align: center">
+ 
+  
+    <section class="section animated fadeInUp">
+        <div class="container">
+          <h1 class="title">What we can do for you</h1>
+          <h2 class="subtitle">
+              At <strong>Gravita Tech</strong>, we develop fully functional websites & Progressive Web Apps for SME's 
+          </h2>
+          <div class="level-item has-text-centered">
+          <figure class="image is-128x128">
+              <img src="/assets/hugo-list-is-empty.png">
+              <mat-label>Idea Creation</mat-label>
+            </figure>
+            <i class="fas fa-arrows-alt-h fa-4x"></i>
+            <figure class="image is-128x128">
+                <img src="/assets/mirage-come-back-later.png">
+                <mat-label>Development</mat-label>
+              </figure>
+            <i class="fas fa-arrows-alt-h fa-4x"></i>
+              <figure class="image is-128x128">
+                  <img src="/assets/mirage-upgrade.png">
+                  <mat-label>Production</mat-label>
+                </figure>
+              </div>
+              <br>
+          <p>You have the bright ideas, we have the smart solutions using the latest web technologies.</p>
+          <br>
+          <button mat-raised-button style="text-align: center" color="accent" routerLink="/enquire">Let's Get Started</button>
+        </div>
+      </section>
 
-  </h3>
+    <!-- <mat-list>
 
-  <h4>
-    How Can We Offer you The Best?
-    We Use the latest Web development technologies, which includes the likes of;</h4>
-
-  <body>
-    <mat-list>
-
-
+** GRID Layout **
       <mat-grid-list cols="2" rowHeight="200px">
         <mat-grid-tile> <span class="fab fa-angular fa-5x" style="color: red;"></span>
           <mat-list-item> Angular Framework: Web based technology that delivers superior performance </mat-list-item>
@@ -36,8 +54,83 @@
         </mat-grid-tile>
       </mat-grid-list>
 
-      <button mat-raised-button color="accent" routerLink="/products">Go To Products</button>
-    </mat-list>
-  </body>
+    </mat-list> -->
 
 </div>
+
+<br>
+
+<!-- <div class="animated fadeInLeft"> -->
+  <div class="tile is-ancestor tiles-hover">
+    <div class="tile is-vertical is-9">
+      <div class="tile animated fadeInLeft">
+        <div class="tile is-parent">
+          <article class="tile is-child box">
+            <p class="title"><span class="fab fa-angular fa-5x" style="color: red;"></span></p>
+            <p class="subtitle">Angular</p>
+            <div class="content">
+              <p>One of the most popular Web/Mobile Front-end development frameworks used today.</p>
+            </div>
+          </article>
+        </div>
+        <div class="tile is-8 is-vertical">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title"><mat-icon class="md-36">cloud_queue</mat-icon></p>
+              <p class="subtitle">Cloud Functionality</p>
+              <!-- <figure class="image is-4by3">
+                  <img src="/assets/hugo-downloading.png">
+                </figure> -->
+              <div class="content">
+              <p>Access your data from anywhere on any device. We use firebase to host and store your apps' data.
+                  Now is also another option to deploy your website to the web, if a database is not required.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="tile animated fadeInUp delay-1s">
+        <div class="tile is-8 is-parent">
+          <article class="tile is-child box">
+            <p class="title"><span class="fas fa-mobile fa-2x" style="color: grey"></span></p>
+            <p class="subtitle">Ionic</p>
+            <div class="content">
+              <p>A mobile hybrid framework, which targets IOS/Android and any web browser, all from one code base.
+                  This is one of the most efficient and effective ways for you to get your voice out there! </p>
+                  <p>Rapid development through the use of Ionic web components means you can be up and flying in no time!</p>
+            </div>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child box">
+            <p class="title">Products</p>
+            <p class="subtitle"></p>
+            <figure class="image is-4by3">
+                <img src="/assets/fogg-premium-upgrade-1.png">
+              </figure>
+            <div class="content">
+              <p>View a list of example apps over on the product page, there you will find an overview guiding you through the services provided by GravitaTech.</p>
+      <button mat-raised-button color="accent" routerLink="/products">Go To Products</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="tile is-parent animated fadeInRight delay-2s">
+      <article class="tile is-child box">
+        <div class="content">
+          <p class="title"><mat-icon style="color: green">android</mat-icon>
+            <span class="fab fa-app-store-ios fa-1x" style="color: deepskyblue;"></span></p>
+          <p class="subtitle">Deployment</p>
+          <div class="content">
+            <p>Deployment to both Android and IOS App Stores, along with a web presence on Browsers through a PWA (Progressive Web App).</p>
+           <p> Stress-free deployments made easy through Firebase or Now, so if you change your mind upon reflection. We can make the change quickly, redeploy instantaneously and keep your customers happy.</p>
+           <figure class="image is-4by3">
+              <img src="/assets/fogg-success-1.png">
+            </figure>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+<!-- </div> -->

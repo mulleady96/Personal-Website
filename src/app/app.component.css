@@ -1,11 +1,12 @@
 h1 {
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   font-family: 'Major Mono Display';
   color: #ecf0f1;
   margin-bottom: 0;
 }
 h2 {
   font-size: 2em;
+  font-family: 'Montserrat';
   margin-top: 0;
   padding-top: 0;
 }
@@ -31,6 +32,7 @@ nav a.active {
 mat-sidenav {
   padding-top: 100px;
   background: #F7F9FA;
+  display: flex;
   justify-content: center;
   width: 250px;
 }
@@ -50,4 +52,5 @@ mat-sidenav-content {
 
 .example-spacer {
   flex: 1 1 auto;
+  resize: vertical;
 }

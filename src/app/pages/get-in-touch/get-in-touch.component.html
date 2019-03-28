@@ -12,12 +12,12 @@
           <tr>
             <td>
               <mat-form-field>
-                <input matInput formControlName="firstName" type="text" placeholder="First Name">
+                <input matInput formControlName="firstName" maxlength="50" type="text" placeholder="First Name">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field>
-                <input matInput formControlName="lastName" type="text" placeholder="Last Name">
+                <input matInput formControlName="lastName" type="text" maxlength="50" placeholder="Last Name">
               </mat-form-field>
             </td>
           </tr>
@@ -25,12 +25,12 @@
           <tr>
             <td>
               <mat-form-field>
-                <input matInput formControlName="email" type="text" placeholder="Email">
+                <input matInput formControlName="email" type="email" placeholder="Email">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field>
-                <input matInput formControlName="phoneNo" type="text" placeholder="Phone No.">
+                <input matInput formControlName="phoneNo" type="text" maxlength="50" placeholder="Phone No.">
               </mat-form-field>
             </td>
 
@@ -48,16 +48,19 @@
           <tr>
             <td colspan="2">
               <mat-form-field class="demo-full-width">
-                <textarea matInput formControlName="address" type="text" placeholder="Company Address" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+                <textarea matInput formControlName="address" type="text" placeholder="Company Address"
+                  matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
               </mat-form-field>
             </td>
           </tr>
 
           <tr>
             <td>
-              <span>App Type</span><br>
+              <span>App Type</span>
+              <br>
               <section class="demo-full-width">
-                <mat-checkbox style="padding-right: 10px;" formControlName="angularChecked">Angular (Website)</mat-checkbox>
+                <mat-checkbox style="padding-right: 10px;" formControlName="angularChecked">Angular (Website)
+                </mat-checkbox>
                 <mat-checkbox class="example-margin" formControlName="ionicChecked">Ionic (Mobile)</mat-checkbox>
               </section>
             </td>
@@ -65,15 +68,19 @@
           <tr>
             <td colspan="2">
               <mat-form-field class="demo-full-width">
-                <textarea matInput formControlName="description" type="text" placeholder="Tell us which brands, websites and designs you admire? " matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
+                <textarea matInput (input)="onTextarea($event.target.value)" formControlName="description" type="text" maxlength="500"
+                  placeholder="Tell us which brands, websites and designs you admire? " matTextareaAutosize
+                  matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
               </mat-form-field>
+              <mat-label class="remaining">{{remaining}} Characters Remaining</mat-label>
             </td>
           </tr>
 
 
         </table>
 
-        <button mat-raised-button (click)="createEnquiry()" (click)="sendEvent()" color="primary" [disabled]="!enquiryForm.valid">Submit</button>
+        <button mat-raised-button (click)="createEnquiry()" (click)="sendEvent()" color="primary"
+          [disabled]="!enquiryForm.valid">Submit</button>
       </form>
       <br>
       <button mat-raised-button (click)="clearForm()" color="accent">Clear</button>

@@ -1,8 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import * as firebase from 'firebase/app';
 import { config } from './credentials';
 import { Router, NavigationEnd } from '@angular/router';
+import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 
 @Component({
   selector: 'app-root',
@@ -20,15 +21,18 @@ import { Router, NavigationEnd } from '@angular/router';
         ])
     ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   // Place google analytics code in app.component => only want to run once.
   title = 'Gravita Tech';
 
   @Output()
   navToggle = new EventEmitter();
 
-  constructor(private router: Router){
-    this.initializeApp()
+  progressRef: NgProgressRef;
+
+  constructor(private router: Router, private progress: NgProgress) {
+
+    this.initializeApp();
 
     // Subscribe to router nav event => on route change, sends page view data to GA
     this.router.events.subscribe(event => {
@@ -41,22 +45,26 @@ export class AppComponent {
 
   navBarOpen = false;
 
+  ngOnInit() { // Progress loading bar @ top of page.
+    this.progressRef = this.progress.ref('myProgress');
+  }
 
-  initializeApp(){
+
+  initializeApp() {
     firebase.initializeApp(config);
   }
 
-  navBarToggle(){
+  navBarToggle() {
     this.navToggle.emit();
   }
 
 
-  toggleNav(){
+  toggleNav() {
   this.navBarOpen = !this.navBarOpen;
   }
 
   // GA tracking to see how frequently users interact with menu button.
-  menuToggleEvent(){
+  menuToggleEvent() {
     (<any>window).ga('send', 'event', {
       eventCategory: 'Menu',
       eventLabel: 'Menu Toggle',

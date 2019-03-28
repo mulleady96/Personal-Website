@@ -7,3 +7,10 @@
   height: 500px;
   width: 100%;
 }
+
+.tiles-hover article:hover {
+    /* color: rgba(77, 89, 97, 0.753); */
+    background-color: rgba(222, 233, 247, 0.945);
+    transform: translateY(-2%);
+  }
+

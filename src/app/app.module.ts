@@ -14,7 +14,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NgProgressModule } from '@ngx-progressbar/core';
+
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -28,6 +32,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { AboutComponent } from './pages/about/about.component';
 import { GetInTouchComponent } from './pages/get-in-touch/get-in-touch.component';
+import { DropZoneDirective } from './drop-zone.directive';
+
+import { FileUploadComponent } from './pages/file-upload/file-upload.component';
+import { FileSizePipe } from './pages/file-upload/file-size.pipe';
 
 @NgModule({
   declarations: [
@@ -35,14 +43,19 @@ import { GetInTouchComponent } from './pages/get-in-touch/get-in-touch.component
     HomeComponent,
     ProductsComponent,
     AboutComponent,
-    GetInTouchComponent
+    GetInTouchComponent,
+    DropZoneDirective,
+    FileSizePipe,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(config),
+    AngularFireStorageModule,
     FormsModule,
     PdfViewerModule,
+    NgProgressModule,
     MatInputModule,
     MatGridListModule,
     MatToolbarModule,

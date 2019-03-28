@@ -7,8 +7,29 @@ html, body {
   font-family: 'Montserrat', sans-serif;
 }
 
+h1 {
+  font-size: 1.45em;
+  font-family: 'Montserrat';
+  color: #49454d;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 1.45em;
+  font-family: 'Montserrat';
+  margin-top: 0;
+  padding-top: 0;
+}
+
 h5 {
   font-family: 'Titillium Web';
+}
+
+i {
+  padding-right: 5px;
+  color: rgba(93, 144, 238, 0.733);
+  display: inline-block;
+
 }
 
 .material-icons.md-18 { font-size: 18px; }
