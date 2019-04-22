@@ -1,5 +1,6 @@
 <!-- animated bounceInLeft -- To use animate.css functionality. -->
-<div class="animated bounceInRight" style="text-align: center;">
+<div class="animated bounceInRight" style="text-align: center;" fxLayout.xs="column wrap">
+  
   <mat-card>
     <!-- Title of an Card -->
     <mat-card-title>
@@ -9,7 +10,7 @@
     <mat-card-content>
       <form [formGroup]="enquiryForm">
         <table>
-          <tr>
+          <tr fxLayout.xs="row wrap">
             <td>
               <mat-form-field>
                 <input matInput formControlName="firstName" maxlength="50" type="text" placeholder="First Name">
@@ -22,7 +23,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr fxLayout.xs="row wrap">
             <td>
               <mat-form-field>
                 <input matInput formControlName="email" type="email" placeholder="Email">
@@ -36,7 +37,7 @@
 
 
           </tr>
-          <tr>
+          <tr fxLayout.xs="row wrap">
             <td>
               <mat-form-field class="demo-full-width">
                 <input matInput formControlName="companyName" type="text" placeholder="Company Name">
@@ -45,7 +46,7 @@
 
           </tr>
 
-          <tr>
+          <tr fxLayout.xs="row wrap">
             <td colspan="2">
               <mat-form-field class="demo-full-width">
                 <textarea matInput formControlName="address" type="text" placeholder="Company Address"
@@ -65,7 +66,7 @@
               </section>
             </td>
           </tr>
-          <tr>
+          <tr fxLayout.xs="row wrap">
             <td colspan="2">
               <mat-form-field class="demo-full-width">
                 <textarea matInput (input)="onTextarea($event.target.value)" formControlName="description" type="text" maxlength="500"
@@ -85,8 +86,6 @@
       <br>
       <button mat-raised-button (click)="clearForm()" color="accent">Clear</button>
 
-
     </mat-card-content>
-
   </mat-card>
-</div>
+  </div>

@@ -1,63 +1,62 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-  <mat-sidenav-container class="main-container">
+<mat-sidenav-container class="main-container">
 
-    <mat-sidenav mode="side" [opened]="navBarOpen">
-      <h2>
+  <mat-sidenav mode="side" [opened]="navBarOpen">
+    <h2>
       {{ title }}
-      </h2>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/home">
-        <mat-icon color="accent">home</mat-icon>
-        Home
-      </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/products">
-        <mat-icon color="accent">desktop_mac</mat-icon>
-        Products
-      </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/about">
-        <mat-icon color="accent">person_pin</mat-icon>
-        About
-      </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/enquire">
-        <mat-icon color="accent">edit</mat-icon>
-        Get In Touch
-      </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/upload">
-        <mat-icon color="accent">cloud_upload</mat-icon>
-        Upload
-      </button>
-      <br>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <mat-toolbar-row class="example-spacer">
+    </h2>
+    <br>
+    <button mat-button routerLinkActive="router-link-active" routerLink="/home">
+      <mat-icon color="accent">home</mat-icon>
+      Home
+    </button>
+    <br>
+    <button mat-button routerLinkActive="router-link-active" routerLink="/products">
+      <mat-icon color="accent">desktop_mac</mat-icon>
+      Products
+    </button>
+    <br>
+    <button mat-button routerLinkActive="router-link-active" routerLink="/about">
+      <mat-icon color="accent">person_pin</mat-icon>
+      About
+    </button>
+    <br>
+    <button mat-button routerLinkActive="router-link-active" routerLink="/enquire">
+      <mat-icon color="accent">edit</mat-icon>
+      Get In Touch
+    </button>
+    <br>
+    <button mat-button routerLinkActive="router-link-active" routerLink="/upload">
+      <mat-icon color="accent">cloud_upload</mat-icon>
+      Upload
+    </button>
+    <br>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" fxLayout="row wrap">
+      <mat-toolbar-row class="example-spacer">
 
-          <!-- TWO OPTIONS BELOW FOR MENUS -->
-          <button mat-icon-button color="accent" (click)="toggleNav()" (click)="menuToggleEvent()">
-            <mat-icon>list</mat-icon>
-          </button>
-          <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+        <!-- TWO OPTIONS BELOW FOR MENUS -->
+        <button mat-icon-button color="accent" (click)="toggleNav()" (click)="menuToggleEvent()">
+          <mat-icon>list</mat-icon>
+        </button>
+        <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>list</mat-icon>
           </button> -->
 
-          <img src="assets\GravitaTech Logo.png" routerLink="/home" style="cursor: pointer">
-          <h1 class="animated fadeInDown title is-6">
+        <img src="assets\GravitaTech Logo.png" routerLink="/home" style="cursor: pointer" alt="GravitaTech Logo">
+        <!-- <h1 class="animated fadeInDown title is-6">
           {{ title }}
-          </h1>
-        
-        </mat-toolbar-row>
-        </mat-toolbar>
+        </h1> -->
+      </mat-toolbar-row>
+    </mat-toolbar>
 
-      
-        <!-- <ng-progress id="myProgress"></ng-progress> -->
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+
+    <!-- <ng-progress id="myProgress"></ng-progress> -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 <!-- <div style="text-align: center">
 <mat-menu #menu="matMenu">

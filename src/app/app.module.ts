@@ -15,6 +15,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { NgProgressModule } from '@ngx-progressbar/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -51,6 +52,7 @@ import { FileSizePipe } from './pages/file-upload/file-size.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FlexLayoutModule,
     AngularFireModule.initializeApp(config),
     AngularFireStorageModule,
     FormsModule,

@@ -46,7 +46,6 @@ export class GetInTouchComponent implements OnInit {
 
    createEnquiry() {
      const firstName = this.enquiryForm.value.firstName;
-     console.log(firstName); // Retrieving values successfully
      const lastName = this.enquiryForm.value.lastName;
      const email = this.enquiryForm.value.email;
      const phoneNo = this.enquiryForm.value.phoneNo;
