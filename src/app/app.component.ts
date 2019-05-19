@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import * as firebase from 'firebase/app';
 import { config } from './credentials';
 import { Router, NavigationEnd } from '@angular/router';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -43,25 +44,31 @@ export class AppComponent implements OnInit {
     });
   }
 
-  navBarOpen = false;
+  @ViewChild('sidenav') sidenav: MatSidenav;
+
+  reason = '';
+
+  close(reason: string) {
+    this.reason = reason;
+    this.sidenav.close();
+  }
 
   ngOnInit() { // Progress loading bar @ top of page.
     this.progressRef = this.progress.ref('myProgress');
   }
 
-
   initializeApp() {
     firebase.initializeApp(config);
   }
 
-  navBarToggle() {
-    this.navToggle.emit();
-  }
+  // navBarToggle() {
+  //   this.navToggle.emit();
+  // }
 
 
-  toggleNav() {
-  this.navBarOpen = !this.navBarOpen;
-  }
+  // toggleNav() {
+  // this.navBarOpen = !this.navBarOpen;
+  // }
 
   // GA tracking to see how frequently users interact with menu button.
   menuToggleEvent() {

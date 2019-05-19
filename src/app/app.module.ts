@@ -38,6 +38,7 @@ import { DropZoneDirective } from './drop-zone.directive';
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { FileSizePipe } from './pages/file-upload/file-size.pipe';
 
+
 @NgModule({
   declarations: [
     AppComponent,
