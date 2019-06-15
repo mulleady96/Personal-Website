@@ -37,6 +37,8 @@ import { DropZoneDirective } from './drop-zone.directive';
 
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { FileSizePipe } from './pages/file-upload/file-size.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -77,7 +79,8 @@ import { FileSizePipe } from './pages/file-upload/file-size.pipe';
     MatIconModule,
     MatTabsModule,
     BrowserAnimationsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

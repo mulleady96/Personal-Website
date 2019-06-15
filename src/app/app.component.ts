@@ -5,6 +5,7 @@ import { config } from './credentials';
 import { Router, NavigationEnd } from '@angular/router';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit {
 
   progressRef: NgProgressRef;
 
-  constructor(private router: Router, private progress: NgProgress) {
+  constructor(private router: Router, private progress: NgProgress,
+    private swUpdate: SwUpdate) {
 
     this.initializeApp();
 
@@ -54,7 +56,16 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() { // Progress loading bar @ top of page.
-    this.progressRef = this.progress.ref('myProgress');
+    //this.progressRef = this.progress.ref('myProgress');
+
+    if (this.swUpdate.isEnabled){
+      this.swUpdate.available.subscribe(() => {
+        if (confirm("New version available. Load New Version?")) {
+
+          window.location.reload();
+      }
+      });
+    }
   }
 
   initializeApp() {

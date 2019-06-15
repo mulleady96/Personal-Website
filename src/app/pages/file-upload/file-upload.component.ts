@@ -43,7 +43,7 @@ export class FileUploadComponent implements OnInit {
     // The File object
     const file = event.item(0);
 
-    // Client-side validation example
+    // Client-side validation example - Only take in images/logos
     // if (file.type.split('/')[0] !== 'image') {
     //   this.snackBar.open('This file type is not supported', 'Oh no!', {
     //     duration: 5000,
@@ -57,7 +57,7 @@ export class FileUploadComponent implements OnInit {
     const path = `Logos/${new Date().getTime()}_${file.name}`;
 
     // Totally optional metadata
-    const customMetadata = { app: 'My AngularFire-powered PWA!' };
+    const customMetadata = { app: 'My Image Uploader!' };
 
     // The main task
     this.task = this.storage.upload(path, file);
