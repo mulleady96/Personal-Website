@@ -53,4 +53,5 @@ mat-sidenav-content {
 .example-spacer {
   flex: 1 1 auto;
   resize: vertical;
+  background: linear-gradient(180deg, #3878a7 95%, #093466 15%);
 }

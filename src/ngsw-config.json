@@ -10,6 +10,9 @@
           "/index.html",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/css?family=Major+Mono+Display|Montserrat|BioRhyme|Bungee|Quicksand|Staatliches|Bungee+Shade|Titillium+Web"
         ]
       }
     }, {

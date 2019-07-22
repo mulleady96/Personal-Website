@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
     // Subscribe to router nav event => on route change, sends page view data to GA
     this.router.events.subscribe(event => {
-      if(event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd) {
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
         (<any>window).ga('send', 'pageview');
       }

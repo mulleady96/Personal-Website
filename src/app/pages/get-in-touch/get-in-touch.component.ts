@@ -72,6 +72,7 @@ export class GetInTouchComponent implements OnInit {
      this.enquiryForm.reset();
      // Mark as pristine
      this.enquiryForm.markAsUntouched();
+     this.remaining = 500;
    }
 
   ngOnInit() {
@@ -80,7 +81,6 @@ export class GetInTouchComponent implements OnInit {
   onTextarea(text: Object) {
     // Calculates characters remaining in textarea field.
     this.remaining = this.MaxLength - Object.keys(text).length;
-  //  console.log(text);
   //  console.log(this.remaining);
   }
 
