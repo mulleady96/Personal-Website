@@ -1,5 +1,6 @@
 .center-item {
-  text-align: center;
+  align-content: center;
+  text-align: center justify;
 }
 
 .mat-icon-styling {
@@ -8,6 +9,10 @@
 
 li {
   font-family: 'Quicksand';
+}
+
+ul {
+  text-align: center justify;
 }
 
 

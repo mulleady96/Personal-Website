@@ -32,54 +32,39 @@
       Upload
     </button>
     <br>
+    <button mat-button routerLinkActive="router-link-active" routerLink="/coming-soon">
+      <mat-icon color="accent">book</mat-icon>
+      Blog
+    </button>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" fxLayout="row wrap">
-      <mat-toolbar-row class="example-spacer">
+      <mat-toolbar-row fxLayoutGap="55px" fxLayoutAlign="center center" class="example-spacer">
 
         <!-- TWO OPTIONS BELOW FOR MENUS -->
+        <div>
         <button mat-icon-button color="accent" (click)="sidenav.open()">
           <mat-icon>list</mat-icon>
         </button>
+        </div>
         <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>list</mat-icon>
           </button> -->
 
-        <img src="assets\Andrew Mulleady Logo.png" routerLink="/home" style="cursor: pointer" alt="GravitaTech Logo">
+      <mat-icon class="icon-logo"><img src="assets\AM Logo.png" routerLink="/home" alt="GravitaTech Logo"></mat-icon>
         <!-- <h1 class="animated fadeInDown title is-6">
           {{ title }}
         </h1> -->
-      <a href="https://github.com/mulleady96" target="_blank">
+      <div><a href="https://github.com/mulleady96" fxLayoutAlign="flex-end" target="_blank">
         <button mat-button matTooltip="My Github Account" color="accent">
           <mat-icon class="fab fa-github"></mat-icon>
         </button>
       </a>
+      </div>
     </mat-toolbar-row>
     </mat-toolbar>
-
 
     <!-- <ng-progress id="myProgress"></ng-progress> -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- <div style="text-align: center">
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/home">
-    <mat-icon>home</mat-icon>
-    <span>Home</span>
-  </button>
-  <button mat-menu-item routerLink="/products">
-    <mat-icon>desktop_mac</mat-icon>
-    <span>Products</span>
-  </button>
-  <button mat-menu-item routerLink="/about">
-    <mat-icon>person_pin</mat-icon>
-    <span>About</span>
-  </button>
-  <button mat-menu-item routerLink="/enquire">
-    <mat-icon>edit</mat-icon>
-    <span>Get In Touch</span>
-  </button>
-</mat-menu>
-</div> -->

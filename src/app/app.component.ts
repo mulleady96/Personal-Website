@@ -6,6 +6,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SwUpdate } from '@angular/service-worker';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +27,7 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent implements OnInit {
   // Place google analytics code in app.component => only want to run once.
-  title = 'Gravita Tech';
+  title = 'Andrew Mulleady';
 
   @Output()
   navToggle = new EventEmitter();
@@ -36,6 +38,7 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate) {
 
     this.initializeApp();
+      AOS.init();
 
     // Subscribe to router nav event => on route change, sends page view data to GA
     this.router.events.subscribe(event => {
@@ -55,12 +58,11 @@ export class AppComponent implements OnInit {
     this.sidenav.close();
   }
 
-  ngOnInit() { // Progress loading bar @ top of page.
-    //this.progressRef = this.progress.ref('myProgress');
-
-    if (this.swUpdate.isEnabled){
+  ngOnInit() {
+    // SW - Reload fresh instance of app, if new version is available.
+    if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
-        if (confirm("New version available. Load New Version?")) {
+        if (confirm('New version available. Load New Version?')) {
 
           window.location.reload();
       }

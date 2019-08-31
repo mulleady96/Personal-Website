@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatTableModule} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
@@ -14,6 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -39,6 +40,9 @@ import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { FileSizePipe } from './pages/file-upload/file-size.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { BlogComponent } from './pages/blog/blog.component';
+import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
+import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 
 
 @NgModule({
@@ -50,7 +54,10 @@ import { environment } from '../environments/environment';
     GetInTouchComponent,
     DropZoneDirective,
     FileSizePipe,
-    FileUploadComponent
+    FileUploadComponent,
+    BlogComponent,
+    BlogDetailComponent,
+    ComingSoonComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +72,7 @@ import { environment } from '../environments/environment';
     MatGridListModule,
     MatToolbarModule,
     MatDividerModule,
+    MatChipsModule,
     MatSnackBarModule,
     MatSnackBarModule,
     MatSidenavModule,
@@ -76,6 +84,7 @@ import { environment } from '../environments/environment';
     MatExpansionModule,
     MatMenuModule,
     MatListModule,
+    MatTableModule,
     MatIconModule,
     MatTabsModule,
     BrowserAnimationsModule,

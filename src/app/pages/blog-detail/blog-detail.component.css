@@ -1,0 +1,33 @@
+div {
+    text-align: center justify;
+    justify-content: center;
+    display: inline-block;
+}
+
+article {
+    justify-content: center;
+}
+
+.left-column-button {
+   position: sticky;
+   top: 0;
+   /* left: 10%; */
+}
+
+h2 {
+    position: sticky;
+    top: 0;
+    padding-bottom: 5px;
+    background-color: aliceblue;
+    width: 100%;
+    text-align: center;
+}
+
+code {
+    color: aliceblue;
+}
+
+pre {
+    white-space: pre-wrap;
+    background: rgb(53, 53, 53);
+}

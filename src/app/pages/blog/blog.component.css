@@ -1,0 +1,40 @@
+table {
+    width: 100%;
+}
+
+.mat-row :hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.example-card {
+    max-width: 400px;
+    cursor: pointer;
+    margin: 20px 25px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+.mat-cell :hover {
+    background-color: lightblue;
+}
+
+mat-form-field {
+    font-size: 25px;
+    width: 80%;
+}
+
+button {
+    text-align: center;
+}
+
+mat-list {
+    flex-grow: inherit;
+}
+
+h5 {
+    text-align: center;
+}
