@@ -65,6 +65,7 @@ export class GetInTouchComponent implements OnInit {
      });
      // Final step is to reset the form on submission.
      this.enquiryForm.reset();
+     this.remaining = 500;
    }
 
    clearForm() {

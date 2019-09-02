@@ -11,7 +11,6 @@ import * as moment from 'moment';
 export class BlogDetailComponent implements OnInit {
 
   constructor(private location: Location) {
-    const githubGist1 = '<script src="https://gist.github.com/mulleady96/3b16609626bbfde2aa25bff9363d4c82.js"></script>';
    }
 
   ngOnInit() {
