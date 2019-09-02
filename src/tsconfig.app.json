@@ -6,7 +6,7 @@
     "types": [],
     "paths": {
       "core-js/es7/reflect": [
-        "node_modules/core-js/proposals/reflect-metadata"
+        "../node_modules/@angular-devkit/build-angular/node_modules/core-js/proposals/reflect-metadata"
       ]
     }
   },
