@@ -44,14 +44,14 @@ export class FileUploadComponent implements OnInit {
     const file = event.item(0);
 
     // Client-side validation example - Only take in images/logos
-    // if (file.type.split('/')[0] !== 'image') {
-    //   this.snackBar.open('This file type is not supported', 'Oh no!', {
-    //     duration: 5000,
-    //     verticalPosition: 'bottom'
-    //   });
-    //   console.error('unsupported file type :( ');
-    //   return;
-    // }
+    if (file.type.split('/')[0] !== 'image') {
+      this.snackBar.open('This file type is not supported', 'Oh no!', {
+        duration: 5000,
+        verticalPosition: 'bottom'
+      });
+      // console.error('unsupported file type :( ');
+      return;
+    }
 
     // The storage path
     const path = `Logos/${new Date().getTime()}_${file.name}`;
@@ -70,7 +70,7 @@ export class FileUploadComponent implements OnInit {
       // The file's download URL
        finalize(() => this.downloadURL = fileRef.getDownloadURL()),
       tap(snap => {
-        console.log(snap);
+       // console.log(snap);
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update DB on completion
           this.pictureRef.push(({ path, size: snap.totalBytes })); // Log the upload as an entry into the DB

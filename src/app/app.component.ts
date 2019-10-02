@@ -8,6 +8,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { SwUpdate } from '@angular/service-worker';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { ThemeService } from './Services/theme.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -33,9 +35,12 @@ export class AppComponent implements OnInit {
   navToggle = new EventEmitter();
 
   progressRef: NgProgressRef;
+  isDarkTheme: Observable<boolean>;
+  themeDescription: string;
+
 
   constructor(private router: Router, private progress: NgProgress,
-    private swUpdate: SwUpdate) {
+    private swUpdate: SwUpdate, private themeService: ThemeService) {
 
     this.initializeApp();
       AOS.init();
@@ -58,7 +63,15 @@ export class AppComponent implements OnInit {
     this.sidenav.close();
   }
 
+  toggleDarkTheme(checked: boolean) {
+    this.themeService.setDarkTheme(checked);
+    this.themeDescription = 'Light Theme';
+  }
+
   ngOnInit() {
+    // Toggle Light/Dark Theme
+    this.isDarkTheme = this.themeService.isDarkTheme;
+
     // SW - Reload fresh instance of app, if new version is available.
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {

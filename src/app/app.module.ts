@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatButtonModule, MatCheckboxModule, MatTableModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatTableModule, MatSlideToggleModule} from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule} from '@angular/material/menu';
@@ -15,18 +15,15 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
+
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-
 import { config } from './credentials';
-
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -35,7 +32,6 @@ import { ProductsComponent } from './pages/products/products.component';
 import { AboutComponent } from './pages/about/about.component';
 import { GetInTouchComponent } from './pages/get-in-touch/get-in-touch.component';
 import { DropZoneDirective } from './drop-zone.directive';
-
 import { FileUploadComponent } from './pages/file-upload/file-upload.component';
 import { FileSizePipe } from './pages/file-upload/file-size.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -43,20 +39,13 @@ import { environment } from '../environments/environment';
 import { BlogComponent } from './pages/blog/blog.component';
 import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
+import { ThemeService } from './Services/theme.service';
+import { AppMaterialModule } from './app-material.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ProductsComponent,
-    AboutComponent,
-    GetInTouchComponent,
-    DropZoneDirective,
-    FileSizePipe,
-    FileUploadComponent,
-    BlogComponent,
-    BlogDetailComponent,
     ComingSoonComponent
   ],
   imports: [
@@ -65,33 +54,16 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
     FlexLayoutModule,
     AngularFireModule.initializeApp(config),
     AngularFireStorageModule,
-    FormsModule,
     PdfViewerModule,
     NgProgressModule,
-    MatInputModule,
-    MatGridListModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatChipsModule,
-    MatSnackBarModule,
-    MatSnackBarModule,
-    MatSidenavModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatMenuModule,
-    MatListModule,
-    MatTableModule,
-    MatIconModule,
-    MatTabsModule,
+    AppMaterialModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    ThemeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,70 +1,65 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div [ngClass]="{'dark-theme' : isDarkTheme | async}">
+  <mat-sidenav-container class="main-container" (backdropClick)="close('backdrop')">
 
-<mat-sidenav-container class="main-container" (backdropClick)="close('backdrop')">
+    <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
+      <h2>
+        {{ title }}
+      </h2>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/home">
+        <mat-icon color="accent">home</mat-icon>
+        Home
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/products">
+        <mat-icon color="accent">desktop_mac</mat-icon>
+        Products
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/about">
+        <mat-icon color="accent">person_pin</mat-icon>
+        About
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/enquire">
+        <mat-icon color="accent">edit</mat-icon>
+        Get In Touch
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/upload">
+        <mat-icon color="accent">cloud_upload</mat-icon>
+        Upload
+      </button>
+      <br>
+      <button mat-button routerLinkActive="router-link-active" routerLink="/coming-soon">
+        <mat-icon color="accent">book</mat-icon>
+        Blog
+      </button>
+      <hr>
+      <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)"><mat-icon color="accent">nights_stay</mat-icon>Dark theme
+        </mat-slide-toggle>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary" fxLayout="row wrap">
+        <mat-toolbar-row fxLayoutGap="55px" fxLayoutAlign="center center" class="example-spacer">
+          <div>
+            <button mat-icon-button color="accent" (click)="sidenav.open()">
+              <mat-icon>list</mat-icon>
+            </button>
+          </div>
+          <mat-icon class="icon-logo"><img src="assets\AM Logo.png" routerLink="/home" alt="GravitaTech Logo">
+          </mat-icon>
 
-  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-    <h2>
-      {{ title }}
-    </h2>
-    <br>
-    <button mat-button routerLinkActive="router-link-active" routerLink="/home">
-      <mat-icon color="accent">home</mat-icon>
-      Home
-    </button>
-    <br>
-    <button mat-button routerLinkActive="router-link-active" routerLink="/products">
-      <mat-icon color="accent">desktop_mac</mat-icon>
-      Products
-    </button>
-    <br>
-    <button mat-button routerLinkActive="router-link-active" routerLink="/about">
-      <mat-icon color="accent">person_pin</mat-icon>
-      About
-    </button>
-    <br>
-    <button mat-button routerLinkActive="router-link-active" routerLink="/enquire">
-      <mat-icon color="accent">edit</mat-icon>
-      Get In Touch
-    </button>
-    <br>
-    <button mat-button routerLinkActive="router-link-active" routerLink="/upload">
-      <mat-icon color="accent">cloud_upload</mat-icon>
-      Upload
-    </button>
-    <br>
-    <button mat-button routerLinkActive="router-link-active" routerLink="/coming-soon">
-      <mat-icon color="accent">book</mat-icon>
-      Blog
-    </button>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary" fxLayout="row wrap">
-      <mat-toolbar-row fxLayoutGap="55px" fxLayoutAlign="center center" class="example-spacer">
-
-        <!-- TWO OPTIONS BELOW FOR MENUS -->
-        <div>
-        <button mat-icon-button color="accent" (click)="sidenav.open()">
-          <mat-icon>list</mat-icon>
-        </button>
-        </div>
-        <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>list</mat-icon>
-          </button> -->
-
-      <mat-icon class="icon-logo"><img src="assets\AM Logo.png" routerLink="/home" alt="GravitaTech Logo"></mat-icon>
-        <!-- <h1 class="animated fadeInDown title is-6">
-          {{ title }}
-        </h1> -->
-      <div><a href="https://github.com/mulleady96" fxLayoutAlign="flex-end" target="_blank">
-        <button mat-button matTooltip="My Github Account" color="accent">
-          <mat-icon class="fab fa-github"></mat-icon>
-        </button>
-      </a>
-      </div>
-    </mat-toolbar-row>
-    </mat-toolbar>
-
-    <!-- <ng-progress id="myProgress"></ng-progress> -->
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+          <div><a href="https://github.com/mulleady96" fxLayoutAlign="flex-end" target="_blank">
+              <button mat-button matTooltip="My Github Account" color="accent">
+                <mat-icon class="fab fa-github"></mat-icon>
+              </button>
+            </a>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -13,13 +13,20 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 // *Implement Lazy Loading.
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'about', component: AboutComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductsComponent },
-  { path: 'enquire', component: GetInTouchComponent },
-  { path: 'upload', component: FileUploadComponent },
-  { path: 'blog', component: BlogComponent },
-  { path: 'BlogDetail', component: BlogDetailComponent },
+  { path: 'about',
+    loadChildren: './pages/about/about.module#AboutModule' },
+  { path: 'home',
+    loadChildren: './pages/home/home.module#HomeModule' },
+  { path: 'products',
+  loadChildren: './pages/products/products.module#ProductsModule' },
+  { path: 'enquire',
+    loadChildren: './pages/get-in-touch/get-in-touch.module#GetInTouchModule' },
+  { path: 'upload',
+  loadChildren: './pages/file-upload/file-upload.module#FileUploadModule' },
+  { path: 'blog',
+    loadChildren: './pages/blog/blog.module#BlogModule' },
+  { path: 'BlogDetail',
+    loadChildren: './pages/blog-detail/blog-detail.module#BlogDetailModule' },
   { path: 'coming-soon', component: ComingSoonComponent },
 
 ];

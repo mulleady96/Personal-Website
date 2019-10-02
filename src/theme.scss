@@ -9,8 +9,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$candy-app-primary: mat-palette($mat-blue-grey, 500);
-$candy-app-accent:  mat-palette($mat-light-blue, 200);
+$candy-app-primary: mat-palette($mat-blue, 100);
+$candy-app-accent:  mat-palette($mat-blue-grey, 900);
 
 
 // The warn palette is optional (defaults to red).
@@ -20,13 +20,65 @@ $candy-app-warn:    mat-palette($mat-red);
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
 // DARK Theme
 
-$candy-app-dark-primary: mat-palette($mat-grey);
-$candy-app-dark-accent: mat-palette($mat-yellow, A200, A100, A400);
-$candy-app-dark-warn:    mat-palette($mat-red);
-
-$candy-app-dark-theme: mat-dark-theme($candy-app-dark-primary, $candy-app-dark-accent, $candy-app-dark-warn);
+// $candy-app-dark-primary: mat-palette($mat-grey);
+// $candy-app-dark-accent: mat-palette($mat-yellow, A200, A100, A400);
+// $candy-app-dark-warn:    mat-palette($mat-red);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($candy-app-theme);
+
+// Our dark theme
+.dark-theme {
+    color: $light-primary-text;
+   
+    $dark-primary: mat-palette($mat-grey, 800);
+    $dark-accent: mat-palette($mat-deep-orange, 100, A100, A700);
+    $dark-warn: mat-palette($mat-red);
+    $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+    $dark-lighter: rgb(53, 53, 53);
+    // Bulma
+   
+    strong {
+        color: white;
+    }
+    article {
+        background-color: $dark-lighter;
+        color: white;
+    }
+
+    h1 {
+        color: white;
+    }
+
+    .example-spacer {
+        /* flex: 1 1 auto;
+        resize: vertical; */
+        background: linear-gradient(180deg, #212222 95%, mat-palette($mat-deep-orange, 100, A100, A700));
+      }
+
+      .router-link-active {
+        background-color: rgb(245, 228, 73);
+        border-bottom: 2px solid rgb(245, 242, 242);
+      }
+      
+
+    h2 {
+        color: white;
+    }
+
+    p {
+        color: white;
+    }
+
+    body {
+        color: white;
+    }
+    section {
+        background-color: $dark-lighter;
+        color: white;
+    }
+
+    @include angular-material-theme($dark-theme);
+  }

@@ -32,7 +32,7 @@ export class GetInTouchComponent implements OnInit {
     this.enquiryForm = formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.email],
       phoneNo: ['', Validators.required],
       companyName: ['', Validators.required],
       address: ['', Validators.required],
