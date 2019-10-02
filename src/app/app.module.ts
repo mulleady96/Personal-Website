@@ -1,43 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatButtonModule, MatCheckboxModule, MatTableModule, MatSlideToggleModule} from '@angular/material';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatChipsModule} from '@angular/material/chips';
 
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatDividerModule} from '@angular/material/divider';
+
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { config } from './credentials';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { HomeComponent } from './pages/home/home.component';
-import { ProductsComponent } from './pages/products/products.component';
-import { AboutComponent } from './pages/about/about.component';
-import { GetInTouchComponent } from './pages/get-in-touch/get-in-touch.component';
-import { DropZoneDirective } from './drop-zone.directive';
-import { FileUploadComponent } from './pages/file-upload/file-upload.component';
-import { FileSizePipe } from './pages/file-upload/file-size.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { BlogComponent } from './pages/blog/blog.component';
-import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { ThemeService } from './Services/theme.service';
 import { AppMaterialModule } from './app-material.module';

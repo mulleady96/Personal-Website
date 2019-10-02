@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { GetInTouchComponent } from './get-in-touch.component';
 import { AppMaterialModule } from 'src/app/app-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   declarations: [GetInTouchComponent],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     AppMaterialModule,
     RouterModule.forChild(routes)
   ],

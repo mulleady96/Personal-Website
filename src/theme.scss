@@ -12,7 +12,6 @@
 $candy-app-primary: mat-palette($mat-blue, 100);
 $candy-app-accent:  mat-palette($mat-blue-grey, 900);
 
-
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);
 
@@ -75,6 +74,7 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     body {
         color: white;
     }
+    
     section {
         background-color: $dark-lighter;
         color: white;

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about.component';
 import { AppMaterialModule } from 'src/app/app-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 const routes: Routes = [
   {
@@ -15,6 +17,7 @@ const routes: Routes = [
   declarations: [AboutComponent],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     AppMaterialModule,
     RouterModule.forChild(routes)
   ]
