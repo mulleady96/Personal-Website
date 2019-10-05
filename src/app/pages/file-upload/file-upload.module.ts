@@ -5,7 +5,6 @@ import { FileUploadComponent } from './file-upload.component';
 import { AppMaterialModule } from 'src/app/app-material.module';
 import { DropZoneDirective } from 'src/app/drop-zone.directive';
 import { FileSizePipe } from './file-size.pipe';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 const routes: Routes = [
@@ -21,7 +20,6 @@ const routes: Routes = [
     FileSizePipe],
   imports: [
     CommonModule,
-    FlexLayoutModule,
     AppMaterialModule,
     RouterModule.forChild(routes)
   ]
