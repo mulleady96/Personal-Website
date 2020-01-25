@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div style="text-align: center" class="container">
   <div class="animated fadeInUp">
     <div class="center-item">
       <section class="section">
@@ -9,32 +9,49 @@
         </div>
       </section>
 
-      <div fxLayout="column wrap">
+      <div fxLayout="column wrap" fxLayoutAlign="center center">
         <mat-tab-group mat-align-tabs="center">
           <mat-tab label="University">
+            <br>
             <mat-icon class="fas fa-university fa-4x mat-icon-styling"></mat-icon>
-            <ul fxLayout.xs="row wrap">
-              <li><i class="fas fa-chevron-right"></i>Attended National University of Ireland, Galway</li>
-              <li><i class="fas fa-chevron-right"></i>Achieved a 2:1 in Bachelor of Commerce</li>
-              <li><i class="fas fa-chevron-right"></i>Achieved a 2:1 in h.Dip in Software Design & Development</li>
-            </ul>
+            <mat-list>
+              <mat-list-item mat-line>
+                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Attended National University of Ireland, Galway
+              </mat-list-item>
+              <mat-list-item mat-line>
+                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Honours degree in Bachelor of Commerce
+              </mat-list-item>
+              <mat-list-item mat-line>
+                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Honours degree in h.Dip in Software Design &
+                Development
+              </mat-list-item>
+            </mat-list>
 
           </mat-tab>
           <mat-tab label="Career">
+            <br>
             <mat-icon class="fas fa-portrait fa-4x mat-icon-styling"></mat-icon>
-            <ul fxLayout.xs="row wrap">
-              <li><i class="fas fa-chevron-right"></i>Full-time I.T professional located in Ireland.</li>
-              <li><i class="fas fa-chevron-right"></i>2 years experience developing web applications.</li>
-            </ul>
+            <mat-list>
+              <mat-list-item mat-line>
+                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Full-time I.T professional located in Ireland
+              </mat-list-item>
+              <mat-list-item mat-line>
+                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>2 years experience developing web applications
+              </mat-list-item>
+
+            </mat-list>
           </mat-tab>
           <mat-tab label="Portfolio">
+            <br>
             <mat-icon class="fas fa-briefcase fa-4x mat-icon-styling"></mat-icon>
-            <ul fxLayout.xs="row wrap">
-              <li><i class="fas fa-chevron-right"></i>Extensive collection of applications on my Github account.</li>
-              <li><i class="fas fa-chevron-right"></i>Practiced advanced topics in Angular/Ionic.</li>
-              <li><i class="fas fa-chevron-right"></i>Practiced server-side programming, by creating projects using the
-                MEAN stack.</li>
-            </ul>
+            <mat-list>
+              <mat-list-item mat-line>
+                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Collection of applications on my Github account.
+              </mat-list-item>
+              <mat-list-item mat-line>
+                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Practiced advanced topics in Angular/Ionic, Typescript and the MEAN stack.
+              </mat-list-item>
+              </mat-list>
           </mat-tab>
         </mat-tab-group>
       </div>

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { HttpClient } from '@angular/common/http';
 
 export interface PeriodicElement {
   name: string;
@@ -31,14 +32,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class BlogComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
+  
   search: boolean;
 
+  @Input() blogURL: String;
+  
   time: number;
   postedAgo: String;
 
@@ -73,4 +76,9 @@ export class BlogComponent implements OnInit {
     return this.postedAgo;
   }
 
+  // Google Blogger API
+  blogger() {
+    console.log('open blog');
+    this.http.get(`https://www.googleapis.com/blogger/v3/blogs/byurl?url=https://andrewmulleady.blogspot.com/`);
+  }
 }

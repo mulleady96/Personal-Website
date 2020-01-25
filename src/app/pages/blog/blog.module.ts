@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogComponent } from './blog.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AppMaterialModule } from 'src/app/app-material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     AppMaterialModule,
+    HttpClientModule,
     RouterModule.forChild(routes)
   ]
 })

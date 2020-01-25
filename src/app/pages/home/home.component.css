@@ -3,19 +3,208 @@
   font-style: oblique;
 }
 
+div {
+  text-align: center;
+}
+
 .responsive {
   height: 500px;
   width: 100%;
 }
 
-.tiles-hover article:hover {
-    /* color: rgba(77, 89, 97, 0.753); */
-    background-color: rgba(222, 233, 247, 0.945);
-    transform: translateY(-2%);
-    transition: all 1s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
+img {
+  border-radius: 50%;
+}
 
-.tiles-hover article {
+.landing-card {
+  max-width: 350px;
+  max-height: max-content;
+  border-radius: 24px;
+  margin: 25px 25px;
+  background: rgb(8, 25, 43);
+  background: linear-gradient(180deg, rgba(8, 25, 43, 1) 0%, rgba(166, 70, 195, 0.7570378493194152) 100%);
+  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
+  box-shadow: 5px 5px 15px -3px #9c9c9c;
+}
+
+.landing-card2 {
+  max-width: 350px;
+  max-height: max-content;
+  border-radius: 24px;
+  margin: 25px 25px;
+  background: rgb(63, 94, 251);
+  background: linear-gradient(180deg, rgba(63, 94, 251, 1) 0%, rgba(70, 190, 252, 1) 100%);
+  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
+  box-shadow: 5px 5px 15px -3px #9c9c9c;
+}
+
+.landing-card3 {
+  max-width: 350px;
+  max-height: max-content;
+  border-radius: 24px;
+  margin: 25px 25px;
+  background: rgb(8,25,43);
+  background: linear-gradient(180deg, rgba(8,25,43,1) 0%, rgba(131,164,76,0.7570378493194152) 100%);
+  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
+  box-shadow: 5px 5px 15px -3px #9c9c9c;
+}
+
+.landing-default {
+  text-align: center;
+  max-width: 400px;
+  max-height: max-content;
+  border-radius: 24px;
+  margin: 25px 25px;
+  justify-content: space-evenly;
+  background: rgb(8, 25, 43);
+  background: linear-gradient(180deg, rgba(8, 25, 43, 1) 0%, rgba(20, 150, 174, 0.7570378493194152) 100%);
+  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
+  box-shadow: 5px 5px 15px -3px #9c9c9c;
+  
+}
+
+
+.landing-default2 {
+  text-align: center;
+  max-width: 400px;
+  max-height: max-content;
+  border-radius: 24px;
+  margin: 25px 25px;
+  justify-content: space-evenly;
+  background: rgb(8, 25, 43);
+  background: linear-gradient(180deg, rgba(8, 25, 43, 1) 0%, rgba(174, 133, 20, 0.7570378493194152) 100%);
+  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
+  box-shadow: 5px 5px 15px -3px #9c9c9c;
+}
+
+.landing-default3 {
+  text-align: center;
+  max-width: 400px;
+  max-height: 550px;
+  border-radius: 24px;
+  margin: 25px 25px;
+  justify-content: space-evenly;
+  background: rgb(8, 25, 43);
+  background: linear-gradient(180deg, rgba(8, 25, 43, 1) 0%, rgba(157, 70, 78, 0.7570378493194152) 100%);
+  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
+  box-shadow: 5px 5px 15px -3px #9c9c9c;
+}
+
+.mat-landing-button {
+  border-radius: 12px;
+  min-width: 275px;
+}
+
+.svgImage {
+  height: 400px;
+  width: 450px;
+  transform: rotate(180deg);
+  background-position: left;
+  z-index: -1;
+  background-image: url("/assets/hologram.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.svgImageResponsive {
+  height: 400px;
+  width: 350px;
+  transform: rotate(45deg);
+  background-position: center;
+  float: left;
+  background-image: url("/assets/master_plan.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* .headingUnderline {
+  border-bottom: 2px solid currentColor;
+  text-decoration-style: double;
+  display: inline-flex;
+  max-width: 350px;
+} */
+
+
+
+.tiles-hover div:hover {
+  /* color: rgba(77, 89, 97, 0.753); */
+  background-color: rgba(222, 233, 247, 0.945);
+  transform: translateY(-2%);
+  transition: all 1s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tiles-hover {
   transition: 0.75s ease;
+}
+
+.seoFab {
+  padding-left: 15px;
+}
+
+.sectionUnderline {
+  -webkit-box-shadow: inset 0 -6px 0 rgba(140, 207, 232, 1);
+  box-shadow: inset 0 -6px 0 rgb(152, 209, 230);
+}
+
+.designImage {
+  justify-content: center;
+  width: 150px;
+  height: 100px;
+  background-image: url("/assets/hugo-list-is-empty.png");
+  background-size: cover;
+}
+
+.devImage {
+  justify-content: center;
+  width: 150px;
+  height: 130px;
+  background-image: url("/assets/mirage-come-back-later.png");
+  background-size: cover;
+}
+
+.productionImage {
+  justify-content: center;
+  width: 150px;
+  height: 100px;
+  border-radius: 25px;
+  background-image: url("/assets/mirage-upgrade.png");
+  background-size: cover;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .titleHighlight {
+  -webkit-box-shadow: inset 0 -6px 0 red;
+  box-shadow: inset 0 -8px 0 rgba(140, 207, 232, 1);
+} */
+
+/* mat-card :hover {
+  transform: translateY(-3%);
+  transition: all 3s ease-in-out;
+} */
+
+mat-card {
+  color: white;
+  font-family: "Montserrat";
+}
+
+.mat-chip-list {
+  text-align: center;
+}
+
+.mat-list-item {
+  color: white;
+  font-family: "Montserrat";
+  font-size: inherit;
 }

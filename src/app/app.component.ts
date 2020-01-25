@@ -6,7 +6,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SwUpdate } from '@angular/service-worker';
-import AOS from 'aos';
+import * as AOS from 'aos';
 import 'aos/dist/aos.css';
 import { ThemeService } from './Services/theme.service';
 import { Observable } from 'rxjs';
@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate, private themeService: ThemeService) {
 
     this.initializeApp();
-      AOS.init();
 
     // Subscribe to router nav event => on route change, sends page view data to GA
     this.router.events.subscribe(event => {
@@ -69,6 +68,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    AOS.init();
     // Toggle Light/Dark Theme
     this.isDarkTheme = this.themeService.isDarkTheme;
 

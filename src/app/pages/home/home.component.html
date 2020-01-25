@@ -1,14 +1,181 @@
-<div style="text-align: center">
- 
-    <section class="section animated fadeInUp">
-        <div class="container">
+
+
+
+  <section class="section">
+      <div>
+        <h1 class="title">How We Can Help You!</h1>
+
+        <h2 class="subtitle">
+          At <strong>Gravita Tech</strong>, we develop fully functional websites & Progressive Web Apps for SME's
+        </h2>
+        <button mat-raised-button color="accent" class="mat-landing-button" routerLink="/enquire">Let's Get
+          Started</button>
+
+                   
+        <div fxLayout="row wrap" fxLayoutAlign="center" class="animated fadeInLeft delay-1s">
          
-            <h1 class="title">What we can do for you!</h1>
-            
-          <h2 class="subtitle">
-              At <strong>Gravita Tech</strong>, we develop fully functional websites & Progressive Web Apps for SME's 
-          </h2>
-          <div class="level-item has-text-centered" fxLayout="row wrap">
+            <mat-card id="cardStyle" class="landing-default">
+              <div fxLayout="row wrap" fxLayoutAlign="center">
+              <figure class="designImage"></figure>
+            </div>
+              <mat-card-header>
+                <mat-card-title>Design</mat-card-title>
+              </mat-card-header>
+  
+              <mat-card-content>
+                <p>
+                  This will involve studying your brand, your competitors and your market, identifying key designs that you admire
+                  from
+                  well-known brands.
+                </p>
+                <br>
+                  <p>From this we can create bespoke UI/UX designs that will engage your audience, by
+                  being
+                  both easy to use and appealing on the eye.
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+              </mat-card-actions>
+            </mat-card>
+            <mat-card id="cardStyle2" class="landing-default2">
+              <div fxLayout="row wrap" fxLayoutAlign="center">
+              <figure fxLayoutAlign="center" class="devImage"></figure>
+              </div>
+              <mat-card-header>
+                <mat-card-title>Development</mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+              </mat-card-header>
+  
+              <mat-card-content>
+                <p>
+                  During the development phase, checkpoints will be established whereby you will be able to test the
+                  application as it's progressing. Providing feedback on the design & functionality.
+                </p>
+                <p>This feedback loop will help generate new exciting ideas that will make your website/app stand out from
+                  the
+                  crowd.</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button full color="accent" routerLink="/products">View Example Apps</button>
+              </mat-card-actions>
+            </mat-card>
+  
+            <mat-card id="cardStyle3" class="landing-default3">
+              <div fxLayout="row wrap" fxLayoutAlign="center">
+              <figure fxLayoutAlign="center" class="productionImage"></figure>
+              </div>
+              <mat-card-header>
+                <mat-card-title>Analytics</mat-card-title>
+              </mat-card-header>
+  
+              <mat-card-content>
+                <p>
+                  We can provide reports/stats on how your website is performing, based on key metrics such as;
+                </p>
+                <mat-list role="list">
+                  <mat-list-item><mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Where your users are Located?</mat-list-item>
+                  <mat-list-item><mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>How many users have accessed your website?</mat-list-item>
+                  <br>
+                  <mat-list-item><mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>What areas of your website/app experience the most traffic?</mat-list-item>
+                  
+                </mat-list>
+                <!-- <li>Where your users are Located?</li>
+                <li>How many users are on your website?</li>
+                <li>What areas of your website/app are busiest?</li>
+                <li>Conversion Channels - Analysing conversion rates for key actions on your website. </li>
+                 -->
+              </mat-card-content>
+            </mat-card>
+        </div>
+      </div>
+      <!-- <div class="column is-4">
+        <div fxHide.xs="true">
+          <div class="svgImage"></div>
+        </div>
+      </div> -->
+  </section>
+
+  <section class="section" fxLayout="column" fxLayoutAlign="center center">
+    <h1 class="title">
+      A Few Guarantees
+    </h1>
+
+    <button mat-fab (click)="toggleDiv()">
+      <mat-icon *ngIf="!showDiv">add</mat-icon>
+      <mat-icon *ngIf="showDiv">
+        close
+      </mat-icon>
+    </button>
+  </section>
+
+<div>
+  <section class="section animated fadeInLeft" *ngIf="showDiv">
+    <div>
+      <div fxLayout="row wrap" fxLayoutAlign="center" class="animated fadeInLeft delay-1s">
+        <mat-card class="landing-card">
+          <mat-card-header>
+            <div class="example-header-image"></div>
+            <mat-card-title>Industry Standard</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>
+              We use the latest front-end frameworks along with cloud based backend technologies. Your app will be
+              responsive and intuitive regardless of how intensive demand may be.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-chip-list aria-label="Front-end elements">
+              <mat-chip color="primary">HTML5</mat-chip>
+              <mat-chip color="primary">CSS3</mat-chip>
+              <mat-chip color="primary">Angular</mat-chip>
+              <mat-chip color="primary">Ionic</mat-chip>
+            </mat-chip-list>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="landing-card2">
+          <mat-card-header>
+            <mat-card-title><button mat-fab class="matFab" [countUp]="100" [options]="opts"></button>
+              <span class="seoFab">SEO Score</span></mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>
+              Search Engine Optimisation is essential in order to appear high up in
+              browser search results, allowing you to engage more potential customers.
+            </p>
+
+          </mat-card-content>
+          <mat-card-actions>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="landing-card3">
+          <mat-card-header>
+            <div class="example-header-image"></div>
+            <mat-card-title>Platform Independent</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>
+              Your new website will be optimised for all browsers and mobile devices.
+              Delivered at a low cost that will be manageable, for you and your business.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-chip-list aria-label="Front-end elements" fxLayoutAlign="center center">
+              <mat-chip color="primary"><mat-icon class="fab fa-apple"></mat-icon></mat-chip>
+              <mat-chip color="primary"><mat-icon>android</mat-icon></mat-chip>
+              <mat-chip color="primary"><mat-icon class="fab fa-chrome"></mat-icon></mat-chip>
+              </mat-chip-list>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>     
+    <!-- <div class="level-item has-text-centered" fxLayout="row wrap">
           <figure class="image is-128x128">
               <img src="/assets/hugo-list-is-empty.png" alt="Idea logo">
               <mat-label>Idea Creation</mat-label>
@@ -23,19 +190,21 @@
                   <img src="/assets/mirage-upgrade.png" alt="production logo">
                   <mat-label>Production</mat-label>
                 </figure>
-              </div>
-              <br>
-          <p>You have the bright ideas, we have the smart solutions using the latest web technologies.</p>
-          <br>
-          <button mat-raised-button color="accent" routerLink="/enquire">Let's Get Started</button>
-        </div>
-      </section>
+              </div> -->
+    <br>
+    <p>You have the bright ideas, we have the smart solutions using the latest web technologies.</p>
+    <br>
+    <button mat-raised-button color="accent" class="mat-landing-button" routerLink="/enquire">Let's Get
+      Started</button>
+  </section>
+</div>
 
 <br>
 
 <!-- <div class="animated fadeInLeft"> -->
-  <div class="tile is-ancestor tiles-hover">
-    <div class="tile is-vertical is-9">
+<div fxHide.xs="true" class="tile is-ancestor tiles-hover">
+
+  <!-- <div class="tile is-vertical is-9">
       <div class="tile animated fadeInLeft">
         <div class="tile is-parent">
           <article class="tile is-child box">
@@ -51,9 +220,9 @@
             <article class="tile is-child box">
               <p class="title"><mat-icon class="md-36">cloud_queue</mat-icon></p>
               <p class="subtitle">Cloud Functionality</p>
-              <!-- <figure class="image is-4by3">
+               <figure class="image is-4by3">
                   <img src="/assets/hugo-downloading.png">
-                </figure> -->
+                </figure>
               <div class="content">
               <p>Access your data from anywhere on any device. We use firebase to host and store your apps' data.
                   Now is also another option to deploy your website to the web, if a database is not required.</p>
@@ -105,7 +274,7 @@
         </div>
       </article>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- </div> -->

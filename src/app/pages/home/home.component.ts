@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { CountUpOptions } from 'countup.js';
 
 @Component({
   selector: 'app-home',
@@ -19,10 +20,24 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class HomeComponent implements OnInit {
 
+    opts: CountUpOptions;
+    showDiv: boolean = false;
+
   constructor() {
   }
 
   ngOnInit() {
+      this.useOptions();
   }
 
+  toggleDiv(){
+      this.showDiv = !this.showDiv;
+  }
+
+  useOptions() {
+    this.opts = {
+      duration: 6,
+      separator: ','
+    };
+  }
 }

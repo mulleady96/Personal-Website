@@ -32,13 +32,22 @@
         Upload
       </button>
       <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/coming-soon">
-        <mat-icon color="accent">book</mat-icon>
-        Blog
-      </button>
+      
       <hr>
       <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)"><mat-icon color="accent">nights_stay</mat-icon>Dark theme
         </mat-slide-toggle>
+        <div fxLayout="row" class="bottomSocial" fxLayoutAlign="start start" fxLayoutGap="35px">
+          <a href="https://github.com/mulleady96" target="_blank">
+            <button mat-button color="accent">
+              <mat-icon class="fab fa-github"></mat-icon>
+            </button>
+          </a>
+          <a href="https://www.linkedin.com/in/andrew-mulleady-a6222a171/" target="_blank">
+            <button mat-button color="accent">
+              <mat-icon class="fab fa-linkedin"></mat-icon>
+            </button>
+          </a>
+        </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar color="primary" fxLayout="row wrap">

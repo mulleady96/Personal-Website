@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material';
@@ -22,7 +23,9 @@ import { AppMaterialModule } from './app-material.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    PageNotFoundComponent,
+
   ],
   imports: [
     BrowserModule,

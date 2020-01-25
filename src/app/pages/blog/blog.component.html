@@ -29,7 +29,7 @@
 
   <mat-list>
     <div fxLayout="row wrap" fxLayoutAlign="center center" [style.margin-top]="'12px'">
-      <mat-card class="example-card" [routerLink]="[ '/BlogDetail']">
+      <mat-card class="example-card" (click)="blogger()" href="https://andrewmulleady.blogspot.com/2019/11/web-design-101.html" target="_blank">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Article Title</mat-card-title>

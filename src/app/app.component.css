@@ -43,8 +43,24 @@ mat-sidenav {
   width: 250px;
 }
 
-mat-sidenav-content {
-  /* background: white; */
+/* ::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle 
+::-webkit-scrollbar-thumb {
+  background: #888; 
+} */
+
+
+
+
+mat-toolbar {
+  -webkit-box-shadow: 5px 5px 15px -3px #9C9C9C; 
+  box-shadow: 5px 5px 15px -3px #9C9C9C;
 }
 
 .router-link-active {
@@ -69,6 +85,11 @@ mat-sidenav-content {
 .icon-logo {
   height: 60px;
   width: 60px;
+}
+
+.bottomSocial {
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; 
 }
 
 img {
