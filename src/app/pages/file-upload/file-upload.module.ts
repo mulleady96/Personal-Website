@@ -1,3 +1,4 @@
+import { UploadService } from './../../Services/upload.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -22,6 +23,6 @@ const routes: Routes = [
     CommonModule,
     AppMaterialModule,
     RouterModule.forChild(routes)
-  ]
+  ],
 })
 export class FileUploadModule { }

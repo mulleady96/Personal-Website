@@ -101,8 +101,8 @@
     </h1>
 
     <button mat-fab (click)="toggleDiv()">
-      <mat-icon *ngIf="!showDiv">add</mat-icon>
-      <mat-icon *ngIf="showDiv">
+      <mat-icon *ngIf="!showDiv" class="toggleAnimation">add</mat-icon>
+      <mat-icon *ngIf="showDiv" class="redIcon">
         close
       </mat-icon>
     </button>

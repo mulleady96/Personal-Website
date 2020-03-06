@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
 
   reason = '';
 
