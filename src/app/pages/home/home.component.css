@@ -124,8 +124,6 @@ img {
   max-width: 350px;
 } */
 
-
-
 .tiles-hover div:hover {
   /* color: rgba(77, 89, 97, 0.753); */
   background-color: rgba(222, 233, 247, 0.945);
@@ -208,3 +206,43 @@ mat-card {
   font-family: "Montserrat";
   font-size: inherit;
 }
+
+@keyframes full-circle {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+@-webkit-keyframes full-circle {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
+}
+
+@-moz-keyframes full-circle {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
+}
+
+.toggleAnimation {
+	animation: full-circle 1.5s linear;
+}
+
+.redIcon {
+  color: red;
+	animation: full-circle 1.5s ease-out;
+}
+
+
+
+
