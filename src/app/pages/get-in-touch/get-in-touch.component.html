@@ -40,7 +40,7 @@
             </td>
             <td>
               <mat-form-field color="accent">
-                <input matInput formControlName="phoneNo" type="text" maxlength="50" placeholder="Phone No.">
+                <input matInput formControlName="phoneNo" type="number" maxlength="50" placeholder="Phone No.">
               </mat-form-field>
             </td>
 
@@ -86,10 +86,9 @@
             </td>
           </tr>
 
-
         </table>
 
-        <button mat-raised-button (click)="createEnquiry()" (click)="sendEvent()" color="primary"
+        <button mat-raised-button (click)="createEnquiry(); sendEvent()" color="primary"
           [disabled]="!enquiryForm.valid">Submit</button>
       </form>
       <br>

@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogComponent } from './blog.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('BlogComponent', () => {
   let component: BlogComponent;
@@ -8,7 +10,9 @@ describe('BlogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlogComponent ]
+      declarations: [ BlogComponent ],
+      imports: [RouterTestingModule.withRoutes(
+        [{path: 'blog', component: BlogComponent}])],
     })
     .compileComponents();
   }));

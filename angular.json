@@ -85,9 +85,9 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               { 
-                "input" : "theme.scss"
+                "input" : "src/theme.scss"
               },
-              "styles.scss"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/aos/dist/aos.js"

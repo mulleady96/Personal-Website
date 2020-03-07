@@ -1,3 +1,4 @@
+import { MatSnackBarModule } from '@angular/material';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileUploadComponent } from './file-upload.component';
@@ -8,7 +9,8 @@ describe('FileUploadComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FileUploadComponent ]
+      declarations: [ FileUploadComponent ],
+      imports: [ MatSnackBarModule ]
     })
     .compileComponents();
   }));

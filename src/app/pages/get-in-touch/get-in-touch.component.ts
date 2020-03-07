@@ -45,24 +45,29 @@ export class GetInTouchComponent implements OnInit {
 
 
    createEnquiry() {
-     const firstName = this.enquiryForm.value.firstName;
-     const lastName = this.enquiryForm.value.lastName;
-     const email = this.enquiryForm.value.email;
-     const phoneNo = this.enquiryForm.value.phoneNo;
-     const companyName = this.enquiryForm.value.companyName;
-     const address = this.enquiryForm.value.address;
-     const angularChecked = this.enquiryForm.value.angularChecked;
-     const ionicChecked = this.enquiryForm.value.ionicChecked;
-     const description = this.enquiryForm.value.description;
 
-
-     // call service and submit the values from form into the DB.
-     this.gravita.createEnquiry(firstName, lastName, email, phoneNo, companyName, address, description, angularChecked, ionicChecked);
-
-     // SnackBar success message showing the form has been submitted.
-     this.snackBar.open('Form Successfully Submitted, Thank You!', 'Great', {
-       duration: 5000
-     });
+    try {
+      const firstName = this.enquiryForm.value.firstName;
+      const lastName = this.enquiryForm.value.lastName;
+      const email = this.enquiryForm.value.email;
+      const phoneNo = this.enquiryForm.value.phoneNo;
+      const companyName = this.enquiryForm.value.companyName;
+      const address = this.enquiryForm.value.address;
+      const angularChecked = this.enquiryForm.value.angularChecked;
+      const ionicChecked = this.enquiryForm.value.ionicChecked;
+      const description = this.enquiryForm.value.description;
+ 
+ 
+      // call service and submit the values from form into the DB.
+      this.gravita.createEnquiry(firstName, lastName, email, phoneNo, companyName, address, description, angularChecked, ionicChecked);
+ 
+      // SnackBar success message showing the form has been submitted.
+      this.snackBar.open('Form Successfully Submitted, Thank You!', 'Great', {
+        duration: 5000
+      });
+    } catch (error) {
+      this.snackBar.open('Unfortunately we ran into a problem.', 'Please try again.');
+    }
      // Final step is to reset the form on submission.
      this.enquiryForm.reset();
      this.remaining = 500;

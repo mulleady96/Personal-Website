@@ -7,27 +7,27 @@
         {{ title }}
       </h2>
       <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/home">
+      <button mat-button routerLinkActive="router-link-active" aria-label="Home" routerLink="/home">
         <mat-icon color="accent">home</mat-icon>
         Home
       </button>
       <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/products">
+      <button mat-button routerLinkActive="router-link-active" aria-label="Products" routerLink="/products">
         <mat-icon color="accent">desktop_mac</mat-icon>
         Products
       </button>
       <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/about">
+      <button mat-button routerLinkActive="router-link-active" aria-label="About" routerLink="/about">
         <mat-icon color="accent">person_pin</mat-icon>
         About
       </button>
       <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/enquire">
+      <button mat-button routerLinkActive="router-link-active" aria-label="Get In Touch Form" routerLink="/enquire">
         <mat-icon color="accent">edit</mat-icon>
         Get In Touch
       </button>
       <br>
-      <button mat-button routerLinkActive="router-link-active" routerLink="/upload">
+      <button mat-button routerLinkActive="router-link-active" aria-label="Upload" routerLink="/upload">
         <mat-icon color="accent">cloud_upload</mat-icon>
         Upload
       </button>
@@ -37,13 +37,13 @@
       <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)"><mat-icon color="accent">nights_stay</mat-icon>Dark theme
         </mat-slide-toggle>
         <div fxLayout="row" class="bottomSocial" fxLayoutAlign="start start" fxLayoutGap="35px">
-          <a href="https://github.com/mulleady96" target="_blank">
-            <button mat-button color="accent">
+          <a href="https://github.com/mulleady96" target="_blank" rel="noreferrer">
+            <button mat-button color="accent" aria-label="Github button">
               <mat-icon class="fab fa-github"></mat-icon>
             </button>
           </a>
-          <a href="https://www.linkedin.com/in/andrew-mulleady-a6222a171/" target="_blank">
-            <button mat-button color="accent">
+          <a href="https://www.linkedin.com/in/andrew-mulleady-a6222a171/" target="_blank" rel="noreferrer">
+            <button mat-button color="accent" aria-label="LinkedIn">
               <mat-icon class="fab fa-linkedin"></mat-icon>
             </button>
           </a>
@@ -53,7 +53,7 @@
       <mat-toolbar color="primary" fxLayout="row wrap">
         <mat-toolbar-row fxLayoutGap="75px" fxLayoutAlign="center center" class="example-spacer">
           <div>
-            <button mat-icon-button color="accent" (click)="sidenav.open()">
+            <button mat-icon-button color="accent" (click)="sidenav.open()" aria-label="List">
               <mat-icon>list</mat-icon>
             </button>
           </div>
@@ -62,7 +62,7 @@
           </mat-icon>
         </div>
           <div><a href="https://github.com/mulleady96" fxLayoutAlign="flex-end" target="_blank" rel="noreferrer">
-              <button mat-button matTooltip="My Github Account" color="accent">
+              <button mat-button matTooltip="My Github Account" color="accent" aria-label="Github button">
                 <mat-icon class="fab fa-github"></mat-icon>
               </button>
             </a>
