@@ -22,12 +22,12 @@
           <tr fxLayout.xs="row wrap">
             <td>
               <mat-form-field color="accent">
-                <input matInput formControlName="firstName" maxlength="50" type="text" placeholder="First Name">
+                <input matInput id="firstName" formControlName="firstName" maxlength="50" type="text" placeholder="First Name">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field color="accent">
-                <input matInput formControlName="lastName" type="text" maxlength="50" placeholder="Last Name">
+                <input matInput id="lastName" formControlName="lastName" type="text" maxlength="50" placeholder="Last Name">
               </mat-form-field>
             </td>
           </tr>
@@ -35,12 +35,12 @@
           <tr fxLayout.xs="row wrap">
             <td>
               <mat-form-field color="accent">
-                <input matInput formControlName="email" type="email" placeholder="Email">
+                <input matInput id="email" formControlName="email" type="email" placeholder="Email">
               </mat-form-field>
             </td>
             <td>
               <mat-form-field color="accent">
-                <input matInput formControlName="phoneNo" type="number" maxlength="50" placeholder="Phone No.">
+                <input matInput id="phoneNo" formControlName="phoneNo" type="number" maxlength="50" placeholder="Phone No.">
               </mat-form-field>
             </td>
 
@@ -49,7 +49,7 @@
           <tr fxLayout.xs="row wrap">
             <td>
               <mat-form-field class="demo-full-width" color="accent">
-                <input matInput formControlName="companyName" type="text" placeholder="Company Name">
+                <input matInput id="companyName" formControlName="companyName" type="text" placeholder="Company Name">
               </mat-form-field>
             </td>
 
@@ -58,7 +58,7 @@
           <tr fxLayout.xs="row wrap">
             <td colspan="2">
               <mat-form-field class="demo-full-width" color="accent">
-                <textarea matInput formControlName="address" type="text" placeholder="Company Address"
+                <textarea matInput id="address" formControlName="address" type="text" placeholder="Company Address"
                   matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
               </mat-form-field>
             </td>
@@ -78,7 +78,7 @@
           <tr fxLayout.xs="row wrap">
             <td colspan="2">
               <mat-form-field class="demo-full-width" color="accent">
-                <textarea matInput (input)="onTextarea($event.target.value)" formControlName="description" type="text" maxlength="500"
+                <textarea matInput id="description" (input)="onTextarea($event.target.value)" formControlName="description" type="text" maxlength="500"
                   placeholder="Tell us which brands, websites and designs you admire? " matTextareaAutosize
                   matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
               </mat-form-field>

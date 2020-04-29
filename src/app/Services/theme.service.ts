@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ThemeService {
-
   private _darkTheme: Subject<boolean> = new Subject<boolean>();
   isDarkTheme = this._darkTheme.asObservable();
 
@@ -20,7 +19,7 @@ export class ThemeService {
 
   // addClass(){
   //   var element = document.getElementById("cardStyle");
-  //   element.classList.add("landing-default"); 
+  //   element.classList.add("landing-default");
   //   var element = document.getElementById("cardStyle2");
   //   element.classList.add("landing-default2");
   //   var element = document.getElementById("cardStyle3");
@@ -28,18 +27,10 @@ export class ThemeService {
   // }
 
   setDarkTheme(isDarkTheme: boolean) {
-
     try {
-      
-   // this.removeClass();
-
-    // if(!isDarkTheme){
-    //   this.addClass();
-    // }
-    this._darkTheme.next(isDarkTheme);
-  }
-  catch(error) {
-    console.log("Div class not rendered.");
-  }
+      this._darkTheme.next(isDarkTheme);
+    } catch (error) {
+      console.log('Div class not rendered.');
+    }
   }
 }

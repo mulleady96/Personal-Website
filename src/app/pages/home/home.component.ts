@@ -5,7 +5,7 @@ import { CountUpOptions } from 'countup.js';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
   animations: [ // Slide items up from the bottom of screen.
         trigger('itemState', [
             transition('void => *', [
@@ -30,11 +30,11 @@ export class HomeComponent implements OnInit {
       this.useOptions();
   }
 
-  toggleDiv(){
+  toggleDiv = () => {
       this.showDiv = !this.showDiv;
   }
 
-  useOptions() {
+  useOptions = () => {
     this.opts = {
       duration: 6,
       separator: ','

@@ -30,6 +30,10 @@ export class FileUploadComponent implements OnInit {
 
 
   constructor(private storage: AngularFireStorage, public snackBar: MatSnackBar) {
+    this.FBaseConnection();
+  }
+
+  FBaseConnection = () => {
     this.pictureRef = firebase
     .database()
     .ref(`/Logos/`);

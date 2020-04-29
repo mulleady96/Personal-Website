@@ -75,12 +75,12 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     }
     
     section {
-        background-color: $dark-lighter;
+     //   background-color: $dark-lighter;
         color: white;
     }
 
     img {
-        opacity: 0.75;
+        opacity: 1;
         background-blend-mode: darken;
     }
 
