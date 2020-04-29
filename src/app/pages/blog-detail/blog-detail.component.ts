@@ -17,11 +17,11 @@ export class BlogDetailComponent implements OnInit {
     this.timePostedAgo();
   }
 
-  goBack() {
+  goBack = () => {
     this.location.back();
   }
 
-  timePostedAgo() { // Shows When it was posted.
+  timePostedAgo = () => { // Shows When it was posted.
     const yourDate = new Date();
     const postedAgo = moment(yourDate).fromNow();
     console.log(postedAgo);

@@ -1,5 +1,6 @@
 .mat-card {
     text-align: -webkit-center;
+    border-radius: 24px;
 }
 
 .demo-toolbar {
@@ -19,7 +20,7 @@
 }
 
 
-$remaining: 450;
+$remaining: 500;
 
 .remaining {
         font-size: 80%;
@@ -27,7 +28,7 @@ $remaining: 450;
         right: 50px;
         font-family: 'Quicksand';
         padding-left: 50px;
-        @if($remaining <= 200){
+        @if($remaining <= 200) {
             color: red;
         }
 }

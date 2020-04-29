@@ -34,7 +34,9 @@
       <br>
       
       <hr>
-      <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)"><mat-icon color="accent">nights_stay</mat-icon>Dark theme
+      <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+        <mat-icon color="accent">{{iconValue}}</mat-icon>
+        {{themeDescription}}
         </mat-slide-toggle>
         <div fxLayout="row" class="bottomSocial" fxLayoutAlign="start start" fxLayoutGap="35px">
           <a href="https://github.com/mulleady96" target="_blank" rel="noreferrer">
@@ -49,16 +51,16 @@
           </a>
         </div>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content (swiperight)="sidenav.open()">
       <mat-toolbar color="primary" fxLayout="row wrap">
         <mat-toolbar-row fxLayoutGap="75px" fxLayoutAlign="center center" class="example-spacer">
           <div>
-            <button mat-icon-button color="accent" (click)="sidenav.open()" aria-label="List">
+            <button mat-icon-button color="accent" (click)="sidenav.open(); menuToggleEvent()" aria-label="List">
               <mat-icon>list</mat-icon>
             </button>
           </div>
-          <div>
-          <mat-icon class="icon-logo"><img src="assets\AM Logo.png" routerLink="/home" alt="GravitaTech Logo">
+          <div class="animated fadeInDown">
+          <mat-icon class="icon-logo"><img [src]="imageSRC" routerLink="/home" alt="GravitaTech Logo">
           </mat-icon>
         </div>
           <div><a href="https://github.com/mulleady96" fxLayoutAlign="flex-end" target="_blank" rel="noreferrer">

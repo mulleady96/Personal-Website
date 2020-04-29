@@ -44,7 +44,7 @@ export class GetInTouchComponent implements OnInit {
    }
 
 
-   createEnquiry() {
+   createEnquiry = () => {
 
     try {
       const firstName = this.enquiryForm.value.firstName;
@@ -56,8 +56,7 @@ export class GetInTouchComponent implements OnInit {
       const angularChecked = this.enquiryForm.value.angularChecked;
       const ionicChecked = this.enquiryForm.value.ionicChecked;
       const description = this.enquiryForm.value.description;
- 
- 
+      
       // call service and submit the values from form into the DB.
       this.gravita.createEnquiry(firstName, lastName, email, phoneNo, companyName, address, description, angularChecked, ionicChecked);
  
@@ -66,14 +65,15 @@ export class GetInTouchComponent implements OnInit {
         duration: 5000
       });
     } catch (error) {
-      this.snackBar.open('Unfortunately we ran into a problem.', 'Please try again.');
+      this.snackBar.open('Unfortunately we ran into a problem.', 'Please try again.', {
+      duration: 5000 });
     }
      // Final step is to reset the form on submission.
      this.enquiryForm.reset();
      this.remaining = 500;
    }
 
-   clearForm() {
+   clearForm = () => {
      // Reset form back to default values.
      this.enquiryForm.reset();
      // Mark as pristine
@@ -84,13 +84,13 @@ export class GetInTouchComponent implements OnInit {
   ngOnInit() {
   }
 
-  onTextarea(text: Object) {
+  onTextarea = (text: Object) => {
     // Calculates characters remaining in textarea field.
     this.remaining = this.MaxLength - Object.keys(text).length;
   //  console.log(this.remaining);
   }
 
-  sendEvent() {
+  sendEvent = () => {
     // Event to track how many users complete & submit Enquiry form.
     (<any>window).ga('send', 'event', {
       eventCategory: 'Enquiry Form Submit',
