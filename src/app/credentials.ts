@@ -1,4 +1,4 @@
-export var config = {
+export const config = {
   apiKey: "AIzaSyBVUtCz5WhqKYJuX214UCD0T8isyXTx9b8",
     authDomain: "gravitatech-9ce75.firebaseapp.com",
     databaseURL: "https://gravitatech-9ce75.firebaseio.com",
