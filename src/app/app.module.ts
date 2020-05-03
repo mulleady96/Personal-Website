@@ -1,5 +1,5 @@
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { BrowserModule, HammerModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
+import { BrowserModule, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 import { MatCheckboxModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -18,16 +18,8 @@ import { environment } from '../environments/environment';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { ThemeService } from './Services/theme.service';
 import { AppMaterialModule } from './app-material.module';
+import { HammerConfig } from './Hammerjs';
 
-@Injectable()
-export class HammerConfig extends HammerGestureConfig {
-  overrides = <any> {
-      // I will only use the swap gesture so 
-      // I will deactivate the others to avoid overlaps
-      'pinch': { enable: false },
-      'rotate': { enable: false }
-  }
-}
 
 @NgModule({
   declarations: [
