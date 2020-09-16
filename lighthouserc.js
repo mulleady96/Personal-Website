@@ -3,14 +3,14 @@ module.exports = {
       collect: {
         /* Add configuration here */
        //staticDistDir: './dist',
-        //startServerCommand: 'ng serve', // Dev report
-        startServerCommand: 'ng serve --prod', // Prod report
+        startServerCommand: 'ng serve', // Dev report
+        //startServerCommand: 'ng serve --prod', // Prod report
         url: ['http://localhost:4200']
       },
       assert: {
         assertions: {
           'categories:performance': ['warn', {minScore: 1}],
-          'categories:accessibility': ['error', {minScore: 1}]
+          'categories:accessibility': ['warn', {minScore: 1}]
         }
       },
       upload: {
