@@ -3,7 +3,7 @@ module.exports = {
       collect: {
         /* Add configuration here */
        //staticDistDir: './dist',
-        startServerCommand: 'ng serve', // Dev report
+        startServerCommand: 'npm run start', // Dev report
         //startServerCommand: 'ng serve --prod', // Prod report
         url: ['http://localhost:4200']
       },
