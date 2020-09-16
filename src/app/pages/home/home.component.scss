@@ -3,6 +3,35 @@
   font-style: oblique;
 }
 
+.overlay {
+  position: absolute;
+  align-self: center;
+  top: 0;
+  bottom: 15px;
+  z-index: 1;
+}
+
+video {
+  position: relative; 
+  left: auto;
+  top: auto;
+  transform: none; 
+  object-fit: cover; 
+}
+
+.heading-video {
+  font-weight: bold;
+  font-size: 6vw;
+  color: azure;
+}
+
+.sub-heading {
+  font-size: 3vw;
+  color: azure;
+  font-weight: lighter;
+}
+
+
 div {
   text-align: center;
 }

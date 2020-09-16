@@ -1,0 +1,65 @@
+
+
+    /*
+     *  Flip animation by David Walsh: https://davidwalsh.name/css-flip
+     */
+
+    /* entire container, keeps perspective */
+    .flip-container {
+        perspective: 1000px;
+    }
+
+
+        /* flip the pane when hovered */
+        .flip-container.flipped .flipper {
+            transform: rotateY(180deg);
+        }
+
+    .flip-container, .front, .back {
+        width: 50vw;
+        height: 40vh;
+        margin: 20px auto;
+        min-width: 250px;
+    }
+
+   
+    /* flip speed goes here */
+    .flipper {
+        transition: 0.6s;
+        transform-style: preserve-3d;
+        position: relative;
+    }
+
+    /* hide back of pane during swap */
+    .front, .back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        backface-visibility: hidden;
+        -webkit-box-shadow: 0px 8px 4px -4px rgba(163,163,163,0.25);
+        -moz-box-shadow: 0px 8px 4px -4px rgba(163,163,163,0.25);
+        box-shadow: 0px 8px 4px -4px rgba(163,163,163,0.25);
+        border: 1px solid #dee2e3;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    /* front pane, placed above back */
+    .front {
+        z-index: 2;
+        /* for firefox 31 */
+        transform: rotateY(0deg);
+    }
+
+    /* back, initially hidden pane */
+    .back {
+        transform: rotateY(180deg);
+        background: rgb(255,255,255);
+        background: -moz-linear-gradient(157deg, rgba(255,255,255,1) 35%, rgba(139,232,236,1) 100%);
+        background: -webkit-linear-gradient(157deg, rgba(255,255,255,1) 35%, rgba(139,232,236,1) 100%);
+        background: linear-gradient(157deg, rgba(255,255,255,1) 35%, rgba(139,232,236,1) 100%);
+    }
+

@@ -28,4 +28,7 @@ export class ProductsComponent implements OnInit {
 
   }
 
+    flipCard() {
+    
+    }
 }
