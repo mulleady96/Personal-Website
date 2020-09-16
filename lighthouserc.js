@@ -2,10 +2,10 @@ module.exports = {
     ci: {
       collect: {
         /* Add configuration here */
-       staticDistDir: './dist',
+       //staticDistDir: './dist',
         //startServerCommand: 'ng serve', // Dev report
         startServerCommand: 'ng serve --prod', // Prod report
-        url: ['https://localhost:4200']
+        url: ['http://localhost:4200']
       },
       assert: {
         assertions: {
