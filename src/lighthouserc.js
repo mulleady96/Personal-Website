@@ -2,7 +2,7 @@ module.exports = {
     ci: {
       collect: {
         /* Add configuration here */
-       // staticDistDir: './public',
+       staticDistDir: './dist',
         //startServerCommand: 'ng serve', // Dev report
         startServerCommand: 'ng serve --prod', // Prod report
         url: ['https://localhost:4200']
