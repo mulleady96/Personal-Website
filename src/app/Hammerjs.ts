@@ -6,7 +6,7 @@ import { HammerGestureConfig } from "@angular/platform-browser";
 export class HammerConfig extends HammerGestureConfig {
   overrides = <any>{
     // override gestures by setting to false.
-    swipe: { direction: Hammer.DIRECTION_ALL },
+    swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
     pinch: { enable: false },
     rotate: { enable: false },
   };

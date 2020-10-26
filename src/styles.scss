@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import './theme';
 
-html, body {
-  margin: 0px !important;
+html, body, mat-sidenav-container {
   height: 100vh;
+  overflow-y: hidden;
+  //overflow: auto;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -25,11 +26,6 @@ h5 {
   font-family: 'Titillium Web';
 }
 
-i {
-  padding-right: 5px;
-  color: rgba(93, 144, 238, 0.733);
-  display: inline-block;
-}
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }

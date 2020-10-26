@@ -23,32 +23,39 @@
     fxLayout="row wrap"
     fxLayoutAlign="center"
     fxLayout.xs="column"
-    fxLayoutGap="10px"
   >
     <app-flash-card>
-     
       <div class="app-flash-card-front">
         <h2>Tier 1 - Basic Website</h2>
         <hr>
         <mat-list role="list">
           <mat-list-item>
             <mat-icon>remove</mat-icon>
-            Redesign existing website - New logos etc
+            Website Redesign
           </mat-list-item>
           <mat-list-item>
             <mat-icon>remove</mat-icon>
-            Upgrading it to be faster, responsive for all devices
+            Faster and more responsive for all devices
           </mat-list-item>
           <mat-list-item>
             <mat-icon>remove</mat-icon>
-            Click to view examples
+            Click to view Examples
           </mat-list-item>
         </mat-list>
       </div>
 
       <div class="app-flash-card-back">
-        <p></p>
-        <div><button color="primary">Select</button></div>
+        <h2>Tier 1</h2>
+       
+        <a href="https://ionicmap-8b1d0.firebaseapp.com/" target="_blank" rel="noreferrer">
+        <img class="avatar-image">
+        </a>         
+       
+        <p>You have selected Tier 1 Basic website package, click below to progress further </p>
+       
+          <button  mat-raised-button routerLink="/enquire"
+          color="accent">Add to Cart</button>
+        
       </div>
    
     </app-flash-card>
@@ -59,21 +66,29 @@
         <hr>
         <mat-list role="list">
           <mat-list-item
-            ><mat-icon>remove</mat-icon> Advanced website - Include features
-            such as Authentication</mat-list-item
+            ><mat-icon>remove</mat-icon> Authentication and Database Storage</mat-list-item
           >
           <mat-list-item
-            ><mat-icon>remove</mat-icon> eCommerce , Analytics</mat-list-item
+            ><mat-icon>remove</mat-icon> Customer and Performance Analytics</mat-list-item
           >
           <mat-list-item
-            ><mat-icon>remove</mat-icon> Click to view examples</mat-list-item
+            ><mat-icon>remove</mat-icon> Click to view Examples</mat-list-item
           >
         </mat-list>
       </div>
 
       <div class="app-flash-card-back">
-        <p>Examples!</p>
-        <div><button color="primary">Select</button></div>
+        <h2>Tier 2</h2>
+
+        <a href="https://ionicmap-8b1d0.firebaseapp.com/" target="_blank" rel="noreferrer">
+          <img class="avatar-image">
+        </a>         
+       
+        <p>You have selected Tier 2 Advanced website package, click below to progress further </p>
+       
+          <button  mat-raised-button routerLink="/enquire"
+          color="accent">Add to Cart</button>
+        
       </div>
     </app-flash-card>
   </div>

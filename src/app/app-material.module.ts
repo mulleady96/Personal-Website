@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule, MatSlideToggleModule, MatGridListModule, MatToolbarModule, MatDividerModule, MatChipsModule, MatSnackBarModule, MatSidenavModule, MatCheckboxModule, MatCardModule, MatFormFieldModule, MatButtonModule, MatExpansionModule, MatMenuModule, MatListModule, MatIconModule, MatTableModule, MatTabsModule } from '@angular/material';
+import { MatInputModule, MatSlideToggleModule, MatGridListModule, MatToolbarModule, MatDividerModule, MatChipsModule, MatSnackBarModule, MatSidenavModule, MatCheckboxModule, MatCardModule, MatFormFieldModule, MatButtonModule, MatExpansionModule, MatMenuModule, MatListModule, MatIconModule, MatTableModule, MatTabsModule, MatTooltipModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -31,7 +31,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTableModule,
     MatIconModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTooltipModule
   ],
   exports: [
     FormsModule,
@@ -57,7 +58,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTableModule,
     MatIconModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTooltipModule
   ]
 })
 export class AppMaterialModule { }

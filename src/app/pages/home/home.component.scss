@@ -3,6 +3,7 @@
   font-style: oblique;
 }
 
+
 .overlay {
   position: absolute;
   align-self: center;
@@ -10,6 +11,36 @@
   bottom: 15px;
   z-index: 1;
 }
+
+
+i {
+  color:  azure;
+}
+
+// .underline {
+//   color: azure;
+//   display: inline-block;
+//   //padding: 15px 20px;
+//   position: relative;
+// }
+
+// .underline:after {
+//   background: none repeat scroll 0 0 transparent;
+//   bottom: 0;
+//   content: "";
+//   display: block;
+//   height: 2px;
+//   left: 50%;
+//   position: absolute;
+//   background: #fff;
+//   transition: width 0.3s ease 0s, left 0.3s ease 0s;
+//   width: 0;
+// }
+
+// .underline:hover:after { 
+//   width: 50%; 
+//   left: 23%; 
+// }
 
 video {
   position: relative; 
@@ -23,6 +54,11 @@ video {
   font-weight: bold;
   font-size: 6vw;
   color: azure;
+}
+
+.circle {
+  text-shadow:  20px 20px 60px #489dcf, 
+  -20px -20px 60px #62d5ff;
 }
 
 .sub-heading {
@@ -45,17 +81,17 @@ img {
   border-radius: 50%;
 }
 
-.underlinePretty {
-  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-  background-repeat: no-repeat;
-  background-size: 100% .4em;
-  background-position: 0 88%;
-  padding-top: 5px;
-  transition: background-size 0.25s ease-in;
-  &:hover {
-    background-size: 100% 88%;
-  }
-}
+// .underlinePretty {
+//   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+//   background-repeat: no-repeat;
+//   background-size: 100% .4em;
+//   background-position: 0 88%;
+//   padding-top: 5px;
+//   transition: background-size 0.25s ease-in;
+//   &:hover {
+//     background-size: 100% 88%;
+//   }
+// }
 
 .landing-card {
   max-width: 350px;
@@ -73,41 +109,31 @@ img {
 
 
 .landing-card2 {
-  max-width: 350px;
-  max-height: max-content;
-  border-radius: 24px;
-  margin: 25px 25px;
+ @extend .landing-card;
   background: linear-gradient(
     180deg,
     rgba(63, 94, 251, 1) 0%,
     rgba(70, 190, 252, 1) 100%
   );
-  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
-  box-shadow: 5px 5px 15px -3px #9c9c9c;
 }
 
 .landing-card3 {
-  max-width: 350px;
-  max-height: max-content;
-  border-radius: 24px;
-  margin: 25px 25px;
+  @extend .landing-card;
   background: linear-gradient(
     180deg,
     rgba(8, 25, 43, 1) 0%,
     rgba(131, 164, 76, 0.7570378493194152) 100%
   );
-  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
-  box-shadow: 5px 5px 15px -3px #9c9c9c;
 }
 
 /* 1 class - use css variable to randomise rgba and inifinte animation. */
 .landing-default {
-  text-align: center;
+  //text-align: center;
   max-width: 400px;
   max-height: max-content;
   border-radius: 24px;
   margin: 25px 25px;
-  justify-content: space-evenly;
+  //justify-content: space-evenly;
   background: rgb(8, 25, 43);
   background: linear-gradient(
     180deg,
@@ -119,41 +145,28 @@ img {
 }
 
 .landing-default2 {
-  text-align: center;
-  max-width: 400px;
-  max-height: max-content;
-  border-radius: 24px;
-  margin: 25px 25px;
-  justify-content: space-evenly;
+  @extend .landing-default;
   background: rgb(8, 25, 43);
   background: linear-gradient(
     180deg,
     rgba(8, 25, 43, 1) 0%,
     rgba(174, 133, 20, 0.7570378493194152) 100%
   );
-  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
-  box-shadow: 5px 5px 15px -3px #9c9c9c;
 }
 
 .landing-default3 {
-  text-align: center;
-  max-width: 400px;
-  max-height: 550px;
-  border-radius: 24px;
-  margin: 25px 25px;
-  justify-content: space-evenly;
+  @extend .landing-default;
   background: rgb(8, 25, 43);
   background: linear-gradient(
     180deg,
     rgba(8, 25, 43, 1) 0%,
     rgba(157, 70, 78, 0.7570378493194152) 100%
   );
-  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
-  box-shadow: 5px 5px 15px -3px #9c9c9c;
 }
 
 .mat-landing-button {
-  border-radius: 12px;
+  border-radius: 24px;
+  size: 50px;
   min-width: 275px;
 }
 
@@ -210,26 +223,20 @@ img {
 .designImage {
   justify-content: center;
   width: 150px;
-  height: 100px;
+  height: 130px;
   background-image: url("/assets/hugo-list-is-empty.png");
   background-size: cover;
 }
 
 .devImage {
-  justify-content: center;
-  width: 150px;
-  height: 130px;
+ @extend .designImage;
   background-image: url("/assets/mirage-come-back-later.png");
-  background-size: cover;
 }
 
 .productionImage {
-  justify-content: center;
-  width: 150px;
-  height: 100px;
+  @extend .designImage;
   border-radius: 25px;
   background-image: url("/assets/mirage-upgrade.png");
-  background-size: cover;
 }
 
 mat-card-header {
@@ -257,6 +264,12 @@ figure {
 mat-card {
   color: white;
   font-family: "Montserrat";
+  text-align: justify;
+  align-items: center;
+}
+
+mat-card-content {
+  font-size: 16px;
 }
 
 .mat-chip-list {

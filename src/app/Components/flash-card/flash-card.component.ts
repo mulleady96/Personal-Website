@@ -11,16 +11,12 @@ export class FlashCardComponent implements OnInit {
   flipped = false;
 
   constructor() { 
-    console.log('component');
-    
   }
 
   ngOnInit() {
   }
 
   flip() {
-    console.log('click');
-    
     this.flipped = !this.flipped;
   }
 
