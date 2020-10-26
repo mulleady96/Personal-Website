@@ -1,17 +1,97 @@
-<br>
-<br>
+<br />
+<br />
 <div class="container animated fadeInLeft">
   <h1 style="text-align: center">Our Product Offering</h1>
 
-  <h4>If you want something similar for your own venture as seen below, why not enquire and let us know what you would
-    like?</h4>
+  <h4>
+    If you want something similar for your own venture as seen below, why not
+    enquire and let us know what you would like?
+  </h4>
+  <br />
+  <h3>
+    <button
+      mat-raised-button
+      class="mat-product-button"
+      color="accent"
+      routerLink="/enquire"
+    >
+      Enquire
+    </button>
+  </h3>
 
-  <br>
-  <h3><button mat-raised-button class="mat-product-button" color="accent" routerLink="/enquire">Enquire</button></h3>
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="center"
+    fxLayout.xs="column"
+  >
+    <app-flash-card>
+      <div class="app-flash-card-front">
+        <h2>Tier 1 - Basic Website</h2>
+        <hr>
+        <mat-list role="list">
+          <mat-list-item>
+            <mat-icon>remove</mat-icon>
+            Website Redesign
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon>remove</mat-icon>
+            Faster and more responsive for all devices
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon>remove</mat-icon>
+            Click to view Examples
+          </mat-list-item>
+        </mat-list>
+      </div>
 
-    <div (swipeup)="sidenav.open()">div 1</div>
-    <div (swipeup)="sidenav.open()">div 2</div>
-    <div (swipeup)="sidenav.open()">div 3</div>
+      <div class="app-flash-card-back">
+        <h2>Tier 1</h2>
+       
+        <a href="https://ionicmap-8b1d0.firebaseapp.com/" target="_blank" rel="noreferrer">
+        <img class="avatar-image">
+        </a>         
+       
+        <p>You have selected Tier 1 Basic website package, click below to progress further </p>
+       
+          <button  mat-raised-button routerLink="/enquire"
+          color="accent">Add to Cart</button>
+        
+      </div>
+   
+    </app-flash-card>
+
+    <app-flash-card>
+      <div class="app-flash-card-front">
+        <h2>Tier 2 - Premium Website</h2>
+        <hr>
+        <mat-list role="list">
+          <mat-list-item
+            ><mat-icon>remove</mat-icon> Authentication and Database Storage</mat-list-item
+          >
+          <mat-list-item
+            ><mat-icon>remove</mat-icon> Customer and Performance Analytics</mat-list-item
+          >
+          <mat-list-item
+            ><mat-icon>remove</mat-icon> Click to view Examples</mat-list-item
+          >
+        </mat-list>
+      </div>
+
+      <div class="app-flash-card-back">
+        <h2>Tier 2</h2>
+
+        <a href="https://ionicmap-8b1d0.firebaseapp.com/" target="_blank" rel="noreferrer">
+          <img class="avatar-image">
+        </a>         
+       
+        <p>You have selected Tier 2 Advanced website package, click below to progress further </p>
+       
+          <button  mat-raised-button routerLink="/enquire"
+          color="accent">Add to Cart</button>
+        
+      </div>
+    </app-flash-card>
+  </div>
 
   <!-- <br>
   <h3>Front-End Technologies</h3>
@@ -100,12 +180,12 @@
 
     </mat-expansion-panel>
   </mat-accordion> -->
-<br>
-  <h4>All applications come with a SEO (Search Engine Optimisation) score of 100, to ensure customers are more likely to find you when browsing online. </h4>
-
+  <br />
+  <h4>
+    All applications come with a SEO (Search Engine Optimisation) score of 100,
+    to ensure customers are more likely to find you when browsing online.
+  </h4>
 </div>
-
-
 
 <!-- Using Material expansion panel with tiles from Bulma -->
 <!-- <div class="tile is-ancestor">
@@ -147,15 +227,6 @@
     </div>
     
     </div> -->
-
-
-
-
-
-
-
-
-
 
 <!-- <mat-tab-group mat-stretch-tabs>
   <mat-tab label="Ionic Application (Mobile)">

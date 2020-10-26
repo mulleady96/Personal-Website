@@ -11,8 +11,6 @@ import { config } from './credentials';
 import { Router, NavigationEnd } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SwUpdate } from '@angular/service-worker';
-import * as AOS from 'aos';
-import 'aos/dist/aos.css';
 import { ThemeService } from './Services/theme.service';
 import { Observable } from 'rxjs';
 
@@ -43,7 +41,7 @@ export class AppComponent implements OnInit {
   isDarkTheme: Observable<boolean>;
   themeDescription: string;
   iconValue = 'nights_stay';
-  imageSRC = 'assets/AM NEW Logo 2020.png';
+  imageSRC = 'assets/BlackAMLogo.png';
   storedTheme: boolean;
   checked: boolean;
 
@@ -83,7 +81,7 @@ export class AppComponent implements OnInit {
    // console.log(this.isDarkTheme);
 
     this.themeService.setDarkTheme(checked);
-    checked ? (this.imageSRC = 'assets/AM New Logo Light 2020.png') : (this.imageSRC = 'assets/AM NEW Logo 2020.png');
+    checked ? (this.imageSRC = 'assets/WhiteAMLogo.png') : (this.imageSRC = 'assets/BlackAMLogo.png');
     checked
       ? (this.themeDescription = 'Light Theme')
       : (this.themeDescription = 'Dark Theme');
@@ -94,7 +92,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    AOS.init();
+    
     // Toggle Light/Dark Theme
     this.isDarkTheme = this.themeService.isDarkTheme;
 

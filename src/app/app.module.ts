@@ -1,3 +1,5 @@
+import { FlashCardComponent } from './Components/flash-card/flash-card.component';
+import { ComponentsModule } from './Components/components.module';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { BrowserModule, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
@@ -25,8 +27,7 @@ import { HammerConfig } from './Hammerjs';
   declarations: [
     AppComponent,
     ComingSoonComponent,
-    PageNotFoundComponent,
-
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +36,7 @@ import { HammerConfig } from './Hammerjs';
     AngularFireModule.initializeApp(config),
     AngularFireStorageModule,
     PdfViewerModule,
+    ComponentsModule,
     NgProgressModule,
     AppMaterialModule,
     HammerModule,

@@ -4,7 +4,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
+  styleUrls: ['./products.component.scss'],
   animations: [ // Slide items up from the bottom of screen.
         trigger('itemState', [
             transition('void => *', [
@@ -28,4 +28,7 @@ export class ProductsComponent implements OnInit {
 
   }
 
+    flipCard() {
+    
+    }
 }

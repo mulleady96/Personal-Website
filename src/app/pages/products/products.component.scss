@@ -5,10 +5,26 @@
   align-items: center;
 }
 
+.avatar-image {
+  width: 50%;
+  height: 150px;
+  border-radius: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url('../../../assets/Tier1Example.png');
+  background-size: cover;
+}
+
+.avatar-image2 {
+  @extend .avatar-image;
+    background-image: url('../../../assets/Tier2Example.png');
+    background-size: cover;
+}
+
+
 h3 {
   text-align: center;
   font-family: 'Bungee';
-  
 }
 
 .mat-product-button {
@@ -16,6 +32,7 @@ h3 {
   min-width: 275px;
   text-align: center;
 }
+
 
 h4 {
   text-align: center;
@@ -32,4 +49,10 @@ h4 {
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+.scene {
+  width: 200px;
+  height: 260px;
+  perspective: 600px;
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CountUpOptions } from 'countup.js';
+
+
 
 @Component({
   selector: 'app-home',
@@ -18,16 +20,20 @@ import { CountUpOptions } from 'countup.js';
         ])
     ]
 })
+
+
 export class HomeComponent implements OnInit {
 
     opts: CountUpOptions;
     showDiv: boolean = false;
+    video: string;
 
   constructor() {
   }
 
   ngOnInit() {
       this.useOptions();
+      this.randomVideos();
   }
 
   toggleDiv = () => {
@@ -39,5 +45,16 @@ export class HomeComponent implements OnInit {
       duration: 6,
       separator: ','
     };
+  }
+
+  randomVideos = () => {
+    const src = [
+      '../assets/Beach.mp4',
+      '../assets/Pexels Videos 2386458.mp4',
+      '../assets/swissAlps.mp4'
+    ];
+    // Every page load, renders a random video.
+    this.video = src[Math.floor(Math.random() * src.length)];
+    return this.video;
   }
 }
