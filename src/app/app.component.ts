@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   isDarkTheme: Observable<boolean>;
   themeDescription: string;
   iconValue = 'nights_stay';
-  imageSRC = 'assets/BlackAMLogo.png';
+  imageSRC = 'assets/AM NEW Logo 2020.png';
   storedTheme: boolean;
   checked: boolean;
 
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
    // console.log(this.isDarkTheme);
 
     this.themeService.setDarkTheme(checked);
-    checked ? (this.imageSRC = 'assets/WhiteAMLogo.png') : (this.imageSRC = 'assets/BlackAMLogo.png');
+    checked ? (this.imageSRC = 'assets/AM New Logo Light 2020.png') : (this.imageSRC = 'assets/AM NEW Logo 2020.png');
     checked
       ? (this.themeDescription = 'Light Theme')
       : (this.themeDescription = 'Dark Theme');

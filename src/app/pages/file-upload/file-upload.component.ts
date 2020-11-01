@@ -87,7 +87,10 @@ export class FileUploadComponent implements OnInit {
       })
     );
     } catch (error) {
-      this.snackBar.open('Could not complete this operation for the following reason' + error);
+      this.snackBar.open('Could not complete this operation for the following reason: ' + error , 'OK', {
+        duration: 5000,
+        verticalPosition: 'bottom'
+      });
     }
   }
 

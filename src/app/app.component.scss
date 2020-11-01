@@ -49,7 +49,6 @@ mat-sidenav {
 mat-toolbar {
   -webkit-box-shadow: 5px 5px 15px -3px #9C9C9C; 
   box-shadow: 5px 5px 15px -3px #9C9C9C;
-  text-align: center;
   width: 100%;
   position: sticky;
     position: -webkit-sticky; /* For macOS/iOS Safari */
@@ -60,6 +59,7 @@ mat-toolbar {
     background-attachment: fixed;
     background-size: cover;
 }
+
 
 .router-link-active {
   background-color: #bbdefb;
@@ -110,10 +110,8 @@ mat-toolbar {
 // }
 
 .icon-logo {
-  height: 85px;
-  width: 105px;
-  text-align: center;
-  transition: 1.1s ease-out;
+  height: 100px;
+  width: auto;
 }
 
 @keyframes rotate-vertical {

@@ -52,25 +52,19 @@
         </div>
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
-      <mat-toolbar fxLayout="row wrap">
-        <mat-toolbar-row fxLayoutGap.gt-xs="100px" fxLayoutGap.xs="40px" fxLayoutAlign="center center">
+      <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
           <div>
             <button mat-icon-button color="accent" (click)="sidenav.open(); menuToggleEvent()" aria-label="List">
               <mat-icon>list</mat-icon>
             </button>
           </div>
-          <div class="animated fadeInDown">
-          <mat-icon class="icon-logo">
-            <img [src]="imageSRC" routerLink="/home" alt="GravitaTech Logo">
-          </mat-icon>
-        </div>
+            <img class="icon-logo animated fadeInDown" [src]="imageSRC" routerLink="/home" alt="GravitaTech Logo">
           <div><a href="https://github.com/mulleady96" fxLayoutAlign="flex-end" target="_blank" rel="noreferrer">
-              <button mat-button matTooltip="My Github Account" color="accent" aria-label="Github button">
+              <button mat-icon-button matTooltip="My Github Account" color="accent" aria-label="Github button">
                 <mat-icon class="fab fa-github"></mat-icon>
               </button>
             </a>
           </div>
-        </mat-toolbar-row>
       </mat-toolbar>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
