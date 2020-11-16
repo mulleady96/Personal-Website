@@ -45,7 +45,6 @@
     "moment": "^2.24.0",
     "ng2-pdf-viewer": "^5.2.3",
     "nodemailer": "^5.1.1",
-    "post-loader": "^2.0.0",
     "rxjs": "^6.5.4",
     "tslib": "^1.11.0",
     "zone.js": "^0.10.2"
@@ -73,7 +72,6 @@
     "ts-node": "~5.0.1",
     "tslint": "^5.16.0",
     "typescript": "^3.7.5",
-    "url-loader": "^4.1.1",
     "webpack-bundle-analyzer": "^3.7.0"
   }
 }
