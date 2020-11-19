@@ -1,5 +1,12 @@
 name: Compress Images
+<<<<<<< HEAD
 on: pull_request
+=======
+on:
+  push:
+    branches:
+      - AM---Code-improvements
+>>>>>>> 36f204fd1e10a08bb691a4f5af0b5f911bebd2c8
 jobs:
   build:   
     name: calibreapp/image-actions
