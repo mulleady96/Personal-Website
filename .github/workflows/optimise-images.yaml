@@ -2,7 +2,7 @@ name: Compress Images
 on:
   push:
     branches:
-      - master, AM---Code-improvements
+      - AM---Code-improvements
 jobs:
   build:   
     name: calibreapp/image-actions
