@@ -2,13 +2,13 @@
 <div [ngClass]="{'dark-theme' : isDarkTheme | async}">
   <mat-sidenav-container (backdropClick)="close('backdrop')">
 
-    <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
+    <mat-sidenav #sidenav (keydown.escape)="close('escape')">
       <h2>
         {{ title }}
       </h2>
       <br>
       <button mat-button routerLinkActive="router-link-active" aria-label="Home" routerLink="/home">
-        <mat-icon color="accent">home</mat-icon>
+       <mat-icon color="accent">home</mat-icon>
         Home
       </button>
       <br>
@@ -32,7 +32,11 @@
         Upload
       </button>
       <br>
-      
+      <button mat-button routerLinkActive="router-link-active" aria-label="Upload" routerLink="/gallery">
+        <mat-icon color="accent">image</mat-icon>
+        Gallery
+      </button>
+      <br>
       <hr>
       <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
         <mat-icon color="accent">{{iconValue}}</mat-icon>

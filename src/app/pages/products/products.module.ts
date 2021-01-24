@@ -1,4 +1,3 @@
-import { FlashCardComponent } from './../../Components/flash-card/flash-card.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
