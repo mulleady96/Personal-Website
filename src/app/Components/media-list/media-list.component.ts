@@ -2,7 +2,6 @@ import { GravitaService } from './../../Services/gravita.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Images } from '../../../assets/Images.json';
 import * as _ from 'lodash';
-import { CountUpOptions } from 'countup.js';
 
 export interface ImagesJson {
   images: Image[];
@@ -33,7 +32,6 @@ export class MediaListComponent implements OnInit {
   locations = [];
   search: boolean;
   @Input() name: string;
-  opts: CountUpOptions;
 
 
   message = 'Wow! Check this photo out at https://andrewmulleady.ie/gallery';
@@ -44,7 +42,6 @@ export class MediaListComponent implements OnInit {
   ngOnInit() {
     this.getImages();
     this.getUniqueNames();
-    this.useOptions();
   }
 
   expand() {
@@ -56,15 +53,12 @@ export class MediaListComponent implements OnInit {
     this.images = Images;
     this.images = _.sortBy(this.images, 'title');
     this.count = this.images.length;
-    console.log(this.images);
-
   }
 
   getUniqueNames() {
     // unique location names for chip list
     this.locations = _.sortBy(this.images, 'title');
     this.locations = _.uniq(_.map(this.locations, 'title'));
-    console.log(this.locations);
   }
 
   sortByName(name) {
@@ -73,21 +67,11 @@ export class MediaListComponent implements OnInit {
     this.images = Images;
    this.images = _.filter(this.images, {title: name});
    this.count = this.images.length;
-   return console.log(this.images);
   }
 
   WhatsApp() {
     window.open("https://api.whatsapp.com/send?text=" + encodeURI(this.message), '_blank');
   }
-
-  useOptions = () => {
-    this.opts = {
-      startVal: this.count,
-      duration: 6,
-      separator: ','
-    };
-  }
-
   
 }
 

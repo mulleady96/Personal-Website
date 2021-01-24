@@ -34,7 +34,7 @@ export class UploadService {
     this.pictureRef = firebase
     .database()
     .ref(`/Logos/`);
-    console.log('started');
+    // console.log('started');
   }
 
   upload(event: FileList) {
@@ -60,7 +60,7 @@ export class UploadService {
 
     // The main task - is undefined
     this.task = this.storage.upload(path, file);
-    console.log(this.task);
+    // console.log(this.task);
     
     const fileRef = this.storage.ref(path);
     
@@ -70,7 +70,7 @@ export class UploadService {
       // The file's download URL
        finalize(() => this.downloadURL = fileRef.getDownloadURL()),
       tap(snap => {
-        console.log(snap);
+       // console.log(snap);
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update DB on completion
           this.pictureRef.push(({ path, size: snap.totalBytes })); // Log the upload as an entry into the DB
