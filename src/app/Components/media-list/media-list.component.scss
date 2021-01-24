@@ -1,0 +1,99 @@
+div {
+  margin: 5px;
+}
+
+img {
+  max-height: 50vh;
+}
+
+mat-chip-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: -4px;
+  padding: 10px;
+}
+
+$colors: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 0.8718837876947654) 34%,
+    rgba(252, 176, 69, 1) 100%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(7, 6, 36, 0.74) 0%,
+    rgba(45, 7, 95, 0.507) 66%,
+    rgba(69, 112, 252, 0.616) 100%
+  ),
+  linear-gradient(
+    142deg,
+    rgba(7, 6, 36, 1) 0%,
+    rgba(20, 152, 151, 1) 24%,
+    rgba(29, 253, 231, 0.5553571770505077) 59%,
+    rgba(42, 206, 238, 0.5133403703278187) 77%,
+    rgba(33, 81, 99, 0.443) 92%,
+    rgba(19, 32, 75, 0.511) 100%
+  );
+@for $i from 1 through length($colors) {
+  mat-chip.mat-standard-chip:nth-child(#{length($colors)}n + #{$i}) {
+    background: nth($colors, $i);
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  left: 30px;
+  height: 50px;
+  color: white;
+}
+
+.underline {
+  /* color: azure; */
+  display: inline-block;
+  padding: 5px 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.underline:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: lightcoral;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.underline:hover:after {
+  width: 50%;
+  left: 23%;
+}
+
+.invisible {
+  transition: opacity 1s ease-out;
+  opacity: 0.2;
+}
+
+.invisible:hover {
+  opacity: 1;
+}
+
+.content {
+  height: 100vh;
+  overflow: auto;
+}
+
+i {
+  margin: 5px;
+}

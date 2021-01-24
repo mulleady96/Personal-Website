@@ -27,8 +27,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/file-upload/file-upload.module').then(m => m.FileUploadModule)
   },
   {
-    path: 'blog',
-    loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule)
+    path: 'gallery',
+    loadChildren: () => import('./pages/gallery/gallery.module').then(m => m.GalleryModule)
   },
   {
     path: 'BlogDetail',

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule, MatSlideToggleModule, MatGridListModule, MatToolbarModule, MatDividerModule, MatChipsModule, MatSnackBarModule, MatSidenavModule, MatCheckboxModule, MatCardModule, MatFormFieldModule, MatButtonModule, MatExpansionModule, MatMenuModule, MatListModule, MatIconModule, MatTableModule, MatTabsModule, MatTooltipModule } from '@angular/material';
+import { MatInputModule, MatSlideToggleModule, MatGridListModule, MatToolbarModule, MatDividerModule, MatChipsModule, MatSnackBarModule, MatSidenavModule, MatCheckboxModule, MatCardModule, MatFormFieldModule, MatButtonModule, MatExpansionModule, MatListModule, MatIconModule, MatTableModule, MatTabsModule, MatTooltipModule, MatBadgeModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { MatMenuModule} from '@angular/material/menu';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [],
   imports: [
@@ -24,6 +25,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatBadgeModule,
     MatExpansionModule,
     MatMenuModule,
     MatListModule,
@@ -32,6 +34,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatCheckboxModule,
     MatTabsModule,
+    ScrollingModule,
     MatTooltipModule
   ],
   exports: [
@@ -51,6 +54,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatBadgeModule,
     MatExpansionModule,
     MatMenuModule,
     MatListModule,
@@ -59,6 +63,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatCheckboxModule,
     MatTabsModule,
+    ScrollingModule,
     MatTooltipModule
   ]
 })

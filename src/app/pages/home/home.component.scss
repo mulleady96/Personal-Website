@@ -3,7 +3,6 @@
   font-style: oblique;
 }
 
-
 .overlay {
   position: absolute;
   align-self: center;
@@ -64,9 +63,9 @@ video {
 .sub-heading {
   font-size: 3vw;
   color: azure;
-  font-weight: lighter;
+  padding: 40px;
+  font-weight: bolder;
 }
-
 
 div {
   text-align: center;
@@ -163,8 +162,8 @@ div {
 
 .mat-landing-button {
   border-radius: 24px;
-  size: 50px;
-  min-width: 275px;
+  width: 100%;
+  max-width: 275px;
 }
 
 .svgImage {

@@ -12,6 +12,8 @@ import { tap, finalize } from 'rxjs/operators';
 
 export class UploadService {
 
+  public basePath = "https://firebasestorage.googleapis.com/v0/b/gravitatech-9ce75.appspot.com/o/Logos%2F";
+
   task: AngularFireUploadTask; // Allows you to pause, resume an upload task.
 
   percentage: Observable<number>; // Progress bar
@@ -87,5 +89,4 @@ export class UploadService {
   isActive(snapshot) { // Make cancel + Pause buttons active whilst upload in progress.
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
-
 }

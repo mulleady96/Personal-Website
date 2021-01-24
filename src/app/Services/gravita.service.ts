@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
@@ -9,7 +10,7 @@ export class GravitaService {
 
   public enquiryListRef: firebase.database.Reference;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.enquiryListRef = firebase
     .database()
     .ref(`/enquiry/`);
@@ -31,5 +32,13 @@ export class GravitaService {
       ionicChecked: ionicChecked
     });
 
+  }
+
+  getImages(){
+    return this.http.get('/assets/Images.json');
+  }
+
+  getVideos(){
+    return this.http.get('/assets/Videos.json');
   }
 }

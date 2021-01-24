@@ -1,4 +1,3 @@
-import { FlashCardComponent } from './Components/flash-card/flash-card.component';
 import { ComponentsModule } from './Components/components.module';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { BrowserModule, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
@@ -17,7 +16,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { ThemeService } from './Services/theme.service';
 import { AppMaterialModule } from './app-material.module';
 import { HammerConfig } from './Hammerjs';
@@ -26,7 +24,6 @@ import { HammerConfig } from './Hammerjs';
 @NgModule({
   declarations: [
     AppComponent,
-    ComingSoonComponent,
     PageNotFoundComponent
   ],
   imports: [
