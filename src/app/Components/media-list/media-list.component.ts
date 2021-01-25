@@ -1,4 +1,3 @@
-import { GravitaService } from './../../Services/gravita.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Images } from '../../../assets/Images.json';
 import * as _ from 'lodash';

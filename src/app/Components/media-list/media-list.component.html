@@ -3,6 +3,7 @@
     mat-fab
     color="accent"
     (click)="expand()"
+    aria-label="Search"
   >
     <mat-icon *ngIf="!search"> search </mat-icon>
     <mat-icon *ngIf="search"> close </mat-icon>
@@ -40,11 +41,11 @@
               <span matBadge="{{image.likes}}" matBadgeOverlap="true"></span></mat-icon
             > -->
           {{image.title}}
-              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with menu options">
                 <i class="fas fa-share"></i>
               </button>
               <mat-menu #menu="matMenu" yPosition="above">
-                <button mat-menu-item (click)="WhatsApp()">
+                <button mat-menu-item (click)="WhatsApp()" aria-label="send to whatsapp">
                   <i class="fab fa-whatsapp"></i>WhatsApp
                 </button>
               </mat-menu>
