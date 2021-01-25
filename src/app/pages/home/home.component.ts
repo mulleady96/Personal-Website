@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CountUpOptions } from 'countup.js';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
