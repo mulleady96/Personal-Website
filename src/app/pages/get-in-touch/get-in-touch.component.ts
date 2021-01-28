@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { GravitaService } from '../../Services/gravita.service';
 
 @Component({

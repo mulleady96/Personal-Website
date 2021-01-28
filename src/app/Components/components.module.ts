@@ -3,7 +3,7 @@ import { InvisibleDirective } from './../Directives/invisible.directive';
 import { UnderlineHoverDirective } from './../Directives/underline-hover.directive';
 import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from './../app-material.module';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 
 import { FlashCardComponent } from './flash-card/flash-card.component';
 import { NgModule } from '@angular/core';

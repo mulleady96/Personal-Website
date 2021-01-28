@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
   }
 
   initializeApp() {
-    firebase.initializeApp(config);
+    firebase.default.initializeApp(config);
   }
 
   // navBarToggle() {
