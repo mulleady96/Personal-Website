@@ -23,12 +23,10 @@
     </ng-template>
     
     <mat-list>
-      <div fxLayout.xs="column" fxLayout="row wrap">
+      <div fxLayout="column" fxLayout.gt-md="row wrap">
         <div
           [appUnderlineHover]
-          fxFlex.sm="0 1 calc(50%-10px)"
-          fxFlex.md="0 1 calc(33%-10px)"
-          fxFlex.gt-md="0 1 calc(33%-10px)"
+          fxFlex.gt-md="0 1 calc(50%-10px)"
           *ngFor="let image of images"
         >
           <!-- <h1 [appUnderlineHover] [matTooltip]="image.description" matTooltipPosition="above">

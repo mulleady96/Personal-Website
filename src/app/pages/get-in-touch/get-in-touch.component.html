@@ -79,7 +79,7 @@
                   placeholder="Tell us which brands, websites and designs you admire? " matTextareaAutosize
                   matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
               </mat-form-field>
-              <mat-label class="remaining">{{remaining}} Characters Remaining</mat-label>
+              <mat-label class="remaining" [ngStyle]="{'color' : warning}">{{remaining}} Characters Remaining</mat-label>
             </td>
           </tr>
 

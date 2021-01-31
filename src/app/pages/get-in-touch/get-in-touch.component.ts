@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -22,8 +22,8 @@ import { GravitaService } from '../../Services/gravita.service';
 })
 export class GetInTouchComponent implements OnInit {
 
+  @Input() warning;
   public enquiryForm: FormGroup;
-
   public MaxLength = 500;
   public remaining = 500;
 
@@ -56,10 +56,10 @@ export class GetInTouchComponent implements OnInit {
       const angularChecked = this.enquiryForm.value.angularChecked;
       const ionicChecked = this.enquiryForm.value.ionicChecked;
       const description = this.enquiryForm.value.description;
-      
+
       // call service and submit the values from form into the DB.
       this.gravita.createEnquiry(firstName, lastName, email, phoneNo, companyName, address, description, angularChecked, ionicChecked);
- 
+
       // SnackBar success message showing the form has been submitted.
       this.snackBar.open('Form Successfully Submitted, Thank You!', 'Great', {
         duration: 5000
@@ -79,6 +79,7 @@ export class GetInTouchComponent implements OnInit {
      // Mark as pristine
      this.enquiryForm.markAsUntouched();
      this.remaining = 500;
+     this.warning = '';
    }
 
   ngOnInit() {
@@ -87,6 +88,7 @@ export class GetInTouchComponent implements OnInit {
   onTextarea = (text: Object) => {
     // Calculates characters remaining in textarea field.
     this.remaining = this.MaxLength - Object.keys(text).length;
+    this.warning = this.remaining <= 100 ? 'orange' : '';
   //  console.log(this.remaining);
   }
 

@@ -36,7 +36,7 @@ nav a.active {
 }
 
 mat-sidenav {
-  padding-top: 100px;
+  padding-top: 60px;
   background: #F7F9FA;
   display: flex;
   justify-content: center;
@@ -148,7 +148,8 @@ mat-toolbar {
 
 
 .bottomSocial {
-  position: fixed; /* Fixed/sticky position */
+ // position: sticky; /* Fixed/sticky position */
+  padding: 20px;
   bottom: 20px; 
 }
 
