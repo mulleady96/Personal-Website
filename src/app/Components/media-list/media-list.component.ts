@@ -46,7 +46,6 @@ export class MediaListComponent implements OnInit {
   expand() {
     this.search = !this.search;
   }
-  
 
   getImages(){
     this.images = Images;
