@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AppMaterialModule } from 'src/app/app-material.module';
-import { CountUpModule } from 'countup.js-angular2';
+import { CountUpModule } from 'ngx-countup';
 
 
 const routes: Routes = [

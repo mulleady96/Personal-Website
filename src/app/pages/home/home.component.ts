@@ -1,7 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CountUpOptions } from 'countup.js';
-
 
 
 @Component({
@@ -49,7 +48,7 @@ export class HomeComponent implements OnInit {
 
   randomVideos = () => {
     const src = [
-      '../assets/GalwayBay4.JPG',
+      '../assets/12 pins.JPG',
       '../assets/Inverin.jpg',
       '../assets/Pier1.jpg',
       '../assets/Pier2.jpg'

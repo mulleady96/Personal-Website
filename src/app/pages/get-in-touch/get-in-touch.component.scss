@@ -20,7 +20,6 @@
 }
 
 
-$remaining: 500;
 
 .remaining {
         font-size: 80%;
@@ -28,9 +27,6 @@ $remaining: 500;
         right: 50px;
         font-family: 'Quicksand';
         padding-left: 50px;
-        @if($remaining <= 200) {
-            color: red;
-        }
 }
 
 

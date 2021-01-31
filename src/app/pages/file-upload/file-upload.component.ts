@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import * as firebase from 'firebase';
 
@@ -26,7 +26,7 @@ export class FileUploadComponent implements OnInit {
 
   isHovering: boolean; // State for dropzone CSS toggling.
 
-  public pictureRef: firebase.database.Reference;
+  public pictureRef: firebase.default.database.Reference;
 
 
   constructor(private storage: AngularFireStorage, public snackBar: MatSnackBar) {
@@ -34,7 +34,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   FBaseConnection = () => {
-    this.pictureRef = firebase
+    this.pictureRef = firebase.default
     .database()
     .ref(`/Logos/`);
   }

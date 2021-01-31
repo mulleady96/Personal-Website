@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
@@ -24,14 +24,14 @@ export class UploadService {
 
   downloadURL: Observable<string>;
 
-  public pictureRef: firebase.database.Reference;
+  public pictureRef: firebase.default.database.Reference;
 
   constructor(private snackBar: MatSnackBar, private storage: AngularFireStorage) {
     this.initializeFirebase();
    }
 
   initializeFirebase () {
-    this.pictureRef = firebase
+    this.pictureRef = firebase.default
     .database()
     .ref(`/Logos/`);
     // console.log('started');

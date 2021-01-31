@@ -3,6 +3,7 @@
     mat-fab
     color="accent"
     (click)="expand()"
+    aria-label="Search"
   >
     <mat-icon *ngIf="!search"> search </mat-icon>
     <mat-icon *ngIf="search"> close </mat-icon>
@@ -11,24 +12,21 @@
   <div *ngIf="search">
     <mat-chip-list aria-label="Sort By Location">
       <mat-chip (click)="getImages()">All</mat-chip>
-      <mat-chip *ngFor="let name of locations" [name]="name" (click)="sortByName(name)">{{name}}</mat-chip>
+      <mat-chip *ngFor="let name of locations" name="name" (click)="sortByName(name)">{{name}}</mat-chip>
     </mat-chip-list>
   </div>
 
 <mat-tab-group mat-stretch-tabs>
   <mat-tab>
     <ng-template mat-tab-label>
-      <span matBadge="{{count}}" matBadgeOverlap="false" [countUp]="startVal"
-      [options]="opts">Images</span>
+      <span matBadge="{{count}}" matBadgeOverlap="false">Images</span>
     </ng-template>
     
     <mat-list>
-      <div fxLayout.xs="column" fxLayout="row wrap">
+      <div fxLayout="column" fxLayout.gt-md="row wrap">
         <div
           [appUnderlineHover]
-          fxFlex.sm="0 1 calc(50%-10px)"
-          fxFlex.md="0 1 calc(33%-10px)"
-          fxFlex.gt-md="0 1 calc(33%-10px)"
+          fxFlex.gt-md="0 1 calc(50%-10px)"
           *ngFor="let image of images"
         >
           <!-- <h1 [appUnderlineHover] [matTooltip]="image.description" matTooltipPosition="above">
@@ -40,11 +38,11 @@
               <span matBadge="{{image.likes}}" matBadgeOverlap="true"></span></mat-icon
             > -->
           {{image.title}}
-              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with menu options">
                 <i class="fas fa-share"></i>
               </button>
               <mat-menu #menu="matMenu" yPosition="above">
-                <button mat-menu-item (click)="WhatsApp()">
+                <button mat-menu-item (click)="WhatsApp()" aria-label="send to whatsapp">
                   <i class="fab fa-whatsapp"></i>WhatsApp
                 </button>
               </mat-menu>

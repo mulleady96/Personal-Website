@@ -8,17 +8,17 @@ import 'firebase/database';
 })
 export class GravitaService {
 
-  public enquiryListRef: firebase.database.Reference;
+  public enquiryListRef: firebase.default.database.Reference;
 
   constructor(private http: HttpClient) {
-    this.enquiryListRef = firebase
+    this.enquiryListRef = firebase.default
     .database()
     .ref(`/enquiry/`);
    }
 
   createEnquiry(firstName: string, lastName: string, email: string, phoneNo: string,
      companyName: string, address: string, description: string, angularChecked: boolean,
-   ionicChecked: boolean): firebase.database.ThenableReference {
+   ionicChecked: boolean): firebase.default.database.ThenableReference {
 
     return this.enquiryListRef.push({
       firstName:  firstName,
