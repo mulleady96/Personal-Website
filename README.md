@@ -6,12 +6,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 * Firebase Hosting & Realtime DB.
 * Material Design icons & Google fonts used throughout.
 * Angular Animations on page load.
-* Google Analytics tracking: 
-  - Track page views
-  - Track how many users are accessing your website.
-  - The devices they use to access your website.
-  - Track the location of your users, when they access your site.
-  - Custom events to track how your users interact with your site.
+* Google Analytics.
+* Dark Mode
+
+ 
 
 ## Development server
 
