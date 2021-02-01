@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
       '../assets/12 pins.JPG',
       '../assets/Inverin.jpg',
       '../assets/Pier1.jpg',
+      '../assets/lighthouse.jpg',
       '../assets/Pier2.jpg'
     ];
     // Every page load, renders a random video.
