@@ -92,7 +92,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    
     // Toggle Light/Dark Theme
     this.isDarkTheme = this.themeService.isDarkTheme;
 
