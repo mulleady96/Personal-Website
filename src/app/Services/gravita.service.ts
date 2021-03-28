@@ -4,41 +4,26 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GravitaService {
-
   public enquiryListRef: firebase.default.database.Reference;
 
   constructor(private http: HttpClient) {
-    this.enquiryListRef = firebase.default
-    .database()
-    .ref(`/enquiry/`);
-   }
-
-  createEnquiry(firstName: string, lastName: string, email: string, phoneNo: string,
-     companyName: string, address: string, description: string, angularChecked: boolean,
-   ionicChecked: boolean): firebase.default.database.ThenableReference {
-
-    return this.enquiryListRef.push({
-      firstName:  firstName,
-      lastName: lastName,
-      email:  email,
-      phoneNo: phoneNo,
-      companyName: companyName,
-      address: address,
-      description: description,
-      angularChecked: angularChecked,
-      ionicChecked: ionicChecked
-    });
-
+    this.enquiryListRef = firebase.default.database().ref(`/enquiry/`);
   }
 
-  getImages(){
+  createEnquiry(enquiryForm: []): firebase.default.database.ThenableReference {
+    return this.enquiryListRef.push({
+      enquiry: enquiryForm,
+    });
+  }
+
+  getImages() {
     return this.http.get('/assets/Images.json');
   }
 
-  getVideos(){
+  getVideos() {
     return this.http.get('/assets/Videos.json');
   }
 }

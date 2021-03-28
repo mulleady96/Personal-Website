@@ -13,5 +13,4 @@ export class InvisibleDirective {
     @HostListener('mouseenter') onMouseEnter() {
       this.renderer.addClass(this.elementRef.nativeElement, 'invisible:hover');
     }
-    
 }

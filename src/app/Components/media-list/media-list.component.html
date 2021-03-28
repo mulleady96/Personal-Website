@@ -32,7 +32,7 @@
           <!-- <h1 [appUnderlineHover] [matTooltip]="image.description" matTooltipPosition="above">
             {{ image.title }}
           </h1> -->
-          <p [appInvisible] class="overlay" >
+          <p [appInvisible] class="overlay">
             <!-- <mat-icon color="accent"
               >favorite
               <span matBadge="{{image.likes}}" matBadgeOverlap="true"></span></mat-icon
@@ -47,10 +47,9 @@
                 </button>
               </mat-menu>
           </p>
-          <img src="{{ image.src }}" alt="Photo of scenery" loading="lazy" />
+          <img src="{{ image.src }}" (click)="openModal(image.src)" alt="Photo of {{image.title}}" loading="lazy" />
         </div>
       </div>
     </mat-list>
-  </mat-tab>
- 
+  </mat-tab> 
 </mat-tab-group>

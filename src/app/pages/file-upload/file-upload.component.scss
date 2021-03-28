@@ -20,6 +20,10 @@
     }
 }
 
+::ng-deep .mat-simple-snackbar-action {
+    color: coral !important;
+}
+
 h2 {
     text-align: center;
     font-size: 1.5em;
