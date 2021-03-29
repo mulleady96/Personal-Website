@@ -12,9 +12,9 @@ jobs:
           node-version: 10.x
       - name: Write credentials.ts
         run: |
-        touch src/app/credentials.ts
-        echo $DEV_credentials >> src/app/credentials.ts
-        cat src/app/credentials.ts
+        touch credentials.ts
+        echo "$DEV_credentials" >> src/app/credentials.ts
+        cat credentials.ts
       - name: npm install
         run: |
           npm install
