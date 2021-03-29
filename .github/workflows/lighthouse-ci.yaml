@@ -2,7 +2,9 @@ name: Build project and run Lighthouse CI
 on: [push]
 jobs:
   lhci:
-    name: Lighthouse CI
+    - name: Lighthouse CI
+      env:
+      DEV_credentials: ${{secrets.DEV_CREDENTIALS}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -12,9 +14,9 @@ jobs:
           node-version: 10.x
       - name: Write credentials.ts
         run: |
-        touch credentials.ts
-        echo "$DEV_credentials" >> credentials.ts
-        cat credentials.ts
+        touch src/app/credentials.ts
+        echo $DEV_credentials >> src/app/credentials.ts
+        cat src/app/credentials.ts
       - name: npm install
         run: |
           npm install
