@@ -3,8 +3,6 @@ on: [push]
 jobs:
   lhci:
     - name: Lighthouse CI
-      env:
-      DEV_credentials: ${{secrets.DEV_CREDENTIALS}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -13,9 +11,11 @@ jobs:
         with:
           node-version: 10.x
       - name: Write credentials.ts
+        env:
+          DEV_CREDENTIALS: ${{secrets.DEV_CREDENTIALS}}
         run: |
         touch src/app/credentials.ts
-        echo $DEV_credentials >> src/app/credentials.ts
+        echo $DEV_CREDENTIALS >> src/app/credentials.ts
         cat src/app/credentials.ts
       - name: npm install
         run: |
