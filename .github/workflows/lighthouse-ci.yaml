@@ -13,7 +13,7 @@ jobs:
       - name: Write credentials.ts
         run: |
         touch credentials.ts
-        echo "$DEV_credentials" >> src/app/credentials.ts
+        echo "$DEV_credentials" >> credentials.ts
         cat credentials.ts
       - name: npm install
         run: |
