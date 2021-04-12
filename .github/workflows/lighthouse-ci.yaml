@@ -13,9 +13,7 @@ jobs:
       - name: Write credentials.ts
         DEV_CREDENTIALS: ${{secrets.DEV_CREDENTIALS}}
         run: |
-        touch: src/app/credentials.ts
-        echo: "$DEV_CREDENTIALS" >> src/app/credentials.ts
-        cat: src/app/credentials.ts
+        '{{ secrets.DEV_CREDENTIALS }}' >> src/app/credentials.ts
       - name: npm install
         run: |
           npm install
