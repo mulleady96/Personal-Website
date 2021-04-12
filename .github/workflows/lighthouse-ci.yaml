@@ -14,7 +14,7 @@ jobs:
         DEV_CREDENTIALS: ${{secrets.DEV_CREDENTIALS}}
         run: |
         echo "$DEV_CREDENTIALS" >> src/app/credentials.ts
-        cat src/app/credentials.ts
+        
       - name: npm install
         run: |
           npm install
