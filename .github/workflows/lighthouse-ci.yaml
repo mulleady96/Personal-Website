@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: 10.x
       - name: Write credentials.ts
-        run: 'echo ${{ secrets.DEV_CREDENTIALS }} | base64 -d >> src/app/credentials.ts'
+        run: 'echo ${{ secrets.DEV_CREDENTIALS }} >> src/app/credentials.ts'
       - name: npm install
         run: |
           npm install
