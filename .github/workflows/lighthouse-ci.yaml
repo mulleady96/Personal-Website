@@ -11,9 +11,7 @@ jobs:
         with:
           node-version: 10.x
       - name: Write credentials.ts
-          env: 
-            Credential: ${{ secrets.DEV_CREDENTIALS }}
-        run: 'echo "$Credential" > /src/app/credentials.ts'
+        run: 'echo "${{ secrets.DEV_CREDENTIALS }}" > /src/app/credentials.ts'
       - name: npm install
         run: |
           npm install
