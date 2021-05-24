@@ -3,7 +3,8 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { Observable } from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/database';
 
 import { tap, finalize } from 'rxjs/operators';
 

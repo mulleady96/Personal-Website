@@ -1,3 +1,4 @@
+import { ComponentsModule } from 'src/app/Components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CountUpModule,
+    ComponentsModule,
     AppMaterialModule,
     RouterModule.forChild(routes)
   ]

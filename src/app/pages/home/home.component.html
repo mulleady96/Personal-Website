@@ -1,14 +1,13 @@
 <section class="hero is-large" fxHide.lt-md="true">
-  <img [src]="video" alt="image Background">
+  <img [src]="video" alt="image Background" />
   <div class="hero-body overlay">
     <div class="container">
       <h1 class="title heading-video">Front End Developer</h1>
       <h2 class="subtitle sub-heading">
         <div>
-           Web Design
-            <i color="accent" class="fas fa-circle"></i>
-           Mobile
-            Apps <i class="fas fa-circle"></i> Logos
+          Web Design
+          <i color="accent" class="fas fa-circle"></i>
+          Mobile Apps <i class="fas fa-circle"></i> Logos
         </div>
       </h2>
       <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="40px">
@@ -53,15 +52,15 @@
             <mat-icon class="fab fa-github" color="accent"></mat-icon>
           </button>
         </a>
-          <button
+        <button
           mat-fab
           color="primary"
           matTooltip="View Gallery"
           aria-label="Button directing to Gallery page"
           routerLink="/gallery"
-          >
-            <mat-icon color="accent">image</mat-icon>
-          </button>
+        >
+          <mat-icon color="accent">image</mat-icon>
+        </button>
       </div>
     </div>
   </div>
@@ -78,10 +77,11 @@
       mat-raised-button
       color="accent"
       class="mat-landing-button"
-      routerLink="/enquire">
+      routerLink="/enquire"
+    >
       Let's Get Started
     </button>
-
+    <app-bubbles></app-bubbles>
     <div
       fxLayout="row wrap"
       fxLayoutAlign="center"
@@ -94,7 +94,6 @@
         <mat-card-header>
           <mat-card-title>Design</mat-card-title>
         </mat-card-header>
-
         <mat-card-content>
           <p>
             This will involve studying your brand, your competitors and your
@@ -109,7 +108,7 @@
         </mat-card-content>
         <mat-card-actions> </mat-card-actions>
       </mat-card>
-      <mat-card id="cardStyle2" class="landing-default2">
+      <mat-card id="cardStyle2" class="landing-default">
         <div fxLayout="row wrap" fxLayoutAlign="center">
           <figure fxLayoutAlign="center" class="devImage"></figure>
         </div>
@@ -130,13 +129,19 @@
           </p>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="center center">
-          <button mat-raised-button full class="mat-landing-button" color="accent" routerLink="/products">
+          <button
+            mat-raised-button
+            full
+            class="mat-landing-button"
+            color="accent"
+            routerLink="/products"
+          >
             View Products
           </button>
         </mat-card-actions>
       </mat-card>
 
-      <mat-card id="cardStyle3" class="landing-default3">
+      <mat-card id="cardStyle3" class="landing-default">
         <div fxLayout="row wrap" fxLayoutAlign="center">
           <figure fxLayoutAlign="center" class="productionImage"></figure>
         </div>
@@ -164,17 +169,14 @@
               of your website/app experience the most traffic?</mat-list-item
             >
           </mat-list>
-         
         </mat-card-content>
       </mat-card>
     </div>
   </div>
- 
 </section>
 
 <section class="section" fxLayout="column" fxLayoutAlign="center center">
   <h1 class="title">A Few Guarantees</h1>
-
   <button mat-fab (click)="toggleDiv()">
     <mat-icon *ngIf="!showDiv" class="toggleAnimation">add</mat-icon>
     <mat-icon *ngIf="showDiv" class="redIcon"> close </mat-icon>
@@ -189,7 +191,7 @@
         fxLayoutAlign="center"
         class="animated fadeInLeft delay-1s"
       >
-        <mat-card class="landing-card">
+        <mat-card class="landing-default2">
           <mat-card-header>
             <div class="example-header-image"></div>
             <mat-card-title>Industry Standard</mat-card-title>
@@ -212,7 +214,7 @@
           </mat-card-actions>
         </mat-card>
 
-        <mat-card class="landing-card2">
+        <mat-card class="landing-default2">
           <mat-card-header>
             <mat-card-title
               ><button
@@ -233,10 +235,9 @@
               customers.
             </p>
           </mat-card-content>
-          <mat-card-actions> </mat-card-actions>
         </mat-card>
 
-        <mat-card class="landing-card3">
+        <mat-card class="landing-default2">
           <mat-card-header>
             <div class="example-header-image"></div>
             <mat-card-title>Platform Independent</mat-card-title>
@@ -283,4 +284,3 @@
     </button>
   </section>
 </div>
-

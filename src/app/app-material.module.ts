@@ -1,3 +1,4 @@
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -38,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatChipsModule,
     MatSnackBarModule,
     MatSnackBarModule,
+    MatDialogModule,
     MatSidenavModule,
     MatCheckboxModule,
     MatCardModule,
@@ -64,6 +66,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatGridListModule,
     MatToolbarModule,
     MatDividerModule,
+    MatDialogModule,
     MatChipsModule,
     MatSnackBarModule,
     MatSnackBarModule,

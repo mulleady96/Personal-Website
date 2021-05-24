@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Images } from '../../../assets/Images.json';
+import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import * as _ from 'lodash';
 
 export interface ImagesJson {
@@ -13,7 +14,6 @@ export interface Image {
   "date" : string;
   "likes" : number;
 }
-
 @Component({
   selector: 'app-media-list',
   templateUrl: './media-list.component.html',
@@ -30,12 +30,13 @@ export class MediaListComponent implements OnInit {
   chipValue;
   locations = [];
   search: boolean;
+  modal: boolean;
   @Input() name: string;
 
 
   message = 'Wow! Check this photo out at https://andrewmulleady.ie/gallery';
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -70,6 +71,27 @@ export class MediaListComponent implements OnInit {
   WhatsApp() {
     window.open("https://api.whatsapp.com/send?text=" + encodeURI(this.message), '_blank');
   }
-  
+
+  openModal(image: Image) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.maxWidth = '100%';
+    dialogConfig.height = '100vh';
+    dialogConfig.panelClass = 'custom-dialog';
+    dialogConfig.data = {
+      src: image
+    },
+    this.dialog.open(DialogElementsExampleDialog, dialogConfig);
+  }
 }
+
+@Component({
+  selector: 'dialog-elements-example-dialog',
+  template: `
+  <img src="{{ image.src }}" mat-dialog-close alt="Photo of scenery" />
+  `,
+})
+export class DialogElementsExampleDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public image: Image) {}
+}
+
 

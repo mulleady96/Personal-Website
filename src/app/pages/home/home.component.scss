@@ -7,6 +7,14 @@ img {
   height: 120vh;
 }
 
+
+// .highlighted-text {
+//   background-image: linear-gradient(transparent 60%,#FDE9A2 60%);
+//   background-size: 20% 100%;
+//   background-repeat: no-repeat;
+//   background-position: top center;
+// }
+
 .overlay {
   position: absolute;
   align-self: center;
@@ -15,9 +23,8 @@ img {
   z-index: 1;
 }
 
-
 i {
-  color:  azure;
+  color: azure;
 }
 
 // .underline {
@@ -40,28 +47,29 @@ i {
 //   width: 0;
 // }
 
-// .underline:hover:after { 
-//   width: 50%; 
-//   left: 23%; 
+// .underline:hover:after {
+//   width: 50%;
+//   left: 23%;
 // }
 
 video {
-  position: relative; 
+  position: relative;
   left: auto;
   top: auto;
-  transform: none; 
-  object-fit: cover; 
+  transform: none;
+  object-fit: cover;
 }
 
 .heading-video {
   font-weight: bold;
   font-size: 6vw;
   color: azure;
+  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .circle {
-  text-shadow:  20px 20px 60px #489dcf, 
-  -20px -20px 60px #62d5ff;
+  text-shadow: 20px 20px 60px #489dcf, -20px -20px 60px #62d5ff;
 }
 
 .sub-heading {
@@ -80,7 +88,6 @@ div {
   width: 100%;
 }
 
-
 // .underlinePretty {
 //   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 //   background-repeat: no-repeat;
@@ -93,104 +100,63 @@ div {
 //   }
 // }
 
-.landing-card {
-  max-width: 350px;
-  max-height: max-content;
-  border-radius: 24px;
-  margin: 25px 25px;
-  background: linear-gradient(
+$colors: linear-gradient(
     180deg,
     rgba(8, 25, 43, 1) 0%,
-    rgba(166, 70, 195, 0.7570378493194152) 100%
+    rgb(20, 151, 174) 100%
+  ),
+  linear-gradient(
+    180deg,
+    rgba(8, 25, 43, 1) 0%,
+    rgb(174, 133, 20) 100%
+  ),
+  linear-gradient(
+    180deg,
+    rgba(8, 25, 43, 1) 0%,
+    rgb(157, 70, 79) 100%
   );
-  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
-  box-shadow: 5px 5px 15px -3px #9c9c9c;
+@for $i from 1 through length($colors) {
+  .landing-default:nth-child(#{length($colors)}n + #{$i}) {
+    background: nth($colors, $i);
+    color: white;
+    font-family: "Montserrat";
+    text-align: justify;
+    align-items: center;
+    max-width: 400px;
+    max-height: max-content;
+    border-radius: 24px;
+    margin: 25px 25px;
+    -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
+    box-shadow: 5px 5px 15px -3px #9c9c9c;
+  }
 }
 
-
-.landing-card2 {
- @extend .landing-card;
-  background: linear-gradient(
+$colors2: linear-gradient(
     180deg,
     rgba(63, 94, 251, 1) 0%,
     rgba(70, 190, 252, 1) 100%
-  );
-}
-
-.landing-card3 {
-  @extend .landing-card;
-  background: linear-gradient(
+  ),
+  linear-gradient(
     180deg,
     rgba(8, 25, 43, 1) 0%,
-    rgba(131, 164, 76, 0.7570378493194152) 100%
-  );
-}
-
-
-
-.landing-default {
-  //text-align: center;
-  max-width: 400px;
-  max-height: max-content;
-  border-radius: 24px;
-  margin: 25px 25px;
-  //justify-content: space-evenly;
-  background: rgb(8, 25, 43);
-  background: linear-gradient(
+    rgb(130, 164, 76) 100%
+  ),
+  linear-gradient(
     180deg,
     rgba(8, 25, 43, 1) 0%,
-    rgba(20, 150, 174, 0.7570378493194152) 100%
+    rgb(166, 70, 195) 100%
   );
-  -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
-  box-shadow: 5px 5px 15px -3px #9c9c9c;
-}
-
-.landing-default2 {
+@for $i from 1 through length($colors2) {
+  .landing-default2:nth-child(#{length($colors2)}n + #{$i}) {
   @extend .landing-default;
-  background: rgb(8, 25, 43);
-  background: linear-gradient(
-    180deg,
-    rgba(8, 25, 43, 1) 0%,
-    rgba(174, 133, 20, 0.7570378493194152) 100%
-  );
-}
-
-.landing-default3 {
-  @extend .landing-default;
-  background: rgb(8, 25, 43);
-  background: linear-gradient(
-    180deg,
-    rgba(8, 25, 43, 1) 0%,
-    rgba(157, 70, 78, 0.7570378493194152) 100%
-  );
+    background: nth($colors2, $i);
+  }
 }
 
 .mat-landing-button {
   border-radius: 24px;
   width: 100%;
   max-width: 275px;
-}
-
-.svgImage {
-  height: 400px;
-  width: 450px;
-  transform: rotate(180deg);
-  background-position: left;
-  z-index: -1;
-  background-image: url("/assets/hologram.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.svgImageResponsive {
-  height: 400px;
-  width: 350px;
-  transform: rotate(45deg);
-  background-position: center;
-  float: left;
-  background-image: url("/assets/master_plan.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 /* .headingUnderline {
@@ -230,7 +196,7 @@ div {
 }
 
 .devImage {
- @extend .designImage;
+  @extend .designImage;
   background-image: url("/assets/mirage-come-back-later.png");
 }
 
@@ -262,19 +228,51 @@ figure {
   transition: all 3s ease-in-out;
 } */
 
-mat-card {
-  color: white;
-  font-family: "Montserrat";
-  text-align: justify;
-  align-items: center;
-}
-
 mat-card-content {
   font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.mat-chip-list {
-  text-align: center;
+$colors: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 0.8718837876947654) 34%,
+    rgba(252, 176, 69, 1) 100%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(7, 6, 36, 0.74) 0%,
+    rgba(45, 7, 95, 0.507) 66%,
+    rgba(69, 112, 252, 0.616) 100%
+  ),
+  linear-gradient(
+    142deg,
+    rgba(7, 6, 36, 1) 0%,
+    rgba(20, 152, 151, 1) 24%,
+    rgba(29, 253, 231, 0.5553571770505077) 59%,
+    rgba(42, 206, 238, 0.5133403703278187) 77%,
+    rgba(33, 81, 99, 0.443) 92%,
+    rgba(19, 32, 75, 0.511) 100%
+  ),
+  linear-gradient(90deg, rgb(39, 10, 143) 0%, rgb(161, 11, 86) 100%);
+@for $i from 1 through length($colors) {
+  mat-chip.mat-standard-chip:nth-child(#{length($colors)}n + #{$i}) {
+    background: nth($colors, $i);
+    color: white;
+    cursor: pointer;
+    text-align: center;
+  }
+}
+
+mat-chip-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: -4px;
+  padding: 10px;
 }
 
 .mat-list-item {
@@ -310,6 +308,8 @@ mat-card-content {
   }
 }
 
+
+
 .toggleAnimation {
   animation: full-circle 1.5s linear;
 }
@@ -317,4 +317,43 @@ mat-card-content {
 .redIcon {
   color: red;
   animation: full-circle 1.5s ease-out;
+}
+
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
 }

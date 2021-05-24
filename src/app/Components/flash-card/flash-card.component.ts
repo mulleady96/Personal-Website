@@ -7,10 +7,9 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 })
 export class FlashCardComponent implements OnInit {
 
-  
   flipped = false;
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit() {

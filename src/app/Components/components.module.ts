@@ -7,14 +7,17 @@ import { MatCardModule } from '@angular/material/card';
 
 import { FlashCardComponent } from './flash-card/flash-card.component';
 import { NgModule } from '@angular/core';
-import { MediaListComponent } from './media-list/media-list.component';
+import { MediaListComponent, DialogElementsExampleDialog } from './media-list/media-list.component';
+import { BubblesComponent } from './bubbles/bubbles.component';
 
 @NgModule({
   declarations: [
     FlashCardComponent,
     MediaListComponent,
+    DialogElementsExampleDialog,
     UnderlineHoverDirective,
-    InvisibleDirective
+    InvisibleDirective,
+    BubblesComponent
   ],
   imports: [
     MatCardModule,
@@ -25,6 +28,8 @@ import { MediaListComponent } from './media-list/media-list.component';
   exports: [
     FlashCardComponent,
     MediaListComponent,
+    BubblesComponent,
+    DialogElementsExampleDialog,
     UnderlineHoverDirective,
     InvisibleDirective
   ]

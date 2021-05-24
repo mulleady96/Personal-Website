@@ -10,6 +10,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
+      - name: Write credentials.ts
+        run: 'echo "${{ secrets.DEV_CREDENTIALS }}" > src/app/credentials.ts'
       - name: npm install
         run: |
           npm install
