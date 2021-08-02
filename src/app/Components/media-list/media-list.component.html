@@ -6,7 +6,7 @@
     aria-label="Search"
   >
     <mat-icon *ngIf="!search"> search </mat-icon>
-    <mat-icon *ngIf="search"> close </mat-icon>
+    <mat-icon *ngIf="search" class="redIcon"> close </mat-icon>
   </button>
 
   <div *ngIf="search">
@@ -44,6 +44,9 @@
               <mat-menu #menu="matMenu" yPosition="above">
                 <button mat-menu-item (click)="WhatsApp()" aria-label="send to whatsapp">
                   <i class="fab fa-whatsapp"></i>WhatsApp
+                </button>
+                <button fxLayout="row" mat-menu-item (click)="Pexels()" aria-label="View more on Pexels">
+                 <i><img src="../../../assets/pexels_icon.png" alt="pexels icon"></i>Pexels
                 </button>
               </mat-menu>
           </p>

@@ -83,12 +83,8 @@ export class AppComponent implements OnInit {
     this.themeService.setDarkTheme(checked);
     checked ? (this.imageSRC = 'assets/AM New Logo Light 2020.png') : (this.imageSRC = 'assets/AM NEW Logo 2020.png');
     checked
-      ? (this.themeDescription = 'Light Theme')
-      : (this.themeDescription = 'Dark Theme');
-    checked
-      ? (this.iconValue = 'wb_sunny')
-      : (this.iconValue = 'nights_stay');
-
+      ? (this.themeDescription = 'Light Theme', this.iconValue = 'wb_sunny')
+      : (this.themeDescription = 'Dark Theme', this.iconValue = 'nights_stay');
   }
 
   ngOnInit() {

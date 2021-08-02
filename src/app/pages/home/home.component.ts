@@ -24,7 +24,7 @@ import { CountUpOptions } from 'countup.js';
 export class HomeComponent implements OnInit {
 
     opts: CountUpOptions;
-    showDiv: boolean = false;
+    showDiv = false;
     video: string;
 
   constructor() {
