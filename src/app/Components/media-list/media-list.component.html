@@ -45,6 +45,9 @@
                 <button mat-menu-item (click)="WhatsApp()" aria-label="send to whatsapp">
                   <i class="fab fa-whatsapp"></i>WhatsApp
                 </button>
+                <button fxLayout="row" mat-menu-item (click)="Pexels()" aria-label="View more on Pexels">
+                 <i><img src="../../../assets/pexels_icon.png" alt="pexels icon"></i>Pexels
+                </button>
               </mat-menu>
           </p>
           <img src="{{ image.src }}" (click)="openModal(image.src)" alt="Photo of {{image.title}}" loading="lazy" />

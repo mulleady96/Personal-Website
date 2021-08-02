@@ -69,7 +69,11 @@ export class MediaListComponent implements OnInit {
   }
 
   WhatsApp() {
-    window.open("https://api.whatsapp.com/send?text=" + encodeURI(this.message), '_blank');
+    window.open('https://api.whatsapp.com/send?text=' + encodeURI(this.message), '_blank');
+  }
+
+  Pexels() {
+    window.open('https://www.pexels.com/@andrew-mulleady-24039905', '_blank');
   }
 
   openModal(image: Image) {
