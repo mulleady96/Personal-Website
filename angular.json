@@ -22,19 +22,18 @@
               "src/favicon.ico",
               "src/assets",
               "src/robots.txt",
+              "src/.well_known",
               "src/manifest.json"
             ],
             "styles": [
               "node_modules/bulma/css/bulma.css",
               "node_modules/aos/dist/aos.css",
               "src/styles.scss",
-              { 
-                "input" : "src/theme.scss"
+              {
+                "input": "src/theme.scss"
               }
             ],
-            "scripts": [
-              "node_modules/aos/dist/aos.js"
-            ]
+            "scripts": ["node_modules/aos/dist/aos.js"]
           },
           "configurations": {
             "production": {
@@ -84,31 +83,20 @@
             "codeCoverage": true,
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              { 
-                "input" : "src/theme.scss"
+              {
+                "input": "src/theme.scss"
               },
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/aos/dist/aos.js"
-            ],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json"
-            ]
+            "scripts": ["node_modules/aos/dist/aos.js"],
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -133,9 +121,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

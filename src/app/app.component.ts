@@ -4,44 +4,44 @@ import {
   EventEmitter,
   OnInit,
   ViewChild,
-} from '@angular/core';
-import { trigger, transition, style, animate } from '@angular/animations';
-import * as firebase from 'firebase/app';
-import { config } from './credentials';
-import { Router, NavigationEnd } from '@angular/router';
-import { MatSidenav } from '@angular/material/sidenav';
-import { SwUpdate } from '@angular/service-worker';
-import { ThemeService } from './Services/theme.service';
-import { Observable } from 'rxjs';
+} from "@angular/core";
+import { trigger, transition, style, animate } from "@angular/animations";
+import * as firebase from "firebase/app";
+import { config } from "./credentials";
+import { Router, NavigationEnd } from "@angular/router";
+import { MatSidenav } from "@angular/material/sidenav";
+import { SwUpdate } from "@angular/service-worker";
+import { ThemeService } from "./Services/theme.service";
+import { Observable, of } from "rxjs";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
   animations: [
     // Slide items up from the bottom of screen.
-    trigger('itemState', [
-      transition('void => *', [
-        style({ transform: 'translateY(100%)' }),
-        animate('0.6s ease-in-out'),
+    trigger("itemState", [
+      transition("void => *", [
+        style({ transform: "translateY(100%)" }),
+        animate("0.6s ease-in-out"),
       ]),
-      transition('* => void', [
-        animate('0.6s ease-in-out', style({ transform: 'translateY(100%)' })),
+      transition("* => void", [
+        animate("0.6s ease-in-out", style({ transform: "translateY(100%)" })),
       ]),
     ]),
   ],
 })
 export class AppComponent implements OnInit {
   // Place google analytics code in app.component => only want to run once.
-  title = 'Andrew Mulleady';
+  title = "Andrew Mulleady";
 
   @Output()
   navToggle = new EventEmitter();
 
   isDarkTheme: Observable<boolean>;
   themeDescription: string;
-  iconValue = 'nights_stay';
-  imageSRC = 'assets/AM NEW Logo 2020.png';
+  iconValue = "nights_stay";
+  imageSRC = "assets/AM NEW Logo 2020.png";
   storedTheme: boolean;
   checked: boolean;
 
@@ -52,20 +52,20 @@ export class AppComponent implements OnInit {
   ) {
     this.initializeApp();
 
-    this.themeDescription = 'Dark Theme';
+    this.themeDescription = "Dark Theme";
 
     // Subscribe to router nav event => on route change, sends page view data to GA
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        (<any>window).ga('set', 'page', event.urlAfterRedirects);
-        (<any>window).ga('send', 'pageview');
+        (<any>window).ga("set", "page", event.urlAfterRedirects);
+        (<any>window).ga("send", "pageview");
       }
     });
   }
 
-  @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
+  @ViewChild("sidenav", { static: true }) sidenav: MatSidenav;
 
-  reason = '';
+  reason = "";
 
   close(reason: string) {
     this.reason = reason;
@@ -74,27 +74,42 @@ export class AppComponent implements OnInit {
 
   toggleDarkTheme(checked) {
     // Store in local storage.
-    // localStorage.setItem('this.isDarkTheme',  JSON.stringify(this.isDarkTheme));
+    localStorage.setItem("isDarkTheme", JSON.stringify(checked));
 
-    // Get item from localStorage
-    // this.storedTheme = JSON.parse(localStorage.getItem('this.isDarkTheme'));
-   // console.log(this.isDarkTheme);
+    //Get item from localStorage
+    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme"));
+
+    if (!this.storedTheme) {
+      this.isDarkTheme = of(false);
+    } else {
+      this.isDarkTheme = of(true);
+    }
 
     this.themeService.setDarkTheme(checked);
-    checked ? (this.imageSRC = 'assets/AM New Logo Light 2020.png') : (this.imageSRC = 'assets/AM NEW Logo 2020.png');
     checked
-      ? (this.themeDescription = 'Light Theme', this.iconValue = 'wb_sunny')
-      : (this.themeDescription = 'Dark Theme', this.iconValue = 'nights_stay');
+      ? (this.imageSRC = "assets/AM New Logo Light 2020.png")
+      : (this.imageSRC = "assets/AM NEW Logo 2020.png");
+    checked
+      ? ((this.themeDescription = "Light Theme"), (this.iconValue = "wb_sunny"))
+      : ((this.themeDescription = "Dark Theme"),
+        (this.iconValue = "nights_stay"));
   }
 
   ngOnInit() {
     // Toggle Light/Dark Theme
     this.isDarkTheme = this.themeService.isDarkTheme;
+    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme"));
+
+    if (this.storedTheme) {
+      this.checked = true;
+      this.isDarkTheme = of(true);
+      this.toggleDarkTheme(this.checked);
+    }
 
     // SW - Reload fresh instance of app, if new version is available.
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
-        if (confirm('New version available. Load New Version?')) {
+        if (confirm("New version available. Load New Version?")) {
           window.location.reload();
         }
       });
@@ -115,10 +130,10 @@ export class AppComponent implements OnInit {
 
   // GA tracking to see how frequently users interact with menu button.
   menuToggleEvent() {
-    (<any>window).ga('send', 'event', {
-      eventCategory: 'Menu',
-      eventLabel: 'Menu Toggle',
-      eventAction: 'Menu Toggle Event',
+    (<any>window).ga("send", "event", {
+      eventCategory: "Menu",
+      eventLabel: "Menu Toggle",
+      eventAction: "Menu Toggle Event",
       eventValue: 10,
     });
   }
