@@ -34,6 +34,7 @@ yarn-error.log
 testem.log
 /typings
 credentials.ts
+/well-known
 
 # System Files
 .DS_Store

@@ -30,7 +30,7 @@ export class ThemeService {
     try {
       this._darkTheme.next(isDarkTheme);
     } catch (error) {
-      console.log('Div class not rendered.');
+      console.log("Div class not rendered.");
     }
   }
 }
