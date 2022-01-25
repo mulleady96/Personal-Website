@@ -1,48 +1,46 @@
-.dropzone { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; 
-    font-weight: 200;
-    height: 300px;
-    border: 2px dashed #f16624;
-    border-radius: 5px;
-    background: white;
-    margin: 10px 0;
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 200;
+  height: 300px;
+  border: 2px dashed #f16624;
+  border-radius: 5px;
+  margin: 10px 0;
 
-    &.hovering {
-        border: 2px solid #f16624;
-        color: #dadada !important;
-    }
+  &.hovering {
+    border: 2px solid #f16624;
+    color: #dadada !important;
+  }
 
-    .file-label {
-        font-size: 1.2em;
-    }
+  .file-label {
+    font-size: 1.2em;
+  }
 }
 
 ::ng-deep .mat-simple-snackbar-action {
-    color: coral !important;
+  color: coral !important;
 }
 
 h2 {
-    text-align: center;
-    font-size: 1.5em;
-    padding-top: 5px;
+  text-align: center;
+  font-size: 1.5em;
+  padding-top: 5px;
 }
 
 .centering {
-    text-align: center;
-
+  text-align: center;
 }
 
 progress::-webkit-progress-value {
-    transition: width 0.1s ease;
+  transition: width 0.1s ease;
 }
 
 img {
-    width: 250px
+  width: 250px;
 }
 
 .fileUploadCard {
-    max-width: inherit;
+  max-width: inherit;
 }

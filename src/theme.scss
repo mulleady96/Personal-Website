@@ -40,7 +40,7 @@ $candy-app-theme: mat-light-theme(
   $dark-accent: mat-palette($mat-deep-orange, 100, A100, A700);
   $dark-warn: mat-palette($mat-red);
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-  $dark-lighter: rgb(53, 53, 53);
+  $dark-lighter: rgb(68, 68, 68);
   // Bulma
 
   strong {
@@ -94,7 +94,7 @@ $candy-app-theme: mat-light-theme(
   }
 
   .sub-heading {
-    color: #424242 !important;
+    color: #ffccbc !important;
   }
 
   mat-toolbar {
