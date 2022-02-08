@@ -12,53 +12,12 @@
 
       <div fxLayout="column wrap" fxLayoutAlign="center center">
         <mat-tab-group mat-align-tabs="center">
-          <mat-tab label="University">
+          <mat-tab *ngFor="let tab of tabDetails" label="{{ tab.label }}">
             <br />
-            <mat-icon
-              class="fas fa-university fa-4x mat-icon-styling"
-            ></mat-icon>
             <mat-list>
-              <mat-list-item mat-line>
-                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Attended
-                National University of Ireland, Galway
-              </mat-list-item>
-              <mat-list-item mat-line>
-                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Honours
-                degree in Bachelor of Commerce
-              </mat-list-item>
-              <mat-list-item mat-line>
-                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Honours
-                degree in h.Dip in Software Design & Development
-              </mat-list-item>
-            </mat-list>
-          </mat-tab>
-          <mat-tab label="Career">
-            <br />
-            <mat-icon class="fas fa-portrait fa-4x mat-icon-styling"></mat-icon>
-            <mat-list>
-              <mat-list-item mat-line>
-                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Full-time
-                I.T professional located in Ireland
-              </mat-list-item>
-              <mat-list-item mat-line>
-                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>3 years
-                experience developing web applications
-              </mat-list-item>
-            </mat-list>
-          </mat-tab>
-          <mat-tab label="Portfolio">
-            <br />
-            <mat-icon
-              class="fas fa-briefcase fa-4x mat-icon-styling"
-            ></mat-icon>
-            <mat-list>
-              <mat-list-item mat-line>
+              <mat-list-item *ngFor="let detail of tab.listItems" mat-line>
                 <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon
-                >Collection of applications on my Github account.
-              </mat-list-item>
-              <mat-list-item mat-line>
-                <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Practiced
-                advanced topics in Angular/Ionic, Typescript and the MEAN stack.
+                >{{ detail }}
               </mat-list-item>
             </mat-list>
           </mat-tab>

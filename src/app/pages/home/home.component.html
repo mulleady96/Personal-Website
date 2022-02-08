@@ -70,7 +70,7 @@
 
 <section class="section">
   <div>
-    <h1 class="title">How We Can Help You!</h1>
+    <h1 class="title">How Can We Help You!</h1>
 
     <h2 class="subtitle">
       We develop fully functional websites & Progressive Web Apps for SME's
@@ -78,6 +78,7 @@
     <button
       mat-raised-button
       color="accent"
+      aria-label="Get Started"
       class="mat-landing-button"
       routerLink="/enquire"
     >
@@ -89,46 +90,22 @@
       fxLayoutAlign="center"
       class="animated fadeInLeft delay-1s"
     >
-      <mat-card id="cardStyle" class="landing-default">
+      <mat-card
+        *ngFor="let card of cardDetails"
+        id="cardStyle"
+        class="landing-default"
+      >
         <div fxLayout="row wrap" fxLayoutAlign="center">
-          <figure class="designImage"></figure>
+          <figure class="{{ card.pictureClass }}"></figure>
         </div>
         <mat-card-header>
-          <mat-card-title>Design</mat-card-title>
+          <mat-card-title>{{ card.title }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <p>
-            This will involve studying your brand, your competitors and your
-            market. Identifying key designs that you admire from well-known
-            brands.
+            {{ card.description }}
           </p>
           <br />
-          <p>
-            From this we can create bespoke UI/UX designs that will engage your
-            audience, by being both easy to use and appealing on the eye.
-          </p>
-        </mat-card-content>
-        <mat-card-actions> </mat-card-actions>
-      </mat-card>
-      <mat-card id="cardStyle2" class="landing-default">
-        <div fxLayout="row wrap" fxLayoutAlign="center">
-          <figure fxLayoutAlign="center" class="devImage"></figure>
-        </div>
-        <mat-card-header>
-          <mat-card-title>Development</mat-card-title>
-          <mat-card-subtitle></mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-          <p>
-            During the development phase, checkpoints will be established
-            whereby you will be able to test the application as it's
-            progressing. Providing feedback on the design & functionality.
-          </p>
-          <p>
-            This feedback loop will help generate new exciting ideas that will
-            make your website/app stand out from the crowd.
-          </p>
         </mat-card-content>
         <mat-card-actions fxLayoutAlign="center center">
           <button
@@ -138,40 +115,9 @@
             color="accent"
             routerLink="/products"
           >
-            View Products
+            {{ card.buttonText }}
           </button>
         </mat-card-actions>
-      </mat-card>
-
-      <mat-card id="cardStyle3" class="landing-default">
-        <div fxLayout="row wrap" fxLayoutAlign="center">
-          <figure fxLayoutAlign="center" class="productionImage"></figure>
-        </div>
-        <mat-card-header>
-          <mat-card-title>Analytics</mat-card-title>
-        </mat-card-header>
-
-        <mat-card-content>
-          <p>
-            We can provide reports/stats on how your website is performing,
-            based on key metrics such as;
-          </p>
-          <mat-list role="list">
-            <mat-list-item
-              ><mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>Where your
-              users are Located?</mat-list-item
-            >
-            <mat-list-item
-              ><mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>How many
-              users have accessed your website?</mat-list-item
-            >
-            <br />
-            <mat-list-item
-              ><mat-icon mat-list-icon>keyboard_arrow_right</mat-icon>What areas
-              of your website/app experience the most traffic?</mat-list-item
-            >
-          </mat-list>
-        </mat-card-content>
       </mat-card>
     </div>
   </div>
@@ -193,85 +139,47 @@
         fxLayoutAlign="center"
         class="animated fadeInLeft delay-1s"
       >
-        <mat-card class="landing-default2">
+        <mat-card
+          *ngFor="let card of guaranteeDetails"
+          class="landing-default2"
+        >
           <mat-card-header>
             <div class="example-header-image"></div>
-            <mat-card-title>Industry Standard</mat-card-title>
+            <mat-card-title>
+              <button
+                mat-fab
+                *ngIf="card.title === 'SEO Score'"
+                class="matFab"
+                [countUp]="100"
+                [options]="opts"
+              ></button
+              >{{ card.title }}</mat-card-title
+            >
           </mat-card-header>
 
           <mat-card-content>
             <p>
-              We use the latest front-end frameworks along with cloud based
-              backend technologies. Your app will be responsive and intuitive
-              regardless of how intensive demand may be.
+              {{ card.description }}
             </p>
           </mat-card-content>
           <mat-card-actions>
             <mat-chip-list aria-label="Front-end elements">
-              <mat-chip color="primary">HTML5</mat-chip>
-              <mat-chip color="primary">CSS3</mat-chip>
-              <mat-chip color="primary">Angular</mat-chip>
-              <mat-chip color="primary">Ionic</mat-chip>
-            </mat-chip-list>
-          </mat-card-actions>
-        </mat-card>
-
-        <mat-card class="landing-default2">
-          <mat-card-header>
-            <mat-card-title
-              ><button
-                mat-fab
-                class="matFab"
-                [countUp]="100"
-                [options]="opts"
-              ></button>
-              <span class="seoFab">SEO Score</span></mat-card-title
-            >
-            <mat-card-subtitle></mat-card-subtitle>
-          </mat-card-header>
-
-          <mat-card-content>
-            <p>
-              Search Engine Optimisation is essential in order to appear high up
-              in browser search results, allowing you to engage more potential
-              customers.
-            </p>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="landing-default2">
-          <mat-card-header>
-            <div class="example-header-image"></div>
-            <mat-card-title>Platform Independent</mat-card-title>
-            <mat-card-subtitle></mat-card-subtitle>
-          </mat-card-header>
-
-          <mat-card-content>
-            <p>
-              Your new website will be optimised for all browsers and mobile
-              devices. Delivered at a low cost that will be manageable, for you
-              and your business.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <mat-chip-list
-              aria-label="Front-end elements"
-              fxLayoutAlign="center center"
-            >
-              <mat-chip color="primary"
-                ><mat-icon class="fab fa-apple"></mat-icon
-              ></mat-chip>
-              <mat-chip color="primary"><mat-icon>android</mat-icon></mat-chip>
-              <mat-chip color="primary"
-                ><mat-icon class="fab fa-chrome"></mat-icon
-              ></mat-chip>
+              <mat-chip *ngFor="let chip of card.chipList" color="primary"
+                ><mat-icon
+                  *ngIf="card.title === 'Platform Independent'"
+                  class="{{ chip }}"
+                ></mat-icon>
+                <span *ngIf="card.title !== 'Platform Independent'"
+                  >{{ chip }}
+                </span></mat-chip
+              >
             </mat-chip-list>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
     <br />
-    <p class="subtitle">
+    <p>
       You have the bright ideas, we have the smart solutions using the latest
       web technologies.
     </p>
@@ -279,6 +187,7 @@
     <button
       mat-raised-button
       color="accent"
+      aria-label="Get Started"
       class="mat-landing-button"
       routerLink="/enquire"
     >

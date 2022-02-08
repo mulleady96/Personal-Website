@@ -1,74 +1,135 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div [ngClass]="{'dark-theme' : isDarkTheme | async}">
+<div [ngClass]="{ 'dark-theme': isDarkTheme | async }">
   <mat-sidenav-container (backdropClick)="close('backdrop')">
-
     <mat-sidenav #sidenav (keydown.escape)="close('escape')">
       <h2>
         {{ title }}
       </h2>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" aria-label="Home" routerLink="/home">
-       <mat-icon color="accent">home</mat-icon>
+      <br />
+      <button
+        mat-button
+        routerLinkActive="router-link-active"
+        aria-label="Home"
+        routerLink="/home"
+      >
+        <mat-icon color="accent">home</mat-icon>
         Home
       </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" aria-label="Products" routerLink="/products">
+      <br />
+      <button
+        mat-button
+        routerLinkActive="router-link-active"
+        aria-label="Products"
+        routerLink="/products"
+      >
         <mat-icon color="accent">desktop_mac</mat-icon>
         Products
       </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" aria-label="About" routerLink="/about">
+      <br />
+      <button
+        mat-button
+        routerLinkActive="router-link-active"
+        aria-label="About"
+        routerLink="/about"
+      >
         <mat-icon color="accent">person_pin</mat-icon>
         About
       </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" aria-label="Get In Touch Form" routerLink="/enquire">
+      <br />
+      <button
+        mat-button
+        routerLinkActive="router-link-active"
+        aria-label="Get In Touch Form"
+        routerLink="/enquire"
+      >
         <mat-icon color="accent">edit</mat-icon>
         Get In Touch
       </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" aria-label="Upload" routerLink="/upload">
+      <br />
+      <button
+        mat-button
+        routerLinkActive="router-link-active"
+        aria-label="Upload"
+        routerLink="/upload"
+      >
         <mat-icon color="accent">cloud_upload</mat-icon>
         Upload
       </button>
-      <br>
-      <button mat-button routerLinkActive="router-link-active" aria-label="Upload" routerLink="/gallery">
+      <br />
+      <button
+        mat-button
+        routerLinkActive="router-link-active"
+        aria-label="Upload"
+        routerLink="/gallery"
+      >
         <mat-icon color="accent">image</mat-icon>
         Gallery
       </button>
-      <br>
-      <hr>
-      <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
-        <mat-icon color="accent">{{iconValue}}</mat-icon>
-        {{themeDescription}}
-        </mat-slide-toggle>
-        <div class="bottomSocial" fxLayoutGap="35px">
-          <a href="https://github.com/mulleady96" target="_blank" rel="noreferrer">
-            <button mat-button color="accent" aria-label="Github button">
-              <mat-icon class="fab fa-github"></mat-icon>
-            </button>
-          </a>
-          <a href="https://www.linkedin.com/in/andrew-mulleady-a6222a171/" target="_blank" rel="noreferrer">
-            <button mat-button color="accent" aria-label="LinkedIn">
-              <mat-icon class="fab fa-linkedin"></mat-icon>
-            </button>
-          </a>
-        </div>
+      <br />
+      <hr />
+      <mat-slide-toggle
+        [checked]="isDarkTheme | async"
+        (change)="toggleDarkTheme($event.checked)"
+      >
+        <mat-icon color="accent">{{ iconValue }}</mat-icon>
+        {{ themeDescription }}
+      </mat-slide-toggle>
+      <div class="bottomSocial" fxLayoutGap="35px">
+        <a
+          href="https://github.com/mulleady96"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <button mat-button color="accent" aria-label="Github button">
+            <mat-icon class="fab fa-github"></mat-icon>
+          </button>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/andrew-mulleady-a6222a171/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <button mat-button color="accent" aria-label="LinkedIn">
+            <mat-icon class="fab fa-linkedin"></mat-icon>
+          </button>
+        </a>
+      </div>
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
       <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
-          <div>
-            <button mat-icon-button color="accent" (click)="sidenav.open(); menuToggleEvent()" aria-label="List">
-              <mat-icon>list</mat-icon>
+        <div>
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="sidenav.open(); menuToggleEvent()"
+            aria-label="List"
+          >
+            <mat-icon>list</mat-icon>
+          </button>
+        </div>
+        <img
+          class="icon-logo animated fadeInDown"
+          [src]="imageSRC"
+          routerLink="/home"
+          alt="GravitaTech Logo"
+        />
+        <div>
+          <a
+            href="https://github.com/mulleady96"
+            fxLayoutAlign="flex-end"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <button
+              mat-icon-button
+              matTooltip="My Github Account"
+              color="accent"
+              aria-label="Github button"
+            >
+              <mat-icon class="fab fa-github"></mat-icon>
             </button>
-          </div>
-            <img class="icon-logo animated fadeInDown" [src]="imageSRC" routerLink="/home" alt="GravitaTech Logo">
-          <div><a href="https://github.com/mulleady96" fxLayoutAlign="flex-end" target="_blank" rel="noreferrer">
-              <button mat-icon-button matTooltip="My Github Account" color="accent" aria-label="Github button">
-                <mat-icon class="fab fa-github"></mat-icon>
-              </button>
-            </a>
-          </div>
+          </a>
+        </div>
       </mat-toolbar>
       <router-outlet></router-outlet>
     </mat-sidenav-content>

@@ -23,6 +23,55 @@ export class HomeComponent implements OnInit {
   opts: CountUpOptions;
   showDiv = false;
   video: string;
+  cardDetails = [
+    {
+      id: 1,
+      title: "Design",
+      description:
+        "This will involve studying your brand, your competitors and your market. Identifying key designs that you admire from well-known brands. From this we can create bespoke UI/UX designs that will engage your audience, by being both easy to use and appealing on the eye.",
+      pictureClass: "designImage",
+      buttonText: "View Designs",
+    },
+    {
+      id: 2,
+      title: "Development",
+      description:
+        "Once the final design has been agreed, checkpoints will be established whereby you will be able to test the application as it's progressing. Providing feedback on the design & functionality throughout.",
+      pictureClass: "devImage",
+      buttonText: "View Portfolio",
+    },
+    {
+      id: 3,
+      title: "Analytics",
+      description:
+        "We can provide comprehensive statistical reports on how your website is performing.",
+      pictureClass: "productionImage",
+      buttonText: "",
+    },
+  ];
+
+  guaranteeDetails = [
+    {
+      id: 1,
+      title: "Industry Standard",
+      description:
+        " We use the latest front-end frameworks along with cloud based backend technologies. Your app will be responsive and intuitive regardless of how intensive demand may be.",
+      chipList: ["HTML", "CSS", "Ionic", "Angular"],
+    },
+    {
+      id: 1,
+      title: "SEO Score",
+      description:
+        "Search Engine Optimisation is essential in order to appear high up in browser search results, allowing you to engage more potential customers.",
+    },
+    {
+      id: 1,
+      title: "Platform Independent",
+      description:
+        "Your new website will be optimised for all browsers and mobile devices. Delivered at a low cost that will be manageable, for you and your business.",
+      chipList: ["fab fa-apple", "fab fa-android", "fab fa-chrome"],
+    },
+  ];
 
   constructor() {}
 
