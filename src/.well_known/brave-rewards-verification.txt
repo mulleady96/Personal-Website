@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: andrewmulleady.ie
+Token: 14778cd0dfd00af81cef5dadcbefe9e7e335453d03b16b7ff0243910a5cdc9d6
