@@ -160,8 +160,8 @@ $colors2: linear-gradient(
   transition: 0.75s ease;
 }
 
-.seoFab {
-  padding-left: 15px;
+.matFab {
+  margin-right: 15px;
 }
 
 .sectionUnderline {
@@ -198,6 +198,16 @@ figure {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mat-card-actions .mat-button:first-child,
+.mat-card-actions .mat-raised-button:first-child,
+.mat-card-actions .mat-stroked-button:first-child {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0;
 }
 
 /* .titleHighlight {
