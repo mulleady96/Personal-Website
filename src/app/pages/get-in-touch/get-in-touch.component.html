@@ -1,96 +1,165 @@
-<div class="animated bounceInRight" style="text-align: center;" fxLayout.xs="column wrap">
-  
+<div class="fadeInLeft" style="text-align: center" fxLayout.xs="column wrap">
   <mat-card>
     <mat-card-title>
-      <h1 class="title"> Enquiry Form </h1>
+      <h1 class="title">Enquiry Form</h1>
     </mat-card-title>
     <mat-card-subtitle>
       Enter your details below, or get in touch by emailing me directly.
     </mat-card-subtitle>
 
-    <a href="mailto:andrewmulleady@live.ie?Subject=Website%20Enquiry" target="_top">
-    <button mat-fab color="accent" aria-label="Example icon-button with an email icon">
-      <mat-icon>email</mat-icon>
-    </button>
+    <a
+      href="mailto:andrewmulleady@live.ie?Subject=Website%20Enquiry"
+      target="_top"
+    >
+      <button
+        mat-fab
+        color="accent"
+        aria-label="Open email to contact website owner"
+      >
+        <mat-icon>email</mat-icon>
+      </button>
     </a>
     <mat-card-content>
-      <form [formGroup]="enquiryForm">
-        <table>
-          <tr fxLayout.xs="row wrap">
-            <td>
-              <mat-form-field color="accent">
-                <input matInput id="firstName" formControlName="firstName" maxlength="50" type="text" placeholder="First Name">
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field color="accent">
-                <input matInput id="lastName" formControlName="lastName" type="text" maxlength="50" placeholder="Last Name">
-              </mat-form-field>
-            </td>
-          </tr>
+      <div [formGroup]="enquiryForm" class="demo-full-width">
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="5px"
+          fxLayoutAlign="space-evenly center"
+        >
+          <mat-form-field color="accent">
+            <input
+              matInput
+              id="firstName"
+              formControlName="firstName"
+              maxlength="50"
+              type="text"
+              placeholder="First Name"
+            />
+          </mat-form-field>
 
-          <tr fxLayout.xs="row wrap">
-            <td>
-              <mat-form-field color="accent">
-                <input matInput id="email" formControlName="email" type="email" placeholder="Email">
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field color="accent">
-                <input matInput id="phoneNo" formControlName="phoneNo" type="number" maxlength="50" placeholder="Phone No.">
-              </mat-form-field>
-            </td>
+          <mat-form-field color="accent">
+            <input
+              matInput
+              id="lastName"
+              formControlName="lastName"
+              type="text"
+              maxlength="50"
+              placeholder="Last Name"
+            />
+          </mat-form-field>
+        </div>
 
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="5px"
+          fxLayoutAlign="space-evenly center"
+        >
+          <mat-form-field color="accent">
+            <input
+              matInput
+              id="email"
+              formControlName="email"
+              type="email"
+              placeholder="Email"
+            />
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <input
+              matInput
+              id="phoneNo"
+              formControlName="phoneNo"
+              type="number"
+              maxlength="50"
+              placeholder="Phone No."
+            />
+          </mat-form-field>
+        </div>
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="5px"
+          fxLayoutAlign="space-evenly center"
+        >
+          <mat-form-field color="accent">
+            <input
+              matInput
+              id="companyName"
+              formControlName="companyName"
+              type="text"
+              placeholder="Company Name"
+            />
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <textarea
+              matInput
+              id="address"
+              formControlName="address"
+              type="text"
+              placeholder="Company Address"
+              matTextareaAutosize
+              matAutosizeMaxRows="5"
+            ></textarea>
+          </mat-form-field>
+        </div>
 
-          </tr>
-          <tr fxLayout.xs="row wrap">
-            <td>
-              <mat-form-field class="demo-full-width" color="accent">
-                <input matInput id="companyName" formControlName="companyName" type="text" placeholder="Company Name">
-              </mat-form-field>
-            </td>
-
-          </tr>
-
-          <tr fxLayout.xs="row wrap">
-            <td colspan="2">
-              <mat-form-field class="demo-full-width" color="accent">
-                <textarea matInput id="address" formControlName="address" type="text" placeholder="Company Address"
-                  matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
-              </mat-form-field>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <span>App Type</span>
-              <br>
-              <section class="demo-full-width">
-                <mat-checkbox style="padding-right: 10px;" formControlName="angularChecked">Angular (Website)
-                </mat-checkbox>
-                <mat-checkbox class="example-margin" formControlName="ionicChecked">Ionic (Mobile)</mat-checkbox>
-              </section>
-            </td>
-          </tr>
-          <tr fxLayout.xs="row wrap">
-            <td colspan="2">
-              <mat-form-field class="demo-full-width" color="accent">
-                <textarea matInput id="description" (input)="onTextarea($event.target.value)" formControlName="description" type="text" maxlength="500"
-                  placeholder="Tell us which brands, websites and designs you admire? " matTextareaAutosize
-                  matAutosizeMinRows="2" matAutosizeMaxRows="8"></textarea>
-              </mat-form-field>
-              <mat-label class="remaining" [ngStyle]="{'color' : warning}">{{remaining}} Characters Remaining</mat-label>
-            </td>
-          </tr>
-
-        </table>
-
-        <button mat-raised-button (click)="createEnquiry(); sendEvent()" color="primary"
-          [disabled]="!enquiryForm.valid">Submit</button>
-      </form>
-      <br>
-      <button mat-raised-button (click)="clearForm()" color="accent">Clear</button>
-
+        <div
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="space-evenly start"
+        >
+          <h4>I would like a</h4>
+          <mat-checkbox
+            style="padding-right: 10px"
+            formControlName="angularChecked"
+            >New Website
+          </mat-checkbox>
+          <mat-checkbox class="example-margin" formControlName="ionicChecked"
+            >Redesign</mat-checkbox
+          >
+        </div>
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxLayoutGap="5px"
+          fxLayoutAlign="space-evenly center"
+        >
+          <mat-form-field color="accent" class="text-input-width">
+            <textarea
+              matInput
+              id="description"
+              (input)="onTextarea($event.target.value)"
+              formControlName="description"
+              type="text"
+              maxlength="500"
+              placeholder="Tell us which brands, websites and designs you admire?"
+              matTextareaAutosize
+              matAutosizeMinRows="2"
+              matAutosizeMaxRows="8"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <div fxLayout.xs="column" fxLayoutAlign="space-between start">
+          <mat-label class="remaining" [ngStyle]="{ color: warning }"
+            >{{ remaining }} Characters Remaining</mat-label
+          >
+        </div>
+        <mat-card-actions fxLayoutAlign="center center">
+          <button
+            mat-raised-button
+            (click)="createEnquiry(); sendEvent()"
+            color="primary"
+            [disabled]="!enquiryForm.valid"
+          >
+            Submit
+          </button>
+          <button mat-raised-button (click)="clearForm()" color="accent">
+            Clear
+          </button>
+        </mat-card-actions>
+      </div>
+      <br />
     </mat-card-content>
   </mat-card>
-  </div>
+</div>

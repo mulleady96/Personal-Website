@@ -34,6 +34,38 @@ import { Observable, of } from "rxjs";
 export class AppComponent implements OnInit {
   // Place google analytics code in app.component => only want to run once.
   title = "Andrew Mulleady";
+  navigationButtons = [
+    {
+      ariaLabel: "Home",
+      routerLink: "/home",
+      icon: "home",
+    },
+    {
+      ariaLabel: "Products",
+      routerLink: "/products",
+      icon: "desktop_mac",
+    },
+    {
+      ariaLabel: "About",
+      routerLink: "/about",
+      icon: "person",
+    },
+    {
+      ariaLabel: "Get In Touch",
+      routerLink: "/enquire",
+      icon: "edit",
+    },
+    {
+      ariaLabel: "Upload",
+      routerLink: "/upload",
+      icon: "upload",
+    },
+    {
+      ariaLabel: "Gallery",
+      routerLink: "/gallery",
+      icon: "collections",
+    },
+  ];
 
   @Output()
   navToggle = new EventEmitter();

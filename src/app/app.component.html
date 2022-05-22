@@ -1,4 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div [ngClass]="{ 'dark-theme': isDarkTheme | async }">
   <mat-sidenav-container (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')">
@@ -6,66 +5,23 @@
         {{ title }}
       </h2>
       <br />
-      <button
-        mat-button
-        routerLinkActive="router-link-active"
-        aria-label="Home"
-        routerLink="/home"
+      <!-- // mat-list of buttons  -->
+      <div
+        fxLayout="column"
+        fxLayoutAlign="space-between start"
+        class="fadeInLeft"
       >
-        <mat-icon color="accent">home</mat-icon>
-        Home
-      </button>
-      <br />
-      <button
-        mat-button
-        routerLinkActive="router-link-active"
-        aria-label="Products"
-        routerLink="/products"
-      >
-        <mat-icon color="accent">desktop_mac</mat-icon>
-        Products
-      </button>
-      <br />
-      <button
-        mat-button
-        routerLinkActive="router-link-active"
-        aria-label="About"
-        routerLink="/about"
-      >
-        <mat-icon color="accent">person_pin</mat-icon>
-        About
-      </button>
-      <br />
-      <button
-        mat-button
-        routerLinkActive="router-link-active"
-        aria-label="Get In Touch Form"
-        routerLink="/enquire"
-      >
-        <mat-icon color="accent">edit</mat-icon>
-        Get In Touch
-      </button>
-      <br />
-      <button
-        mat-button
-        routerLinkActive="router-link-active"
-        aria-label="Upload"
-        routerLink="/upload"
-      >
-        <mat-icon color="accent">cloud_upload</mat-icon>
-        Upload
-      </button>
-      <br />
-      <button
-        mat-button
-        routerLinkActive="router-link-active"
-        aria-label="Upload"
-        routerLink="/gallery"
-      >
-        <mat-icon color="accent">image</mat-icon>
-        Gallery
-      </button>
-      <br />
+        <button
+          *ngFor="let button of navigationButtons"
+          mat-button
+          routerLinkActive="router-link-active"
+          [attr.aria-label]="button.ariaLabel"
+          routerLink="{{ button.routerLink }}"
+        >
+          <mat-icon color="accent">{{ button.icon }}</mat-icon>
+          {{ button.ariaLabel }}
+        </button>
+      </div>
       <hr />
       <mat-slide-toggle
         [checked]="isDarkTheme | async"
@@ -108,7 +64,7 @@
           </button>
         </div>
         <img
-          class="icon-logo animated fadeInDown"
+          class="icon-logo"
           [src]="imageSRC"
           routerLink="/home"
           alt="GravitaTech Logo"
