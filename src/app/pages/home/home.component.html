@@ -85,11 +85,7 @@
       Let's Get Started
     </button>
     <app-bubbles></app-bubbles>
-    <div
-      fxLayout="row wrap"
-      fxLayoutAlign="center"
-      class="animated fadeInLeft delay-1s"
-    >
+    <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
       <mat-card
         *ngFor="let card of cardDetails"
         id="cardStyle"
@@ -132,13 +128,9 @@
 </section>
 
 <div>
-  <section class="section animated fadeInLeft" *ngIf="showDiv">
+  <section class="section fadeInLeft" *ngIf="showDiv">
     <div>
-      <div
-        fxLayout="row wrap"
-        fxLayoutAlign="center"
-        class="animated fadeInLeft delay-1s"
-      >
+      <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
         <mat-card
           *ngFor="let card of guaranteeDetails"
           class="landing-default2"

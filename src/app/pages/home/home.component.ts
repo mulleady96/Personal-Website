@@ -3,6 +3,7 @@ import { trigger, transition, style, animate } from "@angular/animations";
 import { CountUpOptions } from "countup.js";
 
 @Component({
+  // tslint:disable-next-line: quotemark
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],

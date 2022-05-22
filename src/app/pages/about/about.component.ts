@@ -43,7 +43,6 @@ export class AboutComponent implements OnInit {
       listItems: [
         "Collection of applications on my Github account.",
         "Practiced advanced topics in Angular/Ionic, Typescript and the MEAN stack.",
-        "Honours degree in h.Dip in Software Design & Development",
       ],
     },
   ];
