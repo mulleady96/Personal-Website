@@ -1,18 +1,20 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Injectable } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import * as firebase from 'firebase';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Injectable } from "@angular/core";
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from "@angular/fire/compat/storage";
+import { Observable } from "rxjs";
+// import * as firebase from "firebase";
 
-import { tap, finalize } from 'rxjs/operators';
+import { tap, finalize } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-
 export class UploadService {
-
-  public basePath = "https://firebasestorage.googleapis.com/v0/b/gravitatech-9ce75.appspot.com/o/Logos%2F";
+  public basePath =
+    "https://firebasestorage.googleapis.com/v0/b/gravitatech-9ce75.appspot.com/o/Logos%2F";
 
   task: AngularFireUploadTask; // Allows you to pause, resume an upload task.
 
@@ -22,71 +24,80 @@ export class UploadService {
 
   fileRef: any;
 
-  downloadURL: Observable<string>;
+  downloadURL: Observable<any>;
 
   public pictureRef: firebase.default.database.Reference;
 
-  constructor(private snackBar: MatSnackBar, private storage: AngularFireStorage) {
+  constructor(
+    private snackBar: MatSnackBar,
+    private storage: AngularFireStorage
+  ) {
     this.initializeFirebase();
-   }
+  }
 
-  initializeFirebase () {
-    this.pictureRef = firebase.default
-    .database()
-    .ref(`/Logos/`);
+  initializeFirebase() {
+    // this.pictureRef = firebase.default.database().ref(`/Logos/`);
     // console.log('started');
   }
 
-  upload(event: FileList) {
-    console.log('started uploaded');
-    // The File object
-    const file = event.item(0);
+  // upload(event: FileList) {
+  //   console.log("started uploaded");
+  //   // The File object
+  //   const file = event.item(0);
 
-    // Client-side validation example - Only take in images/logos
-    if (file.type.split('/')[0] !== 'image') {
-      this.snackBar.open('This file type is not supported', 'Oh no!', {
-        duration: 5000,
-        verticalPosition: 'bottom'
-      });
-      // console.error('unsupported file type :( ');
-      return;
-    }
+  //   // Client-side validation example - Only take in images/logos
+  //   if (file.type.split("/")[0] !== "image") {
+  //     this.snackBar.open("This file type is not supported", "Oh no!", {
+  //       duration: 5000,
+  //       verticalPosition: "bottom",
+  //     });
+  //     // console.error('unsupported file type :( ');
+  //     return;
+  //   }
 
-    // The storage path
-    const path = `Logos/${new Date().getTime()}_${file.name}`;
+  //   // The storage path
+  //   const path = `Logos/${new Date().getTime()}_${file.name}`;
 
-    // Optional metadata
-    const customMetadata = { app: 'My Image Uploader!' };
+  //   // Optional metadata
+  //   const customMetadata = { app: "My Image Uploader!" };
 
-    // The main task - is undefined
-    this.task = this.storage.upload(path, file);
-    // console.log(this.task);
-    
-    const fileRef = this.storage.ref(path);
-    
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-    this.snapshot   = this.task.snapshotChanges().pipe(
-      // The file's download URL
-       finalize(() => this.downloadURL = fileRef.getDownloadURL()),
-      tap(snap => {
-       // console.log(snap);
-        if (snap.bytesTransferred === snap.totalBytes) {
-          // Update DB on completion
-          this.pictureRef.push(({ path, size: snap.totalBytes })); // Log the upload as an entry into the DB
-          this.snackBar.open(`${file.name} Successfully uploaded, Thank You!`, 'Great', {
-            duration: 5000,
-            verticalPosition: 'top'
-          });
-        }
-      })
+  //   // The main task - is undefined
+  //   this.task = this.storage.upload(path, file);
+  //   // console.log(this.task);
+
+  //   const fileRef = this.storage.ref(path);
+
+  //   // Progress monitoring
+  //   // this.percentage = this.task.percentageChanges();
+  //   // this.snapshot = this.task.snapshotChanges().pipe(
+  //   //   // The file's download URL
+  //   //   finalize(() => (this.downloadURL = fileRef.getDownloadURL())),
+  //   //   tap((snap) => {
+  //   //     // console.log(snap);
+  //   //     if (snap.bytesTransferred === snap.totalBytes) {
+  //   //       // Update DB on completion
+  //   //       this.pictureRef.push({ path, size: snap.totalBytes }); // Log the upload as an entry into the DB
+  //   //       this.snackBar.open(
+  //   //         `${file.name} Successfully uploaded, Thank You!`,
+  //   //         "Great",
+  //   //         {
+  //   //           duration: 5000,
+  //   //           verticalPosition: "top",
+  //   //         }
+  //   //       );
+  //   //     }
+  //   //   })
+  //   // );
+  //   // } catch (error) {
+  //   //   console.log('error');
+  //   // }
+  // }
+
+  isActive(snapshot) {
+    // Make cancel + Pause buttons active whilst upload in progress.
+    return (
+      snapshot.state === "running" &&
+      snapshot.bytesTransferred < snapshot.totalBytes
     );
-    // } catch (error) {
-    //   console.log('error');
-    // }
-  }
-
-  isActive(snapshot) { // Make cancel + Pause buttons active whilst upload in progress.
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 }
