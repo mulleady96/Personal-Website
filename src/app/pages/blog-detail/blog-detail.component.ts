@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import * as moment from 'moment';
-
+import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
+// import * as moment from 'moment';
 
 @Component({
-  selector: 'app-blog-detail',
-  templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.css']
+  selector: "app-blog-detail",
+  templateUrl: "./blog-detail.component.html",
+  styleUrls: ["./blog-detail.component.css"],
 })
 export class BlogDetailComponent implements OnInit {
-
-  constructor(private location: Location) {
-   }
+  constructor(private location: Location) {}
 
   ngOnInit() {
     this.timePostedAgo();
@@ -19,12 +16,12 @@ export class BlogDetailComponent implements OnInit {
 
   goBack = () => {
     this.location.back();
-  }
+  };
 
-  timePostedAgo = () => { // Shows When it was posted.
+  timePostedAgo = () => {
+    // Shows When it was posted.
     const yourDate = new Date();
-    const postedAgo = moment(yourDate).fromNow();
-    console.log(postedAgo);
-  }
-
+    // const postedAgo = moment(yourDate).fromNow();
+    // console.log(postedAgo);
+  };
 }

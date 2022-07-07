@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import * as moment from 'moment';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 export interface PeriodicElement {
   name: string;
@@ -11,28 +10,26 @@ export interface PeriodicElement {
 }
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.css']
+  selector: "app-gallery",
+  templateUrl: "./gallery.component.html",
+  styleUrls: ["./gallery.component.css"],
 })
 export class GalleryComponent implements OnInit {
-
-  constructor(private router: Router, private http: HttpClient) { }
-
+  constructor(private router: Router, private http: HttpClient) {}
 
   time: number;
   postedAgo: String;
 
   ngOnInit() {
-    this.postTimeAgo();
+    // this.postTimeAgo();
   }
 
   navigateDetail() {
-    this.router.navigate['/BlogDetail'];
+    this.router.navigate["/BlogDetail"];
   }
 
-  postTimeAgo() {
-    this.postedAgo = moment([2019, 3, 14]).fromNow();
-    return this.postedAgo;
-  }
+  // postTimeAgo() {
+  //   this.postedAgo = moment([2019, 3, 14]).fromNow();
+  //   return this.postedAgo;
+  // }
 }

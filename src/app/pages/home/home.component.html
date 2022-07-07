@@ -1,6 +1,11 @@
 <section class="hero is-large" fxHide.lt-md="true">
-  <img [src]="video" alt="image Background" />
-  <div class="hero-body overlay">
+  <img
+    *ngIf="imageLoaded"
+    [src]="video"
+    alt="image Background"
+    (error)="imageFailed()"
+  />
+  <div *ngIf="imageLoaded" class="hero-body overlay">
     <div class="container">
       <h1 class="title heading-video">Front End Developer</h1>
       <h2 class="subtitle sub-heading">
