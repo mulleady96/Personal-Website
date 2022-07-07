@@ -1,29 +1,47 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import 'firebase/database';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  setDoc,
+  doc,
+  addDoc,
+} from "firebase/firestore";
+// import "firebase/compat/database";
+import { config } from "../credentials";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class GravitaService {
-  public enquiryListRef: firebase.default.database.Reference;
+  // public enquiryListRef: firebase.default.database.Reference;
+  app = initializeApp(config);
+
+  db = getFirestore(this.app);
 
   constructor(private http: HttpClient) {
-    this.enquiryListRef = firebase.default.database().ref(`/enquiry/`);
+    // const enquiryListRef = collection(db, "enquiry");
+    // this.enquiryListRef = firebase.default.database().ref(`/enquiry/`);
   }
 
-  createEnquiry(enquiryForm: []): firebase.default.database.ThenableReference {
-    return this.enquiryListRef.push({
+  createEnquiry(enquiryForm: []) {
+    console.log("log", enquiryForm);
+
+    // db? means optional param, doesn't have to be supplied when being called by any other comp
+    addDoc(collection(this.db, "Enquiries"), {
       enquiry: enquiryForm,
     });
+    // return this.enquiryListRef.push({
+    //   enquiry: enquiryForm,
+    // });
   }
 
   getImages() {
-    return this.http.get('/assets/Images.json');
+    return this.http.get("/assets/Images.json");
   }
 
   getVideos() {
-    return this.http.get('/assets/Videos.json');
+    return this.http.get("/assets/Videos.json");
   }
 }

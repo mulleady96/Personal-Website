@@ -6,13 +6,14 @@ import {
   ViewChild,
 } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
-import * as firebase from "firebase/app";
+// import * as firebase from "firebase/app";
 import { config } from "./credentials";
 import { Router, NavigationEnd } from "@angular/router";
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
 import { ThemeService } from "./Services/theme.service";
 import { Observable, of } from "rxjs";
+import { initializeApp } from "firebase/app";
 
 @Component({
   selector: "app-root",
@@ -55,11 +56,11 @@ export class AppComponent implements OnInit {
       routerLink: "/enquire",
       icon: "edit",
     },
-    {
-      ariaLabel: "Upload",
-      routerLink: "/upload",
-      icon: "upload",
-    },
+    // {
+    //   ariaLabel: "Upload",
+    //   routerLink: "/upload",
+    //   icon: "upload",
+    // },
     {
       ariaLabel: "Gallery",
       routerLink: "/gallery",
@@ -82,7 +83,7 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private themeService: ThemeService
   ) {
-    this.initializeApp();
+    initializeApp(config);
 
     this.themeDescription = "Dark Theme";
 
@@ -147,11 +148,6 @@ export class AppComponent implements OnInit {
       });
     }
   }
-
-  initializeApp() {
-    firebase.default.initializeApp(config);
-  }
-
   // navBarToggle() {
   //   this.navToggle.emit();
   // }

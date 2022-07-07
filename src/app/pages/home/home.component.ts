@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   opts: CountUpOptions;
   showDiv = false;
   video: string;
+  imageLoaded: boolean = true;
   cardDetails = [
     {
       id: 1,
@@ -104,4 +105,9 @@ export class HomeComponent implements OnInit {
     this.video = src[Math.floor(Math.random() * src.length)];
     return this.video;
   };
+
+  imageFailed() {
+    this.imageLoaded = false;
+    console.log("image failed to load");
+  }
 }
