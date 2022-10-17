@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
 // import * as firebase from "firebase/app";
-import { firebaseConfig } from "./credentials";
+import { config } from "./credentials";
 import { Router, NavigationEnd } from "@angular/router";
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private themeService: ThemeService
   ) {
-    initializeApp(firebaseConfig);
+    initializeApp(config);
 
     this.themeDescription = "Dark Theme";
 

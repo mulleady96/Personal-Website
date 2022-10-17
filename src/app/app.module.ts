@@ -14,7 +14,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 
-import { firebaseConfig } from "./credentials";
+import { config } from "./credentials";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from ".//app-routing.module";
 import { ServiceWorkerModule } from "@angular/service-worker";
@@ -29,7 +29,7 @@ import { HammerConfig } from "./Hammerjs";
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(config),
     AngularFireStorageModule,
     ComponentsModule,
     NgProgressModule,

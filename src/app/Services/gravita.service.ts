@@ -9,14 +9,14 @@ import {
   addDoc,
 } from "firebase/firestore";
 // import "firebase/compat/database";
-import { firebaseConfig } from "../credentials";
+import { config } from "../credentials";
 
 @Injectable({
   providedIn: "root",
 })
 export class GravitaService {
   // public enquiryListRef: firebase.default.database.Reference;
-  app = initializeApp(firebaseConfig);
+  app = initializeApp(config);
 
   db = getFirestore(this.app);
 
