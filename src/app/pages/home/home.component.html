@@ -2,6 +2,7 @@
   <img
     *ngIf="imageLoaded"
     [src]="video"
+    (load)="setAnimation()"
     alt="image Background"
     (error)="imageFailed()"
   />
@@ -9,64 +10,21 @@
     <div class="container">
       <h1 class="title heading-video">Front End Developer</h1>
       <h2 class="subtitle sub-heading">
-        <div>
-          Web Design
-          <mat-icon class="blob-1"></mat-icon>
-          Mobile Apps
-          <mat-icon class="blob-1"></mat-icon>
-          Drone Videos
-        </div>
+        <div>Web Design ❯ Mobile Apps ❯ Drone Videos</div>
       </h2>
       <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="40px">
         <button
+          *ngFor="let button of navigationButtons"
           mat-fab
           color="primary"
-          matTooltip="View Products"
-          aria-label="Button directing to products page"
-          routerLink="/products"
+          matTooltip="{{ button.ariaLabel }}"
+          routerLinkActive="router-link-active"
+          [attr.aria-label]="button.ariaLabel"
+          routerLink="{{ button.routerLink }}"
         >
-          <mat-icon color="accent">desktop_mac</mat-icon>
-        </button>
-        <button
-          mat-fab
-          color="primary"
-          matTooltip="About Information"
-          aria-label="Button directing to about page"
-          routerLink="/about"
-        >
-          <mat-icon color="accent">person_pin</mat-icon>
-        </button>
-        <button
-          mat-fab
-          color="primary"
-          matTooltip="Contact Me"
-          aria-label="Button directing to enquire page"
-          routerLink="/enquire"
-        >
-          <mat-icon color="accent">email</mat-icon>
-        </button>
-        <a
-          href="https://github.com/mulleady96"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button
-            mat-fab
-            color="primary"
-            matTooltip="View Github"
-            aria-label="Button directing to Github account"
-          >
-            <mat-icon class="fab fa-github" color="accent"></mat-icon>
-          </button>
-        </a>
-        <button
-          mat-fab
-          color="primary"
-          matTooltip="View Gallery"
-          aria-label="Button directing to Gallery page"
-          routerLink="/gallery"
-        >
-          <mat-icon color="accent">image</mat-icon>
+          <mat-icon class="View Github" color="accent">{{
+            button.icon
+          }}</mat-icon>
         </button>
       </div>
     </div>

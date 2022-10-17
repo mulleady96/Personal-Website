@@ -18,8 +18,42 @@
       Enquire
     </button>
   </h3>
+  <br />
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-around stretch"
+    fxLayoutGap="20px"
+    fxLayout.xs="column"
+    fxLayoutAlign.xs="center center"
+  >
+    <mat-card *ngFor="let product of portfolioDetails" class="card">
+      <img
+        src="{{ product.image }}"
+        class="card-image-top"
+        alt="Product Image"
+      />
 
-  <div fxLayout="row wrap" fxLayoutAlign="center" fxLayout.xs="column">
+      <div class="card-body">
+        <h3>{{ product.title }}</h3>
+        <mat-card-content>
+          {{ product.description }}
+        </mat-card-content>
+        <mat-card-actions fxLayoutAlign="center">
+          <a href="{{ product.link }}" target="_blank">
+            <button
+              mat-raised-button
+              class="mat-product-button"
+              aria-label="External link to example product"
+              color="accent"
+            >
+              View App
+            </button>
+          </a>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+  </div>
+  <!-- <div fxLayout="row wrap" fxLayoutAlign="center" fxLayout.xs="column">
     <app-flash-card>
       <div class="app-flash-card-front">
         <h2>Tier 1 - Basic Website</h2>
@@ -104,7 +138,7 @@
         </button>
       </div>
     </app-flash-card>
-  </div>
+  </div> -->
 
   <!-- <br>
   <h3>Front-End Technologies</h3>

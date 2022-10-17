@@ -27,18 +27,25 @@ const routes: Routes = [
         (m) => m.GetInTouchModule
       ),
   },
-  {
-    path: "upload",
-    loadChildren: () =>
-      import("./pages/file-upload/file-upload.module").then(
-        (m) => m.FileUploadModule
-      ),
-  },
+  // {
+  //   path: "upload",
+  //   loadChildren: () =>
+  //     import("./pages/file-upload/file-upload.module").then(
+  //       (m) => m.FileUploadModule
+  //     ),
+  // },
   {
     path: "gallery",
     loadChildren: () =>
       import("./pages/gallery/gallery.module").then((m) => m.GalleryModule),
   },
+  // {
+  //   path: "upload",
+  //   loadChildren: () =>
+  //     import("./pages/file-upload/file-upload.module").then(
+  //       (m) => m.FileUploadModule
+  //     ),
+  // },
   {
     path: "BlogDetail",
     loadChildren: () =>

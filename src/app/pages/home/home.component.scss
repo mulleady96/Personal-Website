@@ -8,6 +8,7 @@ img {
   height: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
+  animation: blur-in 1s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 // .highlighted-text {
@@ -65,6 +66,7 @@ video {
 .heading-video {
   font-weight: 800;
   font-size: 6vw;
+  text-shadow: 1px 4px 9px black;
   color: #bbdefb;
   -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
     both;
@@ -78,6 +80,7 @@ video {
 .sub-heading {
   font-size: 3vw;
   color: #bbdefb;
+  text-shadow: 1px 4px 9px black;
   padding: 40px;
   font-weight: 900;
 }
@@ -209,6 +212,15 @@ figure {
   margin-bottom: 10px;
   position: absolute;
   bottom: 0;
+}
+
+button.mat-raised-button:hover {
+  letter-spacing: 0.3em;
+}
+
+button.mat-raised-button {
+  letter-spacing: 0.1em;
+  transition: all 0.5s ease-in;
 }
 
 /* .titleHighlight {
@@ -379,5 +391,42 @@ mat-chip-list {
   }
   100% {
     opacity: 1;
+  }
+}
+
+// Blur in Main image
+@keyframes blur-in {
+  0% {
+    -webkit-filter: opacity(0%) blur(10px);
+  }
+  50% {
+    -webkit-filter: opacity(100%) blur(10px);
+  }
+  100% {
+    -webkit-filter: opacity(100%) blur(0px);
+  }
+}
+
+@-moz-keyframes blur-in {
+  0% {
+    -webkit-filter: opacity(0%) blur(10px);
+  }
+  50% {
+    -webkit-filter: opacity(100%) blur(10px);
+  }
+  100% {
+    -webkit-filter: opacity(100%) blur(0px);
+  }
+}
+
+@-webkit-keyframes blur-in {
+  0% {
+    -webkit-filter: opacity(0%) blur(10px);
+  }
+  50% {
+    -webkit-filter: opacity(100%) blur(10px);
+  }
+  100% {
+    -webkit-filter: opacity(100%) blur(0px);
   }
 }

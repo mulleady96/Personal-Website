@@ -10,11 +10,10 @@
         </div>
       </section>
 
-      <div fxLayout="column wrap" fxLayoutAlign="center center">
+      <div>
         <mat-tab-group mat-align-tabs="center">
           <mat-tab *ngFor="let tab of tabDetails" label="{{ tab.label }}">
-            <br />
-            <mat-list>
+            <mat-list fxLayout="column wrap" fxLayoutAlign="center center">
               <mat-list-item *ngFor="let detail of tab.listItems" mat-line>
                 <mat-icon mat-list-icon>keyboard_arrow_right</mat-icon
                 >{{ detail }}
@@ -23,7 +22,6 @@
           </mat-tab>
         </mat-tab-group>
       </div>
-      <br />
       <div class="center-item">
         <a
           href="https://github.com/mulleady96"
