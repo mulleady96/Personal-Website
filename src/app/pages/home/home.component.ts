@@ -75,6 +75,29 @@ export class HomeComponent implements OnInit {
     },
   ];
 
+  navigationButtons = [
+    {
+      ariaLabel: "Products",
+      routerLink: "/products",
+      icon: "desktop_mac",
+    },
+    {
+      ariaLabel: "About",
+      routerLink: "/about",
+      icon: "account_circle",
+    },
+    {
+      ariaLabel: "Get In Touch",
+      routerLink: "/enquire",
+      icon: "mail",
+    },
+    {
+      ariaLabel: "Gallery",
+      routerLink: "/gallery",
+      icon: "collections",
+    },
+  ];
+
   constructor() {}
 
   ngOnInit() {

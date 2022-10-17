@@ -8,8 +8,10 @@
 }
 
 li {
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
 }
 
-
-
+::ng-deep .mat-tab-body-content {
+  place-content: center;
+  display: flex;
+}
