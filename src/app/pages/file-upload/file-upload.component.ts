@@ -33,7 +33,7 @@
 
 //   // public pictureRef: firebase.default.database.Reference;
 
-//   constructor(public snackBar: MatSnackBar) {}
+// public pictureRef: firebase.default.database.Reference;
 
 //   FBaseConnection = () => {
 //     // Create a root reference
@@ -190,6 +190,7 @@
 //     //   // The main task
 //     //   // this.task = this.storage.upload(path, file);
 
+//   // const fileRef = this.storage.ref(path);
 //     //   // const fileRef = this.storage.ref(path);
 
 //     //   // Progress monitoring
