@@ -77,8 +77,8 @@ export class HomeComponent implements OnInit {
 
   navigationButtons = [
     {
-      ariaLabel: "Products",
-      routerLink: "/products",
+      ariaLabel: "Portfolio",
+      routerLink: "/portfolio",
       icon: "desktop_mac",
     },
     {

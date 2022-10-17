@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
 // import * as firebase from "firebase/app";
-import { config } from "./credentials";
+import { firebaseConfig } from "./credentials";
 import { Router, NavigationEnd } from "@angular/router";
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
@@ -42,8 +42,8 @@ export class AppComponent implements OnInit {
       icon: "home",
     },
     {
-      ariaLabel: "Products",
-      routerLink: "/products",
+      ariaLabel: "Portfolio",
+      routerLink: "/portfolio",
       icon: "desktop_mac",
     },
     {
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private themeService: ThemeService
   ) {
-    initializeApp(config);
+    initializeApp(firebaseConfig);
 
     this.themeDescription = "Dark Theme";
 
