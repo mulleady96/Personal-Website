@@ -23,6 +23,11 @@ mat-sidenav {
   padding-right: 5px;
 }
 
+::ng-deep .mat-slide-toggle-content {
+  display: inline-flex;
+  white-space: pre !important;
+}
+
 .mat-button {
   border-radius: 24px;
   justify-content: center;
