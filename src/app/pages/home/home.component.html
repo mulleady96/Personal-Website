@@ -2,7 +2,6 @@
   <img
     *ngIf="imageLoaded"
     [src]="video"
-    (load)="setAnimation()"
     alt="image Background"
     (error)="imageFailed()"
   />
@@ -17,6 +16,7 @@
           *ngFor="let button of navigationButtons"
           mat-fab
           color="primary"
+          class="list-item"
           matTooltip="{{ button.ariaLabel }}"
           routerLinkActive="router-link-active"
           [attr.aria-label]="button.ariaLabel"
@@ -72,7 +72,7 @@
             full
             class="mat-landing-button"
             color="accent"
-            routerLink="/products"
+            routerLink="/portfolio"
           >
             {{ card.buttonText }}
           </button>

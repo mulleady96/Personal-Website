@@ -8,18 +8,19 @@
   <mat-chip-list aria-label="Sort By Location">
     <mat-chip (click)="getImages()">All</mat-chip>
     <mat-chip
-      *ngFor="let name of locations"
+      *ngFor="let location of locations"
       name="name"
-      (click)="sortByName(name)"
-      >{{ name }}</mat-chip
-    >
+      matBadge="{{ location.locationCount }}"
+      (click)="sortByName(location.name)"
+      >{{ location.name }}
+    </mat-chip>
   </mat-chip-list>
 </div>
 
 <mat-tab-group mat-stretch-tabs>
   <mat-tab>
     <ng-template mat-tab-label>
-      <span matBadge="{{ count }}" matBadgeOverlap="false">Images</span>
+      <span>{{ count }}</span>
     </ng-template>
 
     <mat-list>
