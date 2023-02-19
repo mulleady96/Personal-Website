@@ -48,13 +48,18 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
-      <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-toolbar
+        id="toolbar"
+        fxLayout="row"
+        fxLayoutAlign="space-around center"
+      >
         <div>
           <button
-            mat-icon-button
+            mat-mini-fab
             color="accent"
             (click)="sidenav.open(); menuToggleEvent()"
             aria-label="List"
+            class="header-button"
           >
             <mat-icon>list</mat-icon>
           </button>
@@ -73,10 +78,11 @@
             rel="noreferrer"
           >
             <button
-              mat-icon-button
+              mat-mini-fab
               matTooltip="View Github Account"
               color="accent"
               aria-label="Github button"
+              class="github-header-button"
             >
               <mat-icon class="fab fa-github"></mat-icon>
             </button>

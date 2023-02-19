@@ -26,6 +26,48 @@ img {
   z-index: 1;
 }
 
+.hero {
+  height: 100%;
+}
+
+$n: 4;
+
+.list-item {
+  opacity: 0;
+  animation: scale-in-center 300ms ease forwards;
+
+  @for $x from 2 through $n {
+    &:nth-child(#{$x}) {
+      animation-delay: 400ms * ($x - 1);
+    }
+  }
+}
+
+@-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 i {
   color: azure;
 }

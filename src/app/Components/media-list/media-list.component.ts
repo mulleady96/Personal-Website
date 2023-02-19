@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import { Component, Inject, Input, OnInit } from "@angular/core";
 import * as Images from "../../../assets/Images.json";
 import {
@@ -18,6 +19,7 @@ export interface Image {
   date: string;
   likes: number;
 }
+
 @Component({
   selector: "app-media-list",
   templateUrl: "./media-list.component.html",
@@ -29,6 +31,7 @@ export class MediaListComponent implements OnInit {
   count;
   chipValue;
   locations = [];
+  locationCount = 0;
   search: boolean;
   modal: boolean;
   @Input() name: string;
@@ -49,13 +52,22 @@ export class MediaListComponent implements OnInit {
   getImages() {
     this.images = Images;
     this.images = _.sortBy(this.images, "title");
-    this.count = this.images.length;
+    this.count = `${"Viewing all " + this.images.length + " images"}`;
   }
 
   getUniqueNames() {
-    // unique location names for chip list
-    this.locations = _.sortBy(this.images, "title");
-    this.locations = _.uniq(_.map(this.locations, "title"));
+    // unique location names for chip list & count
+    // this.locations = _.sortBy(this.images, "title");
+    let locationsArray;
+
+    locationsArray = _.uniq(_.map(this.images, "title"));
+    locationsArray.forEach((location) => {
+      this.locationCount = _.filter(this.images, { title: location }).length;
+      this.locations = [
+        ...this.locations,
+        { name: location, locationCount: this.locationCount },
+      ];
+    });
   }
 
   sortByName(name) {
@@ -63,7 +75,7 @@ export class MediaListComponent implements OnInit {
     // input value from chip
     this.images = Images;
     this.images = _.filter(this.images, { title: name });
-    this.count = this.images.length;
+    this.count = `${"Viewing " + this.images.length + " images from " + name}`;
   }
 
   WhatsApp() {
