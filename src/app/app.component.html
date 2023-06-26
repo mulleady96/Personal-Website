@@ -4,7 +4,7 @@
       <h2>
         {{ title }}
       </h2>
-      <br />
+      <!-- <br /> -->
       <!-- // mat-list of buttons  -->
       <div fxLayout="column" fxLayoutAlign="space-between start">
         <button
@@ -18,7 +18,7 @@
           {{ button.ariaLabel }}
         </button>
       </div>
-      <hr />
+      <!-- <hr /> -->
       <mat-slide-toggle
         [checked]="isDarkTheme | async"
         (change)="toggleDarkTheme($event.checked)"
@@ -53,41 +53,43 @@
         fxLayout="row"
         fxLayoutAlign="space-around center"
       >
-        <div>
-          <button
-            mat-mini-fab
-            color="accent"
-            (click)="sidenav.open(); menuToggleEvent()"
-            aria-label="List"
-            class="header-button"
-          >
-            <mat-icon>list</mat-icon>
-          </button>
-        </div>
-        <img
-          class="icon-logo"
-          [src]="imageSRC"
-          routerLink="/home"
-          alt="GravitaTech Logo"
-        />
-        <div>
-          <a
-            href="https://github.com/mulleady96"
-            fxLayoutAlign="flex-end"
-            target="_blank"
-            rel="noreferrer"
-          >
+        <mat-toolbar-row>
+          <div>
             <button
               mat-mini-fab
-              matTooltip="View Github Account"
               color="accent"
-              aria-label="Github button"
-              class="github-header-button"
+              (click)="sidenav.open(); menuToggleEvent()"
+              aria-label="List"
+              class="header-button"
             >
-              <mat-icon class="fab fa-github"></mat-icon>
+              <mat-icon>list</mat-icon>
             </button>
-          </a>
-        </div>
+          </div>
+          <img
+            class="icon-logo"
+            [src]="imageSRC"
+            routerLink="/home"
+            alt="GravitaTech Logo"
+          />
+          <div>
+            <a
+              href="https://github.com/mulleady96"
+              fxLayoutAlign="flex-end"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button
+                mat-mini-fab
+                matTooltip="View Github Account"
+                color="accent"
+                aria-label="Github button"
+                class="github-header-button"
+              >
+                <mat-icon class="fab fa-github"></mat-icon>
+              </button>
+            </a>
+          </div>
+        </mat-toolbar-row>
       </mat-toolbar>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
