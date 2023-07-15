@@ -1,13 +1,20 @@
 .demo-full-width {
-  width: 50%;
+  // width: 50%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  /* align-content: space-between; */
+  /* flex-wrap: nowrap; */
+  align-items: center;
 }
 
 .text-input-width {
-  width: 100%;
+  width: 45%;
 }
 
 .margin {
-  margin-top: 80px;
+  height: 100vh;
+  margin-top: 10%;
 }
 
 ::ng-deep .mat-simple-snackbar-action {
@@ -17,7 +24,7 @@
 .remaining {
   font-size: 80%;
   position: relative;
-  right: 50px;
+  right: 5px;
   font-family: "Quicksand";
 }
 

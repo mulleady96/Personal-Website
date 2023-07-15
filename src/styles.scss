@@ -4,10 +4,24 @@
 html,
 body,
 mat-sidenav-container {
-  height: 100vh;
-  overflow-y: hidden;
-  //overflow: auto;
+  // height: inherit;
+  // overflow-y: hidden;
+  // overflow: auto;
   font-family: "Montserrat", sans-serif;
+}
+
+.mat-drawer-inner-container {
+  display: flex;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: space-between;
+  justify-content: space-between;
+}
+
+.mat-drawer {
+  position: fixed !important;
 }
 
 h1 {

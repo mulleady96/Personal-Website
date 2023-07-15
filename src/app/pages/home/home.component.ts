@@ -131,6 +131,6 @@ export class HomeComponent implements OnInit {
 
   imageFailed() {
     this.imageLoaded = false;
-    console.log("image failed to load");
+    // console.log("image failed to load");
   }
 }

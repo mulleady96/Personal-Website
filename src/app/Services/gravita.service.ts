@@ -26,7 +26,7 @@ export class GravitaService {
   }
 
   createEnquiry(enquiryForm: []) {
-    console.log("log", enquiryForm);
+    // console.log("log", enquiryForm);
 
     // db? means optional param, doesn't have to be supplied when being called by any other comp
     addDoc(collection(this.db, "Enquiries"), {
