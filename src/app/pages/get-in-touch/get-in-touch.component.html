@@ -80,8 +80,9 @@
           fxLayout="column"
           fxLayout.xs="column"
           fxLayoutGap="5px"
-          fxLayoutAlign="start"
-          fxFill
+          fxLayoutAlign="space-evenly stretch"
+          fxLayoutAlign.xs="space-evenly center"
+          class="text-input-width"
         >
           <mat-form-field color="accent">
             <input
@@ -93,26 +94,9 @@
             />
           </mat-form-field>
         </div>
+
         <div
           fxLayout="column"
-          fxLayout.xs="column"
-          fxLayoutGap="5px"
-          fxLayoutAlign="start"
-        >
-          <mat-form-field color="accent">
-            <textarea
-              matInput
-              id="address"
-              formControlName="address"
-              type="text"
-              placeholder="Company Address"
-              matTextareaAutosize
-              matAutosizeMaxRows="5"
-            ></textarea>
-          </mat-form-field>
-        </div>
-        <div
-          fxLayout="row"
           fxLayout.lt-md="column"
           fxLayoutAlign="space-evenly start"
         >
@@ -127,12 +111,14 @@
           >
         </div>
         <div
-          fxLayout="row"
+          fxLayout="column"
           fxLayout.xs="column"
           fxLayoutGap="5px"
-          fxLayoutAlign="space-evenly center"
+          fxLayoutAlign="space-evenly stretch"
+          fxLayoutAlign.xs="space-evenly center"
+          class="text-input-width"
         >
-          <mat-form-field color="accent" class="text-input-width">
+          <mat-form-field color="accent">
             <textarea
               matInput
               id="description"
