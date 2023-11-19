@@ -26,7 +26,6 @@
               "src/manifest.json"
             ],
             "styles": [
-              "node_modules/bulma/css/bulma.css",
               "node_modules/aos/dist/aos.css",
               "src/styles.scss",
               {

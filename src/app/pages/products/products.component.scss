@@ -9,6 +9,13 @@
   margin-top: 70px;
 }
 
+.rowWrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
 button.mat-raised-button:hover {
   letter-spacing: 0.3em;
 }
@@ -24,8 +31,23 @@ button.mat-raised-button {
 }
 
 mat-card-actions {
-  // margin-top: auto;
-  margin: auto 0 0;
+  margin-top: 25px;
+}
+
+.mat-card-actions {
+  margin-left: -8px;
+  margin-right: 265px;
+  padding: 8px 0;
+}
+
+.mat-card-actions .mat-button:first-child,
+.mat-card-actions .mat-raised-button:first-child,
+.mat-card-actions .mat-stroked-button:first-child {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  position: absolute;
+  bottom: 0;
 }
 
 .card {
@@ -34,6 +56,7 @@ mat-card-actions {
   box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
   border-radius: 50px;
+  margin: 25px 25px;
   // position: relative;
   // display: flex;
   // flex-direction: column;
@@ -53,11 +76,11 @@ mat-card-actions {
   border-radius: calc(1.5rem);
   box-sizing: inherit !important;
   height: 235px;
+  width: 100%;
 }
 
 .card-body {
-  flex: 1 1 auto;
-  margin: 0.5rem;
+  margin: 10px;
 }
 .avatar-image {
   width: 50%;
