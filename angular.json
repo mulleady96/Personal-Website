@@ -26,13 +26,11 @@
               "src/manifest.json"
             ],
             "styles": [
-              "node_modules/aos/dist/aos.css",
               "src/styles.scss",
               {
                 "input": "src/theme.scss"
               }
             ],
-            "scripts": ["node_modules/aos/dist/aos.js"],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
@@ -94,7 +92,6 @@
               },
               "src/styles.scss"
             ],
-            "scripts": ["node_modules/aos/dist/aos.js"],
             "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"]
           }
         }

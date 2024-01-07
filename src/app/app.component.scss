@@ -18,7 +18,7 @@ h2 {
   // box-sizing: border-box;
   display: flex;
   // margin-left: -12px;
-  padding: 0px;
+  padding-right: 25px;
   place-content: center space-around;
   align-items: center;
   // box-shadow: none;
@@ -46,8 +46,7 @@ mat-sidenav {
   background: #f7f9fa;
   display: flex;
   width: 250px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 12px 5px 12px 5px;
   border-radius: 0px 25px 25px 0px;
   top: 25px;
   bottom: 25px;

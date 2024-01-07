@@ -88,12 +88,12 @@ export class AppComponent implements OnInit {
     this.themeDescription = "Dark Theme";
 
     // Subscribe to router nav event => on route change, sends page view data to GA
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        (<any>window).ga("set", "page", event.urlAfterRedirects);
-        (<any>window).ga("send", "pageview");
-      }
-    });
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     (<any>window).ga("set", "page", event.urlAfterRedirects);
+    //     (<any>window).ga("send", "pageview");
+    //   }
+    // });
   }
 
   @ViewChild("sidenav", { static: true }) sidenav: MatSidenav;
@@ -147,22 +147,5 @@ export class AppComponent implements OnInit {
         }
       });
     }
-  }
-  // navBarToggle() {
-  //   this.navToggle.emit();
-  // }
-
-  // toggleNav() {
-  // this.navBarOpen = !this.navBarOpen;
-  // }
-
-  // GA tracking to see how frequently users interact with menu button.
-  menuToggleEvent() {
-    (<any>window).ga("send", "event", {
-      eventCategory: "Menu",
-      eventLabel: "Menu Toggle",
-      eventAction: "Menu Toggle Event",
-      eventValue: 10,
-    });
   }
 }

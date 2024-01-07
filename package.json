@@ -12,7 +12,8 @@
     "analyze": "webpack-bundle-analyzer dist/gravitawebtech/stats.json",
     "cypress": "concurrently \"ng serve \" \"cypress open\"",
     "cypress:cli": "concurrently \"ng serve \" \"cypress run\"",
-    "firebase-release": "firebase deploy --only hosting"
+    "firebase-release": "firebase deploy --only hosting",
+    "test-ui": "npx playwright test --ui"
   },
   "private": true,
   "dependencies": {
@@ -36,7 +37,6 @@
     "adm-zip": "^0.5.9",
     "ajv": "^8.11.0",
     "animate.css": "^4.1.1",
-    "aos": "^2.3.4",
     "core-js": "^3.22.6",
     "cypress": "^6.9.1",
     "dot-prop": "^6.0.1",
@@ -67,6 +67,7 @@
     "@angular/cli": "^15.0.3",
     "@angular/compiler-cli": "^13.3.9",
     "@angular/language-service": "^13.3.9",
+    "@playwright/test": "^1.40.1",
     "@types/jasmine": "^3.10.6",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^14.18.18",
