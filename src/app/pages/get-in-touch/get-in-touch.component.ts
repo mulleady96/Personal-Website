@@ -58,10 +58,6 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
         JSON.parse(localStorage.getItem("form"))?.companyName,
         Validators.required,
       ],
-      address: [
-        JSON.parse(localStorage.getItem("form"))?.address,
-        Validators.required,
-      ],
       angularChecked: [
         JSON.parse(localStorage.getItem("form"))?.angularChecked,
       ],
@@ -76,6 +72,7 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
       let description = JSON.parse(localStorage.getItem("form"))?.description;
       this.remaining = this.remaining - Object.keys(description).length;
     }
+    console.log(this.enquiryForm);
   }
 
   createEnquiry = () => {
@@ -128,15 +125,5 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
     // Calculates characters remaining in textarea field.
     this.remaining = this.MaxLength - Object.keys(text).length;
     this.warning = this.remaining <= 100 ? "orange" : "";
-  };
-
-  sendEvent = () => {
-    // Event to track how many users complete & submit Enquiry form.
-    (<any>window).ga("send", "event", {
-      eventCategory: "Enquiry Form Submit",
-      eventLabel: "formSubmitted",
-      eventAction: "Form sent to DB",
-      eventValue: 10,
-    });
   };
 }

@@ -34,9 +34,12 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-credentials.ts
 /well-known
 
 # System Files
 .DS_Store
 Thumbs.db
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

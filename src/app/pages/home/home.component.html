@@ -1,4 +1,4 @@
-<section class="hero is-large" fxHide.lt-md="true">
+<section fxHide.lt-md="true">
   <img
     *ngIf="imageLoaded"
     [src]="video"
@@ -15,7 +15,7 @@
         <button
           *ngFor="let button of navigationButtons"
           mat-fab
-          color="primary"
+          color="secondary"
           class="list-item"
           matTooltip="{{ button.ariaLabel }}"
           routerLinkActive="router-link-active"
@@ -33,9 +33,9 @@
 
 <section class="section">
   <div class="container">
-    <h1 class="title margin">How Can We Help You!</h1>
+    <h1>How Can We Help You!</h1>
 
-    <h2 class="subtitle">
+    <h2>
       We develop fully functional websites & Progressive Web Apps for SME's
     </h2>
     <button
@@ -83,7 +83,7 @@
 </section>
 
 <section class="section" fxLayout="column" fxLayoutAlign="center center">
-  <h1 class="title">A Few Guarantees</h1>
+  <h1>A Few Guarantees</h1>
   <button mat-fab (click)="toggleDiv()">
     <mat-icon *ngIf="!showDiv" class="toggleAnimation">add</mat-icon>
     <mat-icon *ngIf="showDiv" class="redIcon"> close </mat-icon>
@@ -91,7 +91,7 @@
 </section>
 
 <div>
-  <section class="section fadeInLeft" *ngIf="showDiv">
+  <section class="fadeInLeft" *ngIf="showDiv">
     <div>
       <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
         <mat-card

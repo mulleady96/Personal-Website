@@ -1,10 +1,7 @@
-<div class="container margin fadeInLeft" style="height: 100vh">
-  <h1 class="title">Our Product Offering</h1>
+<div class="margin fadeInLeft" fxFill>
+  <h1 class="title">Portfolio</h1>
 
-  <h4>
-    If you want something similar for your own venture as seen below, why not
-    enquire and let us know what you would like?
-  </h4>
+  <h4>Collection of personal projects below</h4>
   <br />
   <h3>
     <button
@@ -17,13 +14,7 @@
     </button>
   </h3>
   <br />
-  <div
-    fxLayout="row"
-    fxLayoutAlign="space-around stretch"
-    fxLayoutGap="20px"
-    fxLayout.xs="column"
-    fxLayoutAlign.xs="center center"
-  >
+  <div class="rowWrap">
     <mat-card *ngFor="let product of portfolioDetails" class="card">
       <img
         src="{{ product.image }}"
@@ -36,7 +27,8 @@
         <mat-card-content>
           {{ product.description }}
         </mat-card-content>
-        <mat-card-actions fxLayoutAlign="center">
+
+        <mat-card-actions fxLayoutAlign="center center">
           <a href="{{ product.link }}" target="_blank">
             <button
               mat-raised-button
@@ -51,7 +43,8 @@
       </div>
     </mat-card>
   </div>
-  <!-- <div fxLayout="row wrap" fxLayoutAlign="center" fxLayout.xs="column">
+</div>
+<!-- <div fxLayout="row wrap" fxLayoutAlign="center" fxLayout.xs="column">
     <app-flash-card>
       <div class="app-flash-card-front">
         <h2>Tier 1 - Basic Website</h2>
@@ -138,7 +131,7 @@
     </app-flash-card>
   </div> -->
 
-  <!-- <br>
+<!-- <br>
   <h3>Front-End Technologies</h3>
   <br>
   <mat-accordion>
@@ -225,12 +218,6 @@
 
     </mat-expansion-panel>
   </mat-accordion> -->
-  <br />
-  <h4>
-    All applications come with a SEO (Search Engine Optimisation) score of 100,
-    to ensure customers are more likely to find you when browsing online.
-  </h4>
-</div>
 
 <!-- Using Material expansion panel with tiles from Bulma -->
 <!-- <div class="tile is-ancestor">

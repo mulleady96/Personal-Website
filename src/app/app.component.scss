@@ -1,6 +1,5 @@
 h1 {
   /* font-size: 1.2em; */
-  font-family: "Major Mono Display";
   color: #ecf0f1;
   margin-bottom: 0;
 }
@@ -18,6 +17,8 @@ h2 {
   flex-direction: row;
   // box-sizing: border-box;
   display: flex;
+  // margin-left: -12px;
+  padding-right: 25px;
   place-content: center space-around;
   align-items: center;
   // box-shadow: none;
@@ -36,18 +37,30 @@ h2 {
   transition: none;
 }
 
+::ng-deep .mat-drawer-container {
+  height: 100vh;
+  background-color: #dad4d4;
+}
+
 mat-sidenav {
   background: #f7f9fa;
   display: flex;
-  justify-content: center;
   width: 250px;
-  // height: 100vh;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 12px 5px 12px 5px;
+  border-radius: 0px 25px 25px 0px;
+  top: 25px;
+  bottom: 25px;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+::ng-deep .mat-sidenav-content {
+  height: 100%;
 }
 
 ::ng-deep .mat-slide-toggle-content {
-  display: inline-flex;
+  // display: inline-flex;
   white-space: pre !important;
 }
 
@@ -70,8 +83,8 @@ mat-sidenav {
 .mat-toolbar {
   // position: absolute;
   backdrop-filter: blur(8px);
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 0px;
+  padding-right: 0px;
   -webkit-backdrop-filter: blur(8px);
   background-color: rgba(255, 255, 255, 0.2) !important;
   align-self: center;
@@ -103,7 +116,7 @@ mat-sidenav {
 }
 
 .router-link-active {
-  background-color: lightcoral;
+  background-color: #c4bebe;
   // animation: pulse 8s;
 }
 

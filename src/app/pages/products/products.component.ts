@@ -38,6 +38,14 @@ export class ProductsComponent implements OnInit {
       link: "https://gasly-game.vercel.app/",
       image: "assets/PierreGasly10.jpg",
     },
+    {
+      id: 3,
+      title: "DOBBLE",
+      description:
+        "Dobble is a fun card game, where you have to find the matching symbol between 2 cards.",
+      link: "https://dobble-one.vercel.app/",
+      image: "assets/logo-color.png",
+    },
   ];
 
   constructor() {}
