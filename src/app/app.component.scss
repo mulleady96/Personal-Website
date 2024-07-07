@@ -180,6 +180,22 @@ img {
   cursor: pointer;
 }
 
+::-webkit-scrollbar {
+  height: 1rem;
+  width: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+  --tw-border-opacity: 1;
+  background-color: #929191;
+  border-color: #727278;
+  border-radius: 9999px;
+  border-width: 1px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 9999px;
+}
+
 // keyframes
 
 @-webkit-keyframes fadeInDown {

@@ -82,9 +82,9 @@ export class HomeComponent implements OnInit {
       icon: "desktop_mac",
     },
     {
-      ariaLabel: "About",
-      routerLink: "/about",
-      icon: "account_circle",
+      ariaLabel: "Blog",
+      routerLink: "/blog",
+      icon: "article",
     },
     {
       ariaLabel: "Get In Touch",
@@ -131,6 +131,5 @@ export class HomeComponent implements OnInit {
 
   imageFailed() {
     this.imageLoaded = false;
-    // console.log("image failed to load");
   }
 }

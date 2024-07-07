@@ -67,12 +67,12 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
         Validators.required,
       ],
     });
+
     // Calculate remaining chars after page reload
     if (JSON.parse(localStorage.getItem("form"))?.description) {
       let description = JSON.parse(localStorage.getItem("form"))?.description;
       this.remaining = this.remaining - Object.keys(description).length;
     }
-    console.log(this.enquiryForm);
   }
 
   createEnquiry = () => {

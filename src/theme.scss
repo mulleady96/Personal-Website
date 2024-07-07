@@ -41,7 +41,18 @@ $candy-app-theme: mat-light-theme(
   $dark-warn: mat-palette($mat-red);
   $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   $dark-lighter: rgb(68, 68, 68);
-  // Bulma
+
+  $cards: 3;
+  @for $i from 1 through length($cards) {
+    .landing-default:nth-child(#{length($cards)}n + #{$i}) {
+      -webkit-box-shadow: 25px 30px 10px -3px #2a2a2a !important;
+      box-shadow: 25px 30px 10px -3px #2a2a2a !important;
+    }
+    .landing-default2:nth-child(#{length($cards)}n + #{$i}) {
+      -webkit-box-shadow: 25px 30px 10px -3px #2a2a2a !important;
+      box-shadow: 25px 30px 10px -3px #2a2a2a !important;
+    }
+  }
 
   strong {
     color: white;
@@ -78,10 +89,10 @@ $candy-app-theme: mat-light-theme(
   }
 
   mat-card {
-    border-radius: 24px;
+    // border-radius: 24px;
     // margin: 25px 25px;
-    -webkit-box-shadow: 5px 5px 15px -3px #9c9c9c;
-    box-shadow: 5px 5px 15px -3px #9c9c9c;
+    -webkit-box-shadow: 25px 30px 10px -3px #2a2a2a;
+    box-shadow: 25px 30px 10px -3px #2a2a2a;
   }
 
   .heading-video {

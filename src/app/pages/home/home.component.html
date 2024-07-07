@@ -8,9 +8,6 @@
   <div *ngIf="imageLoaded" class="hero-body overlay">
     <div class="container">
       <h1 class="title heading-video">Front End Developer</h1>
-      <h2 class="subtitle sub-heading">
-        <div>Web Design ❯ Mobile Apps ❯ Drone Videos</div>
-      </h2>
       <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="40px">
         <button
           *ngFor="let button of navigationButtons"
@@ -25,6 +22,7 @@
           <mat-icon class="View Github" color="accent">{{
             button.icon
           }}</mat-icon>
+          {{ button.ariaLabel }}
         </button>
       </div>
     </div>
