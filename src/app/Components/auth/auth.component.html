@@ -1,0 +1,16 @@
+<button
+  *ngIf="!this.currentUser"
+  (click)="googleSignIn()"
+  mat-mini-fab
+  color="accent"
+>
+  <mat-icon>person</mat-icon>
+</button>
+<button
+  mat-mini-fab
+  color="accent"
+  (click)="signOut()"
+  *ngIf="this.currentUser"
+>
+  <mat-icon>logout</mat-icon>
+</button>

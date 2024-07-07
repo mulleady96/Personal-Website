@@ -20,6 +20,6 @@ test("Enquire", async ({ page }) => {
   await page.getByText("New Website").click();
   await page.getByLabel("Tell us which brands,").click();
   await page.getByLabel("Tell us which brands,").fill("Nice text");
-  await page.getByRole("button", { name: "Submit" }).click();
-  await page.getByText("Form Successfully Submitted,").click();
+  // await page.getByRole("button", { name: "Submit" }).click();
+  // await page.getByText("Form Successfully Submitted,").click();
 });

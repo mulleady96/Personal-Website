@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import {
   Component,
   Output,
@@ -33,7 +34,6 @@ import { initializeApp } from "firebase/app";
   ],
 })
 export class AppComponent implements OnInit {
-  // Place google analytics code in app.component => only want to run once.
   title = "Andrew Mulleady";
   navigationButtons = [
     {
@@ -47,6 +47,11 @@ export class AppComponent implements OnInit {
       icon: "desktop_mac",
     },
     {
+      ariaLabel: "Blog",
+      routerLink: "/blog",
+      icon: "article",
+    },
+    {
       ariaLabel: "About",
       routerLink: "/about",
       icon: "person",
@@ -56,11 +61,6 @@ export class AppComponent implements OnInit {
       routerLink: "/enquire",
       icon: "edit",
     },
-    // {
-    //   ariaLabel: "Upload",
-    //   routerLink: "/upload",
-    //   icon: "upload",
-    // },
     {
       ariaLabel: "Gallery",
       routerLink: "/gallery",
@@ -81,9 +81,11 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private swUpdate: SwUpdate,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private location: Location
   ) {
     initializeApp(config);
+    // console.log(this.location.path());
 
     this.themeDescription = "Dark Theme";
 
@@ -99,10 +101,16 @@ export class AppComponent implements OnInit {
   @ViewChild("sidenav", { static: true }) sidenav: MatSidenav;
 
   reason = "";
+  openWithSwipe = false;
 
   close(reason: string) {
     this.reason = reason;
     this.sidenav.close();
+  }
+
+  canOpenSidebar(): boolean {
+    // Check if the current route is not the blog route.
+    return !this.location.path().includes("/blog");
   }
 
   toggleDarkTheme(checked) {
@@ -132,6 +140,7 @@ export class AppComponent implements OnInit {
     // Toggle Light/Dark Theme
     this.isDarkTheme = this.themeService.isDarkTheme;
     this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme"));
+    // console.log(this.router.url);
 
     if (this.storedTheme) {
       this.checked = true;

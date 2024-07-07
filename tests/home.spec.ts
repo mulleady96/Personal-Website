@@ -9,10 +9,7 @@ test("Home", async ({ page }) => {
     page.getByRole("button", { name: "View Portfolio" })
   ).toBeVisible();
   await expect(
-    page
-      .locator("div")
-      .filter({ hasText: "Front End DeveloperWeb Design" })
-      .nth(1)
+    page.locator("div").filter({ hasText: "Front End Developer" }).nth(1)
   ).toBeVisible();
   await expect(page.locator("app-home")).toContainText("desktop_mac");
   await page.getByLabel("List").click();

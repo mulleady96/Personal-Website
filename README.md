@@ -1,5 +1,8 @@
 # GravitaWebTech
 
+[![Build Successful](https://img.shields.io/badge/Build-Passed-brightgreen.svg)](https://github.com/mulleady96/Personal-Website/actions/workflows/lighthouse-ci.yaml)
+[![Tests Passed](https://img.shields.io/badge/Tests-Passed-brightgreen.svg)](https://github.com/mulleady96/Personal-Website/actions/workflows/playwright.yml)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
 * Progressive Web App designed with Angular material, https://material.angular.io/.
