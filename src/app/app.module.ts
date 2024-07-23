@@ -9,7 +9,6 @@ import { NgModule, Injectable } from "@angular/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { NgProgressModule } from "@ngx-progressbar/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
@@ -32,7 +31,6 @@ import { HammerConfig } from "./Hammerjs";
     AngularFireModule.initializeApp(config),
     AngularFireStorageModule,
     ComponentsModule,
-    NgProgressModule,
     AppMaterialModule,
     HammerModule,
     BrowserAnimationsModule,

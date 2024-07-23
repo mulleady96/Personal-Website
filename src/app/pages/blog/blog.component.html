@@ -46,7 +46,7 @@
   >
     <mat-card
       (click)="selectedBlog(i)"
-      *ngFor="let response of allContent; index as i"
+      *ngFor="let response of responses; index as i"
       class="card"
     >
       <p [innerHTML]="response.response | markdown"></p>
@@ -90,6 +90,6 @@
     class="padTop"
     fxFlex="50%"
     *ngIf="showArticle"
-    [innerHTML]="this.allContent[selectedValue].response | markdown"
+    [innerHTML]="this.responses[selectedValue].response | markdown"
   ></div>
 </div>
