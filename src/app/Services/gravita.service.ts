@@ -8,6 +8,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  getDocs,
   getFirestore,
   orderBy,
   query,
