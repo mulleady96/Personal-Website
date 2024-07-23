@@ -8,6 +8,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  getDocs,
   getFirestore,
   orderBy,
   query,
@@ -107,7 +108,7 @@ export class GravitaService {
     const q = query(
       collectionRef,
       where("id", "==", "bloggi"),
-      orderBy("status.startTime")
+      orderBy("status.startTime"),
     );
 
     const querySnapshot = await getDocs(q);
