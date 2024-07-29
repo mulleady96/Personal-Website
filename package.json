@@ -14,7 +14,7 @@
     "cypress:cli": "concurrently \"ng serve \" \"cypress run\"",
     "firebase-release": "firebase deploy --only hosting",
     "test-ui": "npx playwright test --ui",
-    "deploy": "ng build --configuration production && firebase deploy --only hosting"
+    "deploy": "ng build --configuration production && npx playwright test && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
