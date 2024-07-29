@@ -22,6 +22,7 @@ import {
   getDoc,
   updateDoc,
   where,
+  getDocs,
 } from "firebase/firestore";
 // import "firebase/compat/database";
 import { config } from "../credentials";
@@ -121,32 +122,35 @@ export class GravitaService {
    */
   async saveIdea(query: string) {}
 
-  getAIQuery(): Observable<any> {
-    return new Observable((observer: Observer<any>) => {
-      const collectionRef = collection(this.db, "generate");
-      const q = query(
-        collectionRef,
-        where("id", "==", "bloggi"),
-        orderBy("status.startTime")
-      );
+  async getAIQuery() {
+    const collectionRef = collection(this.db, "generate");
+    const q = query(
+      collectionRef,
+      where("id", "==", "bloggi"),
+      orderBy("status.startTime")
+    );
 
-      /** Listen for any changes **/
-      onSnapshot(q, (snapshot) => {
-        snapshot.docs.forEach((change) => {
-          /** Get prompt and response */
-          const { comment, output, response, prompt, status } = change.data();
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs;
 
-          const mergedData = {
-            response: response,
-            prompt: prompt,
-            state: status.state,
-            createTime: status.completeTime,
-          };
+    /** Listen for any changes **/
+    // onSnapshot(q, (snapshot) => {
+    //   console.log("fire snapshot", snapshot.docs);
 
-          observer.next(mergedData);
-        });
-      });
-    });
+    //   snapshot.docs.forEach((change) => {
+    //     /** Get prompt and response */
+    //     const { comment, output, response, prompt, status } = change.data();
+
+    //     const mergedData = {
+    //       response: response,
+    //       prompt: prompt,
+    //       state: status.state,
+    //       createTime: status.completeTime,
+    //     };
+
+    //     observer.next(mergedData);
+    //   });
+    // });
   }
 
   loginWithGoogle(): Promise<any> {

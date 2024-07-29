@@ -1,4 +1,3 @@
-import { Subscription } from "rxjs";
 import { GravitaService } from "./../../Services/gravita.service";
 import {
   Component,
@@ -29,7 +28,7 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   limit;
   currentUser;
-  private subscription: Subscription;
+  private subscription;
   private clipboard: ClipboardJS;
   chips = [
     { name: "Responses", selected: false },
@@ -43,31 +42,22 @@ export class BlogComponent implements OnInit, OnDestroy {
     private markdownService: MarkdownService
   ) {
     // get limit - disable input if 0.
-    this.gravita.getLimit("sGNbtnG9rFj4mL2akP5O", false).then((data) => {
-      this.limit = data.AILimit;
-    });
-
-    this.subscription = this.gravita.getAIQuery().subscribe((mergedData) => {
-      // this.subscription = response;
-      this.responses.unshift(mergedData);
-      this.allContent = this.responses;
-
-      this.markdownContent = this.responses[this.responses.length - 1];
-      this.prompt = mergedData.prompt;
-      this.loading = mergedData.state === "COMPLETED" ? false : true;
-    });
+    // this.gravita.getLimit("sGNbtnG9rFj4mL2akP5O", false).then((data) => {
+    //   this.limit = data.AILimit;
+    // });
   }
 
-  ngOnUpdate(): void {}
-
   ngOnInit(): void {
-    // get current user
+    this.gravita.getAIQuery().then((data) => {
+      data.forEach((doc) => {
+        this.responses.unshift(doc.data());
+      });
+    });
+
     this.toggleSelection(this.chips[0]);
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe to avoid memory leaks
-    this.subscription.unsubscribe();
     if (this.clipboard) {
       this.clipboard.destroy();
     }

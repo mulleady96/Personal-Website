@@ -38,21 +38,22 @@
   </mat-form-field> -->
 </div>
 
-<div>
-  <div
-    *ngIf="!showArticle"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-around center"
+<div
+  *ngIf="!showArticle"
+  fxLayout="column"
+  fxLayoutAlign="space-between"
+  fxLayout.gt-md="row wrap"
+>
+  <mat-card
+    (click)="selectedBlog(i)"
+    fxFlex.gt-md="0 1 calc(44% - 25px)"
+    *ngFor="let response of responses; index as i"
+    class="card"
   >
-    <mat-card
-      (click)="selectedBlog(i)"
-      *ngFor="let response of allContent; index as i"
-      class="card"
-    >
-      <p [innerHTML]="response.response | markdown"></p>
-    </mat-card>
-  </div>
-  <!-- <mat-chip-list>
+    <p [innerHTML]="response.response | markdown"></p>
+  </mat-card>
+</div>
+<!-- <mat-chip-list>
     <mat-chip
       *ngFor="let chip of chips"
       [selected]="chip.selected"
@@ -61,7 +62,7 @@
       {{ chip.name }}
     </mat-chip>
   </mat-chip-list> -->
-  <!-- <mat-form-field appearance="fill" color="accent">
+<!-- <mat-form-field appearance="fill" color="accent">
     <mat-label>Select an option</mat-label>
     <mat-select [(ngModel)]="selectedValue">
       <mat-option
@@ -73,12 +74,11 @@
       </mat-option>
     </mat-select>
   </mat-form-field> -->
-  <!-- <mat-card
+<!-- <mat-card
     *ngFor="let response of allContent"
     [innerHTML]="response.response | markdown"
     >{{ response.response }}
   </mat-card> -->
-</div>
 <!-- <button [appCopy]>Copy</button> -->
 <div fxLayout="column" style="margin: 0 20px">
   <!-- Assuming markdownContent is an array -->
@@ -90,6 +90,6 @@
     class="padTop"
     fxFlex="50%"
     *ngIf="showArticle"
-    [innerHTML]="this.allContent[selectedValue].response | markdown"
+    [innerHTML]="this.responses[selectedValue].response | markdown"
   ></div>
 </div>
