@@ -71,15 +71,7 @@ export class MediaListComponent implements OnInit {
   }
 
   toggleSelection(location: any) {
-    if (location.name !== "All") {
-      this.locations.forEach((loc) => (loc.selected = false)); // Deselect all locations
-    } else {
-      this.locations.forEach((loc) => {
-        if (loc.name === "All") {
-          loc.selected = false; // Deselect the "All" chip if a location is selected
-        }
-      });
-    }
+    this.locations.forEach((loc) => (loc.selected = false)); // Deselect all locations
     location.selected = !location.selected; // Toggle the selected chip
   }
 

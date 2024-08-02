@@ -7,14 +7,6 @@
 <div *ngIf="search">
   <mat-chip-list aria-label="Sort By Location">
     <mat-chip
-      (click)="
-        toggleSelection({ name: 'All', selected: isAllSelected() }); getImages()
-      "
-      [ngClass]="{ selected: isAllSelected() }"
-    >
-      All
-    </mat-chip>
-    <mat-chip
       *ngFor="let location of locations"
       name="name"
       [selected]="location.selected"
