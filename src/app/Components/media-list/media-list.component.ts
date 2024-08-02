@@ -38,7 +38,7 @@ export class MediaListComponent implements OnInit {
 
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
 
-  constructor(private dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getImages();

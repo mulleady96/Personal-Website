@@ -8,7 +8,7 @@
   <mat-chip-list aria-label="Sort By Location">
     <mat-chip
       (click)="
-        toggleSelection({ name: 'all', selected: isAllSelected() }); getImages()
+        toggleSelection({ name: 'All', selected: isAllSelected() }); getImages()
       "
       [ngClass]="{ selected: isAllSelected() }"
     >
