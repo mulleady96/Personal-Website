@@ -70,6 +70,23 @@ export class MediaListComponent implements OnInit {
     });
   }
 
+  toggleSelection(location: any) {
+    if (location.name !== "All") {
+      this.locations.forEach((loc) => (loc.selected = false)); // Deselect all locations
+    } else {
+      this.locations.forEach((loc) => {
+        if (loc.name === "All") {
+          loc.selected = false; // Deselect the "All" chip if a location is selected
+        }
+      });
+    }
+    location.selected = !location.selected; // Toggle the selected chip
+  }
+
+  isAllSelected(): boolean {
+    return !this.locations.some((location) => location.selected);
+  }
+
   sortByName(name) {
     // based on chip selected, dislay those items
     // input value from chip
@@ -87,6 +104,10 @@ export class MediaListComponent implements OnInit {
 
   Pexels() {
     window.open("https://www.pexels.com/@andrew-mulleady-24039905", "_blank");
+  }
+
+  Tip() {
+    window.open("https://buy.stripe.com/dR6fZzaRhczXdjy3cc", "_blank");
   }
 
   openModal(image: Image) {

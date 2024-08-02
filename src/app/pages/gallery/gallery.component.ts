@@ -2,13 +2,6 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 @Component({
   selector: "app-gallery",
   templateUrl: "./gallery.component.html",
