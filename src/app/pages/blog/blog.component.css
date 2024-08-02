@@ -70,3 +70,9 @@ app-auth {
 .padTop {
   padding-top: 4rem;
 }
+
+.bloggiButton {
+  position: absolute;
+  top: 70px;
+  left: 10px;
+}

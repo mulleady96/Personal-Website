@@ -36,6 +36,7 @@ import { EmailSignUpComponent } from "./email-sign-up/email-sign-up.component";
     DialogElementsExampleDialog,
     UnderlineHoverDirective,
     InvisibleDirective,
+    AppMaterialModule,
   ],
 })
 export class ComponentsModule {}

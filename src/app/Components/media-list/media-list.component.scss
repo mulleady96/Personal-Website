@@ -12,6 +12,12 @@ img {
   aspect-ratio: 14/9;
 }
 
+mat-chip.selected {
+  border: 3px solid #38e455;
+  background-color: transparent;
+  color: #33ba21;
+}
+
 mat-chip-list {
   display: flex;
   flex-direction: row;
@@ -92,11 +98,6 @@ $colors: linear-gradient(
       both;
     animation: puff-in-bottom 0.7s cubic-bezier(0.47, 0, 0.745, 0.715) both;
   }
-}
-
-.mat-chip.mat-standard-chip:focus {
-  -webkit-box-shadow: 5px 5px 15px -3px red;
-  box-shadow: 5px 5px 15px -3px red;
 }
 
 .overlay {
