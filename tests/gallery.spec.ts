@@ -11,7 +11,7 @@ test("Gallery", async ({ page }) => {
     "Here you will find a selection of Images from all across Ireland and beyond."
   );
   await expect(page.getByLabel("Sort By Location")).toContainText(
-    "AllBarna Pier 5Inverin 16Lough Inagh 5Mweenish Beach 2Roundstone 5"
+    " All 33 Barna Pier 5 Inverin 16 Lough Inagh 5 Mweenish Beach 2 Roundstone 5"
   );
   await expect(
     page.getByRole("img", { name: "Photo of Roundstone" }).nth(1)
