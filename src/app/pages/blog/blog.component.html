@@ -10,6 +10,7 @@
   </button>
   <h1 [appTypingAnimation] *ngIf="!showArticle">Bloggi</h1>
   <!-- <app-auth></app-auth> -->
+  <mat-spinner *ngIf="!isLoaded" color="accent"></mat-spinner>
 
   <a
     href="https://buy.stripe.com/dR6fZzaRhczXdjy3cc"

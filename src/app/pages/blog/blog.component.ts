@@ -19,12 +19,12 @@ export class BlogComponent implements OnInit, OnDestroy {
   // have side menu / dropdown box with list of prompts/headings and can click on prompt to scroll to that answer.
   markdownText = "";
   prompt = "";
-  loading = false;
   markdownContent: any = ``;
   allContent: any;
   responses = [];
   selectedValue = 0;
   showArticle = false;
+  isLoaded: boolean;
 
   limit;
   currentUser;
@@ -52,6 +52,7 @@ export class BlogComponent implements OnInit, OnDestroy {
       data.forEach((doc) => {
         this.responses.unshift(doc.data());
       });
+      this.isLoaded = true;
     });
 
     this.toggleSelection(this.chips[0]);
