@@ -84,19 +84,6 @@ export class MediaListComponent implements OnInit {
     location.selected = !location.selected; // Toggle the selected chip
   }
 
-  isAllSelected(): boolean {
-    return !this.locations.some((location) => location.selected);
-  }
-
-  toggleSelection(location: any) {
-    this.locations.forEach((loc) => (loc.selected = false)); // Deselect all locations
-    location.selected = !location.selected; // Toggle the selected chip
-  }
-
-  isAllSelected(): boolean {
-    return !this.locations.some((location) => location.selected);
-  }
-
   sortByName(name) {
     // based on chip selected, dislay those items
     // input value from chip
