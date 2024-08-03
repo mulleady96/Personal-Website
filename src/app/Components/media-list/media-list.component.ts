@@ -68,6 +68,24 @@ export class MediaListComponent implements OnInit {
         { name: location, locationCount: this.locationCount },
       ];
     });
+    const totalCount = this.images.length;
+    this.locations.unshift({
+      name: "All",
+      locationCount: totalCount,
+      selected: true,
+    });
+  }
+
+  toggleSelection(location: any) {
+    if (location.name == "All") {
+      this.getImages();
+    }
+    this.locations.forEach((loc) => (loc.selected = false)); // Deselect all locations
+    location.selected = !location.selected; // Toggle the selected chip
+  }
+
+  isAllSelected(): boolean {
+    return !this.locations.some((location) => location.selected);
   }
 
   toggleSelection(location: any) {

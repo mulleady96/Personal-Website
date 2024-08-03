@@ -8,7 +8,6 @@
   <mat-chip-list aria-label="Sort By Location">
     <mat-chip
       *ngFor="let location of locations"
-      name="name"
       [selected]="location.selected"
       matBadge="{{ location.locationCount }}"
       (click)="sortByName(location.name); toggleSelection(location)"
