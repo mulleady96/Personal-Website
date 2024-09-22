@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:stats": "ng build --stats-json",
-    "analyze": "webpack-bundle-analyzer dist/gravitawebtech/stats.json",
+    "analyze": "webpack-bundle-analyzer dist/PersonalWebsite/stats.json",
     "cypress": "concurrently \"ng serve \" \"cypress open\"",
     "cypress:cli": "concurrently \"ng serve \" \"cypress run\"",
     "firebase-release": "firebase deploy --only hosting",
