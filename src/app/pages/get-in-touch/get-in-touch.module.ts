@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { GetInTouchComponent } from './get-in-touch.component';
-import { AppMaterialModule } from 'src/app/app-material.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { MatStepperModule } from "@angular/material/stepper";
+import { RouterModule,Routes } from "@angular/router";
 
+import { AppMaterialModule } from "../../app-material.module";
+import { GetInTouchComponent } from "./get-in-touch.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: GetInTouchComponent
-  }
+    path: "",
+    component: GetInTouchComponent,
+  },
 ];
 
 @NgModule({
@@ -17,8 +18,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     AppMaterialModule,
-    RouterModule.forChild(routes)
+    MatStepperModule,
+    RouterModule.forChild(routes),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class GetInTouchModule { }
+export class GetInTouchModule {}

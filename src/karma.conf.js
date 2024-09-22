@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-require-imports */
+
 module.exports = function (config) {
   config.set({
     basePath: "",
@@ -23,17 +26,15 @@ module.exports = function (config) {
       fixWebpackSourcePaths: true,
     },
     customLaunchers: {
-      ChromeDriver: {
-        base: "Chrome",
-        flags: ["--no-sandbox"],
-        browserName: "chrome",
-        chromeDriver: "C:/Program Files/Google/Chrome/Application", // Automatically uses the installed ChromeDriver
+      ChromeHeadlessCustom: {
+        base: "ChromeHeadless",
+        flags: ["--no-sandbox", "--disable-gpu"], // Flags useful for CI environments
       },
     },
-    browsers: ["ChromeHeadless"], // Use ChromeDriver instead of Chrome
-    reporters: ["progress", "kjhtml", "spec", "coverage"],
+    browsers: ["ChromeHeadlessCustom"], // Custom headless chrome configuration
+    reporters: ["kjhtml", "spec", "coverage", "progress"], // Removed progress for cleaner output
     preprocessors: {
-      "src/**/*.ts": ["coverage"],
+      "src/**/*.ts": ["coverage"], // Keep for coverage, or refine to exclude test files
     },
     port: 9876,
     colors: true,

@@ -1,4 +1,3 @@
-import { GravitaService } from "./../../Services/gravita.service";
 import {
   Component,
   ElementRef,
@@ -6,8 +5,14 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
-import * as ClipboardJS from "clipboard";
 import { MarkdownService } from "ngx-markdown";
+
+import { GravitaService } from "../../Services/gravita.service";
+
+interface ResponseData {
+  // Define the structure of your response data
+  [key: string]: any;
+}
 
 @Component({
   selector: "app-blog",
@@ -21,25 +26,25 @@ export class BlogComponent implements OnInit, OnDestroy {
   prompt = "";
   markdownContent: any = ``;
   allContent: any;
-  responses = [];
+  responses: ResponseData[] = [];
   selectedValue = 0;
   showArticle = false;
-  isLoaded: boolean;
-
-  limit;
-  currentUser;
-  private subscription;
-  private clipboard: ClipboardJS;
+  isLoaded: boolean = false;
+  limit: any;
+  currentUser: any;
+  private subscription: any;
+  // private clipboard: ClipboardJS = new ClipboardJS;
   chips = [
     { name: "Responses", selected: false },
     { name: "Bloggis' Idea of the Week", selected: false },
     // Add more chips as needed
   ];
-  @ViewChild("BloggiTextarea") myTextarea: ElementRef;
+  @ViewChild("BloggiTextarea")
+  myTextarea!: ElementRef;
 
   constructor(
     private gravita: GravitaService,
-    private markdownService: MarkdownService
+    private markdownService: MarkdownService,
   ) {
     // get limit - disable input if 0.
     // this.gravita.getLimit("sGNbtnG9rFj4mL2akP5O", false).then((data) => {
@@ -47,25 +52,29 @@ export class BlogComponent implements OnInit, OnDestroy {
     // });
   }
 
-  ngOnInit(): void {
-    this.gravita.getAIQuery().then((data) => {
-      data.forEach((doc) => {
-        this.responses.unshift(doc.data());
-      });
-      this.isLoaded = true;
-    });
-
-    this.toggleSelection(this.chips[0]);
+  ngOnInit() {
+    this.loadResponses();
   }
 
-  ngOnDestroy(): void {
-    if (this.clipboard) {
-      this.clipboard.destroy();
+  async loadResponses() {
+    try {
+      const data = await this.gravita.getAIQuery();
+      this.responses = data.map((doc: any) => doc.data());
+      this.responses.reverse();
+      this.isLoaded = true;
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   }
 
-  selectedBlog(index) {
-    this.selectedValue = index;
+  ngOnDestroy(): void {
+    // if (this.clipboard) {
+    //   this.clipboard.destroy();
+    // }
+  }
+
+  selectedBlog(index?: number) {
+    if (index) this.selectedValue = index;
     this.showArticle = !this.showArticle;
   }
 

@@ -1,16 +1,17 @@
-import { ComponentsModule } from '../../Components/components.module';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { GalleryComponent } from './gallery.component';
-import { Routes, RouterModule } from '@angular/router';
-import { AppMaterialModule } from 'src/app/app-material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { RouterModule,Routes } from "@angular/router";
+
+import { AppMaterialModule } from "../../../app/app-material.module";
+import { ComponentsModule } from "../../Components/components.module";
+import { GalleryComponent } from "./gallery.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: GalleryComponent
-  }
+    path: "",
+    component: GalleryComponent,
+  },
 ];
 
 @NgModule({
@@ -20,7 +21,7 @@ const routes: Routes = [
     AppMaterialModule,
     ComponentsModule,
     HttpClientModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class GalleryModule { }
+export class GalleryModule {}

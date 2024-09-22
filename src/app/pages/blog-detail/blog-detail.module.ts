@@ -1,24 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BlogDetailComponent } from './blog-detail.component';
-import { Routes, RouterModule } from '@angular/router';
-import { AppMaterialModule } from 'src/app/app-material.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { RouterModule,Routes } from "@angular/router";
 
+import { AppMaterialModule } from "../../app-material.module";
+import { BlogDetailComponent } from "./blog-detail.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: BlogDetailComponent
-  }
+    path: "",
+    component: BlogDetailComponent,
+  },
 ];
-
 
 @NgModule({
   declarations: [BlogDetailComponent],
-  imports: [
-    CommonModule,
-    AppMaterialModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [CommonModule, AppMaterialModule, RouterModule.forChild(routes)],
 })
-export class BlogDetailModule { }
+export class BlogDetailModule {}

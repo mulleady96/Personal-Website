@@ -1,17 +1,17 @@
-import { ComponentsModule } from 'src/app/Components/components.module';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
-import { Routes, RouterModule } from '@angular/router';
-import { AppMaterialModule } from 'src/app/app-material.module';
-import { CountUpModule } from 'ngx-countup';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { RouterModule,Routes } from "@angular/router";
+import { CountUpModule } from "ngx-countup";
 
+import { AppMaterialModule } from "../../../app/app-material.module";
+import { ComponentsModule } from "../../Components/components.module";
+import { HomeComponent } from "./home.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent
-  }
+    path: "",
+    component: HomeComponent,
+  },
 ];
 
 @NgModule({
@@ -21,7 +21,7 @@ const routes: Routes = [
     CountUpModule,
     ComponentsModule,
     AppMaterialModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

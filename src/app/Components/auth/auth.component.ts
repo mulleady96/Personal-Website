@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { AuthService } from "src/app/Services/auth.service";
+
+import { AuthService } from "../../Services/auth.service";
 
 @Component({
   selector: "app-auth",
@@ -7,7 +8,7 @@ import { AuthService } from "src/app/Services/auth.service";
   styleUrls: ["./auth.component.css"],
 })
 export class AuthComponent {
-  currentUser;
+  currentUser: string | null | undefined;
 
   constructor(private authService: AuthService) {
     this.authService.getCurrentUser().then((currentUser) => {

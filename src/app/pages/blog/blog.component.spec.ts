@@ -1,13 +1,14 @@
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
-import { BlogComponent } from "./blog.component";
-import { GravitaService } from "../../Services/gravita.service";
-import { MarkdownService } from "ngx-markdown";
 import {
-  QueryDocumentSnapshot,
   DocumentData,
+  QueryDocumentSnapshot,
   SnapshotMetadata,
 } from "firebase/firestore";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MarkdownService } from "ngx-markdown";
+
+import { GravitaService } from "../../Services/gravita.service";
+import { BlogComponent } from "./blog.component";
 
 describe("Blog Component", () => {
   let component: BlogComponent;

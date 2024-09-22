@@ -1,9 +1,9 @@
-import { Directive, ElementRef, Renderer2 } from "@angular/core";
+import { Directive, ElementRef, OnInit, Renderer2 } from "@angular/core";
 
 @Directive({
   selector: "[appTypingAnimation]",
 })
-export class TypingAnimationDirective {
+export class TypingAnimationDirective implements OnInit {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {

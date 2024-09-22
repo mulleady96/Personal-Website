@@ -1,15 +1,12 @@
-import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
+
 // *Implement Lazy Loading.
-const routes: Routes = [
+export const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
-  {
-    path: "about",
-    loadChildren: () =>
-      import("./pages/about/about.module").then((m) => m.AboutModule),
-  },
+
   {
     path: "home",
     loadChildren: () =>

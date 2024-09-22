@@ -12,14 +12,19 @@ img {
   aspect-ratio: 14/9;
 }
 
+p {
+  display: inline-flex;
+  align-items: center;
+}
+
 mat-chip.selected {
   border: 3px solid #38e455;
   background-color: transparent;
   color: #33ba21;
 }
 
-mat-chip-list {
-  display: flex;
+mat-chip-set {
+  display: grid;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -66,6 +71,10 @@ cdk-overlay-pane {
   max-width: 0;
 }
 
+::ng-deep .mat-badge-content {
+  z-index: 1;
+}
+
 $colors: linear-gradient(
     90deg,
     rgba(131, 58, 180, 1) 0%,
@@ -88,7 +97,7 @@ $colors: linear-gradient(
     rgba(19, 32, 75, 0.511) 100%
   );
 @for $i from 1 through length($colors) {
-  mat-chip.mat-standard-chip:nth-child(#{length($colors)}n + #{$i}) {
+  mat-chip:nth-child(#{length($colors)}n + #{$i}) {
     background: nth($colors, $i);
     color: white;
     cursor: pointer;
@@ -105,7 +114,8 @@ $colors: linear-gradient(
   bottom: 0;
   z-index: 1;
   left: 30px;
-  height: 35px;
+  // height: 35px;
+  // display: inline-grid;
   color: white;
 }
 

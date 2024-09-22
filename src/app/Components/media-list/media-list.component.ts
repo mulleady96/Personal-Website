@@ -1,12 +1,12 @@
-import { Location } from "@angular/common";
 import { Component, Inject, Input, OnInit } from "@angular/core";
-import * as Images from "../../../assets/Images.json";
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogConfig,
-  MAT_DIALOG_DATA,
 } from "@angular/material/dialog";
-import * as _ from "lodash";
+import { filter, map, sortBy, uniq } from "lodash";
+
+import * as Images from "../../../assets/Images.json";
 
 export interface ImagesJson {
   images: Image[];
@@ -27,14 +27,15 @@ export interface Image {
 })
 export class MediaListComponent implements OnInit {
   images = Images;
-  Videos;
-  count;
-  chipValue;
-  locations = [];
+  Videos: any;
+  count!: string;
+  chipValue: any;
+  locations: any[] = [];
   locationCount = 0;
-  search: boolean;
-  modal: boolean;
-  @Input() name: string;
+  search!: boolean;
+  modal!: boolean;
+  @Input()
+  name!: string;
 
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
 
@@ -51,7 +52,7 @@ export class MediaListComponent implements OnInit {
 
   getImages() {
     this.images = Images;
-    this.images = _.sortBy(this.images, "title");
+    this.images = sortBy(this.images, "title");
     this.count = `${"Viewing all " + this.images.length + " images"}`;
   }
 
@@ -60,9 +61,9 @@ export class MediaListComponent implements OnInit {
     // this.locations = _.sortBy(this.images, "title");
     let locationsArray;
 
-    locationsArray = _.uniq(_.map(this.images, "title"));
-    locationsArray.forEach((location) => {
-      this.locationCount = _.filter(this.images, { title: location }).length;
+    locationsArray = uniq(map(this.images, "title"));
+    locationsArray.forEach((location: any) => {
+      this.locationCount = filter(this.images, { title: location }).length;
       this.locations = [
         ...this.locations,
         { name: location, locationCount: this.locationCount },
@@ -84,18 +85,18 @@ export class MediaListComponent implements OnInit {
     location.selected = !location.selected; // Toggle the selected chip
   }
 
-  sortByName(name) {
+  sortByName(name: string) {
     // based on chip selected, dislay those items
     // input value from chip
     this.images = Images;
-    this.images = _.filter(this.images, { title: name });
+    this.images = filter(this.images, { title: name });
     this.count = `${"Viewing " + this.images.length + " images from " + name}`;
   }
 
   WhatsApp() {
     window.open(
       "https://api.whatsapp.com/send?text=" + encodeURI(this.message),
-      "_blank"
+      "_blank",
     );
   }
 
@@ -109,11 +110,12 @@ export class MediaListComponent implements OnInit {
 
   openModal(image: Image) {
     const dialogConfig = new MatDialogConfig();
+    const { src } = image;
     dialogConfig.maxWidth = "100%";
     dialogConfig.height = "100vh";
     dialogConfig.panelClass = "custom-dialog";
     (dialogConfig.data = {
-      src: image,
+      src: src,
     }),
       this.dialog.open(DialogElementsExampleDialog, dialogConfig);
   }

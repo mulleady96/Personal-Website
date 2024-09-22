@@ -1,0 +1,33 @@
+{
+  "plugins": ["import"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "groups": ["external", "builtin", "parent", ["sibling", "index"]],
+        "newlines-between": "never",
+        "pathGroups": [
+          {
+            "group": "external",
+            "pattern": "react",
+            "position": "before"
+          },
+          {
+            "group": "external",
+            "pattern": "@my_org/**",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"]
+      }
+    ],
+    "lint": {
+      "builder": "@angular-eslint/builder:lint",
+      "options": {}
+    }
+  }
+}

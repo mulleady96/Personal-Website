@@ -1,4 +1,4 @@
-<div fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+<div class="margin" fxLayout="column wrap" fxLayoutAlign="space-evenly center">
   <button
     *ngIf="showArticle"
     (click)="selectedBlog()"
@@ -8,7 +8,7 @@
   >
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <h1 [appTypingAnimation] *ngIf="!showArticle">Bloggi</h1>
+  <h1 appTypingAnimation *ngIf="!showArticle">Bloggi</h1>
   <!-- <app-auth></app-auth> -->
   <mat-spinner *ngIf="!isLoaded" color="accent"></mat-spinner>
 
@@ -65,7 +65,7 @@
     *ngFor="let response of responses; index as i"
     class="card"
   >
-    <p [innerHTML]="response.response | markdown"></p>
+    <markdown [data]="response['response']"></markdown>
   </mat-card>
 </div>
 <!-- <mat-chip-list>
@@ -101,10 +101,7 @@
   <!-- *ngFor="let response of markdownContent; let last = last" -->
 
   <!-- <h1>{{ response.prompt }}</h1> -->
-  <div
-    class="padTop"
-    fxFlex="50%"
-    *ngIf="showArticle"
-    [innerHTML]="this.responses[selectedValue].response | markdown"
-  ></div>
+  <div class="padTop" fxFlex="50%" *ngIf="showArticle">
+    <markdown [data]="this.responses[selectedValue]['response']"></markdown>
+  </div>
 </div>

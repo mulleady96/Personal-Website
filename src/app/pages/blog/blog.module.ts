@@ -1,17 +1,19 @@
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Routes, RouterModule } from "@angular/router";
-import { BlogComponent } from "./blog.component";
-import { AppMaterialModule } from "src/app/app-material.module";
-import { MarkdownModule } from "ngx-markdown";
-import { TypingAnimationDirective } from "src/app/Directives/typing-animation.directive";
-import { CopyDirective } from "src/app/Directives/copy.directive";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { ComponentsModule } from "src/app/Components/components.module";
-import { MatInputModule } from "@angular/material/input";
-import { MatSelectModule } from "@angular/material/select";
+import { NgModule } from "@angular/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { EllipsisDirective } from "src/app/Directives/ellipsis.directive";
+import { MatInputModule } from "@angular/material/input";
+// import { CopyDirective } from '../../Directives/copy.directive';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSelectModule } from "@angular/material/select";
+import { RouterModule,Routes } from "@angular/router";
+import { MarkdownModule } from "ngx-markdown";
+
+import { AppMaterialModule } from "../../../app/app-material.module";
+import { ComponentsModule } from "../../Components/components.module";
+import { EllipsisDirective } from "../../Directives/ellipsis.directive";
+import { TypingAnimationDirective } from "../../Directives/typing-animation.directive";
+import { BlogComponent } from "./blog.component";
+
 const routes: Routes = [
   {
     path: "",
@@ -20,12 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    BlogComponent,
-    TypingAnimationDirective,
-    CopyDirective,
-    EllipsisDirective,
-  ],
+  declarations: [BlogComponent, TypingAnimationDirective, EllipsisDirective],
   imports: [
     CommonModule,
     ComponentsModule,
