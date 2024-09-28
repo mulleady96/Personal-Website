@@ -123,16 +123,7 @@
   <!-- *ngFor="let response of markdownContent; let last = last" -->
 
   <!-- <h1>{{ response.prompt }}</h1> -->
-  <<<<<<< HEAD
   <div class="padTop" fxFlex="50%" *ngIf="showArticle">
     <markdown [data]="this.responses[selectedValue]['response']"></markdown>
   </div>
-  =======
-  <div
-    class="padTop"
-    fxFlex="50%"
-    *ngIf="showArticle"
-    [innerHTML]="this.responses[selectedValue].response | markdown"
-  ></div>
-  >>>>>>> 583e43d... AM: blog component
 </div>
