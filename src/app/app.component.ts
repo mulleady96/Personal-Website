@@ -1,4 +1,4 @@
-import { animate,style, transition, trigger } from "@angular/animations";
+import { animate, style, transition, trigger } from "@angular/animations";
 import { Location } from "@angular/common";
 import {
   Component,
@@ -144,9 +144,11 @@ export class AppComponent implements OnInit {
 
     // SW - Reload fresh instance of app, if new version is available.
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.checkForUpdate().then(() => {
-        if (confirm("New version available. Load New Version?")) {
-          window.location.reload();
+      this.swUpdate.versionUpdates.subscribe((event) => {
+        if (event.type === "VERSION_READY") {
+          if (confirm("New version available. Load New Version?")) {
+            window.location.reload();
+          }
         }
       });
     }

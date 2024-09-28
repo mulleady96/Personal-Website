@@ -44,7 +44,7 @@
           <ng-template matStepLabel>Fill out your e-mail</ng-template>
           <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" required />
+            <input matInput type="email" formControlName="email" required />
             <mat-error
               *ngIf="enquiryForm.get('secondStep.email')?.hasError('required')"
             >
