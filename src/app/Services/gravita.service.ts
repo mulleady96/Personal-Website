@@ -1,32 +1,22 @@
-import { BehaviorSubject, Observable, Observer } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { initializeApp } from "firebase/app";
 import {
-  getAuth,
-  signOut,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  User,
-} from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  setDoc,
-  doc,
   addDoc,
-  onSnapshot,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
   orderBy,
   query,
-  getDoc,
   updateDoc,
   where,
-  getDocs,
 } from "firebase/firestore";
+
 // import "firebase/compat/database";
 import { config } from "../credentials";
-import { v4 as uuidv4 } from "uuid";
 
 @Injectable({
   providedIn: "root",
@@ -37,17 +27,14 @@ export class GravitaService {
 
   db = getFirestore(this.app);
   AILimitRef = doc(this.db, "Limits", "sGNbtnG9rFj4mL2akP5O");
-  AILimit;
+  AILimit: any;
 
   constructor(private http: HttpClient) {
     // const enquiryListRef = collection(db, "enquiry");
     // this.enquiryListRef = firebase.default.database().ref(`/enquiry/`);
   }
 
-  createEnquiry(enquiryForm: []) {
-    // console.log("log", enquiryForm);
-
-    // db? means optional param, doesn't have to be supplied when being called by any other comp
+  createEnquiry(enquiryForm: FormGroup) {
     addDoc(collection(this.db, "Enquiries"), {
       enquiry: enquiryForm,
     });
@@ -68,7 +55,7 @@ export class GravitaService {
         // Document exists, you can access its data using docSnap.data()
         const data = docSnap.data();
 
-        this.AILimit = data.AILimit;
+        this.AILimit = data["AILimit"];
 
         if (createQuery) {
           updateDoc(this.AILimitRef, {
@@ -90,14 +77,7 @@ export class GravitaService {
   async createAIQuery(sQuery: string) {
     /** Add a new Firestore document - Limit to 100 queries per day.*/
     // let limit = this.getLimit("sGNbtnG9rFj4mL2akP5O");
-    // console.log("limit", limit);
-    // let bloggiID = localStorage.getItem("bloggiID"),
-    //   id = "";
-    // if (bloggiID) {
-    //   id = bloggiID;
-    // } else {
-    //   id = uuidv4();
-    // }
+
     try {
       await addDoc(collection(this.db, "generate"), {
         id: "bloggi",
@@ -131,6 +111,7 @@ export class GravitaService {
     );
 
     const querySnapshot = await getDocs(q);
+
     return querySnapshot.docs;
 
     /** Listen for any changes **/
@@ -151,48 +132,6 @@ export class GravitaService {
     //     observer.next(mergedData);
     //   });
     // });
-  }
-
-  loginWithGoogle(): Promise<any> {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-    // provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
-    return signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        return user;
-        // return user;
-
-        // return user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        return error;
-        // ...
-      });
-  }
-
-  signOut() {
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
   }
 
   getImages() {

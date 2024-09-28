@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js 16.x
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v1
         with:
-          node-version: 16.x
+          node-version: 18.x
       - name: Write credentials.ts
         run: 'echo "${{ secrets.DEV_CREDENTIALS }}" > src/app/credentials.ts'
       - name: npm install
@@ -18,5 +18,5 @@ jobs:
           npm run build
       - name: run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.3.x
+          npm install -g @lhci/cli@0.14.x
           lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"

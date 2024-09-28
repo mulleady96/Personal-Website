@@ -2,6 +2,10 @@
   width: 45% !important;
 }
 
+.margin {
+  margin-top: 70px;
+}
+
 .mat-tab-group {
   width: 45% !important;
 }

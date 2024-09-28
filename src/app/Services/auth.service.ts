@@ -1,28 +1,16 @@
-import { BehaviorSubject, Observable, Observer } from "rxjs";
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signOut,
-  signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithPopup,
+  signOut,
   User,
 } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  setDoc,
-  doc,
-  addDoc,
-  onSnapshot,
-  orderBy,
-  query,
-  getDoc,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { BehaviorSubject, Observable } from "rxjs";
+
 // import "firebase/compat/database";
 import { config } from "../credentials";
 
@@ -56,7 +44,7 @@ export class AuthService {
             resolve(null); // Resolve with null if user is signed out
           }
         },
-        reject
+        reject,
       ); // Reject if there's an error
     });
     // const auth = getAuth();
@@ -83,7 +71,7 @@ export class AuthService {
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        const token = credential?.accessToken;
         // The signed-in user info.
         const user = result.user;
         return user;
@@ -113,6 +101,7 @@ export class AuthService {
         // Sign-out successful.
       })
       .catch((error) => {
+        console.error(error);
         // An error happened.
       });
   }

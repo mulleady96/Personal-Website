@@ -1,5 +1,5 @@
+import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
-import { trigger, transition, style, animate } from "@angular/animations";
 import { CountUpOptions } from "countup.js";
 
 @Component({
@@ -21,9 +21,9 @@ import { CountUpOptions } from "countup.js";
   ],
 })
 export class HomeComponent implements OnInit {
-  opts: CountUpOptions;
+  opts!: CountUpOptions;
   showDiv = false;
-  video: string;
+  video!: string;
   imageLoaded: boolean = true;
   cardDetails = [
     {
@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
       description:
         "We can provide comprehensive statistical reports on how your website is performing.",
       pictureClass: "productionImage",
-      buttonText: "",
     },
   ];
 

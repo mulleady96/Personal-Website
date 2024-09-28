@@ -16,7 +16,7 @@ export class EllipsisDirective implements OnChanges {
   constructor(private elementRef: ElementRef) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.maxLength) {
+    if (changes["maxLength"]) {
       this.applyEllipsis();
     }
   }

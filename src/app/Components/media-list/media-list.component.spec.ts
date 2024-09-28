@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatDialogConfig, MatDialogModule } from "@angular/material/dialog";
-import { MediaListComponent } from "./media-list.component";
-import * as Images from "../../../assets/Images.json";
-import { ComponentsModule } from "../components.module";
 import { MatMenuModule } from "@angular/material/menu";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import * as Images from "../../../assets/Images.json";
+import { ComponentsModule } from "../components.module";
+import { MediaListComponent } from "./media-list.component";
 
 describe("MediaListComponent", () => {
   let component: MediaListComponent;

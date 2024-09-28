@@ -12,8 +12,8 @@
         <button
           *ngFor="let button of navigationButtons"
           mat-fab
-          color="secondary"
-          class="list-item"
+          extended
+          class="nav-button-stagger"
           matTooltip="{{ button.ariaLabel }}"
           routerLinkActive="router-link-active"
           [attr.aria-label]="button.ariaLabel"
@@ -29,10 +29,9 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section margin">
   <div class="container">
     <h1>How Can We Help You!</h1>
-
     <h2>
       We develop fully functional websites & Progressive Web Apps for SME's
     </h2>
@@ -64,17 +63,20 @@
           </p>
           <br />
         </mat-card-content>
-        <mat-card-actions fxLayoutAlign="center center">
-          <button
-            mat-raised-button
-            full
-            class="mat-landing-button"
-            color="accent"
-            routerLink="/portfolio"
-          >
-            {{ card.buttonText }}
-          </button>
-        </mat-card-actions>
+        <mat-card-footer>
+          <mat-card-actions fxLayoutAlign="center center">
+            <button
+              *ngIf="card.buttonText"
+              mat-raised-button
+              full
+              class="mat-landing-button"
+              color="accent"
+              routerLink="/portfolio"
+            >
+              {{ card.buttonText }}
+            </button>
+          </mat-card-actions>
+        </mat-card-footer>
       </mat-card>
     </div>
   </div>
@@ -115,9 +117,9 @@
               {{ card.description }}
             </p>
           </mat-card-content>
-          <mat-card-actions>
-            <mat-chip-list aria-label="Front-end elements">
-              <mat-chip *ngFor="let chip of card.chipList" color="primary"
+          <!-- <mat-card-actions>
+            <mat-chip-set aria-label="Front-end elements">
+              <mat-chip *ngFor="let chip of card.chipList"
                 ><mat-icon
                   *ngIf="card.title === 'Platform Independent'"
                   class="{{ chip }}"
@@ -126,8 +128,8 @@
                   >{{ chip }}
                 </span></mat-chip
               >
-            </mat-chip-list>
-          </mat-card-actions>
+            </mat-chip-set>
+          </mat-card-actions> -->
         </mat-card>
       </div>
     </div>

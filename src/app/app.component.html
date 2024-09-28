@@ -33,8 +33,8 @@
           target="_blank"
           rel="noreferrer"
         >
-          <button mat-button color="accent" aria-label="Github button">
-            <mat-icon class="fab fa-github"></mat-icon>
+          <button mat-mini-fab color="accent" aria-label="Github button">
+            <fa-icon [icon]="['fab', 'github']"></fa-icon>
           </button>
         </a>
         <a
@@ -42,8 +42,8 @@
           target="_blank"
           rel="noreferrer"
         >
-          <button mat-button color="accent" aria-label="LinkedIn">
-            <mat-icon class="fab fa-linkedin"></mat-icon>
+          <button mat-mini-fab color="accent" aria-label="LinkedIn">
+            <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
           </button>
         </a>
       </div>
@@ -58,10 +58,9 @@
           <div>
             <button
               mat-mini-fab
-              color="accent"
+              color="primary"
               (click)="sidenav.open()"
               aria-label="List"
-              class="header-button"
             >
               <mat-icon>list</mat-icon>
             </button>
@@ -70,7 +69,7 @@
             class="icon-logo"
             [src]="imageSRC"
             routerLink="/home"
-            alt="GravitaTech Logo"
+            alt="Andrew Mulleady Logo"
           />
           <div>
             <a
@@ -84,9 +83,8 @@
                 matTooltip="View Github Account"
                 color="accent"
                 aria-label="Github button"
-                class="github-header-button"
               >
-                <mat-icon class="fab fa-github"></mat-icon>
+                <fa-icon [icon]="['fab', 'github']"></fa-icon>
               </button>
             </a>
           </div>

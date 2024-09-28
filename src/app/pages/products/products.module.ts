@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { ProductsComponent } from './products.component';
-import { AppMaterialModule } from 'src/app/app-material.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ComponentsModule } from 'src/app/Components/components.module';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { RouterModule,Routes } from "@angular/router";
+
+import { AppMaterialModule } from "../../../app/app-material.module";
+import { ComponentsModule } from "../../Components/components.module";
+import { ProductsComponent } from "./products.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: ProductsComponent
-  }
+    path: "",
+    component: ProductsComponent,
+  },
 ];
 
 @NgModule({
@@ -20,7 +21,7 @@ const routes: Routes = [
     FlexLayoutModule,
     AppMaterialModule,
     ComponentsModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class ProductsModule { }
+export class ProductsModule {}

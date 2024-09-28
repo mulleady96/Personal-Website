@@ -1,33 +1,35 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
     "experimentalDecorators": true,
-    // "esModuleInterop": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "paths": {
-      // "rxjs": [
-      //   "node_modules/rxjs"
-      // ],
-      // // "rxjs/*": [
-      // //   "node_modules/rxjs/*"
-      // // ],
-      "core-js/es7/reflect": [
-        "node_modules/core-js/proposals/reflect-metadata",
-      ],
-      "core-js/es6/*": ["node_modules/core-js/es"]
-    },
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
     "lib": [
-      "es2017",
+      "ES2022",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

@@ -1,80 +1,65 @@
-<br />
 <button mat-fab color="accent" (click)="expand()" aria-label="Search">
   <mat-icon *ngIf="!search"> search </mat-icon>
   <mat-icon *ngIf="search" class="redIcon"> close </mat-icon>
 </button>
 
 <div *ngIf="search">
-  <mat-chip-list aria-label="Sort By Location">
+  <mat-chip-set aria-label="Sort By Location">
     <mat-chip
       *ngFor="let location of locations"
-      [selected]="location.selected"
+      selected="location.selected"
       matBadge="{{ location.locationCount }}"
       (click)="sortByName(location.name); toggleSelection(location)"
       [ngClass]="{ selected: location.selected }"
     >
       {{ location.name }}
     </mat-chip>
-  </mat-chip-list>
+  </mat-chip-set>
+  <span>{{ count }}</span>
 </div>
 
-<mat-tab-group mat-stretch-tabs>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <span>{{ count }}</span>
-    </ng-template>
-
-    <mat-list>
-      <div fxLayout="column" fxLayout.gt-md="row wrap">
-        <div
-          [appUnderlineHover]
-          fxFlex.gt-md="0 1 calc(50%-10px)"
-          *ngFor="let image of images"
-        >
-          <!-- <h1 [appUnderlineHover] [matTooltip]="image.description" matTooltipPosition="above">
+<mat-list>
+  <div fxLayout="column" fxLayout.gt-md="row wrap">
+    <div
+      appUnderlineHover
+      fxFlex.gt-md="0 1 calc(50%-10px)"
+      *ngFor="let image of images"
+    >
+      <!-- <h1 [appUnderlineHover] [matTooltip]="image.description" matTooltipPosition="above">
             {{ image.title }}
           </h1> -->
-          <p [appInvisible] class="overlay">
-            <!-- <mat-icon color="accent"
+      <p appInvisible class="overlay">
+        <!-- <mat-icon color="accent"
               >favorite
               <span matBadge="{{image.likes}}" matBadgeOverlap="true"></span></mat-icon
             > -->
-            {{ image.title }}
-            <button
-              mat-icon-button
-              [matMenuTriggerFor]="menu"
-              aria-label="icon-button with menu options"
-            >
-              <i class="fas fa-share"></i>
-            </button>
-            <mat-menu #menu="matMenu" yPosition="above">
-              <button
-                mat-menu-item
-                (click)="WhatsApp()"
-                aria-label="send to whatsapp"
-              >
-                <mat-icon class="fab fa-whatsapp"></mat-icon>WhatsApp
-              </button>
-              <button
-                mat-menu-item
-                (click)="Pexels()"
-                aria-label="View more on Pexels"
-              >
-                <mat-icon>collections</mat-icon>Pexels
-              </button>
-              <button mat-menu-item (click)="Tip()">
-                <mat-icon>paid</mat-icon>Tip
-              </button>
-            </mat-menu>
-          </p>
-          <img
-            src="{{ image.src }}"
-            (click)="openModal(image.src)"
-            alt="Photo of {{ image.title }}"
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </mat-list>
-  </mat-tab>
-</mat-tab-group>
+        <button
+          mat-raised-button
+          [matMenuTriggerFor]="menu"
+          aria-label="icon-button with menu options"
+        >
+          {{ image.title }}
+          <mat-icon>share</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" yPosition="above">
+          <button
+            mat-menu-item
+            (click)="Pexels()"
+            aria-label="View more on Pexels"
+          >
+            <mat-icon>collections</mat-icon>Pexels
+          </button>
+          <button mat-menu-item (click)="Tip()">
+            <mat-icon>paid</mat-icon>Tip
+          </button>
+        </mat-menu>
+      </p>
+      <img
+        src="{{ image.src }}"
+        (click)="openModal(image)"
+        alt="Photo of {{ image.title }}"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</mat-list>

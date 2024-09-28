@@ -1,23 +1,25 @@
+import { animate,style, transition, trigger } from "@angular/animations";
 import { Location } from "@angular/common";
 import {
   Component,
-  Output,
   EventEmitter,
   OnInit,
+  Output,
   ViewChild,
 } from "@angular/core";
-import { trigger, transition, style, animate } from "@angular/animations";
+import { MatSidenav } from "@angular/material/sidenav";
+import { Router } from "@angular/router";
+import { SwUpdate } from "@angular/service-worker";
+import { initializeApp } from "firebase/app";
+import { Observable, of } from "rxjs";
+
 // import * as firebase from "firebase/app";
 import { config } from "./credentials";
-import { Router, NavigationEnd } from "@angular/router";
-import { MatSidenav } from "@angular/material/sidenav";
-import { SwUpdate } from "@angular/service-worker";
 import { ThemeService } from "./Services/theme.service";
-import { Observable, of } from "rxjs";
-import { initializeApp } from "firebase/app";
 
 @Component({
   selector: "app-root",
+  standalone: false,
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
   animations: [
@@ -52,11 +54,6 @@ export class AppComponent implements OnInit {
       icon: "article",
     },
     {
-      ariaLabel: "About",
-      routerLink: "/about",
-      icon: "person",
-    },
-    {
       ariaLabel: "Get In Touch",
       routerLink: "/enquire",
       icon: "edit",
@@ -71,23 +68,23 @@ export class AppComponent implements OnInit {
   @Output()
   navToggle = new EventEmitter();
 
-  isDarkTheme: Observable<boolean>;
+  isDarkTheme!: Observable<boolean>;
   themeDescription: string;
   iconValue = "nights_stay";
   imageSRC = "assets/AM NEW Logo 2020.png";
-  storedTheme: boolean;
-  checked: boolean;
+  storedTheme!: boolean;
+  checked!: boolean;
 
   constructor(
     private router: Router,
     private swUpdate: SwUpdate,
     private themeService: ThemeService,
-    private location: Location
+    private location: Location,
   ) {
     initializeApp(config);
     // console.log(this.location.path());
 
-    this.themeDescription = "Dark Theme";
+    this.themeDescription = "Light Theme";
 
     // Subscribe to router nav event => on route change, sends page view data to GA
     // this.router.events.subscribe((event) => {
@@ -98,7 +95,8 @@ export class AppComponent implements OnInit {
     // });
   }
 
-  @ViewChild("sidenav", { static: true }) sidenav: MatSidenav;
+  @ViewChild("sidenav", { static: true })
+  sidenav!: MatSidenav;
 
   reason = "";
   openWithSwipe = false;
@@ -113,12 +111,12 @@ export class AppComponent implements OnInit {
     return !this.location.path().includes("/blog");
   }
 
-  toggleDarkTheme(checked) {
+  toggleDarkTheme(checked: boolean) {
     // Store in local storage.
     localStorage.setItem("isDarkTheme", JSON.stringify(checked));
 
     //Get item from localStorage
-    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme"));
+    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme") || "");
 
     if (!this.storedTheme) {
       this.isDarkTheme = of(false);
@@ -127,20 +125,16 @@ export class AppComponent implements OnInit {
     }
 
     this.themeService.setDarkTheme(checked);
-    checked
-      ? (this.imageSRC = "assets/AM New Logo Light 2020.png")
-      : (this.imageSRC = "assets/AM NEW Logo 2020.png");
-    checked
-      ? ((this.themeDescription = "Light Theme"), (this.iconValue = "wb_sunny"))
-      : ((this.themeDescription = "Dark Theme"),
-        (this.iconValue = "nights_stay"));
+    this.imageSRC = checked
+      ? "assets/AM New Logo Light 2020.png"
+      : "assets/AM NEW Logo 2020.png";
+    this.themeDescription = checked ? "Dark Theme" : "Light Theme";
   }
 
   ngOnInit() {
     // Toggle Light/Dark Theme
     this.isDarkTheme = this.themeService.isDarkTheme;
-    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme"));
-    // console.log(this.router.url);
+    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme") || "");
 
     if (this.storedTheme) {
       this.checked = true;
@@ -150,7 +144,7 @@ export class AppComponent implements OnInit {
 
     // SW - Reload fresh instance of app, if new version is available.
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.available.subscribe(() => {
+      this.swUpdate.checkForUpdate().then(() => {
         if (confirm("New version available. Load New Version?")) {
           window.location.reload();
         }

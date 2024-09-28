@@ -11,8 +11,8 @@ import {
   styleUrls: ["./email-sign-up.component.css"],
 })
 export class EmailSignUpComponent {
-  signUpForm: FormGroup;
-  signedUp: boolean;
+  signUpForm!: FormGroup;
+  signedUp!: boolean;
 
   constructor(private fb: FormBuilder) {}
 
@@ -24,8 +24,7 @@ export class EmailSignUpComponent {
 
   onSubmit() {
     if (this.signUpForm.valid) {
-      let control: AbstractControl = null;
-      const email = this.signUpForm.get("email").value;
+      const email = this.signUpForm.get("email")?.value;
       // Here check if email already exists and update DB.
       this.signedUp = true;
       this.signUpForm.reset();

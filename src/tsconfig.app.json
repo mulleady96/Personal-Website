@@ -11,6 +11,16 @@
     }
   },
   "exclude": [
+    "/src/test.ts",
+    "/src/app/Directives/copy.directive.ts",
+    "/src/app/Directives/drop-zone.directive.ts",
+    "/src/app/Services/upload.service.ts",
+    "/src/app/drop-zone.directive.ts",
+    "/src/app/pages/about/about.component.ts",
+    "/src/app/pages/about/about.module.ts",
+    "/src/app/pages/file-upload/file-size.pipe.ts",
+    "/src/app/pages/file-upload/file-upload.component.ts",
+    "/src/app/pages/file-upload/file-upload.module.ts",
     "src/test.ts",
     "**/*.spec.ts"
   ]

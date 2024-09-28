@@ -43,7 +43,6 @@ h2 {
 }
 
 mat-sidenav {
-  background: #f7f9fa;
   display: flex;
   width: 250px;
   padding: 12px 5px 12px 5px;
@@ -116,7 +115,7 @@ mat-sidenav {
 }
 
 .router-link-active {
-  background-color: #c4bebe;
+  outline: 2px solid;
   // animation: pulse 8s;
 }
 
@@ -171,9 +170,10 @@ mat-sidenav {
 }
 
 .bottomSocial {
-  // position: sticky; /* Fixed/sticky position */
-  padding: 20px;
+  padding: 10px;
+  display: flex;
   bottom: 20px;
+  place-self: center;
 }
 
 img {

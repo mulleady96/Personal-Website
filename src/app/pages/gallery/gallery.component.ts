@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-gallery",
@@ -8,17 +8,20 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./gallery.component.css"],
 })
 export class GalleryComponent implements OnInit {
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+  ) {}
 
-  time: number;
-  postedAgo: String;
+  time!: number;
+  postedAgo!: string;
 
   ngOnInit() {
     // this.postTimeAgo();
   }
 
   navigateDetail() {
-    this.router.navigate["/BlogDetail"];
+    // this.router.navigate["/BlogDetail"];
   }
 
   // postTimeAgo() {

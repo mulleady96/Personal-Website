@@ -1,5 +1,5 @@
+import { animate,style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
-import { trigger, transition, style, animate } from "@angular/animations";
 
 @Component({
   selector: "app-products",
@@ -19,7 +19,7 @@ import { trigger, transition, style, animate } from "@angular/animations";
   ],
 })
 export class ProductsComponent implements OnInit {
-  panelOpenState: boolean;
+  panelOpenState!: boolean;
 
   portfolioDetails = [
     {
