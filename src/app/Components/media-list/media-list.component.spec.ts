@@ -42,7 +42,7 @@ describe("MediaListComponent", () => {
     const location = "SomeLocation"; // replace with an actual location from your mock data
     component.sortByName(location);
     expect(
-      component.images.every((image) => image.title === location)
+      component.images.every((image) => image.title === location),
     ).toBeTrue();
     expect(component.count).toContain(location);
   });
@@ -68,17 +68,17 @@ describe("MediaListComponent", () => {
 
     // Check that 'All' is deselected
     expect(
-      component.locations.find((loc) => loc.name === "All").selected
+      component.locations.find((loc) => loc.name === "All").selected,
     ).toBeFalse();
 
     // Check that 'Location1' is now selected
     expect(
-      component.locations.find((loc) => loc.name === "Location1").selected
+      component.locations.find((loc) => loc.name === "Location1").selected,
     ).toBeTrue();
 
     // Check that 'Location2' remains deselected
     expect(
-      component.locations.find((loc) => loc.name === "Location2").selected
+      component.locations.find((loc) => loc.name === "Location2").selected,
     ).toBeFalse();
   });
 
@@ -87,7 +87,7 @@ describe("MediaListComponent", () => {
     component.WhatsApp();
     expect(window.open).toHaveBeenCalledWith(
       jasmine.stringMatching(/https:\/\/api\.whatsapp\.com\/send\?text=/),
-      "_blank"
+      "_blank",
     );
   });
 
@@ -96,7 +96,7 @@ describe("MediaListComponent", () => {
     component.Pexels();
     expect(window.open).toHaveBeenCalledWith(
       "https://www.pexels.com/@andrew-mulleady-24039905",
-      "_blank"
+      "_blank",
     );
   });
 
@@ -105,7 +105,7 @@ describe("MediaListComponent", () => {
     component.Tip();
     expect(window.open).toHaveBeenCalledWith(
       "https://buy.stripe.com/dR6fZzaRhczXdjy3cc",
-      "_blank"
+      "_blank",
     );
   });
 
