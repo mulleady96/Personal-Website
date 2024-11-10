@@ -41,7 +41,8 @@ app-auth {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 250px;
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+  box-shadow:
+    12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
   /* border-radius: 50px; */
   margin: 25px 25px;
@@ -76,7 +77,23 @@ app-auth {
 }
 
 .bloggiButton {
-  position: absolute;
-  top: 70px;
-  left: 10px;
+  /* position: absolute; */
+  /* top: 70px; */
+  /* left: 10px; */
+}
+
+.center-alignment {
+  display: flex;
+  justify-content: center;
+}
+
+mat-progress-bar {
+  width: 50%;
+}
+
+mat-chip-listbox {
+  display: grid;
+  place-content: center;
+  padding: 10px;
+  gap: 5px;
 }

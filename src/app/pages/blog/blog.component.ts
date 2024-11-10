@@ -5,10 +5,15 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
+import { MatChipSelectionChange } from "@angular/material/chips";
 import { MarkdownService } from "ngx-markdown";
 
 import { GravitaService } from "../../Services/gravita.service";
 
+type Filter = {
+  name: string;
+  selected: boolean;
+};
 interface ResponseData {
   // Define the structure of your response data
   [key: string]: any;
@@ -23,17 +28,20 @@ export class BlogComponent implements OnInit, OnDestroy {
   // chips thread 1 - 5. Arrow up down to view answers.
   // have side menu / dropdown box with list of prompts/headings and can click on prompt to scroll to that answer.
   markdownText = "";
-  prompt = "";
-  markdownContent: any = ``;
-  allContent: any;
+  prompt: string[] = [];
   responses: ResponseData[] = [];
+  originalResponses: ResponseData[] = [];
   selectedValue = 0;
   showArticle = false;
   isLoaded: boolean = false;
-  limit: any;
-  currentUser: any;
+  search: boolean = false;
+  filters: Filter[] = [
+    { name: "All", selected: true },
+    { name: "Angular", selected: false },
+    { name: "SCSS", selected: false },
+    { name: "Javascript", selected: false },
+  ];
   private subscription: any;
-  // private clipboard: ClipboardJS = new ClipboardJS;
   chips = [
     { name: "Responses", selected: false },
     { name: "Bloggis' Idea of the Week", selected: false },
@@ -56,10 +64,36 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.loadResponses();
   }
 
+  onSearchChange(search: boolean) {
+    this.search = search;
+  }
+
+  filterPosts(name: string) {
+    // based on chip selected, display those items only.
+    this.responses = [...this.originalResponses].reverse();
+    if (name == "All") return;
+    this.responses = this.responses.filter((response) => {
+      const prompt = response["prompt"].toLowerCase();
+      return prompt.includes(name.toLowerCase());
+    });
+  }
+
+  onChipSelectionChange(event: MatChipSelectionChange, filter: Filter) {
+    if (!event.selected) {
+      // Prevent deselection by re-selecting the chip
+      event.source.select();
+    }
+    this.filters.forEach((loc) => (loc.selected = false)); // Deselect all locations
+    filter.selected = !filter.selected; // Toggle the selected chip
+  }
+
   async loadResponses() {
     try {
       const data = await this.gravita.getAIQuery();
+
       this.responses = data.map((doc: any) => doc.data());
+      this.originalResponses = [...this.responses];
+
       this.responses.reverse();
       this.isLoaded = true;
     } catch (error) {
@@ -73,14 +107,12 @@ export class BlogComponent implements OnInit, OnDestroy {
     // }
   }
 
-  selectedBlog(index?: number) {
-    if (index) this.selectedValue = index;
-    this.showArticle = !this.showArticle;
-  }
+  selectedBlog(index: number) {
+    console.log(index === 0);
 
-  toggleSelection(chip: any) {
-    this.chips.forEach((c) => (c.selected = false)); // Deselect all chips
-    chip.selected = true; // Select the clicked chip
+    this.selectedValue = index;
+    this.showArticle = !this.showArticle;
+    this.search = false;
   }
 
   sendQuery(event: KeyboardEvent) {

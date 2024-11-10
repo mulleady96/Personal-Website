@@ -1,16 +1,19 @@
-<div class="margin" fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+<div class="margin" fxLayout="row wrap" fxLayoutAlign="space-around center">
   <button
     *ngIf="showArticle"
-    (click)="selectedBlog()"
+    (click)="selectedBlog(0)"
     mat-mini-fab
     color="accent"
     class="backButton"
   >
     <mat-icon>arrow_back</mat-icon>
   </button>
-  <h1 appTypingAnimation *ngIf="!showArticle">Bloggi</h1>
   <!-- <app-auth></app-auth> -->
-  <mat-spinner *ngIf="!isLoaded" color="accent"></mat-spinner>
+  <app-search-button
+    *ngIf="!showArticle"
+    (searchChange)="onSearchChange($event)"
+  ></app-search-button>
+  <!-- <mat-spinner *ngIf="!isLoaded" color="accent"></mat-spinner> -->
 
   <a
     href="https://buy.stripe.com/dR6fZzaRhczXdjy3cc"
@@ -52,6 +55,25 @@
     >
   </mat-form-field> -->
 </div>
+<div class="center-alignment">
+  <mat-spinner *ngIf="!isLoaded" color="accent"></mat-spinner>
+</div>
+
+<div class="center-alignment">
+  <mat-chip-listbox
+    *ngIf="search && !showArticle"
+    aria-label="Cutest dog breeds"
+  >
+    @for (filter of filters; track filter) {
+      <mat-chip-option
+        (click)="filterPosts(filter.name)"
+        selected="{{ filter.selected }}"
+        (selectionChange)="onChipSelectionChange($event, filter)"
+        >{{ filter.name }}</mat-chip-option
+      >
+    }
+  </mat-chip-listbox>
+</div>
 
 <div
   *ngIf="!showArticle"
@@ -60,9 +82,9 @@
   fxLayout.gt-md="row wrap"
 >
   <mat-card
-    (click)="selectedBlog(i)"
     fxFlex.gt-md="0 1 calc(44% - 25px)"
     *ngFor="let response of responses; index as i"
+    (click)="selectedBlog(i)"
     class="card"
   >
     <markdown [data]="response['response']"></markdown>

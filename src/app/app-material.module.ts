@@ -2,7 +2,7 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { FormsModule,ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -57,6 +57,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatTabsModule,
     ScrollingModule,
     MatTooltipModule,
+    MatChipsModule,
   ],
   exports: [
     FormsModule,
@@ -87,6 +88,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatTabsModule,
     ScrollingModule,
     MatTooltipModule,
+    MatChipsModule,
   ],
 })
 export class AppMaterialModule {}

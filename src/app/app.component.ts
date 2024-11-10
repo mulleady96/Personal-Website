@@ -8,7 +8,6 @@ import {
   ViewChild,
 } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
-import { Router } from "@angular/router";
 import { SwUpdate } from "@angular/service-worker";
 import { initializeApp } from "firebase/app";
 import { Observable, of } from "rxjs";
@@ -76,7 +75,6 @@ export class AppComponent implements OnInit {
   checked!: boolean;
 
   constructor(
-    private router: Router,
     private swUpdate: SwUpdate,
     private themeService: ThemeService,
     private location: Location,

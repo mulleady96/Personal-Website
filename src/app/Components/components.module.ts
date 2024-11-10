@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
+import { MatChipListbox } from "@angular/material/chips";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 import { AppMaterialModule } from "../app-material.module";
@@ -15,6 +16,7 @@ import {
   DialogElementsExampleDialog,
   MediaListComponent,
 } from "./media-list/media-list.component";
+import { SearchButtonComponent } from "./search-button/search-button.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import {
     BubblesComponent,
     AuthComponent,
     EmailSignUpComponent,
+    SearchButtonComponent,
   ],
   imports: [
     MatCardModule,
@@ -40,6 +43,7 @@ import {
     BubblesComponent,
     AuthComponent,
     EmailSignUpComponent,
+    SearchButtonComponent,
     DialogElementsExampleDialog,
     UnderlineHoverDirective,
     InvisibleDirective,
