@@ -155,23 +155,12 @@ $dark-theme: mat.define-theme(
 );
 
 @include mat.core();
-@mixin custom-sidenav-content-theme($theme) {
-  // Access the 'primary' color palette from the color map
-  // @if mat.get-theme-type($theme) == light {
-  //   $background-palette: mat.get-theme-color($theme, neutral, 95);
-  //   mat-sidenav-content {
-  //     background-color: $background-palette;
-  //   }
-  // }
-}
 
 @mixin create-light-theme() {
   @include mat.all-component-themes($light-theme);
-  @include custom-sidenav-content-theme($light-theme);
 }
 
 @mixin create-dark-theme() {
   // This mixin only generates the color styles now (we use light theme by default).
   @include mat.all-component-colors($dark-theme);
-  @include custom-sidenav-content-theme($dark-theme);
 }

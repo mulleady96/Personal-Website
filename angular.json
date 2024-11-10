@@ -10,9 +10,7 @@
       "prefix": "app",
       "schematics": {},
       "cli": {
-        "schematicCollections": [
-          "@angular-eslint/schematics"
-        ]
+        "schematicCollections": ["@angular-eslint/schematics"]
       },
       "architect": {
         "build": {
@@ -30,10 +28,7 @@
               "src/.well_known",
               "src/manifest.json"
             ],
-            "styles": [
-              "src/styles.scss",
-              "src/prism-vsc-dark-plus.css"
-            ],
+            "styles": ["src/styles.scss", "src/prism-vsc-dark-plus.css"],
             "scripts": [
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-csharp.min.js",
@@ -70,6 +65,11 @@
               "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "src/ngsw-config.json"
+            },
+            "analyze-bundle": {
+              "sourceMap": true,
+              "outputHashing": "none",
+              "namedChunks": true
             }
           },
           "defaultConfiguration": ""
@@ -99,23 +99,14 @@
             "tsConfig": "src/tsconfig.spec.json",
             "codeCoverage": true,
             "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json"
-            ]
+            "styles": ["src/styles.scss"],
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"]
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }

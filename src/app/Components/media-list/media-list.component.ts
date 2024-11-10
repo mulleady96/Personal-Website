@@ -4,15 +4,16 @@ import {
   MatDialog,
   MatDialogConfig,
 } from "@angular/material/dialog";
-import { filter, map, sortBy, uniq } from "lodash";
 
 import * as Images from "../../../assets/Images.json";
 
-export interface ImagesJson {
-  images: Image[];
-}
+type location = {
+  name: string;
+  locationCount: number;
+  selected: boolean;
+};
 
-export interface Image {
+interface Image {
   title: string;
   src: string;
   description: string;
@@ -27,10 +28,9 @@ export interface Image {
 })
 export class MediaListComponent implements OnInit {
   images = Images;
-  Videos: any;
+  imageList = this.images.images;
   count!: string;
-  chipValue: any;
-  locations: any[] = [];
+  locations: location[] = [];
   locationCount = 0;
   search!: boolean;
   modal!: boolean;
@@ -46,30 +46,43 @@ export class MediaListComponent implements OnInit {
     this.getUniqueNames();
   }
 
+  onSearchChange(search: boolean) {
+    this.search = search;
+  }
+
   expand() {
     this.search = !this.search;
   }
 
   getImages() {
-    this.images = Images;
-    this.images = sortBy(this.images, "title");
-    this.count = `${"Viewing all " + this.images.length + " images"}`;
+    this.imageList.sort((a, b) => a.title.localeCompare(b.title));
+    this.count = `Viewing all ${this.imageList.length} images`;
   }
 
   getUniqueNames() {
     // unique location names for chip list & count
-    // this.locations = _.sortBy(this.images, "title");
-    let locationsArray;
+    const locationSet = new Set();
+    const locationCountMap = new Map();
 
-    locationsArray = uniq(map(this.images, "title"));
-    locationsArray.forEach((location: any) => {
-      this.locationCount = filter(this.images, { title: location }).length;
-      this.locations = [
-        ...this.locations,
-        { name: location, locationCount: this.locationCount },
-      ];
-    });
-    const totalCount = this.images.length;
+    // Get unique location names and count occurrences
+    for (const image of this.imageList) {
+      locationSet.add(image.title);
+      const count = locationCountMap.get(image.title) || 0;
+      locationCountMap.set(image.title, count + 1);
+    }
+
+    this.locations = [];
+
+    // Create location objects with name and count
+    for (const location of locationSet) {
+      this.locations.push({
+        name: location as string,
+        locationCount: locationCountMap.get(location),
+        selected: false,
+      });
+    }
+
+    const totalCount = this.imageList.length;
     this.locations.unshift({
       name: "All",
       locationCount: totalCount,
@@ -86,11 +99,18 @@ export class MediaListComponent implements OnInit {
   }
 
   sortByName(name: string) {
-    // based on chip selected, dislay those items
+    // based on chip selected, display those items
     // input value from chip
-    this.images = Images;
-    this.images = filter(this.images, { title: name });
-    this.count = `${"Viewing " + this.images.length + " images from " + name}`;
+    // this.images = Images;
+    console.log(name);
+    this.imageList = this.images.images;
+    this.imageList = this.imageList.filter((image) => image.title === name);
+    if (this.imageList.length === 0) {
+      this.imageList = this.images.images;
+    }
+    console.log(this.imageList);
+
+    this.count = `Viewing ${this.imageList.length} images from ${name}`;
   }
 
   WhatsApp() {
@@ -114,10 +134,10 @@ export class MediaListComponent implements OnInit {
     dialogConfig.maxWidth = "100%";
     dialogConfig.height = "100vh";
     dialogConfig.panelClass = "custom-dialog";
-    (dialogConfig.data = {
+    dialogConfig.data = {
       src: src,
-    }),
-      this.dialog.open(DialogElementsExampleDialog, dialogConfig);
+    };
+    this.dialog.open(DialogElementsExampleDialog, dialogConfig);
   }
 }
 
