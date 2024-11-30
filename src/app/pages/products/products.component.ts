@@ -1,4 +1,4 @@
-import { animate,style, transition, trigger } from "@angular/animations";
+import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -29,6 +29,8 @@ export class ProductsComponent implements OnInit {
         "Simple App to keep all your loyalty cards in one place, online or offline, forever.",
       link: "https://ionicmap-8b1d0.firebaseapp.com/",
       image: "assets/pexels-lukas-1420707.jpg",
+      buttonText: "Open App",
+      externalLink: true,
     },
     {
       id: 2,
@@ -37,6 +39,8 @@ export class ProductsComponent implements OnInit {
         "Fun game that resembles Pierre Gasly's pre-race procedure, where he catches falling tennis balls.",
       link: "https://gasly-game.vercel.app/",
       image: "assets/PierreGasly10.jpg",
+      buttonText: "Open App",
+      externalLink: true,
     },
     {
       id: 3,
@@ -45,6 +49,8 @@ export class ProductsComponent implements OnInit {
         "Dobble is a fun card game, where you have to find the matching symbol between 2 cards.",
       link: "https://dobble-one.vercel.app/",
       image: "assets/logo-color.png",
+      buttonText: "Open App",
+      externalLink: true,
     },
   ];
 

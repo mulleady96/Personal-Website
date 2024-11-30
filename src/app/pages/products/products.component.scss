@@ -1,110 +1,12 @@
-.example-card {
-  max-width: 100%;
-  // padding-left: 200px;
-  justify-content: center;
-  align-items: center;
-}
-
-.margin {
-  margin-top: 70px;
-}
+@use "/src/app/styles/mixins.scss" as mixins;
 
 .rowWrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  flex-direction: row;
-}
-
-button.mat-raised-button:hover {
-  letter-spacing: 0.3em;
-}
-
-button.mat-raised-button {
-  letter-spacing: 0em;
-  transition: all 0.5s ease-in;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
-mat-card-actions {
-  margin-top: 25px;
-}
-
-.mat-card-actions {
-  margin-left: -8px;
-  margin-right: 265px;
-  padding: 8px 0;
-}
-
-.mat-card-actions .mat-button:first-child,
-.mat-card-actions .mat-raised-button:first-child,
-.mat-card-actions .mat-stroked-button:first-child {
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 10px;
-  position: absolute;
-  bottom: 0;
-}
-
-.card {
-  max-width: 22rem;
-  padding: 0px;
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
-  border-radius: 50px;
-  margin: 25px 25px;
-  // position: relative;
-  // display: flex;
-  // flex-direction: column;
-  // min-width: 0;
-  // word-wrap: break-word;
-  // background-color: #fff;
-  // background-clip: border-box;
-  // border: 1px solid rgba(0, 0, 0, 0.125);
-  // border-radius: 2.5rem;
-}
-
-.card-title {
-  margin-bottom: 0.5rem;
-}
-
-.card-image-top {
-  border-radius: calc(1.5rem);
-  box-sizing: inherit !important;
-  height: 235px;
-  width: 100%;
-}
-
-.card-body {
-  margin: 10px;
-}
-.avatar-image {
-  width: 50%;
-  height: 150px;
-  border-radius: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: url("/assets/Tier1Example.PNG");
-  background-size: cover;
-}
-
-.avatar-image2 {
-  @extend .avatar-image;
-  background-image: url("/assets/Tier2Example.PNG");
-  background-size: cover;
+  @include mixins.rowWrap;
 }
 
 h1 {
   text-align: center;
-}
-
-h3 {
-  text-align: center;
-  font-family: "Bungee";
+  margin-top: 70px;
 }
 
 .mat-product-button {
@@ -113,25 +15,6 @@ h3 {
   text-align: center;
 }
 
-h4 {
+div {
   text-align: center;
-  font-family: "Quicksand";
-}
-
-.angular-example-card {
-  max-width: 400px;
-  padding-left: 900px;
-  justify-content: center;
-  align-items: center;
-}
-
-.example-header-image {
-  // background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
-}
-
-.scene {
-  width: 200px;
-  height: 260px;
-  perspective: 600px;
 }

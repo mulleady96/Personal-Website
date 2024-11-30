@@ -3,46 +3,16 @@
 
   <h4>Collection of personal projects below</h4>
   <br />
-  <h3>
-    <button
-      mat-stroked-button
-      class="mat-product-button"
-      color="primary"
-      routerLink="/enquire"
-    >
-      Enquire
-    </button>
-  </h3>
+  <button
+    mat-stroked-button
+    class="mat-product-button"
+    color="primary"
+    routerLink="/enquire"
+  >
+    Enquire
+  </button>
   <br />
-  <div class="rowWrap">
-    <mat-card *ngFor="let product of portfolioDetails" class="card">
-      <img
-        src="{{ product.image }}"
-        class="card-image-top"
-        alt="Product Image"
-      />
-
-      <div class="card-body">
-        <h3>{{ product.title }}</h3>
-        <mat-card-content>
-          {{ product.description }}
-        </mat-card-content>
-
-        <mat-card-actions fxLayoutAlign="center center">
-          <a href="{{ product.link }}" target="_blank">
-            <button
-              mat-raised-button
-              class="mat-product-button"
-              aria-label="External link to example product"
-              color="accent"
-            >
-              View App
-            </button>
-          </a>
-        </mat-card-actions>
-      </div>
-    </mat-card>
-  </div>
+  <app-card [cardList]="portfolioDetails"></app-card>
 </div>
 <!-- <div fxLayout="row wrap" fxLayoutAlign="center" fxLayout.xs="column">
     <app-flash-card>

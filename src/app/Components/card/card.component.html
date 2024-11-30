@@ -1,0 +1,35 @@
+<div class="rowWrap">
+  <mat-card *ngFor="let card of cardList">
+    <img
+      *ngIf="card.image"
+      ngSrc="{{ card.image }}"
+      fill
+      class="card-image-top"
+      alt="{{ card.description }}"
+      priority
+    />
+
+    <h3>{{ card.title }}</h3>
+    <mat-card-content>
+      {{ card.description }}
+    </mat-card-content>
+    <mat-card-actions>
+      <a
+        *ngIf="card.link"
+        [routerLink]="!card.externalLink ? card.link : null"
+        ariaCurrentWhenActive="page"
+      >
+        <button
+          *ngIf="card.buttonText"
+          (click)="navigate(card)"
+          mat-raised-button
+          class="mat-product-button"
+          aria-label="External link to example product"
+          color="accent"
+        >
+          {{ card.buttonText }}
+        </button>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>
