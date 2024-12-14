@@ -5,16 +5,15 @@ interface CardItem {
   id: number;
   title: string;
   description: string;
-  link: string;
-  image: string;
-  buttonText: string;
-  externalLink: boolean;
+  link?: string;
+  image?: string | undefined;
+  buttonText?: string;
+  externalLink?: boolean;
 }
 
 @Component({
   selector: "app-card",
   standalone: false,
-  imports: [],
   templateUrl: "./card.component.html",
   styleUrl: "./card.component.scss",
 })

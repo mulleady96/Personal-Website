@@ -9,7 +9,6 @@ import { AppMaterialModule } from "../app-material.module";
 import { InvisibleDirective } from "../Directives/invisible.directive";
 import { UnderlineHoverDirective } from "../Directives/underline-hover.directive";
 import { AuthComponent } from "./auth/auth.component";
-import { BubblesComponent } from "./bubbles/bubbles.component";
 import { CardComponent } from "./card/card.component";
 import { EmailSignUpComponent } from "./email-sign-up/email-sign-up.component";
 import { FlashCardComponent } from "./flash-card/flash-card.component";
@@ -26,10 +25,8 @@ import { SearchButtonComponent } from "./search-button/search-button.component";
     DialogElementsExampleDialog,
     UnderlineHoverDirective,
     InvisibleDirective,
-    BubblesComponent,
     AuthComponent,
     EmailSignUpComponent,
-    SearchButtonComponent,
     CardComponent,
   ],
   imports: [
@@ -40,14 +37,13 @@ import { SearchButtonComponent } from "./search-button/search-button.component";
     FontAwesomeModule,
     RouterModule,
     NgOptimizedImage,
+    SearchButtonComponent,
   ],
   exports: [
     FlashCardComponent,
     MediaListComponent,
-    BubblesComponent,
     AuthComponent,
     EmailSignUpComponent,
-    SearchButtonComponent,
     CardComponent,
     DialogElementsExampleDialog,
     UnderlineHoverDirective,
