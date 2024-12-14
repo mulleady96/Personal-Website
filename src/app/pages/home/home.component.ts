@@ -61,7 +61,6 @@ export class HomeComponent implements OnInit {
       title: "Industry Standard",
       description:
         " We use the latest front-end frameworks along with cloud based backend technologies. Your app will be responsive and intuitive regardless of how intensive demand may be.",
-      chipList: ["HTML", "CSS", "Ionic", "Angular"],
     },
     {
       id: 1,
@@ -74,7 +73,6 @@ export class HomeComponent implements OnInit {
       title: "Platform Independent",
       description:
         "Your new website will be optimised for all browsers and mobile devices. Delivered at a low cost that will be manageable, for you and your business.",
-      chipList: ["fab fa-apple", "fab fa-android", "fab fa-chrome"],
     },
   ];
 

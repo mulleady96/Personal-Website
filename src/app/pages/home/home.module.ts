@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CountUpModule } from "ngx-countup";
+import { BubblesComponent } from "src/app/Components/bubbles/bubbles.component";
 
 import { AppMaterialModule } from "../../../app/app-material.module";
 import { ComponentsModule } from "../../Components/components.module";
@@ -20,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     CountUpModule,
     ComponentsModule,
+    BubblesComponent,
     AppMaterialModule,
     RouterModule.forChild(routes),
   ],

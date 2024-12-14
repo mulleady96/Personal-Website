@@ -37,6 +37,12 @@ h2 {
   transition: none;
 }
 
+.side-menu-button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
 ::ng-deep .mat-drawer-container {
   height: 100vh;
   background-color: #dad4d4;
@@ -44,7 +50,7 @@ h2 {
 
 mat-sidenav {
   display: flex;
-  width: 250px;
+  width: 180px;
   padding: 12px 5px 12px 5px;
   border-radius: 0px 25px 25px 0px;
   top: 25px;

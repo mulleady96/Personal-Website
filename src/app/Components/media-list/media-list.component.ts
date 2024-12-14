@@ -102,14 +102,11 @@ export class MediaListComponent implements OnInit {
     // based on chip selected, display those items
     // input value from chip
     // this.images = Images;
-    console.log(name);
     this.imageList = this.images.images;
     this.imageList = this.imageList.filter((image) => image.title === name);
     if (this.imageList.length === 0) {
       this.imageList = this.images.images;
     }
-    console.log(this.imageList);
-
     this.count = `Viewing ${this.imageList.length} images from ${name}`;
   }
 
