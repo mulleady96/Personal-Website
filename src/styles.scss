@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 // @import "../m3-theme.scss";
 @import "../src/app/styles/m3-theme.scss";
+@import "../src/app/styles/mixins.scss";
 
 .dark-theme {
   @include create-dark-theme();

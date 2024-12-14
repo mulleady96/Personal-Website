@@ -46,38 +46,7 @@
     </button>
     <app-bubbles></app-bubbles>
     <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
-      <mat-card
-        *ngFor="let card of cardDetails"
-        id="cardStyle"
-        class="landing-default"
-      >
-        <div fxLayout="row wrap" fxLayoutAlign="center">
-          <figure class="{{ card.pictureClass }}"></figure>
-        </div>
-        <mat-card-header>
-          <mat-card-title>{{ card.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            {{ card.description }}
-          </p>
-          <br />
-        </mat-card-content>
-        <mat-card-footer>
-          <mat-card-actions fxLayoutAlign="center center">
-            <button
-              *ngIf="card.buttonText"
-              mat-raised-button
-              full
-              class="mat-landing-button"
-              color="accent"
-              routerLink="/portfolio"
-            >
-              {{ card.buttonText }}
-            </button>
-          </mat-card-actions>
-        </mat-card-footer>
-      </mat-card>
+      <app-card [cardList]="cardDetails"></app-card>
     </div>
   </div>
 </section>
@@ -94,43 +63,9 @@
   <section class="fadeInLeft" *ngIf="showDiv">
     <div>
       <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
-        <mat-card
-          *ngFor="let card of guaranteeDetails"
-          class="landing-default2"
-        >
-          <mat-card-header>
-            <div class="example-header-image"></div>
-            <mat-card-title>
-              <button
-                mat-fab
-                *ngIf="card.title === 'SEO Score'"
-                class="matFab"
-                [countUp]="100"
-                [options]="opts"
-              ></button
-              >{{ card.title }}</mat-card-title
-            >
-          </mat-card-header>
-
-          <mat-card-content>
-            <p>
-              {{ card.description }}
-            </p>
-          </mat-card-content>
-          <!-- <mat-card-actions>
-            <mat-chip-set aria-label="Front-end elements">
-              <mat-chip *ngFor="let chip of card.chipList"
-                ><mat-icon
-                  *ngIf="card.title === 'Platform Independent'"
-                  class="{{ chip }}"
-                ></mat-icon>
-                <span *ngIf="card.title !== 'Platform Independent'"
-                  >{{ chip }}
-                </span></mat-chip
-              >
-            </mat-chip-set>
-          </mat-card-actions> -->
-        </mat-card>
+        <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
+          <app-card [cardList]="guaranteeDetails"></app-card>
+        </div>
       </div>
     </div>
     <br />

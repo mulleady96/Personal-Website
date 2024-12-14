@@ -1,8 +1,5 @@
-<button mat-fab color="accent" (click)="expand()" aria-label="Search">
-  <mat-icon *ngIf="!search"> search </mat-icon>
-  <mat-icon *ngIf="search" class="redIcon"> close </mat-icon>
-</button>
 
+<app-search-button (searchChange)="onSearchChange($event)"></app-search-button>
 <div *ngIf="search">
   <mat-chip-set aria-label="Sort By Location">
     <mat-chip
@@ -23,7 +20,7 @@
     <div
       appUnderlineHover
       fxFlex.gt-md="0 1 calc(50%-10px)"
-      *ngFor="let image of images"
+      *ngFor="let image of imageList"
     >
       <!-- <h1 [appUnderlineHover] [matTooltip]="image.description" matTooltipPosition="above">
             {{ image.title }}

@@ -27,7 +27,7 @@ export class GravitaService {
 
   db = getFirestore(this.app);
   AILimitRef = doc(this.db, "Limits", "sGNbtnG9rFj4mL2akP5O");
-  AILimit: any;
+  AILimit: number = 0;
 
   constructor(private http: HttpClient) {
     // const enquiryListRef = collection(db, "enquiry");
@@ -94,13 +94,6 @@ export class GravitaService {
       console.log("Error generating prompt.", error);
     }
   }
-
-  /**
-   *
-   * @returns Bloggis Idea of the Day
-   * Generate prompt can use createAIQuery for that & save response in firestore.
-   */
-  async saveIdea(query: string) {}
 
   async getAIQuery() {
     const collectionRef = collection(this.db, "generate");
