@@ -32,7 +32,9 @@ mat-card-content {
 
 mat-card-actions {
   margin-top: 25px;
+  display: block;
   align-self: center;
+  width: 80%;
 }
 
 .card-image-top {
@@ -70,8 +72,8 @@ h3 {
 
 .mat-product-button {
   border-radius: 12px;
-  min-width: 275px;
   text-align: center;
+  width: 100%;
 }
 
 h4 {

@@ -1,6 +1,8 @@
 import { NgFor } from "@angular/common";
 import { Component, ElementRef, OnInit } from "@angular/core";
 
+type Theme = "christmas" | "halloween" | "stPatricks" | "easter" | "default";
+
 @Component({
   selector: "app-bubbles",
   imports: [NgFor],
@@ -15,53 +17,44 @@ import { Component, ElementRef, OnInit } from "@angular/core";
   styleUrls: ["./bubbles.component.scss"],
 })
 export class BubblesComponent implements OnInit {
-  particles = [
-    "🎅",
-    "🎅",
-    "🎄",
-    "🎁",
-    "🎁",
-    "🎄",
-    "🎅",
-    "🎅",
-    "🎄",
-    "🎁",
-    "🎁",
-    "🎄",
-    "🎅",
-    "🎅",
-    "⛄",
-    "⛄",
-    "⛄",
-    "⛄",
-    "⛄",
-    "🎄",
-    "🎁",
-    "🎁",
-    "🎄",
-    "🎅",
-    "🎅",
-    "🎄",
-    "🎁",
-    "🎁",
-    "🎄",
-    "🤶",
-    "🎁",
-    "🎄",
-    "🤶",
-    "❄️",
-    "❄️",
-    "❄️",
-    "❄️",
-  ];
+  particles: string[] = [];
   defaultParticle = false; // set true or false.
-  constructor(private elementRef: ElementRef) {
-    // this.particles = Array(20).fill(""); // if defaultParticle true - reset particles to empty array
-  }
 
-  ngOnInit(): void {}
+  getThemeByMonth = (): Theme => {
+    const month = new Date().getMonth();
 
-  enableCelebration() {
-    // 1. datetimes - if current date within month then set array.
+    switch (month) {
+      case 11:
+        return "christmas";
+      case 2:
+        return "stPatricks";
+      case 3:
+        return "easter";
+      case 9:
+        return "halloween";
+      default:
+        this.defaultParticle = true;
+        return "default"; // Default theme, e.g., for other months
+    }
+  };
+  theme: Theme = this.getThemeByMonth(); // Example theme
+
+  emojiThemes: Record<Theme, string[]> = {
+    christmas: ["🎅", "🤶", "🎄", "❄️", "⛄", "🎁"],
+    halloween: ["🎃", "👻", "🦇", "🕸️", "🕷️", "🧙", "🍬", "💀", "🧟", "🧛"],
+    stPatricks: ["🍀", "☘️", "🍺", "💰", "🍻", "🎩", "🎉"],
+    easter: ["🐰", "🥚", "🌸", "🐣", "🐇", "🌼", "🍫", "🌷", "🌻"],
+    default: ["", "", "", "", "", ""],
+  };
+  emojiOptions = this.emojiThemes[this.theme]; //["🎅", "🤶", "🎄", "❄️", "⛄", "🎁"];
+  arrayLength = 20;
+  constructor() {}
+
+  ngOnInit(): void {
+    this.particles = Array.from(
+      { length: this.arrayLength },
+      () =>
+        this.emojiOptions[Math.floor(Math.random() * this.emojiOptions.length)],
+    );
   }
 }

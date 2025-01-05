@@ -53,7 +53,7 @@
 
 <section class="section" fxLayout="column" fxLayoutAlign="center center">
   <h1>A Few Guarantees</h1>
-  <button mat-fab (click)="toggleDiv()">
+  <button mat-fab aria-label="Icon to open/close div" (click)="toggleDiv()">
     <mat-icon *ngIf="!showDiv" class="toggleAnimation">add</mat-icon>
     <mat-icon *ngIf="showDiv" class="redIcon"> close </mat-icon>
   </button>

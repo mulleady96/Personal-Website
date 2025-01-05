@@ -14,10 +14,11 @@
     "analyze": "webpack-bundle-analyzer dist/PersonalWebsite/stats.json",
     "cypress": "concurrently \"ng serve \" \"cypress open\"",
     "cypress:cli": "concurrently \"ng serve \" \"cypress run\"",
+    "integration": "npx playwright test",
     "firebase-release": "firebase deploy --only hosting",
     "test-ui": "npx playwright test --ui",
     "commit": "git cz",
-    "deploy": "ng build --configuration production && firebase deploy --only hosting"
+    "deploy": "ng build --c production && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {

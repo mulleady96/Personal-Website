@@ -34,7 +34,7 @@
             </mat-error>
           </mat-form-field>
           <div>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button aria-label="Next" matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step
@@ -53,8 +53,10 @@
           </mat-form-field>
 
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button aria-label="Back" matStepperPrevious>
+              Back
+            </button>
+            <button mat-button aria-label="Next" matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step>
@@ -76,10 +78,15 @@
           </p>
 
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button aria-label="Back" matStepperPrevious>
+              Back
+            </button>
+            <button mat-button aria-label="Reset" (click)="stepper.reset()">
+              Reset
+            </button>
             <button
               mat-button
+              aria-label="Send"
               [disabled]="!this.enquiryForm.valid"
               (click)="this.createEnquiry()"
             >
