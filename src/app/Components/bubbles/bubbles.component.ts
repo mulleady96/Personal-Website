@@ -1,5 +1,5 @@
 import { NgFor } from "@angular/common";
-import { Component, ElementRef, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 type Theme = "christmas" | "halloween" | "stPatricks" | "easter" | "default";
 
@@ -46,7 +46,7 @@ export class BubblesComponent implements OnInit {
     easter: ["🐰", "🥚", "🌸", "🐣", "🐇", "🌼", "🍫", "🌷", "🌻"],
     default: ["", "", "", "", "", ""],
   };
-  emojiOptions = this.emojiThemes[this.theme]; //["🎅", "🤶", "🎄", "❄️", "⛄", "🎁"];
+  emojiOptions = this.emojiThemes[this.theme];
   arrayLength = 20;
   constructor() {}
 
