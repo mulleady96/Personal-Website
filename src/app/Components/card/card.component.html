@@ -24,7 +24,7 @@
           (click)="navigate(card)"
           mat-raised-button
           class="mat-product-button"
-          aria-label="External link to example product"
+          [attr.aria-label]="card.buttonText"
           color="accent"
         >
           {{ card.buttonText }}
