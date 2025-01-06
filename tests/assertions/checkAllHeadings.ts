@@ -13,9 +13,7 @@ export async function checkHeadingsVisibility(page: Page): Promise<void> {
 
     const isVisible = await header.isVisible();
     if (!isVisible) {
-      throw new Error(
-        `Heading ${header.textContent()} at index ${i} is not visible.`,
-      );
+      throw new Error(`Heading at index ${i} is not visible.`);
     }
   }
 
