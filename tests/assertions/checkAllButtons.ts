@@ -13,8 +13,6 @@ export async function checkButtonsVisibilityAndAriaLabel(
   for (let i = 0; i < buttonCount; i++) {
     const button = buttons.nth(i);
 
-    console.log("button", button);
-
     const isVisible = await button.isVisible();
     if (!isVisible) {
       throw new Error(`Button at index ${i} is not visible.`);
