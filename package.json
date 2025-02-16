@@ -18,7 +18,7 @@
     "firebase-release": "firebase deploy --only hosting",
     "test-ui": "npx playwright test --ui",
     "commit": "git cz",
-    "deploy": "ng build --c production && firebase deploy --only hosting"
+    "deploy": "ng build --c production && npx playwright test && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
@@ -59,7 +59,7 @@
     "@angular/cli": "^18.2.1",
     "@angular/compiler-cli": "^18.2.0",
     "@eslint/js": "^9.10.0",
-    "@playwright/test": "^1.47.1",
+    "@playwright/test": "^1.50.1",
     "@types/hammerjs": "^2.0.45",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "7.11.0",
@@ -76,7 +76,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "karma-spec-reporter": "^0.0.36",
-    "playwright": "^1.47.2",
+    "playwright": "^1.49.1",
+    "playwright-broad-utils": "^1.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.0.0",
     "sass": "^1.77.8",

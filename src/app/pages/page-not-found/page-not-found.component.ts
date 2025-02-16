@@ -2,8 +2,8 @@ import { Component } from "@angular/core";
 
 @Component({
   selector: "app-page-not-found",
-  template: ` <div class="container">
-    <section class="section margin animated fadeIn">
+  template: `
+    <section class="center">
       <h1 class="title">Uh oh, Page Not Found!</h1>
 
       <p>Head back to the home page by clicking on the 'Home' button</p>
@@ -17,8 +17,8 @@ import { Component } from "@angular/core";
         Home
       </button>
     </section>
-  </div>`,
-  styleUrls: ["./page-not-found.component.css"],
+  `,
+  styleUrls: ["./page-not-found.component.scss"],
 })
 export class PageNotFoundComponent {
   constructor() {}

@@ -24,12 +24,12 @@ export class ProductsComponent implements OnInit {
   portfolioDetails = [
     {
       id: 1,
-      title: "Loyalty Rewards",
+      title: "Playwright-broad-utils",
       description:
-        "Simple App to keep all your loyalty cards in one place, online or offline, forever.",
-      link: "https://ionicmap-8b1d0.firebaseapp.com/",
-      image: "assets/pexels-lukas-1420707.jpg",
-      buttonText: "Open App",
+        "Utility npm package that allows you to assert all Images are rendered on a page, all external links load and capture web socket messages.",
+      link: "https://www.npmjs.com/package/playwright-broad-utils?activeTab=readme",
+      image: "assets/Playwright.Logo.svg",
+      buttonText: "View Package",
       externalLink: true,
     },
     {

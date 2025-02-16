@@ -1,8 +1,9 @@
 import test from "@playwright/test";
-
-import { checkButtonsVisibilityAndAriaLabel } from "./assertions/checkAllButtons";
-import { checkHeadingsVisibility } from "./assertions/checkAllHeadings";
-import { checkImagesVisibility } from "./assertions/checkAllImages";
+import {
+  checkButtonsVisibilityAndAriaLabel,
+  checkHeadingsVisibility,
+  checkImagesVisibility,
+} from "playwright-broad-utils";
 
 test("Portfolio", async ({ page }) => {
   await page.goto("localhost:4200/portfolio");
