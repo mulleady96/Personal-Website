@@ -1,0 +1,6 @@
+@use "/src/app/styles/mixins.scss" as mixins;
+
+.center {
+  height: 100%;
+  @include mixins.center;
+}

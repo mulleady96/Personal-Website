@@ -1,102 +1,94 @@
-<div class="fadeInLeft margin" fxLayout.xs="column wrap">
-  <mat-card>
-    <mat-card-title>
-      <h1>Enquiry Form</h1>
-      <a
-        href="mailto:admin@andrewmulleady.ie?Subject=Website%20Enquiry"
-        target="_top"
+<div class="fadeInLeft center" fxLayout.xs="column wrap">
+  <div class="row">
+    <h1>Enquiry Form</h1>
+    <a
+      href="mailto:admin@andrewmulleady.ie?Subject=Website%20Enquiry"
+      target="_top"
+    >
+      <button
+        mat-fab
+        color="accent"
+        aria-label="Open email to contact website owner"
       >
-        <button
-          mat-fab
-          color="accent"
-          aria-label="Open email to contact website owner"
-        >
-          <mat-icon>email</mat-icon>
-        </button>
-      </a>
-    </mat-card-title>
+        <mat-icon>email</mat-icon>
+      </button>
+    </a>
+  </div>
 
-    <form [formGroup]="enquiryForm">
-      <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-        <mat-step
-          [stepControl]="enquiryForm.get('firstStep') || fallbackControl"
-          formGroupName="firstStep"
-        >
-          <ng-template matStepLabel>Fill out your name</ng-template>
-          <mat-form-field>
-            <mat-label>Name</mat-label>
-            <!-- Use formGroupName to target the correct nested group -->
-            <input matInput formControlName="name" required />
-            <mat-error
-              *ngIf="enquiryForm.get('firstStep.name')?.hasError('required')"
-            >
-              Name is required
-            </mat-error>
-          </mat-form-field>
-          <div>
-            <button mat-button aria-label="Next" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step
-          [stepControl]="enquiryForm.get('secondStep') || fallbackControl"
-          formGroupName="secondStep"
-        >
-          <ng-template matStepLabel>Fill out your e-mail</ng-template>
-          <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email" required />
-            <mat-error
-              *ngIf="enquiryForm.get('secondStep.email')?.hasError('required')"
-            >
-              Email is required
-            </mat-error>
-          </mat-form-field>
+  <form [formGroup]="enquiryForm">
+    <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+      <mat-step
+        [stepControl]="enquiryForm.get('firstStep') || fallbackControl"
+        formGroupName="firstStep"
+      >
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <!-- Use formGroupName to target the correct nested group -->
+          <input matInput type="text" formControlName="name" required />
+          <mat-error
+            *ngIf="enquiryForm.get('firstStep.name')?.hasError('required')"
+          >
+            Name is required
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button aria-label="Next" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step
+        [stepControl]="enquiryForm.get('secondStep') || fallbackControl"
+        formGroupName="secondStep"
+      >
+        <ng-template matStepLabel>Fill out your e-mail</ng-template>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required />
+          <mat-error
+            *ngIf="enquiryForm.get('secondStep.email')?.hasError('required')"
+          >
+            Email is required
+          </mat-error>
+        </mat-form-field>
 
-          <div>
-            <button mat-button aria-label="Back" matStepperPrevious>
-              Back
-            </button>
-            <button mat-button aria-label="Next" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>Your Details:</p>
-          <p>
-            Name:
-            {{
-              enquiryForm.get("firstStep.name")?.value ||
-                "Please fill out your name"
-            }}
-          </p>
-          <p>
-            e-mail:
-            {{
-              enquiryForm.get("secondStep.email")?.value ||
-                "Please fill out your email"
-            }}
-          </p>
+        <div>
+          <button mat-button aria-label="Back" matStepperPrevious>Back</button>
+          <button mat-button aria-label="Next" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>Your Details:</p>
+        <p>
+          Name:
+          {{
+            enquiryForm.get("firstStep.name")?.value ||
+              "Please fill out your name"
+          }}
+        </p>
+        <p>
+          e-mail:
+          {{
+            enquiryForm.get("secondStep.email")?.value ||
+              "Please fill out your email"
+          }}
+        </p>
 
-          <div>
-            <button mat-button aria-label="Back" matStepperPrevious>
-              Back
-            </button>
-            <button mat-button aria-label="Reset" (click)="stepper.reset()">
-              Reset
-            </button>
-            <button
-              mat-button
-              aria-label="Send"
-              [disabled]="!this.enquiryForm.valid"
-              (click)="this.createEnquiry()"
-            >
-              Send
-            </button>
-          </div>
-        </mat-step>
-      </mat-stepper>
-    </form>
-
-    <br />
-  </mat-card>
+        <div>
+          <button mat-button aria-label="Back" matStepperPrevious>Back</button>
+          <button mat-button aria-label="Reset" (click)="stepper.reset()">
+            Reset
+          </button>
+          <button
+            mat-button
+            aria-label="Send"
+            [disabled]="!this.enquiryForm.valid"
+            (click)="this.createEnquiry()"
+          >
+            Send
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </form>
 </div>

@@ -16,16 +16,10 @@ import { AppMaterialModule } from "src/app/app-material.module";
 })
 export class SearchButtonComponent {
   search: boolean = false;
-  @Input() searchFilters: string[] = [];
   @Output() searchChange = new EventEmitter<boolean>();
-
-  searchFilter() {
-    console.log(this.searchFilters);
-  }
 
   expand() {
     this.search = !this.search;
     this.searchChange.emit(this.search);
-    console.log(this.search);
   }
 }

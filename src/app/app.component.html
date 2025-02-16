@@ -4,8 +4,6 @@
       <h2>
         {{ title }}
       </h2>
-      <!-- <br /> -->
-      <!-- // mat-list of buttons  -->
       <div fxLayout="column">
         <button
           class="side-menu-button"
@@ -19,7 +17,6 @@
           {{ button.ariaLabel }}
         </button>
       </div>
-      <!-- <hr /> -->
       <mat-slide-toggle
         [checked]="isDarkTheme | async"
         (change)="toggleDarkTheme($event.checked)"

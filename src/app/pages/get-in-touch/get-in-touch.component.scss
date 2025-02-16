@@ -1,19 +1,12 @@
-.demo-full-width {
-  // width: 50%;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-around; */
-  /* align-content: space-between; */
-  /* flex-wrap: nowrap; */
-  align-items: center;
+@use "/src/app/styles/mixins.scss" as mixins;
+
+.center {
+  height: 100%;
+  @include mixins.center;
 }
 
 .text-input-width {
   width: 45%;
-}
-
-.margin {
-  margin-top: 50px;
 }
 
 mat-form-field {
