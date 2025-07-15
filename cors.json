@@ -1,0 +1,13 @@
+[
+  {
+    "origin": [
+      "http://localhost:4200",
+      "https://gravitatech-9ce75.web.app",
+      "https://gravitatech-9ce75.firebaseapp.com",
+      "https://andrewmulleady.ie"
+    ],
+    "method": ["GET"],
+    "responseHeader": ["Content-Type"],
+    "maxAgeSeconds": 3600
+  }
+]

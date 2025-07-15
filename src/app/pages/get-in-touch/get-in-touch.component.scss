@@ -2,7 +2,7 @@
 
 .center {
   height: 100%;
-  @include mixins.center;
+  @include mixins.rowWrap;
 }
 
 .text-input-width {

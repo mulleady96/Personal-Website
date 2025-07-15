@@ -1,6 +1,7 @@
 @use "/src/app/styles/mixins.scss" as mixins;
 
-.center {
-  height: 100%;
+.colWrap {
   @include mixins.columnWrap;
+  @include mixins.center;
+  height: 100%;
 }

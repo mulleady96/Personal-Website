@@ -1,10 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { MatStepperModule } from "@angular/material/stepper";
-import { RouterModule,Routes } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 
 import { AppMaterialModule } from "../../app-material.module";
 import { GetInTouchComponent } from "./get-in-touch.component";
+import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     AppMaterialModule,
     MatStepperModule,
     RouterModule.forChild(routes),
+    BubblesComponent,
   ],
   exports: [RouterModule],
 })

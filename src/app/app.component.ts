@@ -9,11 +9,9 @@ import {
 } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
-import { initializeApp } from "firebase/app";
 import { Observable, of } from "rxjs";
 
 // import * as firebase from "firebase/app";
-import { config } from "./credentials";
 import { ThemeService } from "./Services/theme.service";
 
 @Component({
@@ -79,18 +77,8 @@ export class AppComponent implements OnInit {
     private themeService: ThemeService,
     private location: Location,
   ) {
-    initializeApp(config);
-    // console.log(this.location.path());
-
+    // initializeApp(config);
     this.themeDescription = "Light Theme";
-
-    // Subscribe to router nav event => on route change, sends page view data to GA
-    // this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     (<any>window).ga("set", "page", event.urlAfterRedirects);
-    //     (<any>window).ga("send", "pageview");
-    //   }
-    // });
   }
 
   @ViewChild("sidenav", { static: true })

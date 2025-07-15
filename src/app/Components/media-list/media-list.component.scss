@@ -20,7 +20,7 @@ p {
 mat-chip.selected {
   border: 3px solid #38e455;
   background-color: transparent;
-  color: #33ba21;
+  border-radius: 10px;
 }
 
 mat-chip-set {
@@ -73,27 +73,9 @@ cdk-overlay-pane {
   z-index: 1;
 }
 
-$colors: linear-gradient(
-    90deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(253, 29, 29, 0.8718837876947654) 34%,
-    rgba(252, 176, 69, 1) 100%
-  ),
-  linear-gradient(
-    90deg,
-    rgba(7, 6, 36, 0.74) 0%,
-    rgba(45, 7, 95, 0.507) 66%,
-    rgba(69, 112, 252, 0.616) 100%
-  ),
-  linear-gradient(
-    142deg,
-    rgba(7, 6, 36, 1) 0%,
-    rgba(20, 152, 151, 1) 24%,
-    rgba(29, 253, 231, 0.5553571770505077) 59%,
-    rgba(42, 206, 238, 0.5133403703278187) 77%,
-    rgba(33, 81, 99, 0.443) 92%,
-    rgba(19, 32, 75, 0.511) 100%
-  );
+$colors: rgb(241, 146, 91), rgb(64, 184, 184), rgb(116, 185, 255),
+  rgb(162, 155, 254), rgb(226, 144, 123), rgb(220, 164, 59), rgb(108, 92, 231),
+  rgb(15, 188, 249);
 @for $i from 1 through length($colors) {
   mat-chip:nth-child(#{length($colors)}n + #{$i}) {
     background: nth($colors, $i);

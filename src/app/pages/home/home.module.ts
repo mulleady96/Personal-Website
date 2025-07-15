@@ -6,6 +6,7 @@ import { BubblesComponent } from "src/app/Components/bubbles/bubbles.component";
 
 import { AppMaterialModule } from "../../../app/app-material.module";
 import { ComponentsModule } from "../../Components/components.module";
+import { StackedCardsComponent } from "../../Components/stacked-cards/stacked-cards.component";
 import { HomeComponent } from "./home.component";
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
     BubblesComponent,
     AppMaterialModule,
     RouterModule.forChild(routes),
+    StackedCardsComponent,
   ],
 })
 export class HomeModule {}

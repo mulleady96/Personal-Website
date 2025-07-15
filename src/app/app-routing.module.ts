@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
+import { PaymentCancelComponent } from "./Components/payment-cancel/payment-cancel.component";
+import { PaymentSuccessComponent } from "./Components/payment-success/payment-success.component";
+import { PricingCardComponent } from "./Components/pricing-card/pricing-card.component";
 import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 
-// *Implement Lazy Loading.
 export const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
 
@@ -26,35 +28,24 @@ export const routes: Routes = [
     path: "enquire",
     loadChildren: () =>
       import("./pages/get-in-touch/get-in-touch.module").then(
-        (m) => m.GetInTouchModule
+        (m) => m.GetInTouchModule,
       ),
   },
-  // {
-  //   path: "upload",
-  //   loadChildren: () =>
-  //     import("./pages/file-upload/file-upload.module").then(
-  //       (m) => m.FileUploadModule
-  //     ),
-  // },
   {
     path: "gallery",
     loadChildren: () =>
       import("./pages/gallery/gallery.module").then((m) => m.GalleryModule),
   },
-  // {
-  //   path: "upload",
-  //   loadChildren: () =>
-  //     import("./pages/file-upload/file-upload.module").then(
-  //       (m) => m.FileUploadModule
-  //     ),
-  // },
   {
     path: "BlogDetail",
     loadChildren: () =>
       import("./pages/blog-detail/blog-detail.module").then(
-        (m) => m.BlogDetailModule
+        (m) => m.BlogDetailModule,
       ),
   },
+  { path: "download", component: PricingCardComponent },
+  { path: "payment-success", component: PaymentSuccessComponent },
+  { path: "payment-cancel", component: PaymentCancelComponent },
   { path: "**", component: PageNotFoundComponent },
 ];
 

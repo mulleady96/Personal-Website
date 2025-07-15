@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { getFunctions, provideFunctions } from "@angular/fire/functions";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import {
@@ -25,6 +27,7 @@ import { AppComponent } from "./app.component";
 import { AppMaterialModule } from "./app-material.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./Components/components.module";
+import { PricingCardComponent } from "./Components/pricing-card/pricing-card.component";
 import { config } from "./credentials";
 import { HammerConfig } from "./Hammerjs";
 import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
@@ -43,6 +46,7 @@ import { ThemeService } from "./Services/theme.service";
     HammerModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
+    PricingCardComponent,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
     }),
@@ -53,6 +57,8 @@ import { ThemeService } from "./Services/theme.service";
       provide: HAMMER_GESTURE_CONFIG,
       useClass: HammerConfig,
     },
+    provideFirebaseApp(() => initializeApp(config)),
+    provideFunctions(() => getFunctions()),
   ],
   bootstrap: [AppComponent],
 })

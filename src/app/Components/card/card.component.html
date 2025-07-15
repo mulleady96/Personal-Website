@@ -1,35 +1,87 @@
 <div class="rowWrap">
-  <mat-card *ngFor="let card of cardList">
-    <img
-      *ngIf="card.image"
-      ngSrc="{{ card.image }}"
-      fill
-      class="card-image-top"
-      alt="{{ card.description }}"
-      priority
-    />
+  @if (cardList.length > 0 && isStacked) {
+    <mat-card
+      (click)="handleNavigation($event)"
+      (mousemove)="handleHover($event)"
+      (mouseleave)="resetHover()"
+      [ngClass]="{
+        'highlight-left': hoverSide === 'left',
+        'highlight-right': hoverSide === 'right',
+      }"
+    >
+      <img
+        *ngIf="cardList[currentIndex]?.image"
+        ngSrc="{{ cardList[currentIndex].image }}"
+        fill
+        class="card-image-top"
+        alt="{{ cardList[currentIndex].description }}"
+        priority
+      />
 
-    <h3>{{ card.title }}</h3>
-    <mat-card-content>
-      {{ card.description }}
-    </mat-card-content>
-    <mat-card-actions>
-      <a
-        *ngIf="card.link"
-        [routerLink]="!card.externalLink ? card.link : null"
-        ariaCurrentWhenActive="page"
-      >
-        <button
-          *ngIf="card.buttonText"
-          (click)="navigate(card)"
-          mat-raised-button
-          class="mat-product-button"
-          [attr.aria-label]="card.buttonText"
-          color="accent"
+      <h3 class="card-heading">
+        {{ cardList[currentIndex].title }} <span>-</span>
+        {{ currentIndex + 1 }} / {{ cardList.length }}
+      </h3>
+
+      <mat-card-content>
+        {{ cardList[currentIndex].description }}
+      </mat-card-content>
+      <mat-card-actions>
+        <a
+          *ngIf="cardList[currentIndex].link"
+          [routerLink]="
+            !cardList[currentIndex].externalLink
+              ? cardList[currentIndex].link
+              : null
+          "
+          ariaCurrentWhenActive="page"
         >
-          {{ card.buttonText }}
-        </button>
-      </a>
-    </mat-card-actions>
-  </mat-card>
+          <button
+            *ngIf="cardList[currentIndex]?.buttonText"
+            (click)="navigate(cardList[currentIndex])"
+            mat-raised-button
+            class="mat-product-button"
+            [attr.aria-label]="cardList[currentIndex].buttonText"
+            color="accent"
+          >
+            {{ cardList[currentIndex].buttonText }}
+          </button>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  } @else {
+    <mat-card *ngFor="let card of cardList; index as i">
+      <img
+        *ngIf="card.image"
+        ngSrc="{{ card.image }}"
+        fill
+        class="card-image-top"
+        alt="{{ card.description }}"
+        priority
+      />
+
+      <h3>{{ card.title }}</h3>
+      <mat-card-content>
+        {{ card.description }}
+      </mat-card-content>
+      <mat-card-actions>
+        <a
+          *ngIf="card.link"
+          [routerLink]="!card.externalLink ? card.link : null"
+          ariaCurrentWhenActive="page"
+        >
+          <button
+            *ngIf="card.buttonText"
+            (click)="navigate(card)"
+            mat-raised-button
+            class="mat-product-button"
+            [attr.aria-label]="card.buttonText"
+            color="accent"
+          >
+            {{ card.buttonText }}
+          </button>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  }
 </div>

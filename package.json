@@ -18,7 +18,8 @@
     "firebase-release": "firebase deploy --only hosting",
     "test-ui": "npx playwright test --ui",
     "commit": "git cz",
-    "deploy": "ng build --c production && npx playwright test && firebase deploy --only hosting"
+    "deploy": "ng build --c production && npx playwright test && firebase deploy --only hosting",
+    "createTheme": "ng generate @angular/material:m3-theme"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +38,7 @@
     "@angular/service-worker": "^18.2.1",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@stripe/stripe-js": "^7.4.0",
     "core-js": "^3.38.1",
     "firebase": "^10.13.0",
     "hammerjs": "^2.0.8",

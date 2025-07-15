@@ -40,11 +40,11 @@ export class BubblesComponent implements OnInit {
   theme: Theme = this.getThemeByMonth(); // Example theme
 
   emojiThemes: Record<Theme, string[]> = {
-    christmas: ["🎅", "🤶", "🎄", "❄️", "⛄", "🎁"],
-    halloween: ["🎃", "👻", "🦇", "🕸️", "🕷️", "🧙", "🍬", "💀", "🧟", "🧛"],
-    stPatricks: ["🍀", "☘️", "🍺", "💰", "🍻", "🎩", "🎉"],
-    easter: ["🐰", "🥚", "🌸", "🐣", "🐇", "🌼", "🍫", "🌷", "🌻"],
-    default: ["", "", "", "", "", ""],
+    christmas: ["❄️"],
+    halloween: ["🎃"],
+    stPatricks: ["☘️"],
+    easter: ["🥚"],
+    default: [""],
   };
   emojiOptions = this.emojiThemes[this.theme];
   arrayLength = 20;

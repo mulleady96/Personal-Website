@@ -99,8 +99,6 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor() {}
-
   ngOnInit() {
     this.useOptions();
     this.randomVideos();

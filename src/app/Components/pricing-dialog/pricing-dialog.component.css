@@ -1,0 +1,57 @@
+/* pricing-dialog.component.css */
+
+/*
+ * Create a visually distinct, full-width block for the price.
+ * Negative margins allow it to break out of the parent's padding.
+ */
+.price {
+  padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  color: #212529;
+  font-size: 5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/*
+ * Style the secondary text ("/download") to be smaller and less prominent.
+ * This creates a clear visual hierarchy.
+ */
+.price-period {
+  font-size: 1.25rem;
+  font-weight: 400; /* Regular weight */
+  color: #6c757d; /* Muted gray color */
+  margin-left: 8px; /* Give it some space from the main price */
+}
+
+/*
+ * Adjust the padding on the main content area to account for the
+ * new full-width price block.
+ */
+mat-card-content {
+  padding-bottom: 8px !important;
+}
+
+/*
+ * Ensure the features list is clean and well-spaced.
+ */
+.mat-list-base {
+  padding-top: 0;
+}
+
+/*
+ * Style the main call-to-action button for maximum impact.
+ */
+mat-card-actions {
+  padding: 0 16px 16px; /* Add padding around the button */
+}
+
+.purchase-button {
+  width: 100%;
+  /* Make the button feel more substantial */
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 1rem;
+}

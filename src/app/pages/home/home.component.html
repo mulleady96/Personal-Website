@@ -1,87 +1,35 @@
-<section fxHide.lt-md="true">
+<div class="rowWrap" fxFill>
   <img
     *ngIf="imageLoaded"
     [src]="video"
     alt="image Background"
     (error)="imageFailed()"
   />
-  <div *ngIf="imageLoaded" class="hero-body overlay">
-    <div class="container">
-      <h1 class="title heading-video">Welcome</h1>
-      <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="40px">
-        <button
-          *ngFor="let button of navigationButtons"
-          mat-fab
-          extended
-          class="nav-button-stagger"
-          matTooltip="{{ button.ariaLabel }}"
-          routerLinkActive="router-link-active"
-          [attr.aria-label]="button.ariaLabel"
-          routerLink="{{ button.routerLink }}"
-        >
-          <mat-icon class="View Github" color="accent">{{
-            button.icon
-          }}</mat-icon>
-          {{ button.ariaLabel }}
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section margin">
-  <div class="container">
-    <h1>How Can We Help You!</h1>
-    <h2>
-      We develop fully functional websites & Progressive Web Apps for SME's
-    </h2>
-    <button
-      mat-raised-button
-      color="accent"
-      aria-label="Get Started"
-      class="mat-landing-button"
-      routerLink="/enquire"
-    >
-      Let's Get Started
-    </button>
+  <div class="leftSide" fxHide.lt-md="true">
     <app-bubbles></app-bubbles>
-    <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
-      <app-card [cardList]="cardDetails"></app-card>
+
+    <h1 class="heading-video">Welcome</h1>
+    <div class="rowWrap">
+      <button
+        *ngFor="let button of navigationButtons"
+        mat-fab
+        extended
+        class="nav-button-stagger"
+        matTooltip="{{ button.ariaLabel }}"
+        routerLinkActive="router-link-active"
+        [attr.aria-label]="button.ariaLabel"
+        routerLink="{{ button.routerLink }}"
+      >
+        <mat-icon class="View Github" color="accent">{{
+          button.icon
+        }}</mat-icon>
+        {{ button.ariaLabel }}
+      </button>
     </div>
   </div>
-</section>
+  <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
+    <app-bubbles></app-bubbles>
 
-<section class="section" fxLayout="column" fxLayoutAlign="center center">
-  <h1>A Few Guarantees</h1>
-  <button mat-fab aria-label="Icon to open/close div" (click)="toggleDiv()">
-    <mat-icon *ngIf="!showDiv" class="toggleAnimation">add</mat-icon>
-    <mat-icon *ngIf="showDiv" class="redIcon"> close </mat-icon>
-  </button>
-</section>
-
-<div>
-  <section class="fadeInLeft" *ngIf="showDiv">
-    <div>
-      <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
-        <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
-          <app-card [cardList]="guaranteeDetails"></app-card>
-        </div>
-      </div>
-    </div>
-    <br />
-    <p>
-      You have the bright ideas, we have the smart solutions using the latest
-      web technologies.
-    </p>
-    <br />
-    <button
-      mat-raised-button
-      color="accent"
-      aria-label="Get Started"
-      class="mat-landing-button"
-      routerLink="/enquire"
-    >
-      Let's Get Started
-    </button>
-  </section>
+    <app-card [cardList]="cardDetails" [isStacked]="true"></app-card>
+  </div>
 </div>

@@ -1,7 +1,17 @@
-@mixin rowWrap {
+@mixin Wrap {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-around;
+}
+
+@mixin columnWrap {
+  @include Wrap;
+  flex-direction: column;
+}
+
+@mixin rowWrap {
+  @include Wrap;
   flex-direction: row;
 }
 
@@ -9,7 +19,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
 @mixin background-blur {

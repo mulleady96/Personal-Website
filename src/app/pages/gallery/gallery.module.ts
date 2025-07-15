@@ -1,10 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { RouterModule,Routes } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 
 import { AppMaterialModule } from "../../../app/app-material.module";
+import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
 import { ComponentsModule } from "../../Components/components.module";
+import { PricingCardComponent } from "../../Components/pricing-card/pricing-card.component";
 import { GalleryComponent } from "./gallery.component";
 
 const routes: Routes = [
@@ -20,8 +21,9 @@ const routes: Routes = [
     CommonModule,
     AppMaterialModule,
     ComponentsModule,
-    HttpClientModule,
     RouterModule.forChild(routes),
+    BubblesComponent,
+    PricingCardComponent,
   ],
 })
 export class GalleryModule {}

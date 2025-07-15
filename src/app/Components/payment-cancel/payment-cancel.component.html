@@ -1,0 +1,14 @@
+<div class="status-container; colWrap">
+  <h2>Payment Canceled</h2>
+  <p>Your payment process was canceled. You have not been charged.</p>
+  <button
+    mat-raised-button
+    accent="primary"
+    class="purchase-button"
+    (click)="redirectToCheckout()"
+    [disabled]="isLoading"
+  >
+    <span *ngIf="!isLoading">Try again</span>
+    <span *ngIf="isLoading">Redirecting to payment...</span>
+  </button>
+</div>

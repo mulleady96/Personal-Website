@@ -16,9 +16,9 @@
     }
     100% {
       transform: translate3d(
-        (random(90) * 1vw),
-        (random(90) * 1vh),
-        (random(100) * 1px)
+        #{random(150)}px,
+        #{random(200)}px,
+        #{random(100)}px
       );
       opacity: 0;
     }
@@ -34,9 +34,9 @@
     animation-delay: -$i * 300ms;
     transition: ease-in-out;
     transform: translate3d(
-      (random(90) * 1vw),
-      (random(90) * 1vh),
-      (random(100) * 1px)
+      (random(90) * -10px),
+      (random(90) * -10px),
+      (random(100) * -10px)
     );
     max-width: inherit;
   }
