@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CountUpModule } from "ngx-countup";
@@ -24,6 +24,7 @@ const routes: Routes = [
     ComponentsModule,
     BubblesComponent,
     AppMaterialModule,
+    NgOptimizedImage,
     RouterModule.forChild(routes),
     StackedCardsComponent,
   ],

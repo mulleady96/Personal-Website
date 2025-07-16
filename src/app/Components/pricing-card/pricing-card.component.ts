@@ -71,7 +71,6 @@ export class PricingCardComponent {
   openPricingDialog(): void {
     this.dialog.open(PricingDialogComponent, {
       width: "360px", // Set a width for the dialog
-      panelClass: "pricing-dialog", // Custom class for styling
     });
   }
 

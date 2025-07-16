@@ -1,7 +1,7 @@
 <div class="rowWrap" fxFill>
   <img
-    *ngIf="imageLoaded"
-    [src]="video"
+    ngSrc="{{ video }}"
+    fill
     alt="image Background"
     (error)="imageFailed()"
   />

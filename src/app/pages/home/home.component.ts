@@ -117,11 +117,11 @@ export class HomeComponent implements OnInit {
 
   randomVideos = () => {
     const src = [
-      "../assets/DJI_0249.JPG",
-      "../assets/DJI_0406.JPG",
-      "../assets/Pier1.jpg",
-      "../assets/LoughInagh.JPG",
-      "../assets/Pier2.jpg",
+      "/assets/DJI_0249.JPG",
+      "/assets/DJI_0406.JPG",
+      "/assets/Pier1.jpg",
+      "/assets/LoughInagh.JPG",
+      "/assets/Pier2.jpg",
     ];
     // Every page load, renders a random video.
     this.video = src[Math.floor(Math.random() * src.length)];

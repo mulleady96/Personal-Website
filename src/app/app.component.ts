@@ -1,8 +1,10 @@
 import { animate, style, transition, trigger } from "@angular/animations";
+import { OverlayContainer } from "@angular/cdk/overlay";
 import { Location } from "@angular/common";
 import {
   Component,
   EventEmitter,
+  HostBinding,
   OnInit,
   Output,
   ViewChild,
@@ -65,7 +67,7 @@ export class AppComponent implements OnInit {
   @Output()
   navToggle = new EventEmitter();
 
-  isDarkTheme!: Observable<boolean>;
+  isDarkTheme!: boolean;
   themeDescription: string;
   iconValue = "nights_stay";
   imageSRC = "assets/AM NEW Logo 2020.png";
@@ -76,12 +78,15 @@ export class AppComponent implements OnInit {
     private swUpdate: SwUpdate,
     private themeService: ThemeService,
     private location: Location,
+    private overlayContainer: OverlayContainer,
   ) {
     // initializeApp(config);
     this.themeDescription = "Light Theme";
   }
 
   @ViewChild("sidenav", { static: true })
+  @HostBinding("class")
+  className = "";
   sidenav!: MatSidenav;
 
   reason = "";
@@ -97,36 +102,47 @@ export class AppComponent implements OnInit {
     return !this.location.path().includes("/blog");
   }
 
-  toggleDarkTheme(checked: boolean) {
-    // Store in local storage.
+  onThemeChange(checked: boolean): void {
+    // Save the new state to localStorage
     localStorage.setItem("isDarkTheme", JSON.stringify(checked));
 
-    //Get item from localStorage
-    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme") || "");
-
-    if (!this.storedTheme) {
-      this.isDarkTheme = of(false);
-    } else {
-      this.isDarkTheme = of(true);
-    }
-
-    this.themeService.setDarkTheme(checked);
-    this.imageSRC = checked
-      ? "assets/AM New Logo Light 2020.png"
-      : "assets/AM NEW Logo 2020.png";
-    this.themeDescription = checked ? "Dark Theme" : "Light Theme";
+    // Update all theme-related properties and classes
+    this.updateTheme(checked);
   }
 
+  private updateTheme(isDark: boolean): void {
+    this.isDarkTheme = isDark;
+    const darkThemeClass = "dark-theme";
+
+    // Update overlay container for dialogs, menus, etc.
+    const overlayContainerClasses =
+      this.overlayContainer.getContainerElement().classList;
+
+    if (isDark) {
+      this.className = darkThemeClass; // Assumes HostBinding('class')
+      overlayContainerClasses.add(darkThemeClass);
+    } else {
+      this.className = "";
+      overlayContainerClasses.remove(darkThemeClass);
+    }
+
+    // Update other theme-dependent properties
+    this.imageSRC = isDark
+      ? "assets/AM New Logo Light 2020.png"
+      : "assets/AM NEW Logo 2020.png";
+    this.themeDescription = isDark ? "Dark Theme" : "Light Theme";
+
+    // Notify the service
+    this.themeService.setDarkTheme(isDark);
+  }
   ngOnInit() {
     // Toggle Light/Dark Theme
-    this.isDarkTheme = this.themeService.isDarkTheme;
-    this.storedTheme = JSON.parse(localStorage.getItem("isDarkTheme") || "");
+    // Get stored theme, default to false if nothing is stored
+    const storedTheme = localStorage.getItem("isDarkTheme");
+    const initialThemeState = storedTheme ? JSON.parse(storedTheme) : false;
 
-    if (this.storedTheme) {
-      this.checked = true;
-      this.isDarkTheme = of(true);
-      this.toggleDarkTheme(this.checked);
-    }
+    // Set the initial theme based on the stored value
+    this.updateTheme(initialThemeState);
 
     // SW - Reload fresh instance of app, if new version is available.
     if (this.swUpdate.isEnabled) {

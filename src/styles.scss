@@ -3,6 +3,10 @@
 
 .dark-theme {
   @include create-dark-theme();
+
+  .mat-card-title {
+    color: white !important;
+  }
 }
 
 html,
