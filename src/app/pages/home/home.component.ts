@@ -125,7 +125,6 @@ export class HomeComponent implements OnInit {
     ];
     // Every page load, renders a random video.
     this.video = src[Math.floor(Math.random() * src.length)];
-    return this.video;
   };
 
   imageFailed() {

@@ -11,7 +11,6 @@ import {
 } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
-import { Observable, of } from "rxjs";
 
 // import * as firebase from "firebase/app";
 import { ThemeService } from "./Services/theme.service";
@@ -95,11 +94,6 @@ export class AppComponent implements OnInit {
   close(reason: string) {
     this.reason = reason;
     this.sidenav.close();
-  }
-
-  canOpenSidebar(): boolean {
-    // Check if the current route is not the blog route.
-    return !this.location.path().includes("/blog");
   }
 
   onThemeChange(checked: boolean): void {
