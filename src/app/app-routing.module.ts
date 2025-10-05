@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { PaymentCancelComponent } from "./Components/payment-cancel/payment-cancel.component";
 import { PaymentSuccessComponent } from "./Components/payment-success/payment-success.component";
 import { PricingCardComponent } from "./Components/pricing-card/pricing-card.component";
+import { PaymentSuccessGuard } from "./Guards/payment-success.guard";
 import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 
 export const routes: Routes = [
@@ -44,7 +45,11 @@ export const routes: Routes = [
       ),
   },
   { path: "download", component: PricingCardComponent },
-  { path: "payment-success", component: PaymentSuccessComponent },
+  {
+    path: "payment-success",
+    component: PaymentSuccessComponent,
+    canActivate: [PaymentSuccessGuard],
+  },
   { path: "payment-cancel", component: PaymentCancelComponent },
   { path: "**", component: PageNotFoundComponent },
 ];
