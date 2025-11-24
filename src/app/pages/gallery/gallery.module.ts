@@ -16,14 +16,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [GalleryComponent],
-  imports: [
-    CommonModule,
-    AppMaterialModule,
-    ComponentsModule,
-    RouterModule.forChild(routes),
-    BubblesComponent,
-    PricingCardComponent,
-  ],
+    imports: [
+        CommonModule,
+        AppMaterialModule,
+        ComponentsModule,
+        RouterModule.forChild(routes),
+        BubblesComponent,
+        PricingCardComponent,
+        GalleryComponent,
+    ],
 })
 export class GalleryModule {}

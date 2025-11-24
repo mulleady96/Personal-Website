@@ -5,22 +5,23 @@
         {{ title }}
       </h2>
       <div fxLayout="column">
-        <button
-          class="side-menu-button"
-          *ngFor="let button of navigationButtons"
-          mat-button
-          routerLinkActive="router-link-active"
-          [attr.aria-label]="button.ariaLabel"
-          routerLink="{{ button.routerLink }}"
-        >
-          <mat-icon color="accent">{{ button.icon }}</mat-icon>
-          {{ button.ariaLabel }}
-        </button>
+        @for (button of navigationButtons; track button) {
+          <button
+            class="side-menu-button"
+            mat-button
+            routerLinkActive="router-link-active"
+            [attr.aria-label]="button.ariaLabel"
+            routerLink="{{ button.routerLink }}"
+            >
+            <mat-icon color="accent">{{ button.icon }}</mat-icon>
+            {{ button.ariaLabel }}
+          </button>
+        }
       </div>
       <mat-slide-toggle
         [checked]="isDarkTheme"
         (change)="onThemeChange($event.checked)"
-      >
+        >
         <span>
           {{ themeDescription }}
         </span>
@@ -30,7 +31,7 @@
           href="https://github.com/mulleady96"
           target="_blank"
           rel="noreferrer"
-        >
+          >
           <button mat-mini-fab color="accent" aria-label="Github button">
             <fa-icon [icon]="['fab', 'github']"></fa-icon>
           </button>
@@ -39,7 +40,7 @@
           href="https://www.linkedin.com/in/andrew-mulleady-a6222a171/"
           target="_blank"
           rel="noreferrer"
-        >
+          >
           <button mat-mini-fab color="accent" aria-label="LinkedIn">
             <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
           </button>
@@ -51,7 +52,7 @@
         id="toolbar"
         fxLayout="row"
         fxLayoutAlign="space-around center"
-      >
+        >
         <mat-toolbar-row>
           <div>
             <button
@@ -59,7 +60,7 @@
               color="primary"
               (click)="sidenav.open()"
               aria-label="List"
-            >
+              >
               <mat-icon>list</mat-icon>
             </button>
           </div>
@@ -68,13 +69,13 @@
             [src]="imageSRC"
             routerLink="/home"
             alt="Andrew Mulleady Logo"
-          />
-          <div>
-            <app-pricing-card></app-pricing-card>
-          </div>
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+            />
+            <div>
+              <app-pricing-card></app-pricing-card>
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

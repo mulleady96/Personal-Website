@@ -1,24 +1,34 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
 import { CountUpOptions } from "countup.js";
+import { FlexModule } from "@angular/flex-layout/flex";
+import { NgOptimizedImage } from "@angular/common";
+import { ExtendedModule } from "@angular/flex-layout/extended";
+import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
+import { MatFabButton } from "@angular/material/button";
+import { RouterLinkActive, RouterLink } from "@angular/router";
+import { MatTooltip } from "@angular/material/tooltip";
+import { MatIcon } from "@angular/material/icon";
+import { CardComponent } from "../../Components/card/card.component";
 
 @Component({
-  // tslint:disable-next-line: quotemark
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"],
-  animations: [
-    // Slide items up from the bottom of screen.
-    trigger("itemState", [
-      transition("void => *", [
-        style({ transform: "translateY(100%)" }),
-        animate("0.6s ease-in-out"),
-      ]),
-      transition("* => void", [
-        animate("0.6s ease-in-out", style({ transform: "translateY(100%)" })),
-      ]),
-    ]),
-  ],
+    // tslint:disable-next-line: quotemark
+    selector: "app-home",
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.scss"],
+    animations: [
+        // Slide items up from the bottom of screen.
+        trigger("itemState", [
+            transition("void => *", [
+                style({ transform: "translateY(100%)" }),
+                animate("0.6s ease-in-out"),
+            ]),
+            transition("* => void", [
+                animate("0.6s ease-in-out", style({ transform: "translateY(100%)" })),
+            ]),
+        ]),
+    ],
+    imports: [FlexModule, NgOptimizedImage, ExtendedModule, BubblesComponent, MatFabButton, RouterLinkActive, MatTooltip, RouterLink, MatIcon, CardComponent]
 })
 export class HomeComponent implements OnInit {
   opts!: CountUpOptions;

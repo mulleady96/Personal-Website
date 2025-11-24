@@ -16,14 +16,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProductsComponent],
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    AppMaterialModule,
-    ComponentsModule,
-    RouterModule.forChild(routes),
-    BubblesComponent,
-  ],
+    imports: [
+        CommonModule,
+        FlexLayoutModule,
+        AppMaterialModule,
+        ComponentsModule,
+        RouterModule.forChild(routes),
+        BubblesComponent,
+        ProductsComponent,
+    ],
 })
 export class ProductsModule {}

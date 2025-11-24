@@ -1,35 +1,41 @@
 <form class="sign-up-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
   <mat-card>
     <mat-card-title>Subscribe to Bloggi's weekly newsletter!</mat-card-title>
-    <mat-form-field *ngIf="!signedUp" appearance="fill" color="accent">
-      <mat-label>Email</mat-label>
-      <input
-        matInput
-        formControlName="email"
-        type="email"
-        placeholder="Enter your email"
-      />
-      <mat-error
-        *ngIf="
-          signUpForm.get('email')?.value &&
-          signUpForm.get('email')?.invalid &&
-          signUpForm.get('email')?.touched
-        "
-      >
-        Please enter a valid email.
-      </mat-error>
-    </mat-form-field>
+    @if (!signedUp) {
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+          type="email"
+          placeholder="Enter your email"
+          />
+          @if (
+            signUpForm.get('email')?.value &&
+            signUpForm.get('email')?.invalid &&
+            signUpForm.get('email')?.touched
+            ) {
+            <mat-error
+              >
+              Please enter a valid email.
+            </mat-error>
+          }
+        </mat-form-field>
+      }
 
-    <p *ngIf="signedUp">Thank you!</p>
+      @if (signedUp) {
+        <p>Thank you!</p>
+      }
 
-    <button
-      mat-raised-button
-      color="primary"
-      *ngIf="!signedUp"
-      type="submit"
-      [disabled]="!signUpForm.valid"
-    >
-      Sign Up
-    </button>
-  </mat-card>
-</form>
+      @if (!signedUp) {
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!signUpForm.valid"
+          >
+          Sign Up
+        </button>
+      }
+    </mat-card>
+  </form>

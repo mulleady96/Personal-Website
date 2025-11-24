@@ -15,14 +15,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [GetInTouchComponent],
-  imports: [
-    CommonModule,
-    AppMaterialModule,
-    MatStepperModule,
-    RouterModule.forChild(routes),
-    BubblesComponent,
-  ],
-  exports: [RouterModule],
+    imports: [
+        CommonModule,
+        AppMaterialModule,
+        MatStepperModule,
+        RouterModule.forChild(routes),
+        BubblesComponent,
+        GetInTouchComponent,
+    ],
+    exports: [RouterModule],
 })
 export class GetInTouchModule {}

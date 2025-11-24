@@ -1,11 +1,16 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
+import { FlexModule } from "@angular/flex-layout/flex";
+import { MatButton, MatIconButton } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
+import { ExtendedModule } from "@angular/flex-layout/extended";
 // import * as moment from 'moment';
 
 @Component({
-  selector: "app-blog-detail",
-  templateUrl: "./blog-detail.component.html",
-  styleUrls: ["./blog-detail.component.css"],
+    selector: "app-blog-detail",
+    templateUrl: "./blog-detail.component.html",
+    styleUrls: ["./blog-detail.component.css"],
+    imports: [FlexModule, MatButton, MatIconButton, MatIcon, ExtendedModule]
 })
 export class BlogDetailComponent implements OnInit {
   constructor(private location: Location) {}

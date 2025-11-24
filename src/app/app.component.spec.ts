@@ -7,14 +7,14 @@ import { AppComponent } from "./app.component";
 describe("AppComponent", () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [
+    declarations: [AppComponent],
+    imports: [
         RouterTestingModule.withRoutes([{ path: "", component: AppComponent }]),
         ServiceWorkerModule.register("ngsw-worker.js", {
-          enabled: environment.production,
+            enabled: environment.production,
         }),
-      ],
-    }).compileComponents();
+    ],
+}).compileComponents();
   }));
   it("should create the app", waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);

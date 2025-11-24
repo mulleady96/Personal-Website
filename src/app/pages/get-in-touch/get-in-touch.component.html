@@ -4,12 +4,12 @@
     <a
       href="mailto:admin@andrewmulleady.ie?Subject=Website%20Enquiry"
       target="_top"
-    >
+      >
       <button
         mat-fab
         color="accent"
         aria-label="Open email to contact website owner"
-      >
+        >
         <mat-icon>email</mat-icon>
       </button>
     </a>
@@ -20,17 +20,18 @@
       <mat-step
         [stepControl]="enquiryForm.get('firstStep') || fallbackControl"
         formGroupName="firstStep"
-      >
+        >
         <ng-template matStepLabel>Fill out your name</ng-template>
         <mat-form-field>
           <mat-label>Name</mat-label>
           <!-- Use formGroupName to target the correct nested group -->
           <input matInput type="text" formControlName="name" required />
-          <mat-error
-            *ngIf="enquiryForm.get('firstStep.name')?.hasError('required')"
-          >
-            Name is required
-          </mat-error>
+          @if (enquiryForm.get('firstStep.name')?.hasError('required')) {
+            <mat-error
+              >
+              Name is required
+            </mat-error>
+          }
         </mat-form-field>
         <div>
           <button mat-button aria-label="Next" matStepperNext>Next</button>
@@ -39,16 +40,17 @@
       <mat-step
         [stepControl]="enquiryForm.get('secondStep') || fallbackControl"
         formGroupName="secondStep"
-      >
+        >
         <ng-template matStepLabel>Fill out your e-mail</ng-template>
         <mat-form-field>
           <mat-label>Email</mat-label>
           <input matInput type="email" formControlName="email" required />
-          <mat-error
-            *ngIf="enquiryForm.get('secondStep.email')?.hasError('required')"
-          >
-            Email is required
-          </mat-error>
+          @if (enquiryForm.get('secondStep.email')?.hasError('required')) {
+            <mat-error
+              >
+              Email is required
+            </mat-error>
+          }
         </mat-form-field>
 
         <div>
@@ -62,15 +64,15 @@
         <p>
           Name:
           {{
-            enquiryForm.get("firstStep.name")?.value ||
-              "Please fill out your name"
+          enquiryForm.get("firstStep.name")?.value ||
+          "Please fill out your name"
           }}
         </p>
         <p>
           e-mail:
           {{
-            enquiryForm.get("secondStep.email")?.value ||
-              "Please fill out your email"
+          enquiryForm.get("secondStep.email")?.value ||
+          "Please fill out your email"
           }}
         </p>
 
@@ -84,7 +86,7 @@
             aria-label="Send"
             [disabled]="!this.enquiryForm.valid"
             (click)="this.createEnquiry()"
-          >
+            >
             Send
           </button>
         </div>

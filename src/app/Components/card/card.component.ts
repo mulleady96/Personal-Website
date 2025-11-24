@@ -1,6 +1,10 @@
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { Component, Input, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { MatCard, MatCardContent, MatCardActions } from "@angular/material/card";
+import { NgClass, NgOptimizedImage } from "@angular/common";
+import { ExtendedModule } from "@angular/flex-layout/extended";
+import { MatButton } from "@angular/material/button";
 
 export interface CardItem {
   id: number;
@@ -13,10 +17,19 @@ export interface CardItem {
 }
 
 @Component({
-  selector: "app-card",
-  standalone: false,
-  templateUrl: "./card.component.html",
-  styleUrl: "./card.component.scss",
+    selector: "app-card",
+    templateUrl: "./card.component.html",
+    styleUrl: "./card.component.scss",
+    imports: [
+        MatCard,
+        NgClass,
+        ExtendedModule,
+        NgOptimizedImage,
+        MatCardContent,
+        MatCardActions,
+        RouterLink,
+        MatButton,
+    ],
 })
 export class CardComponent implements OnInit {
   @Input() cardList: CardItem[] = [];

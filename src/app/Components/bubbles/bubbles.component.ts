@@ -1,20 +1,20 @@
-import { NgFor } from "@angular/common";
+
 import { Component, OnInit } from "@angular/core";
 
 type Theme = "christmas" | "halloween" | "stPatricks" | "easter" | "default";
 
 @Component({
-  selector: "app-bubbles",
-  imports: [NgFor],
-  standalone: true,
-  template: `<div
-    *ngFor="let particle of particles"
+    selector: "app-bubbles",
+    imports: [],
+    template: `@for (particle of particles; track particle) {
+  <div
     [class.celebration]="defaultParticle"
     class="particle"
-  >
+    >
     {{ particle }}
-  </div>`,
-  styleUrls: ["./bubbles.component.scss"],
+  </div>
+}`,
+    styleUrls: ["./bubbles.component.scss"]
 })
 export class BubblesComponent implements OnInit {
   particles: string[] = [];

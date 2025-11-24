@@ -1,22 +1,25 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
+import { FlexModule } from "@angular/flex-layout/flex";
+import { CardComponent } from "../../Components/card/card.component";
 
 @Component({
-  selector: "app-products",
-  templateUrl: "./products.component.html",
-  styleUrls: ["./products.component.scss"],
-  animations: [
-    // Slide items up from the bottom of screen.
-    trigger("itemState", [
-      transition("void => *", [
-        style({ transform: "translateX(100%)" }),
-        animate("0.6s ease-in-out"),
-      ]),
-      transition("* => void", [
-        animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
-      ]),
-    ]),
-  ],
+    selector: "app-products",
+    templateUrl: "./products.component.html",
+    styleUrls: ["./products.component.scss"],
+    animations: [
+        // Slide items up from the bottom of screen.
+        trigger("itemState", [
+            transition("void => *", [
+                style({ transform: "translateX(100%)" }),
+                animate("0.6s ease-in-out"),
+            ]),
+            transition("* => void", [
+                animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
+            ]),
+        ]),
+    ],
+    imports: [FlexModule, CardComponent]
 })
 export class ProductsComponent implements OnInit {
   panelOpenState!: boolean;

@@ -1,12 +1,16 @@
 <div class="status-container; colWrap">
   <h2>Payment Successful!</h2>
-  <div *ngIf="isDownloading">
-    <!-- You can add a spinner here -->
-  </div>
+  @if (isDownloading) {
+    <div>
+      <!-- You can add a spinner here -->
+    </div>
+  }
   <a href="https://photos.app.goo.gl/5YHLsNhjDtEwYMba6" target="_blank"
     >Click here to open the album.</a
-  >
-  <div *ngIf="error">
-    <p class="error-message">{{ error }}</p>
+    >
+    @if (error) {
+      <div>
+        <p class="error-message">{{ error }}</p>
+      </div>
+    }
   </div>
-</div>

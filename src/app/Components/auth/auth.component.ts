@@ -1,11 +1,14 @@
 import { Component } from "@angular/core";
 
 import { AuthService } from "../../Services/auth.service";
+import { MatMiniFabButton } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
-  selector: "app-auth",
-  templateUrl: "./auth.component.html",
-  styleUrls: ["./auth.component.css"],
+    selector: "app-auth",
+    templateUrl: "./auth.component.html",
+    styleUrls: ["./auth.component.css"],
+    imports: [MatMiniFabButton, MatIcon]
 })
 export class AuthComponent {
   currentUser: string | null | undefined;

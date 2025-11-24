@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, inject } from "@angular/core";
 import { Functions, httpsCallable } from "@angular/fire/functions";
 import { MatBadgeModule } from "@angular/material/badge";
@@ -11,19 +11,17 @@ import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { environment } from "src/environments/environment";
 
 @Component({
-  selector: "app-pricing-dialog",
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: "app-pricing-dialog",
+    imports: [
     MatBadgeModule,
     MatCardModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatError,
-  ],
-  templateUrl: "./pricing-dialog.component.html",
-  styleUrls: ["./pricing-dialog.component.css"],
+    MatError
+],
+    templateUrl: "./pricing-dialog.component.html",
+    styleUrls: ["./pricing-dialog.component.css"]
 })
 export class PricingDialogComponent {
   isLoading = false;

@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { initializeApp } from "firebase/app";
 import {
@@ -22,6 +22,7 @@ import { config } from "../credentials";
   providedIn: "root",
 })
 export class GravitaService {
+  private http = inject(HttpClient);
   // public enquiryListRef: firebase.default.database.Reference;
   app = initializeApp(config);
 
@@ -29,7 +30,7 @@ export class GravitaService {
   AILimitRef = doc(this.db, "Limits", "sGNbtnG9rFj4mL2akP5O");
   AILimit: number = 0;
 
-  constructor(private http: HttpClient) {
+  constructor() {
     // const enquiryListRef = collection(db, "enquiry");
     // this.enquiryListRef = firebase.default.database().ref(`/enquiry/`);
   }

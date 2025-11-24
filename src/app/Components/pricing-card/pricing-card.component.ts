@@ -5,7 +5,7 @@ import {
   transition,
   trigger,
 } from "@angular/animations";
-import { CommonModule } from "@angular/common";
+
 import { Component, inject } from "@angular/core";
 import { Functions, httpsCallable } from "@angular/fire/functions";
 import { MatBadgeModule } from "@angular/material/badge";
@@ -20,41 +20,33 @@ import { environment } from "src/environments/environment";
 import { PricingDialogComponent } from "../pricing-dialog/pricing-dialog.component"; // Adjust the path as needed
 
 @Component({
-  selector: "app-pricing-card",
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: "app-pricing-card",
+    imports: [
     MatBadgeModule,
     MatCardModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule,
-  ],
-  templateUrl: "./pricing-card.component.html",
-  styleUrl: "./pricing-card.component.css",
-  animations: [
-    trigger("slideUp", [
-      state(
-        "hidden",
-        style({
-          transform: "translateY(100%)", // Start offscreen (below)
-          opacity: 0,
-        }),
-      ),
-      state(
-        "visible",
-        style({
-          transform: "translateY(0)", // End at its original position
-          opacity: 1,
-        }),
-      ),
-      transition("hidden => visible", [
-        animate("300ms ease-out"), // Animation duration and easing
-      ]),
-      transition("visible => hidden", [animate("300ms ease-in")]),
-    ]),
-  ],
+    MatDialogModule
+],
+    templateUrl: "./pricing-card.component.html",
+    styleUrl: "./pricing-card.component.css",
+    animations: [
+        trigger("slideUp", [
+            state("hidden", style({
+                transform: "translateY(100%)", // Start offscreen (below)
+                opacity: 0,
+            })),
+            state("visible", style({
+                transform: "translateY(0)", // End at its original position
+                opacity: 1,
+            })),
+            transition("hidden => visible", [
+                animate("300ms ease-out"), // Animation duration and easing
+            ]),
+            transition("visible => hidden", [animate("300ms ease-in")]),
+        ]),
+    ]
 })
 export class PricingCardComponent {
   private functions: Functions = inject(Functions);

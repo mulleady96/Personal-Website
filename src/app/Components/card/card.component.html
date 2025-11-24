@@ -8,15 +8,16 @@
         'highlight-left': hoverSide === 'left',
         'highlight-right': hoverSide === 'right',
       }"
-    >
-      <img
-        *ngIf="cardList[currentIndex]?.image"
-        ngSrc="{{ cardList[currentIndex].image }}"
-        fill
-        class="card-image-top"
-        alt="{{ cardList[currentIndex].description }}"
-        priority
-      />
+      >
+      @if (cardList[currentIndex]?.image) {
+        <img
+          ngSrc="{{ cardList[currentIndex].image }}"
+          fill
+          class="card-image-top"
+          alt="{{ cardList[currentIndex].description }}"
+          priority
+          />
+      }
 
       <h3 class="card-heading">
         {{ cardList[currentIndex].title }} <span>-</span>
@@ -27,61 +28,67 @@
         {{ cardList[currentIndex].description }}
       </mat-card-content>
       <mat-card-actions>
-        <a
-          *ngIf="cardList[currentIndex].link"
+        @if (cardList[currentIndex].link) {
+          <a
           [routerLink]="
             !cardList[currentIndex].externalLink
               ? cardList[currentIndex].link
               : null
           "
-          ariaCurrentWhenActive="page"
-        >
-          <button
-            *ngIf="cardList[currentIndex]?.buttonText"
-            (click)="navigate(cardList[currentIndex])"
-            mat-raised-button
-            class="mat-product-button"
-            [attr.aria-label]="cardList[currentIndex].buttonText"
-            color="accent"
-          >
-            {{ cardList[currentIndex].buttonText }}
-          </button>
-        </a>
+            ariaCurrentWhenActive="page"
+            >
+            @if (cardList[currentIndex]?.buttonText) {
+              <button
+                (click)="navigate(cardList[currentIndex])"
+                mat-raised-button
+                class="mat-product-button"
+                [attr.aria-label]="cardList[currentIndex].buttonText"
+                color="accent"
+                >
+                {{ cardList[currentIndex].buttonText }}
+              </button>
+            }
+          </a>
+        }
       </mat-card-actions>
     </mat-card>
   } @else {
-    <mat-card *ngFor="let card of cardList; index as i">
-      <img
-        *ngIf="card.image"
-        ngSrc="{{ card.image }}"
-        fill
-        class="card-image-top"
-        alt="{{ card.description }}"
-        priority
-      />
-
-      <h3>{{ card.title }}</h3>
-      <mat-card-content>
-        {{ card.description }}
-      </mat-card-content>
-      <mat-card-actions>
-        <a
-          *ngIf="card.link"
-          [routerLink]="!card.externalLink ? card.link : null"
-          ariaCurrentWhenActive="page"
-        >
-          <button
-            *ngIf="card.buttonText"
-            (click)="navigate(card)"
-            mat-raised-button
-            class="mat-product-button"
-            [attr.aria-label]="card.buttonText"
-            color="accent"
-          >
-            {{ card.buttonText }}
-          </button>
-        </a>
-      </mat-card-actions>
-    </mat-card>
+    @for (card of cardList; track card; let i = $index) {
+      <mat-card>
+        @if (card.image) {
+          <img
+            ngSrc="{{ card.image }}"
+            fill
+            class="card-image-top"
+            alt="{{ card.description }}"
+            priority
+            />
+        }
+        <h3>{{ card.title }}</h3>
+        <mat-card-content>
+          {{ card.description }}
+        </mat-card-content>
+        <mat-card-actions>
+          @if (card.link) {
+            <a
+              [routerLink]="!card.externalLink ? card.link : null"
+              ariaCurrentWhenActive="page"
+              >
+              @if (card.buttonText) {
+                <button
+                  (click)="navigate(card)"
+                  mat-raised-button
+                  class="mat-product-button"
+                  [attr.aria-label]="card.buttonText"
+                  color="accent"
+                  >
+                  {{ card.buttonText }}
+                </button>
+              }
+            </a>
+          }
+        </mat-card-actions>
+      </mat-card>
+    }
   }
 </div>

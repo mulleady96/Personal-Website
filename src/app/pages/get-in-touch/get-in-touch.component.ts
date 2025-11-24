@@ -1,34 +1,35 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, inject, Input, OnDestroy, OnInit } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { of } from "rxjs/internal/observable/of";
 import { Subject } from "rxjs/internal/Subject";
 import { debounceTime, switchMap } from "rxjs/operators";
 
 import { GravitaService } from "../../Services/gravita.service";
+import { FlexModule } from "@angular/flex-layout/flex";
+import { MatFabButton, MatButton } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
+import { MatStepper, MatStep, MatStepLabel, MatStepperNext, MatStepperPrevious } from "@angular/material/stepper";
+import { MatFormField, MatLabel, MatInput, MatError } from "@angular/material/input";
 
 @Component({
-  selector: "app-get-in-touch",
-  templateUrl: "./get-in-touch.component.html",
-  styleUrls: ["./get-in-touch.component.scss"],
-  animations: [
-    // Slide items up from the bottom of screen.
-    trigger("itemState", [
-      transition("void => *", [
-        style({ transform: "translateX(100%)" }),
-        animate("0.6s ease-in-out"),
-      ]),
-      transition("* => void", [
-        animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
-      ]),
-    ]),
-  ],
+    selector: "app-get-in-touch",
+    templateUrl: "./get-in-touch.component.html",
+    styleUrls: ["./get-in-touch.component.scss"],
+    animations: [
+        // Slide items up from the bottom of screen.
+        trigger("itemState", [
+            transition("void => *", [
+                style({ transform: "translateX(100%)" }),
+                animate("0.6s ease-in-out"),
+            ]),
+            transition("* => void", [
+                animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
+            ]),
+        ]),
+    ],
+    imports: [FlexModule, MatFabButton, MatIcon, FormsModule, ReactiveFormsModule, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious]
 })
 export class GetInTouchComponent implements OnInit, OnDestroy {
   @Input()
@@ -38,53 +39,13 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
   public remaining = 500;
   private unsubscribe = new Subject<void>();
   private _formBuilder = inject(FormBuilder);
+  public gravita = inject(GravitaService);
+  public snackBar = inject(MatSnackBar);
   fallbackControl = new FormControl(null);
 
   isLinear = false;
 
-  constructor(
-    public gravita: GravitaService,
-    public snackBar: MatSnackBar,
-  ) {
-    // this.enquiryForm = formBuilder.group({
-    //   firstName: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.firstName,
-    //     Validators.required,
-    //   ],
-    //   lastName: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.lastName,
-    //     Validators.required,
-    //   ],
-    //   email: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.email,
-    //     Validators.email,
-    //   ],
-    //   phoneNo: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.phoneNo,
-    //     Validators.required,
-    //   ],
-    //   companyName: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.companyName,
-    //     Validators.required,
-    //   ],
-    //   angularChecked: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.angularChecked,
-    //   ],
-    //   ionicChecked: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.ionicChecked,
-    //   ],
-    //   description: [
-    //     JSON.parse(localStorage.getItem('form') || '')?.description,
-    //     Validators.required,
-    //   ],
-    // });
-    // Calculate remaining chars after page reload
-    // if (JSON.parse(localStorage.getItem('form') || '')?.description) {
-    //   let description = JSON.parse(
-    //     localStorage.getItem('form') || ''
-    //   )?.description;
-    //   this.remaining = this.remaining - Object.keys(description).length;
-    // }
+  constructor() {
     this.enquiryForm = this._formBuilder.group({
       // Create nested form groups for each step
       firstStep: this._formBuilder.group({

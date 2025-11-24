@@ -1,14 +1,13 @@
 import { Component } from "@angular/core";
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatCard, MatCardTitle } from "@angular/material/card";
+import { MatFormField, MatLabel, MatInput, MatError } from "@angular/material/input";
+import { MatButton } from "@angular/material/button";
 @Component({
-  selector: "app-email-sign-up",
-  templateUrl: "./email-sign-up.component.html",
-  styleUrls: ["./email-sign-up.component.css"],
+    selector: "app-email-sign-up",
+    templateUrl: "./email-sign-up.component.html",
+    styleUrls: ["./email-sign-up.component.css"],
+    imports: [FormsModule, ReactiveFormsModule, MatCard, MatCardTitle, MatFormField, MatLabel, MatInput, MatError, MatButton]
 })
 export class EmailSignUpComponent {
   signUpForm!: FormGroup;

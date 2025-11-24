@@ -1,42 +1,45 @@
 <div class="margin" fxLayout="row wrap" fxLayoutAlign="space-around center">
-  <button
-    *ngIf="showArticle"
-    (click)="selectedBlog(0)"
-    mat-mini-fab
-    color="accent"
-    class="backButton"
-  >
-    <mat-icon>arrow_back</mat-icon>
-  </button>
+  @if (showArticle) {
+    <button
+      (click)="selectedBlog(0)"
+      mat-mini-fab
+      color="accent"
+      class="backButton"
+      >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  }
   <!-- <app-auth></app-auth> -->
-  <app-search-button
-    *ngIf="!showArticle"
-    (searchChange)="onSearchChange($event)"
-  ></app-search-button>
+  @if (!showArticle) {
+    <app-search-button
+      (searchChange)="onSearchChange($event)"
+    ></app-search-button>
+  }
   <!-- <mat-spinner *ngIf="!isLoaded" color="accent"></mat-spinner> -->
 
   <a
     href="https://buy.stripe.com/dR6fZzaRhczXdjy3cc"
     target="_blank"
     rel="noopener noreferrer"
-    ><button
-      *ngIf="!showArticle"
+    >@if (!showArticle) {
+    <button
       mat-raised-button
       class="bloggiButton"
       color="accent"
       aria-label="Support Bloggi"
-    >
+      >
       Support Bloggi
-    </button></a
-  >
-  <!-- <h4 *ngIf="this.currentUser">Hi, {{ this.currentUser }}</h4> -->
-  <!-- <app-email-sign-up></app-email-sign-up> -->
-  <!-- <mat-form-field
+    </button>
+    }</a
+    >
+    <!-- <h4 *ngIf="this.currentUser">Hi, {{ this.currentUser }}</h4> -->
+    <!-- <app-email-sign-up></app-email-sign-up> -->
+    <!-- <mat-form-field
     color="accent"
     fxLayout="column"
     fxLayoutAlign="space-evenly stretch"
     appearance="outline"
-  >
+    >
     <mat-label [appTypingAnimation]>Bloggi is here to help!</mat-label>
     <textarea
       #BloggiTextarea
@@ -46,77 +49,82 @@
       [disabled]="this.limit == 0"
       [(ngModel)]="markdownText"
       placeholder="Ask me anything!"
-    >
+      >
     </textarea>
     <button mat-mini-fab color="accent" class="custom-button">
       <mat-icon (click)="sendQuery()"> search </mat-icon>
     </button>
     <mat-hint *ngIf="this.limit == 0"
       >Bloggi is currently sleeping and will be available tomorrow.</mat-hint
-    >
-  </mat-form-field> -->
-</div>
-<div class="center-alignment">
-  <mat-spinner *ngIf="!isLoaded" color="accent"></mat-spinner>
-</div>
-
-<div class="center-alignment">
-  <mat-chip-listbox
-    *ngIf="search && !showArticle"
-    aria-label="Cutest dog breeds"
-  >
-    @for (filter of filters; track filter) {
-      <mat-chip-option
-        (click)="filterPosts(filter.name)"
-        selected="{{ filter.selected }}"
-        (selectionChange)="onChipSelectionChange($event, filter)"
-        >{{ filter.name }}</mat-chip-option
       >
+    </mat-form-field> -->
+  </div>
+  <div class="center-alignment">
+    @if (!isLoaded) {
+      <mat-spinner color="accent"></mat-spinner>
     }
-  </mat-chip-listbox>
-</div>
+  </div>
 
-<div
-  *ngIf="!showArticle"
-  fxLayout="column"
-  fxLayoutAlign="space-between"
-  fxLayout.gt-md="row wrap"
->
-  <mat-card
-    fxFlex.gt-md="0 1 calc(44% - 25px)"
-    *ngFor="let response of responses; index as i"
-    (click)="selectedBlog(i)"
-    class="card"
-  >
-    <markdown [data]="response['response']"></markdown>
-  </mat-card>
-</div>
-<!-- <mat-chip-list>
+  <div class="center-alignment">
+    @if (search && !showArticle) {
+      <mat-chip-listbox
+        aria-label="Cutest dog breeds"
+        >
+        @for (filter of filters; track filter) {
+          <mat-chip-option
+            (click)="filterPosts(filter.name)"
+            selected="{{ filter.selected }}"
+            (selectionChange)="onChipSelectionChange($event, filter)"
+            >{{ filter.name }}</mat-chip-option
+            >
+          }
+        </mat-chip-listbox>
+      }
+    </div>
+
+    @if (!showArticle) {
+      <div
+        fxLayout="column"
+        fxLayoutAlign="space-between"
+        fxLayout.gt-md="row wrap"
+        >
+        @for (response of responses; track response; let i = $index) {
+          <mat-card
+            fxFlex.gt-md="0 1 calc(44% - 25px)"
+            (click)="selectedBlog(i)"
+            class="card"
+            >
+            <markdown [data]="response['response']"></markdown>
+          </mat-card>
+        }
+      </div>
+    }
+    <!-- <mat-chip-list>
     <mat-chip
       *ngFor="let chip of chips"
       [selected]="chip.selected"
       (click)="toggleSelection(chip)"
-    >
+      >
       {{ chip.name }}
     </mat-chip>
   </mat-chip-list> -->
-<!-- <mat-form-field appearance="fill" color="accent">
-    <mat-label>Select an option</mat-label>
-    <mat-select [(ngModel)]="selectedValue">
-      <mat-option
-        *ngFor="let response of allContent"
-        [value]="response.response"
-        [innerHTML]="response.response | markdown"
+  <!-- <mat-form-field appearance="fill" color="accent">
+  <mat-label>Select an option</mat-label>
+  <mat-select [(ngModel)]="selectedValue">
+    <mat-option
+      *ngFor="let response of allContent"
+      [value]="response.response"
+      [innerHTML]="response.response | markdown"
       >
-        <p>{{ response.response }}</p>
-      </mat-option>
-    </mat-select>
-  </mat-form-field> -->
+      <p>{{ response.response }}</p>
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
 <!-- <mat-card
-    *ngFor="let response of allContent"
-    [innerHTML]="response.response | markdown"
-    >{{ response.response }}
-  </mat-card> -->
+*ngFor="let response of allContent"
+[innerHTML]="response.response | markdown"
+>{{ response.response }}
+</mat-card> -->
 <!-- <button [appCopy]>Copy</button> -->
 <div fxLayout="column" style="margin: 0 20px">
   <!-- Assuming markdownContent is an array -->
@@ -124,7 +132,9 @@
   <!-- *ngFor="let response of markdownContent; let last = last" -->
 
   <!-- <h1>{{ response.prompt }}</h1> -->
-  <div class="padTop" fxFlex="50%" *ngIf="showArticle">
-    <markdown [data]="this.responses[selectedValue]['response']"></markdown>
-  </div>
+  @if (showArticle) {
+    <div class="padTop" fxFlex="50%">
+      <markdown [data]="this.responses[selectedValue]['response']"></markdown>
+    </div>
+  }
 </div>

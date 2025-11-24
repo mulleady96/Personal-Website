@@ -1,13 +1,12 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, inject, OnInit } from "@angular/core";
 
 import { MediaService } from "../../Services/media.service"; // Adjust path if needed
 @Component({
-  selector: "app-payment-success",
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: "./payment-success.component.html",
-  styleUrl: "./payment-success.component.scss",
+    selector: "app-payment-success",
+    imports: [],
+    templateUrl: "./payment-success.component.html",
+    styleUrl: "./payment-success.component.scss"
 })
 export class PaymentSuccessComponent implements OnInit {
   private mediaService = inject(MediaService);

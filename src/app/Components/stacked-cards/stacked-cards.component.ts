@@ -4,11 +4,10 @@ import { CardItem } from "../card/card.component";
 import { ComponentsModule } from "../components.module";
 
 @Component({
-  selector: "app-stacked-cards",
-  standalone: true,
-  imports: [ComponentsModule],
-  templateUrl: "./stacked-cards.component.html",
-  styleUrl: "./stacked-cards.component.css",
+    selector: "app-stacked-cards",
+    imports: [ComponentsModule],
+    templateUrl: "./stacked-cards.component.html",
+    styleUrl: "./stacked-cards.component.css"
 })
 export class StackedCardsComponent {
   @Input() cards: CardItem[] = [

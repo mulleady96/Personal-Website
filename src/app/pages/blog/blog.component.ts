@@ -1,14 +1,21 @@
 import {
   Component,
   ElementRef,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
 } from "@angular/core";
-import { MatChipSelectionChange } from "@angular/material/chips";
-import { MarkdownService } from "ngx-markdown";
+import { MatChipSelectionChange, MatChipListbox, MatChipOption } from "@angular/material/chips";
+import { MarkdownService, MarkdownComponent } from "ngx-markdown";
 
 import { GravitaService } from "../../Services/gravita.service";
+import { FlexModule } from "@angular/flex-layout/flex";
+import { MatMiniFabButton, MatButton } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
+import { SearchButtonComponent } from "../../Components/search-button/search-button.component";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
+import { MatCard } from "@angular/material/card";
 
 type Filter = {
   name: string;
@@ -20,11 +27,15 @@ interface ResponseData {
 }
 
 @Component({
-  selector: "app-blog",
-  templateUrl: "./blog.component.html",
-  styleUrls: ["./blog.component.css"],
+    selector: "app-blog",
+    templateUrl: "./blog.component.html",
+    styleUrls: ["./blog.component.css"],
+    imports: [FlexModule, MatMiniFabButton, MatIcon, SearchButtonComponent, MatButton, MatProgressSpinner, MatChipListbox, MatChipOption, MatCard, MarkdownComponent]
 })
 export class BlogComponent implements OnInit, OnDestroy {
+  private gravita = inject(GravitaService);
+  private markdownService = inject(MarkdownService);
+
   // chips thread 1 - 5. Arrow up down to view answers.
   // have side menu / dropdown box with list of prompts/headings and can click on prompt to scroll to that answer.
   markdownText = "";
@@ -50,10 +61,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   @ViewChild("BloggiTextarea")
   myTextarea!: ElementRef;
 
-  constructor(
-    private gravita: GravitaService,
-    private markdownService: MarkdownService,
-  ) {
+  constructor() {
     // get limit - disable input if 0.
     // this.gravita.getLimit("sGNbtnG9rFj4mL2akP5O", false).then((data) => {
     //   this.limit = data.AILimit;

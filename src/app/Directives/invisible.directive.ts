@@ -1,8 +1,6 @@
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
-@Directive({
-  selector: '[appInvisible]',
-})
+@Directive({ selector: '[appInvisible]' })
 export class InvisibleDirective {
   
   constructor(private elementRef: ElementRef,

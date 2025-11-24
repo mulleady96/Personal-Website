@@ -7,9 +7,7 @@ import {
   SimpleChanges,
 } from "@angular/core";
 
-@Directive({
-  selector: "[appEllipsis]",
-})
+@Directive({ selector: "[appEllipsis]" })
 export class EllipsisDirective implements OnChanges {
   @Input() maxLength: number = 50;
 

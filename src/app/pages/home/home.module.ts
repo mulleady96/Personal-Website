@@ -17,16 +17,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    CountUpModule,
-    ComponentsModule,
-    BubblesComponent,
-    AppMaterialModule,
-    NgOptimizedImage,
-    RouterModule.forChild(routes),
-    StackedCardsComponent,
-  ],
+    imports: [
+        CommonModule,
+        CountUpModule,
+        ComponentsModule,
+        BubblesComponent,
+        AppMaterialModule,
+        NgOptimizedImage,
+        RouterModule.forChild(routes),
+        StackedCardsComponent,
+        HomeComponent,
+    ],
 })
 export class HomeModule {}

@@ -1,22 +1,29 @@
 import { animate,style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
+import { MatTabGroup, MatTab } from "@angular/material/tabs";
+import { MatList, MatListItem } from "@angular/material/list";
+import { FlexModule } from "@angular/flex-layout/flex";
+import { MatLine } from "@angular/material/grid-list";
+import { MatIcon } from "@angular/material/icon";
+import { MatButton } from "@angular/material/button";
 
 @Component({
-  selector: "app-about",
-  templateUrl: "./about.component.html",
-  styleUrls: ["./about.component.css"],
-  animations: [
-    // Slide items up from the bottom of screen.
-    trigger("itemState", [
-      transition("void => *", [
-        style({ transform: "translateX(100%)" }),
-        animate("0.6s ease-in-out"),
-      ]),
-      transition("* => void", [
-        animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
-      ]),
-    ]),
-  ],
+    selector: "app-about",
+    templateUrl: "./about.component.html",
+    styleUrls: ["./about.component.css"],
+    animations: [
+        // Slide items up from the bottom of screen.
+        trigger("itemState", [
+            transition("void => *", [
+                style({ transform: "translateX(100%)" }),
+                animate("0.6s ease-in-out"),
+            ]),
+            transition("* => void", [
+                animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
+            ]),
+        ]),
+    ],
+    imports: [MatTabGroup, MatTab, MatList, FlexModule, MatListItem, MatLine, MatIcon, MatButton]
 })
 export class AboutComponent implements OnInit {
   tabDetails = [

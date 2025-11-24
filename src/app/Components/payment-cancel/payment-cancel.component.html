@@ -7,8 +7,12 @@
     class="purchase-button"
     (click)="redirectToCheckout()"
     [disabled]="isLoading"
-  >
-    <span *ngIf="!isLoading">Try again</span>
-    <span *ngIf="isLoading">Redirecting to payment...</span>
+    >
+    @if (!isLoading) {
+      <span>Try again</span>
+    }
+    @if (isLoading) {
+      <span>Redirecting to payment...</span>
+    }
   </button>
 </div>

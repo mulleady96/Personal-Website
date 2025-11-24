@@ -1,8 +1,6 @@
 import { Directive, ElementRef, OnInit, Renderer2 } from "@angular/core";
 
-@Directive({
-  selector: "[appTypingAnimation]",
-})
+@Directive({ selector: "[appTypingAnimation]" })
 export class TypingAnimationDirective implements OnInit {
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 

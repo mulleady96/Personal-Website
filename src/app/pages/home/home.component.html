@@ -4,32 +4,33 @@
     fill
     alt="image Background"
     (error)="imageFailed()"
-  />
-  <div class="leftSide" fxHide.lt-md="true">
-    <app-bubbles></app-bubbles>
+    />
+    <div class="leftSide" fxHide.lt-md="true">
+      <app-bubbles></app-bubbles>
 
-    <h1 class="heading-video">Welcome</h1>
-    <div class="rowWrap">
-      <button
-        *ngFor="let button of navigationButtons"
-        mat-fab
-        extended
-        class="nav-button-stagger"
-        matTooltip="{{ button.ariaLabel }}"
-        routerLinkActive="router-link-active"
-        [attr.aria-label]="button.ariaLabel"
-        routerLink="{{ button.routerLink }}"
-      >
-        <mat-icon class="View Github" color="accent">{{
-          button.icon
-        }}</mat-icon>
-        {{ button.ariaLabel }}
-      </button>
+      <h1 class="heading-video">Welcome</h1>
+      <div class="rowWrap">
+        @for (button of navigationButtons; track button) {
+          <button
+            mat-fab
+            extended
+            class="nav-button-stagger"
+            matTooltip="{{ button.ariaLabel }}"
+            routerLinkActive="router-link-active"
+            [attr.aria-label]="button.ariaLabel"
+            routerLink="{{ button.routerLink }}"
+            >
+            <mat-icon class="View Github" color="accent">{{
+              button.icon
+            }}</mat-icon>
+            {{ button.ariaLabel }}
+          </button>
+        }
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
+      <app-bubbles></app-bubbles>
+
+      <app-card [cardList]="cardDetails" [isStacked]="true"></app-card>
     </div>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="center" class="fadeInLeft">
-    <app-bubbles></app-bubbles>
-
-    <app-card [cardList]="cardDetails" [isStacked]="true"></app-card>
-  </div>
-</div>

@@ -24,19 +24,19 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BlogComponent, TypingAnimationDirective, EllipsisDirective],
-  imports: [
-    CommonModule,
-    ComponentsModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    SearchButtonComponent,
-    MatInputModule,
-    AppMaterialModule,
-    MarkdownModule.forRoot(),
-    RouterModule.forChild(routes),
-  ],
+    imports: [
+        CommonModule,
+        ComponentsModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        SearchButtonComponent,
+        MatInputModule,
+        AppMaterialModule,
+        MarkdownModule.forRoot(),
+        RouterModule.forChild(routes),
+        BlogComponent, TypingAnimationDirective, EllipsisDirective,
+    ],
 })
 export class BlogModule {}

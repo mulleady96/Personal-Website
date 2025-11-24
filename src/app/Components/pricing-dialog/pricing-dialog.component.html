@@ -26,10 +26,16 @@
       class="purchase-button"
       (click)="redirectToCheckout()"
       [disabled]="isLoading"
-    >
-      <span *ngIf="!isLoading">Purchase and Download</span>
-      <span *ngIf="isLoading">Redirecting to payment...</span>
+      >
+      @if (!isLoading) {
+        <span>Purchase and Download</span>
+      }
+      @if (isLoading) {
+        <span>Redirecting to payment...</span>
+      }
     </button>
   </mat-card-actions>
-  <mat-error *ngIf="error">{{ error }}</mat-error>
+  @if (error) {
+    <mat-error>{{ error }}</mat-error>
+  }
 </mat-card>

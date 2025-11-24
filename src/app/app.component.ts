@@ -1,23 +1,42 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { OverlayContainer } from "@angular/cdk/overlay";
-import { Location } from "@angular/common";
+import { CommonModule, Location } from "@angular/common";
 import {
   Component,
   EventEmitter,
   HostBinding,
+  inject,
   OnInit,
   Output,
   ViewChild,
 } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
+import { RouterModule } from "@angular/router";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { FontAwesomeModule, FaIconLibrary } from "@fortawesome/angular-fontawesome";
+import { faGithub, faLinkedin, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
-// import * as firebase from "firebase/app";
 import { ThemeService } from "./Services/theme.service";
+import { ComponentsModule } from "./Components/components.module";
+import { AppMaterialModule } from "./app-material.module";
+
+import { PricingCardComponent } from "./Components/pricing-card/pricing-card.component";
 
 @Component({
   selector: "app-root",
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FlexLayoutModule,
+    MatCheckboxModule,
+    FontAwesomeModule,
+    ComponentsModule,
+    AppMaterialModule,
+    PricingCardComponent,
+  ],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
   animations: [
@@ -34,6 +53,12 @@ import { ThemeService } from "./Services/theme.service";
   ],
 })
 export class AppComponent implements OnInit {
+  private swUpdate = inject(SwUpdate);
+  private themeService = inject(ThemeService);
+  private location = inject(Location);
+  private overlayContainer = inject(OverlayContainer);
+  private library = inject(FaIconLibrary);
+
   title = "Andrew Mulleady";
   navigationButtons = [
     {
@@ -73,20 +98,15 @@ export class AppComponent implements OnInit {
   storedTheme!: boolean;
   checked!: boolean;
 
-  constructor(
-    private swUpdate: SwUpdate,
-    private themeService: ThemeService,
-    private location: Location,
-    private overlayContainer: OverlayContainer,
-  ) {
+  constructor() {
     // initializeApp(config);
     this.themeDescription = "Light Theme";
+    this.library.addIcons(faGithub, faLinkedin, faWhatsapp);
   }
 
-  @ViewChild("sidenav", { static: true })
+  @ViewChild("sidenav") sidenav!: MatSidenav;
   @HostBinding("class")
   className = "";
-  sidenav!: MatSidenav;
 
   reason = "";
   openWithSwipe = false;
@@ -150,3 +170,4 @@ export class AppComponent implements OnInit {
     }
   }
 }
+

@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, inject } from "@angular/core";
 import { Functions, httpsCallable } from "@angular/fire/functions";
 import { MatButtonModule } from "@angular/material/button";
@@ -8,17 +8,15 @@ import { MatListModule } from "@angular/material/list";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { environment } from "src/environments/environment";
 @Component({
-  selector: "app-payment-cancel",
-  standalone: true,
-  imports: [
-    CommonModule,
+    selector: "app-payment-cancel",
+    imports: [
     MatCardModule,
     MatListModule,
     MatIconModule,
-    MatButtonModule,
-  ],
-  templateUrl: "./payment-cancel.component.html",
-  styleUrl: "./payment-cancel.component.scss",
+    MatButtonModule
+],
+    templateUrl: "./payment-cancel.component.html",
+    styleUrl: "./payment-cancel.component.scss"
 })
 export class PaymentCancelComponent {
   private functions: Functions = inject(Functions);

@@ -6,9 +6,7 @@ import {
   Renderer2,
 } from "@angular/core";
 
-@Directive({
-  selector: "[appUnderlineHover]",
-})
+@Directive({ selector: "[appUnderlineHover]" })
 export class UnderlineHoverDirective {
   @Input("appUnderlineHover")
   highlightColor!: string;

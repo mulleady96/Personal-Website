@@ -13,9 +13,8 @@ describe("MediaListComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MediaListComponent],
-      imports: [MatDialogModule, MatMenuModule, BrowserAnimationsModule],
-    }).compileComponents();
+    imports: [MatDialogModule, MatMenuModule, BrowserAnimationsModule, MediaListComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(MediaListComponent);
     component = fixture.componentInstance;

@@ -27,13 +27,12 @@ describe("Blog Component", () => {
     ]);
 
     TestBed.configureTestingModule({
-      declarations: [BlogComponent],
-      imports: [HttpClientTestingModule],
-      providers: [
+    imports: [HttpClientTestingModule, BlogComponent],
+    providers: [
         { provide: GravitaService, useValue: gravitaService },
         { provide: MarkdownService, useValue: markdownService },
-      ],
-    });
+    ],
+});
 
     const fixture = TestBed.createComponent(BlogComponent);
     component = fixture.componentInstance;
