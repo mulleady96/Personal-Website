@@ -16,7 +16,7 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "importHelpers": true,
     "target": "ES2022",
@@ -26,7 +26,9 @@
       "dom"
     ],
     "paths": {
-      "@playwright/test": ["./node_modules/@playwright/test"]
+      "@playwright/test": [
+        "./node_modules/@playwright/test"
+      ]
     }
   },
   "angularCompilerOptions": {
