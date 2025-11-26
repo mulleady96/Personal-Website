@@ -13,8 +13,8 @@ describe("MediaListComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [MatDialogModule, MatMenuModule, BrowserAnimationsModule, MediaListComponent],
-}).compileComponents();
+      imports: [MatDialogModule, MatMenuModule, BrowserAnimationsModule, MediaListComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MediaListComponent);
     component = fixture.componentInstance;
@@ -41,13 +41,13 @@ describe("MediaListComponent", () => {
     const location = "SomeLocation"; // replace with an actual location from your mock data
     component.sortByName(location);
     expect(
-      component.images.every((image) => image.title === location),
+      component.imageList.every((image: any) => image.title === location),
     ).toBeTrue();
     expect(component.count).toContain(location);
   });
 
   it("should toggle selection for a location", () => {
-    const location = { name: "SomeLocation", selected: false };
+    const location = { name: "SomeLocation", selected: false, locationCount: 0 };
     component.toggleSelection(location);
     expect(location.selected).toBeTrue();
     component.toggleSelection(location);
@@ -57,9 +57,9 @@ describe("MediaListComponent", () => {
   it("should deselect all locations when a specific location is selected", () => {
     // Initial setup
     component.locations = [
-      { name: "Location1", selected: false },
-      { name: "Location2", selected: false },
-      { name: "All", selected: true },
+      { name: "Location1", selected: false, locationCount: 0 },
+      { name: "Location2", selected: false, locationCount: 0 },
+      { name: "All", selected: true, locationCount: 0 },
     ];
 
     // Call toggleSelection
@@ -67,17 +67,17 @@ describe("MediaListComponent", () => {
 
     // Check that 'All' is deselected
     expect(
-      component.locations.find((loc) => loc.name === "All").selected,
+      component.locations.find((loc) => loc.name === "All")!.selected,
     ).toBeFalse();
 
     // Check that 'Location1' is now selected
     expect(
-      component.locations.find((loc) => loc.name === "Location1").selected,
+      component.locations.find((loc) => loc.name === "Location1")!.selected,
     ).toBeTrue();
 
     // Check that 'Location2' remains deselected
     expect(
-      component.locations.find((loc) => loc.name === "Location2").selected,
+      component.locations.find((loc) => loc.name === "Location2")!.selected,
     ).toBeFalse();
   });
 

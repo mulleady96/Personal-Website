@@ -1,4 +1,4 @@
-import { Directive, EventEmitter,HostListener, Output } from "@angular/core";
+import { Directive, EventEmitter, HostListener, Output } from "@angular/core";
 
 @Directive({
     selector: "[appDropZone]",
@@ -11,12 +11,11 @@ export class DropZoneDirective {
   constructor() {}
 
   @HostListener("drop", ["$event"])
-  ondrop($event: {
-    preventDefault: () => void;
-    dataTransfer: FileList | undefined;
-  }) {
+  ondrop($event: DragEvent) {
     $event.preventDefault(); // Prevent browser opening new tab.
-    this.dropped.emit($event.dataTransfer);
+    if ($event.dataTransfer && $event.dataTransfer.files) {
+      this.dropped.emit($event.dataTransfer.files);
+    }
     this.hovered.emit(false);
   }
 
@@ -26,7 +25,7 @@ export class DropZoneDirective {
     this.hovered.emit(true);
   }
 
-  @HostListener("dragover", ["$event"])
+  @HostListener("dragleave", ["$event"])
   ondragleave($event: { preventDefault: () => void }) {
     $event.preventDefault(); // Prevent browser opening new tab.
     this.hovered.emit(false);
