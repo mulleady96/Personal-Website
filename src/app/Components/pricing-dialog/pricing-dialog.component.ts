@@ -9,6 +9,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { environment } from "src/environments/environment";
+import { AppMaterialModule } from "src/app/app-material.module";
 
 @Component({
     selector: "app-pricing-dialog",
@@ -18,7 +19,8 @@ import { environment } from "src/environments/environment";
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatError
+    MatError,
+    AppMaterialModule
 ],
     templateUrl: "./pricing-dialog.component.html",
     styleUrls: ["./pricing-dialog.component.css"]

@@ -1,5 +1,4 @@
-import { animate, style, transition, trigger } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { FlexModule } from "@angular/flex-layout/flex";
 import { CardComponent } from "../../Components/card/card.component";
 
@@ -7,23 +6,9 @@ import { CardComponent } from "../../Components/card/card.component";
     selector: "app-products",
     templateUrl: "./products.component.html",
     styleUrls: ["./products.component.scss"],
-    animations: [
-        // Slide items up from the bottom of screen.
-        trigger("itemState", [
-            transition("void => *", [
-                style({ transform: "translateX(100%)" }),
-                animate("0.6s ease-in-out"),
-            ]),
-            transition("* => void", [
-                animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
-            ]),
-        ]),
-    ],
     imports: [FlexModule, CardComponent]
 })
-export class ProductsComponent implements OnInit {
-  panelOpenState!: boolean;
-
+export class ProductsComponent {
   portfolioDetails = [
     {
       id: 1,
@@ -55,11 +40,33 @@ export class ProductsComponent implements OnInit {
       buttonText: "Open App",
       externalLink: true,
     },
+    {
+      id: 4,
+      title: "Apple Catcher",
+      description:
+        "Apple Catcher is a snapchat lense made on Lens Studio, where you have to catch falling apples.",
+      image: "assets/snapcode-apple-catcher.png",
+      buttonText: "Scan with Snapchat",
+      externalLink: false,
+    },
+    {
+      id: 5,
+      title: "F1 Lights Out",
+      description:
+        "F1 Lights Out is a snapchat lense made on Lens Studio, where you can test your reaction speed.",
+      
+      image: "assets/snapcode-lights-out.png",
+      buttonText: "Scan with Snapchat",
+      externalLink: false,
+    },
+    {
+      id: 6,
+      title: "Pirelli Cap",
+      description:
+        "Snapchat lense made on Lens Studio, where you can wear various different Pirelli caps.",
+      image: "assets/snapcode-pirelli-cap.png",
+      buttonText: "Scan with Snapchat",
+      externalLink: false,
+    },
   ];
-
-  constructor() {}
-
-  ngOnInit() {}
-
-  flipCard() {}
 }
