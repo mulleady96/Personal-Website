@@ -17,6 +17,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { FontAwesomeModule, FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import { faGithub, faLinkedin, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { Analytics, logEvent } from "@angular/fire/analytics";
 
 import { ThemeService } from "./Services/theme.service";
 import { ComponentsModule } from "./Components/components.module";
@@ -58,6 +59,7 @@ export class AppComponent implements OnInit {
   private location = inject(Location);
   private overlayContainer = inject(OverlayContainer);
   private library = inject(FaIconLibrary);
+  private analytics = inject(Analytics);
 
   title = "Andrew Mulleady";
   navigationButtons = [
@@ -102,6 +104,7 @@ export class AppComponent implements OnInit {
     // initializeApp(config);
     this.themeDescription = "Light Theme";
     this.library.addIcons(faGithub, faLinkedin, faWhatsapp);
+    logEvent(this.analytics, 'app_load', { page: 'main' });
   }
 
   @ViewChild("sidenav") sidenav!: MatSidenav;

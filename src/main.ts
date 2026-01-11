@@ -15,6 +15,7 @@ import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { getFunctions, provideFunctions } from "@angular/fire/functions";
+import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 
 import { AppComponent } from "./app/app.component";
 import { routes } from "./app/app-routing.module";
@@ -48,5 +49,8 @@ bootstrapApplication(AppComponent, {
     },
     provideFirebaseApp(() => initializeApp(config)),
     provideFunctions(() => getFunctions()),
+    provideAnalytics(() => getAnalytics()),
+    ScreenTrackingService,
+    UserTrackingService,
   ],
 }).catch((err) => console.error(err));

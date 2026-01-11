@@ -2,6 +2,7 @@
 import { Component, inject, OnInit } from "@angular/core";
 
 import { MediaService } from "../../Services/media.service"; // Adjust path if needed
+import { Analytics, logEvent } from "@angular/fire/analytics";
 @Component({
     selector: "app-payment-success",
     imports: [],
@@ -10,7 +11,7 @@ import { MediaService } from "../../Services/media.service"; // Adjust path if n
 })
 export class PaymentSuccessComponent implements OnInit {
   private mediaService = inject(MediaService);
-
+  private analytics = inject(Analytics);
   isDownloading = false;
   downloadComplete = false;
   error: string | null = null;
@@ -36,5 +37,7 @@ export class PaymentSuccessComponent implements OnInit {
       this.myFileContent,
       this.myDatedFilename,
     );
-  }
+   logEvent(this.analytics, 'payment_success', { page: 'payment-success' });
+  }  
 }
+  
