@@ -6,11 +6,13 @@ import {
   addDoc,
   collection,
   doc,
+  DocumentData,
   getDoc,
   getDocs,
   getFirestore,
   orderBy,
   query,
+  QueryDocumentSnapshot,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -29,6 +31,7 @@ export class GravitaService {
   db = getFirestore(this.app);
   AILimitRef = doc(this.db, "Limits", "sGNbtnG9rFj4mL2akP5O");
   AILimit: number = 0;
+  private aiQueryCache$: Promise<QueryDocumentSnapshot<DocumentData, DocumentData>[]> | null = null;  
 
   constructor() {
     // const enquiryListRef = collection(db, "enquiry");
@@ -39,9 +42,6 @@ export class GravitaService {
     addDoc(collection(this.db, "Enquiries"), {
       enquiry: enquiryForm,
     });
-    // return this.enquiryListRef.push({
-    //   enquiry: enquiryForm,
-    // });
   }
 
   async getLimit(documentId: string, createQuery: boolean) {
@@ -85,47 +85,28 @@ export class GravitaService {
         prompt: sQuery,
       }).then(() => {
         this.getLimit("sGNbtnG9rFj4mL2akP5O", true);
+        // Invalidate cache so next fetch gets the new data
+        this.aiQueryCache$ = null;
       });
-      // -1 from limit.
-      // this.AILimit = this.getLimit("sGNbtnG9rFj4mL2akP5O");
-      // updateDoc(this.AILimitRef, {
-      //   AILimit: this.AILimit--,
-      // });
     } catch (error) {
       console.log("Error generating prompt.", error);
     }
   }
 
   async getAIQuery() {
-    const collectionRef = collection(this.db, "generate");
+    if (this.aiQueryCache$) {
+      return this.aiQueryCache$;
+    }
+
+    const collectionRef = collection(this.db, "blog");
     const q = query(
       collectionRef,
       where("id", "==", "bloggi"),
       orderBy("status.startTime"),
     );
 
-    const querySnapshot = await getDocs(q);
-
-    return querySnapshot.docs;
-
-    /** Listen for any changes **/
-    // onSnapshot(q, (snapshot) => {
-    //   console.log("fire snapshot", snapshot.docs);
-
-    //   snapshot.docs.forEach((change) => {
-    //     /** Get prompt and response */
-    //     const { comment, output, response, prompt, status } = change.data();
-
-    //     const mergedData = {
-    //       response: response,
-    //       prompt: prompt,
-    //       state: status.state,
-    //       createTime: status.completeTime,
-    //     };
-
-    //     observer.next(mergedData);
-    //   });
-    // });
+    this.aiQueryCache$ = getDocs(q).then((snapshot) => snapshot.docs);
+    return this.aiQueryCache$;
   }
 
   getImages() {
@@ -135,4 +116,76 @@ export class GravitaService {
   getVideos() {
     return this.http.get("/assets/Videos.json");
   }
+
+  /* Admin / Rich Editor Methods */
+
+  async getArticles() {
+    const collectionRef = collection(this.db, "blog");
+    // Get all bloggi posts, ordered by time. 
+    // You might want to remove the 'where' clause if you want to see everything
+    const q = query(
+      collectionRef,
+      where("id", "==", "bloggi"),
+      orderBy("status.startTime", "desc") // Newest first
+    );
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => {
+      const data = doc.data();
+      let startTime = data['status']?.startTime;
+      if (startTime && typeof startTime.toDate === 'function') {
+        startTime = startTime.toDate();
+      }
+      return { 
+        docId: doc.id, 
+        ...data,
+        status: { ...data['status'], startTime } 
+      };
+    });
+  }
+
+  async getArticleById(id: string) {
+    const docRef = doc(this.db, "blog", id);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap);
+    
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+       let startTime = data['status']?.startTime;
+      if (startTime && typeof startTime.toDate === 'function') {
+        startTime = startTime.toDate();
+      }
+      return { 
+        docId: docSnap.id, 
+        ...data,
+        status: { ...data['status'], startTime } 
+      };
+    } else {
+      return null;
+    }
+  }
+
+  async updateArticle(id: string, data: any) {
+    const docRef = doc(this.db, "blog", id);
+    await updateDoc(docRef, data);
+  }
+
+  async createArticle(data: any) {
+    // Ensure we set id: 'bloggi' so it shows up in the blog
+    const docData = {
+      ...data,
+      id: "bloggi", 
+      status: {
+        startTime: new Date().toISOString(), // Use consistent timestamp format
+        ...data.status
+      }
+    };
+    await addDoc(collection(this.db, "blog"), docData);
+  }
+
+  async deleteArticle(id: string) {
+     // Implement if needed, though user only asked for Add/Update
+     // import { deleteDoc } from "firebase/firestore";
+     // await deleteDoc(doc(this.db, "generate", id));
+  }
+
 }

@@ -46,7 +46,9 @@
     "mini-css-extract-plugin": "^2.9.1",
     "ngx-countup": "^13.2.0",
     "ngx-markdown": "^19.1.1",
+    "ngx-quill": "^30.0.1",
     "prismjs": "^1.29.0",
+    "quill": "^2.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"

@@ -31,7 +31,11 @@
               "src/.well_known",
               "src/manifest.json"
             ],
-            "styles": ["src/styles.scss", "src/prism-vsc-dark-plus.css"],
+            "styles": [
+              "src/styles.scss",
+              "src/prism-vsc-dark-plus.css",
+              "node_modules/quill/dist/quill.snow.css"
+            ],
             "scripts": [
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-csharp.min.js",

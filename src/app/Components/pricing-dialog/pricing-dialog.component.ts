@@ -29,11 +29,6 @@ export class PricingDialogComponent {
   isLoading = false;
   error: string | null = null;
   private functions: Functions = inject(Functions);
-  private stripePromise: Promise<Stripe | null>;
-
-  constructor() {
-    this.stripePromise = loadStripe(environment.stripe.publishable_key);
-  }
 
   async redirectToCheckout(): Promise<void> {
     this.isLoading = true;
@@ -49,7 +44,7 @@ export class PricingDialogComponent {
       const sessionId = result.data.id;
 
       // 2. Redirect to Stripe's hosted checkout page
-      const stripe = await this.stripePromise;
+      const stripe = await loadStripe(environment.stripe.publishable_key);
       if (stripe) {
         await stripe.redirectToCheckout({ sessionId });
       }

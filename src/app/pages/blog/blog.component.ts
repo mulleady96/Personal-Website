@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MatChipSelectionChange, MatChipListbox, MatChipOption } from "@angular/material/chips";
 import { MarkdownService, MarkdownComponent } from "ngx-markdown";
 
@@ -32,12 +33,8 @@ interface ResponseData {
     styleUrls: ["./blog.component.css"],
     imports: [FlexModule, MatMiniFabButton, MatIcon, SearchButtonComponent, MatButton, MatProgressSpinner, MatChipListbox, MatChipOption, MatCard, MarkdownComponent]
 })
-export class BlogComponent implements OnInit, OnDestroy {
+export class BlogComponent implements OnInit {
   private gravita = inject(GravitaService);
-  private markdownService = inject(MarkdownService);
-
-  // chips thread 1 - 5. Arrow up down to view answers.
-  // have side menu / dropdown box with list of prompts/headings and can click on prompt to scroll to that answer.
   markdownText = "";
   prompt: string[] = [];
   responses: ResponseData[] = [];
@@ -60,6 +57,8 @@ export class BlogComponent implements OnInit, OnDestroy {
   ];
   @ViewChild("BloggiTextarea")
   myTextarea!: ElementRef;
+  router = inject(Router);
+
 
   constructor() {
     // get limit - disable input if 0.
@@ -68,8 +67,19 @@ export class BlogComponent implements OnInit, OnDestroy {
     // });
   }
 
-  ngOnInit() {
-    this.loadResponses();
+  private route = inject(ActivatedRoute);
+
+  async ngOnInit() {
+    await this.loadResponses();
+    const resolvedArticle = this.route.snapshot.data['article'];
+    if (resolvedArticle) {
+      this.showArticle = true;
+      // Find the index of the resolved article
+      const index = this.responses.findIndex(r => r['docId'] === resolvedArticle.docId);
+       if (index !== -1) {
+        this.selectedValue = index;
+      }
+    }
   }
 
   onSearchChange(search: boolean) {
@@ -99,7 +109,7 @@ export class BlogComponent implements OnInit, OnDestroy {
     try {
       const data = await this.gravita.getAIQuery();
 
-      this.responses = data.map((doc: any) => doc.data());
+      this.responses = data.map((doc: any) => ({ docId: doc.id, ...doc.data() }));
       this.originalResponses = [...this.responses];
 
       this.responses.reverse();
@@ -109,17 +119,16 @@ export class BlogComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    // if (this.clipboard) {
-    //   this.clipboard.destroy();
-    // }
-  }
-
   selectedBlog(index: number) {
-    console.log(index === 0);
-
-    this.selectedValue = index;
-    this.showArticle = !this.showArticle;
+    if (!this.showArticle) {
+       this.selectedValue = index;
+       const id = this.responses[index]['docId'];
+       this.router.navigate(['blog', id]);
+    } else {
+       this.router.navigate(['blog']);
+       // reset for when we navigate back (if component is reused, though Resolver should handle it)
+       this.showArticle = false;
+    }
     this.search = false;
   }
 

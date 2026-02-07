@@ -154,11 +154,19 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     // Toggle Light/Dark Theme
-    // Get stored theme, default to false if nothing is stored
+    // Get stored theme
     const storedTheme = localStorage.getItem("isDarkTheme");
-    const initialThemeState = storedTheme ? JSON.parse(storedTheme) : false;
+    let initialThemeState = false;
 
-    // Set the initial theme based on the stored value
+    if (storedTheme) {
+      initialThemeState = JSON.parse(storedTheme);
+    } else {
+      // Check system preference
+      initialThemeState = window.matchMedia && 
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    // Set the initial theme based on the stored value or system preference
     this.updateTheme(initialThemeState);
 
     // SW - Reload fresh instance of app, if new version is available.

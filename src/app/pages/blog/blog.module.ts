@@ -7,6 +7,7 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
 import { RouterModule, Routes } from "@angular/router";
+import { articleResolver } from "../../resolvers/article.resolver";
 import { MarkdownModule } from "ngx-markdown";
 import { SearchButtonComponent } from "src/app/Components/search-button/search-button.component";
 
@@ -20,6 +21,11 @@ const routes: Routes = [
   {
     path: "",
     component: BlogComponent,
+  },
+  {
+    path: ":id",
+    component: BlogComponent,
+    resolve: { article: articleResolver },
   },
 ];
 
