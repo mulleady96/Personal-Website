@@ -1,5 +1,7 @@
-import { Component, Inject, Input, OnInit } from "@angular/core";
+import { Component, Inject, Input, OnInit, HostListener } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogClose } from "@angular/material/dialog";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
 
 import * as Images from "../../../assets/Images.json";
 import { SearchButtonComponent } from "../search-button/search-button.component";
@@ -11,9 +13,10 @@ import { MatList } from "@angular/material/list";
 import { FlexModule } from "@angular/flex-layout/flex";
 import { UnderlineHoverDirective } from "../../Directives/underline-hover.directive";
 import { InvisibleDirective } from "../../Directives/invisible.directive";
-import { MatButton } from "@angular/material/button";
+import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatMenuTrigger, MatMenu, MatMenuItem } from "@angular/material/menu";
 import { MatIcon } from "@angular/material/icon";
+import { PricingDialogComponent } from "../pricing-dialog/pricing-dialog.component";
 
 type location = {
   name: string;
@@ -21,12 +24,13 @@ type location = {
   selected: boolean;
 };
 
-interface Image {
+interface MediaItem {
   title: string;
   src: string;
   description: string;
   date: string;
   likes: number;
+  type: 'image' | 'video';
 }
 
 @Component({
@@ -37,7 +41,7 @@ interface Image {
 })
 export class MediaListComponent implements OnInit {
   images = Images;
-  imageList = this.images.images;
+  imageList: MediaItem[] = this.images.images as MediaItem[];
   count!: string;
   locations: location[] = [];
   locationCount = 0;
@@ -48,11 +52,21 @@ export class MediaListComponent implements OnInit {
 
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.getImages();
     this.getUniqueNames();
+
+    this.route.queryParams.subscribe(params => {
+      if (params['unlock-collection'] !== undefined) {
+        this.openPricingDialog();
+      }
+    });
   }
 
   onSearchChange(search: boolean) {
@@ -63,10 +77,7 @@ export class MediaListComponent implements OnInit {
     this.search = !this.search;
   }
 
-  getImages() {
-    this.imageList.sort((a, b) => a.title.localeCompare(b.title));
-    this.count = `Viewing all ${this.imageList.length} images`;
-  }
+
 
   getUniqueNames() {
     // unique location names for chip list & count
@@ -99,24 +110,72 @@ export class MediaListComponent implements OnInit {
     });
   }
 
-  toggleSelection(location: any) {
-    if (location.name == "All") {
-      this.getImages();
+  toggleSelection(location: location) {
+    if (location.name === "All") {
+      // If "All" is clicked, select it and deselect everything else
+      this.locations.forEach((loc) => (loc.selected = false));
+      location.selected = true;
+    } else {
+      // If any other chip is clicked
+      location.selected = !location.selected;
+
+      // Deselect "All" if it was selected
+      const allLoc = this.locations.find(l => l.name === "All");
+      if (allLoc && allLoc.selected) {
+        allLoc.selected = false;
+      }
+
+      // If nothing is selected after toggle, re-select "All"
+      const anySelected = this.locations.some(l => l.selected);
+      if (!anySelected && allLoc) {
+        allLoc.selected = true;
+      }
     }
-    this.locations.forEach((loc) => (loc.selected = false)); // Deselect all locations
-    location.selected = !location.selected; // Toggle the selected chip
+
+    this.filterMedia();
   }
 
-  sortByName(name: string) {
-    // based on chip selected, display those items
-    // input value from chip
-    // this.images = Images;
-    this.imageList = this.images.images;
-    this.imageList = this.imageList.filter((image) => image.title === name);
-    if (this.imageList.length === 0) {
-      this.imageList = this.images.images;
+  filterMedia() {
+    const selectedLocations = this.locations.filter(l => l.selected).map(l => l.name);
+    const allSelected = selectedLocations.includes("All");
+
+    if (allSelected || selectedLocations.length === 0) {
+      this.imageList = this.images.images as MediaItem[];
+    } else {
+      this.imageList = (this.images.images as MediaItem[]).filter(item => 
+        selectedLocations.includes(item.title)
+      );
     }
-    this.count = `Viewing ${this.imageList.length} images from ${name}`;
+
+    this.updateCount();
+  }
+
+  updateCount() {
+    const imageCount = this.imageList.filter(item => item.type === 'image' || !item.type).length;
+    const videoCount = this.imageList.filter(item => item.type === 'video').length;
+    
+    const parts = [];
+    if (imageCount > 0) parts.push(`${imageCount} image${imageCount !== 1 ? 's' : ''}`);
+    if (videoCount > 0) parts.push(`${videoCount} video${videoCount !== 1 ? 's' : ''}`);
+    
+    if (parts.length === 0) {
+      this.count = "No media found";
+    } else {
+      this.count = `Viewing ${parts.join(' and ')}`;
+    }
+  }
+
+  getImages() {
+    this.imageList = this.images.images as MediaItem[];
+    this.imageList.sort((a, b) => a.title.localeCompare(b.title));
+    this.updateCount();
+  }
+
+
+  openPricingDialog(): void {
+    this.dialog.open(PricingDialogComponent, {
+      width: "360px", // Set a width for the dialog
+    });
   }
 
   WhatsApp() {
@@ -134,14 +193,33 @@ export class MediaListComponent implements OnInit {
     window.open("https://buy.stripe.com/dR6fZzaRhczXdjy3cc", "_blank");
   }
 
-  openModal(image: Image) {
+  getSafeUrl(url: string): SafeResourceUrl {
+    let videoId = '';
+    if (url.includes('youtu.be')) {
+        videoId = url.split('/').pop() || '';
+    } else if (url.includes('youtube.com')) {
+        const params = new URLSearchParams(url.split('?')[1]);
+        videoId = params.get('v') || '';
+    }
+    
+    if (videoId) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
+    } else {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url); // Fallback
+    }
+  }
+
+  openModal(image: MediaItem) {
+    if (image.type === 'video') return; // Don't open modal for videos
+    
+    const index = this.imageList.indexOf(image);
     const dialogConfig = new MatDialogConfig();
-    const { src } = image;
     dialogConfig.maxWidth = "100%";
     dialogConfig.height = "100vh";
     dialogConfig.panelClass = "custom-dialog";
     dialogConfig.data = {
-      src: src,
+      images: this.imageList,
+      initialIndex: index
     };
     this.dialog.open(DialogElementsExampleDialog, dialogConfig);
   }
@@ -150,10 +228,85 @@ export class MediaListComponent implements OnInit {
 @Component({
     selector: "dialog-elements-example-dialog",
     template: `
-    <img src="{{ image.src }}" mat-dialog-close alt="Photo of scenery" />
+    <div class="dialog-container">
+      <img [src]="currentImage.src" mat-dialog-close alt="Photo of scenery" />
+      
+      <button matMiniFab class="nav-btn prev-btn" (click)="prev($event)">
+        <mat-icon color="accent">chevron_left</mat-icon>
+      </button>
+      
+      <button matMiniFab class="nav-btn next-btn" (click)="next($event)">
+        <mat-icon color="accent">chevron_right</mat-icon>
+      </button>
+
+      <button matMiniFab class="close-btn" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   `,
-    imports: [MatDialogClose]
+  styles: [`
+    .dialog-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    img {
+      max-width: 100%;
+      max-height: 100vh;
+      object-fit: contain;
+    }
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+    .prev-btn { left: 20px; }
+    .next-btn { right: 20px; }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+  `],
+    imports: [MatDialogClose, MatButton, MatIcon, MatMiniFabButton]
 })
-export class DialogElementsExampleDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public image: Image) {}
+export class DialogElementsExampleDialog implements OnInit {
+  currentIndex: number = 0;
+  images: MediaItem[] = [];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { images: MediaItem[], initialIndex: number }) {
+    this.images = data.images.filter(img => img.type === 'image' || !img.type); // Ensure only images
+    this.currentIndex = this.images.findIndex(img => img === data.images[data.initialIndex]);
+    if (this.currentIndex === -1) this.currentIndex = 0;
+  }
+
+  ngOnInit() {}
+
+  get currentImage(): MediaItem {
+    return this.images[this.currentIndex];
+  }
+
+  next(event: Event) {
+    event.stopPropagation();
+    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+  }
+
+  prev(event: Event) {
+    event.stopPropagation();
+    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'ArrowRight') {
+      this.next(new Event('keydown'));
+    } else if (event.key === 'ArrowLeft') {
+      this.prev(new Event('keydown'));
+    }
+  }
 }

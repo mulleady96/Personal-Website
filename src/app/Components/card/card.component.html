@@ -5,8 +5,10 @@
       (mousemove)="handleHover($event)"
       (mouseleave)="resetHover()"
       [ngClass]="{
-        'highlight-left': hoverSide === 'left',
-        'highlight-right': hoverSide === 'right',
+        'highlight-left': hoverSide === 'left' && currentIndex !== 0,
+        'highlight-right': hoverSide === 'right' && currentIndex !== cardList.length - 1,
+        'highlight-left-red': hoverSide === 'left' && currentIndex === 0,
+        'highlight-right-red': hoverSide === 'right' && currentIndex === cardList.length - 1
       }"
       >
       @if (cardList[currentIndex]?.image) {

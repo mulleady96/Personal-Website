@@ -7,7 +7,7 @@
         <mat-chip
           selected="location.selected"
           matBadge="{{ location.locationCount }}"
-          (click)="sortByName(location.name); toggleSelection(location)"
+          (click)="toggleSelection(location)"
           [ngClass]="{ selected: location.selected }"
           >
           {{ location.name }}
@@ -22,44 +22,49 @@
   <div fxLayout="column" fxLayout.gt-md="row wrap">
     @for (image of imageList; track image) {
       <div
-        appUnderlineHover
         fxFlex.gt-md="0 1 calc(50%-10px)"
         >
-        <!-- <h1 [appUnderlineHover] [matTooltip]="image.description" matTooltipPosition="above">
-        {{ image.title }}
-      </h1> -->
-      <p appInvisible class="overlay">
-        <!-- <mat-icon color="accent"
-        >favorite
-        <span matBadge="{{image.likes}}" matBadgeOverlap="true"></span></mat-icon
-        > -->
-        <button
+      @if (image.type === 'video') {
+        <iframe
+          [src]="getSafeUrl(image.src)"
+          class="media-item"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      } @else {
+        <div class="image-wrapper">
+          <button
           mat-raised-button
-          [matMenuTriggerFor]="menu"
-          aria-label="icon-button with menu options"
-          >
+            [matMenuTriggerFor]="menu"
+            aria-label="icon-button with menu options"
+            class="menu-button"
+            (click)="$event.stopPropagation()"
+            >
           {{ image.title }}
           <mat-icon>share</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" yPosition="above">
-          <button
-            mat-menu-item
-            (click)="Pexels()"
-            aria-label="View more on Pexels"
-            >
-            <mat-icon>collections</mat-icon>Pexels
           </button>
-          <button mat-menu-item (click)="Tip()">
-            <mat-icon>paid</mat-icon>Tip
-          </button>
-        </mat-menu>
-      </p>
-      <img
-        src="{{ image.src }}"
-        (click)="openModal(image)"
-        alt="Photo of {{ image.title }}"
-        loading="lazy"
-        />
+          <mat-menu #menu="matMenu" yPosition="above">
+            <button
+              mat-menu-item
+              (click)="Pexels()"
+              aria-label="View more on Pexels"
+              >
+              <mat-icon>link</mat-icon>Pexels
+            </button>
+            <button mat-menu-item (click)="openPricingDialog()">
+              <mat-icon>collections</mat-icon>Access Full Collection
+            </button>
+          </mat-menu>
+          <img
+            src="{{ image.src }}"
+            (click)="openModal(image)"
+            alt="Photo of {{ image.title }}"
+            loading="lazy"
+            class="media-item"
+          />
+        </div>
+      }
       </div>
     }
   </div>

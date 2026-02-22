@@ -6,10 +6,29 @@ div {
   color: red;
 }
 
-img {
+.media-item {
   width: 100%;
   height: auto;
   aspect-ratio: 14/9;
+  object-fit: cover;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.menu-button {
+  position: absolute;
+  bottom: 15px;
+  left: 5px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.4);
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 }
 
 p {

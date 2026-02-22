@@ -1,9 +1,7 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
 import { CountUpOptions } from "countup.js";
-import { FlexModule } from "@angular/flex-layout/flex";
 import { NgOptimizedImage } from "@angular/common";
-import { ExtendedModule } from "@angular/flex-layout/extended";
 import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
 import { MatFabButton } from "@angular/material/button";
 import { RouterLinkActive, RouterLink } from "@angular/router";
@@ -28,7 +26,7 @@ import { CardComponent } from "../../Components/card/card.component";
             ]),
         ]),
     ],
-    imports: [FlexModule, NgOptimizedImage, ExtendedModule, BubblesComponent, MatFabButton, RouterLinkActive, MatTooltip, RouterLink, MatIcon, CardComponent]
+    imports: [NgOptimizedImage, BubblesComponent, MatFabButton, RouterLinkActive, MatTooltip, RouterLink, MatIcon, CardComponent]
 })
 export class HomeComponent implements OnInit {
   opts!: CountUpOptions;

@@ -131,34 +131,4 @@ export class BlogComponent implements OnInit {
     }
     this.search = false;
   }
-
-  sendQuery(event: KeyboardEvent) {
-    // generate unique id for anon user. To store their responses.
-    if (this.markdownText.trim() !== "") {
-      event.preventDefault();
-      this.gravita.createAIQuery(this.markdownText);
-      this.markdownText = "";
-      // Clear the textarea value
-      this.myTextarea.nativeElement.value = "";
-      // Move the cursor to the start
-      this.myTextarea.nativeElement.setSelectionRange(0, 0);
-    }
-  }
-
-  // reset limit midnight irish time.
-  runOnceWeek() {
-    // Calculate milliseconds until next week
-    const millisecondsInWeek = 7 * 24 * 60 * 60 * 1000;
-    const now = new Date();
-    const nextWeek = new Date(now.getTime() + millisecondsInWeek);
-    const millisecondsUntilNextWeek = nextWeek.getTime() - now.getTime();
-
-    // gen idea of the week.
-
-    // Schedule the function to run once a week
-    setInterval(() => {
-      // Call bloggi idea of the week function
-      // this.weeklyService.runOnceAWeek();
-    }, millisecondsUntilNextWeek);
-  }
 }
