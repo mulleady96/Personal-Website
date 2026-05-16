@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
-import { FlexModule } from "@angular/flex-layout/flex";
+
 import { CardComponent } from "../../Components/card/card.component";
 
 @Component({
     selector: "app-products",
     templateUrl: "./products.component.html",
     styleUrls: ["./products.component.scss"],
-    imports: [FlexModule, CardComponent]
+    imports: [CardComponent]
 })
 export class ProductsComponent {
   portfolioDetails = [

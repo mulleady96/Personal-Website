@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { MatCard, MatCardContent, MatCardActions } from "@angular/material/card";
 import { NgClass, NgOptimizedImage } from "@angular/common";
-import { ExtendedModule } from "@angular/flex-layout/extended";
+
 import { MatButton } from "@angular/material/button";
 
 export interface CardItem {
@@ -23,7 +23,7 @@ export interface CardItem {
     imports: [
         MatCard,
         NgClass,
-        ExtendedModule,
+
         NgOptimizedImage,
         MatCardContent,
         MatCardActions,

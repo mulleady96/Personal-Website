@@ -31,3 +31,47 @@ pre {
     white-space: pre-wrap;
     background: rgb(53, 53, 53);
 }
+
+.blog-detail-container {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 20%;
+    align-items: center;
+    align-content: stretch;
+}
+
+.centre-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 60%;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-column {
+    display: none; /* fxShow="false" */
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 20%;
+    align-items: flex-end;
+}
+
+@media screen and (max-width: 599px) {
+    .left-column {
+        flex: 5%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .right-column {
+        display: flex; /* fxShow.gt-sm */
+    }
+}

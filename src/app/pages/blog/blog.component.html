@@ -1,4 +1,4 @@
-<div class="margin" fxLayout="row wrap" fxLayoutAlign="space-around center">
+<div class="margin blog-header-container">
   @if (showArticle) {
     <button
       (click)="selectedBlog(0)"
@@ -42,16 +42,11 @@
     </div> -->
 
     @if (!showArticle) {
-      <div
-        fxLayout="column"
-        fxLayoutAlign="space-between"
-        fxLayout.gt-md="row wrap"
-        >
+      <div class="blog-responses-container">
         @for (response of responses; track response; let i = $index) {
           <mat-card
-            fxFlex.gt-md="0 1 calc(44% - 25px)"
             (click)="selectedBlog(i)"
-            class="card"
+            class="card blog-card"
             >
             <markdown [data]="response['response']"></markdown>
           </mat-card>
@@ -85,14 +80,14 @@
 >{{ response.response }}
 </mat-card> -->
 <!-- <button [appCopy]>Copy</button> -->
-<div fxLayout="column" style="margin: 0 20px">
+<div class="blog-content-container" style="margin: 0 20px">
   <!-- Assuming markdownContent is an array -->
 
   <!-- *ngFor="let response of markdownContent; let last = last" -->
 
   <!-- <h1>{{ response.prompt }}</h1> -->
   @if (showArticle) {
-    <div class="padTop" fxFlex="50%">
+    <div class="padTop">
       <markdown [data]="this.responses[selectedValue]['response']"></markdown>
     </div>
   }

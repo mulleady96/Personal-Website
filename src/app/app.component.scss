@@ -28,6 +28,11 @@ h2 {
   justify-content: flex-start;
 }
 
+.nav-buttons-container {
+  display: flex;
+  flex-direction: column;
+}
+
 ::ng-deep .mat-drawer-container {
   height: 100vh;
   background-color: #dad4d4;
@@ -76,6 +81,10 @@ mat-sidenav {
   border-radius: 24px;
   text-align: center;
   z-index: 100; /* Ensure that your app's content doesn't overlap the toolbar */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .router-link-active {
@@ -110,6 +119,7 @@ mat-sidenav {
   display: flex;
   bottom: 20px;
   place-self: center;
+  gap: 35px;
 }
 
 img {

@@ -7,7 +7,7 @@ import { Subject } from "rxjs/internal/Subject";
 import { debounceTime, switchMap } from "rxjs/operators";
 
 import { GravitaService } from "../../Services/gravita.service";
-import { FlexModule } from "@angular/flex-layout/flex";
+
 import { MatFabButton, MatButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatStepper, MatStep, MatStepLabel, MatStepperNext, MatStepperPrevious } from "@angular/material/stepper";
@@ -29,7 +29,7 @@ import { MatFormField, MatLabel, MatInput, MatError } from "@angular/material/in
             ]),
         ]),
     ],
-    imports: [FlexModule, MatFabButton, MatIcon, FormsModule, ReactiveFormsModule, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious]
+    imports: [MatFabButton, MatIcon, FormsModule, ReactiveFormsModule, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious]
 })
 export class GetInTouchComponent implements OnInit, OnDestroy {
   @Input()

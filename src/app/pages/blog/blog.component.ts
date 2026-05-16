@@ -7,15 +7,14 @@ import {
   ViewChild,
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { MatChipSelectionChange, MatChipListbox, MatChipOption } from "@angular/material/chips";
+import { MatChipSelectionChange } from "@angular/material/chips";
 import { MarkdownService, MarkdownComponent } from "ngx-markdown";
 
 import { GravitaService } from "../../Services/gravita.service";
-import { FlexModule } from "@angular/flex-layout/flex";
-import { MatMiniFabButton, MatButton } from "@angular/material/button";
+
+import { MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
-import { SearchButtonComponent } from "../../Components/search-button/search-button.component";
-import { MatProgressSpinner } from "@angular/material/progress-spinner";
+
 import { MatCard } from "@angular/material/card";
 
 type Filter = {
@@ -31,7 +30,7 @@ interface ResponseData {
     selector: "app-blog",
     templateUrl: "./blog.component.html",
     styleUrls: ["./blog.component.css"],
-    imports: [FlexModule, MatMiniFabButton, MatIcon, SearchButtonComponent, MatButton, MatProgressSpinner, MatChipListbox, MatChipOption, MatCard, MarkdownComponent]
+    imports: [MatMiniFabButton, MatIcon, MatCard, MarkdownComponent]
 })
 export class BlogComponent implements OnInit {
   private gravita = inject(GravitaService);

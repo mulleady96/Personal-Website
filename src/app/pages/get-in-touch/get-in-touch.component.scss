@@ -49,3 +49,11 @@ mat-card {
   right: 20px;
   color: white;
 }
+
+@media screen and (max-width: 599px) {
+  .get-in-touch-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}

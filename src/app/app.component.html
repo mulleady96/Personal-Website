@@ -4,7 +4,7 @@
       <h2>
         {{ title }}
       </h2>
-      <div fxLayout="column">
+      <div class="nav-buttons-container">
         @for (button of navigationButtons; track button) {
           <button
             class="side-menu-button"
@@ -26,7 +26,7 @@
           {{ themeDescription }}
         </span>
       </mat-slide-toggle>
-      <div class="bottomSocial" fxLayoutGap="35px">
+      <div class="bottomSocial">
         <a
           href="https://github.com/mulleady96"
           target="_blank"
@@ -48,11 +48,7 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
-      <mat-toolbar
-        id="toolbar"
-        fxLayout="row"
-        fxLayoutAlign="space-around center"
-        >
+      <mat-toolbar id="toolbar">
         <mat-toolbar-row>
           <div>
             <button

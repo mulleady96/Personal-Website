@@ -204,3 +204,19 @@ i {
     opacity: 1;
   }
 }
+
+.media-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 960px) {
+  .media-list-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .media-list-item {
+    flex: 0 1 calc(50% - 10px);
+  }
+}

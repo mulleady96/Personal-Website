@@ -97,3 +97,38 @@ mat-chip-listbox {
   padding: 10px;
   gap: 5px;
 }
+
+.blog-header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.blog-responses-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blog-content-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.padTop {
+  padding-top: 4rem;
+  flex: 50%;
+}
+
+@media screen and (min-width: 960px) {
+  .blog-responses-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .blog-card {
+    flex: 0 1 calc(44% - 25px);
+  }
+}

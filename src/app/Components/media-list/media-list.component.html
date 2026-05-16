@@ -19,11 +19,9 @@
 }
 
 <mat-list>
-  <div fxLayout="column" fxLayout.gt-md="row wrap">
+  <div class="media-list-container">
     @for (image of imageList; track image) {
-      <div
-        fxFlex.gt-md="0 1 calc(50%-10px)"
-        >
+      <div class="media-list-item">
       @if (image.type === 'video') {
         <iframe
           [src]="getSafeUrl(image.src)"

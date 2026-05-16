@@ -14,10 +14,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
-import { loadStripe, Stripe } from "@stripe/stripe-js";
-import { environment } from "src/environments/environment";
-
-import { PricingDialogComponent } from "../pricing-dialog/pricing-dialog.component"; // Adjust the path as needed
+import { PricingDialogComponent } from "../pricing-dialog/pricing-dialog.component";
 
 @Component({
     selector: "app-pricing-card",
@@ -49,13 +46,7 @@ import { PricingDialogComponent } from "../pricing-dialog/pricing-dialog.compone
     ]
 })
 export class PricingCardComponent {
-  private functions: Functions = inject(Functions);
-
-  isLoading = false;
-  error: string | null = null;
-
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(public dialog: MatDialog) {}
 
   openPricingDialog(): void {
     this.dialog.open(PricingDialogComponent, {

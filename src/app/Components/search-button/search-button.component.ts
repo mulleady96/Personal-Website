@@ -1,11 +1,11 @@
 
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { MatIcon } from "@angular/material/icon";
-import { AppMaterialModule } from "src/app/app-material.module";
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: "app-search-button",
-    imports: [MatIcon, AppMaterialModule],
+    imports: [MatIcon, MatButtonModule],
     template: `
     <button mat-fab color="accent" (click)="expand()" aria-label="Search">
       @if (!search) {

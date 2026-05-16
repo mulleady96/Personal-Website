@@ -5,7 +5,14 @@ import { MatCardModule } from "@angular/material/card";
 import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
-import { AppMaterialModule } from "../app-material.module";
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InvisibleDirective } from "../Directives/invisible.directive";
 import { UnderlineHoverDirective } from "../Directives/underline-hover.directive";
 import { AuthComponent } from "./auth/auth.component";
@@ -23,7 +30,14 @@ import { SearchButtonComponent } from "./search-button/search-button.component";
         MatCardModule,
         CommonModule,
         HttpClientModule,
-        AppMaterialModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogModule,
+        MatTabsModule,
+        MatChipsModule,
+        MatProgressSpinnerModule,
         FontAwesomeModule,
         RouterModule,
         NgOptimizedImage,
@@ -46,7 +60,7 @@ import { SearchButtonComponent } from "./search-button/search-button.component";
         DialogElementsExampleDialog,
         UnderlineHoverDirective,
         InvisibleDirective,
-        AppMaterialModule,
+
     ],
 })
 export class ComponentsModule {}

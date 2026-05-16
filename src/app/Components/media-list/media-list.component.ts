@@ -8,9 +8,9 @@ import { SearchButtonComponent } from "../search-button/search-button.component"
 import { MatChipSet, MatChip } from "@angular/material/chips";
 import { MatBadge } from "@angular/material/badge";
 import { NgClass } from "@angular/common";
-import { ExtendedModule } from "@angular/flex-layout/extended";
+
 import { MatList } from "@angular/material/list";
-import { FlexModule } from "@angular/flex-layout/flex";
+
 import { UnderlineHoverDirective } from "../../Directives/underline-hover.directive";
 import { InvisibleDirective } from "../../Directives/invisible.directive";
 import { MatButton, MatMiniFabButton } from "@angular/material/button";
@@ -37,7 +37,7 @@ interface MediaItem {
     selector: "app-media-list",
     templateUrl: "./media-list.component.html",
     styleUrls: ["./media-list.component.scss"],
-    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, ExtendedModule, MatList, FlexModule, UnderlineHoverDirective, InvisibleDirective, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
+    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatList, UnderlineHoverDirective, InvisibleDirective, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
 })
 export class MediaListComponent implements OnInit {
   images = Images;

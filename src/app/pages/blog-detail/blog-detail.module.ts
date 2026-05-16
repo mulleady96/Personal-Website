@@ -2,7 +2,17 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule,Routes } from "@angular/router";
 
-import { AppMaterialModule } from "../../app-material.module";
+import 'prismjs';
+import 'prismjs/components/prism-csharp';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-scss';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
+import 'clipboard';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { BlogDetailComponent } from "./blog-detail.component";
 
 const routes: Routes = [
@@ -13,6 +23,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [CommonModule, AppMaterialModule, RouterModule.forChild(routes), BlogDetailComponent],
+    imports: [CommonModule, MatButtonModule, MatIconModule, RouterModule.forChild(routes), BlogDetailComponent],
 })
 export class BlogDetailModule {}

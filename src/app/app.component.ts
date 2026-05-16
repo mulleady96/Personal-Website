@@ -13,7 +13,7 @@ import {
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
 import { RouterModule } from "@angular/router";
-import { FlexLayoutModule } from "@angular/flex-layout";
+
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { FontAwesomeModule, FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import { faGithub, faLinkedin, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
@@ -21,7 +21,11 @@ import { Analytics, logEvent } from "@angular/fire/analytics";
 
 import { ThemeService } from "./Services/theme.service";
 import { ComponentsModule } from "./Components/components.module";
-import { AppMaterialModule } from "./app-material.module";
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { PricingCardComponent } from "./Components/pricing-card/pricing-card.component";
 
@@ -31,11 +35,14 @@ import { PricingCardComponent } from "./Components/pricing-card/pricing-card.com
   imports: [
     CommonModule,
     RouterModule,
-    FlexLayoutModule,
     MatCheckboxModule,
     FontAwesomeModule,
     ComponentsModule,
-    AppMaterialModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
     PricingCardComponent,
   ],
   templateUrl: "./app.component.html",
