@@ -15,14 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
-import 'prismjs';
-import 'prismjs/components/prism-csharp';
-import 'prismjs/components/prism-css';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-json';
-import 'clipboard';
+
 import { ComponentsModule } from "../../Components/components.module";
 import { EllipsisDirective } from "../../Directives/ellipsis.directive";
 import { TypingAnimationDirective } from "../../Directives/typing-animation.directive";
