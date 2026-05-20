@@ -11,8 +11,6 @@ import { NgClass } from "@angular/common";
 
 import { MatList } from "@angular/material/list";
 
-import { UnderlineHoverDirective } from "../../Directives/underline-hover.directive";
-import { InvisibleDirective } from "../../Directives/invisible.directive";
 import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatMenuTrigger, MatMenu, MatMenuItem } from "@angular/material/menu";
 import { MatIcon } from "@angular/material/icon";
@@ -37,7 +35,7 @@ interface MediaItem {
     selector: "app-media-list",
     templateUrl: "./media-list.component.html",
     styleUrls: ["./media-list.component.scss"],
-    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatList, UnderlineHoverDirective, InvisibleDirective, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
+    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatList, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
 })
 export class MediaListComponent implements OnInit {
   images = Images;
@@ -273,7 +271,7 @@ export class MediaListComponent implements OnInit {
       z-index: 10;
     }
   `],
-    imports: [MatDialogClose, MatButton, MatIcon, MatMiniFabButton]
+    imports: [MatDialogClose, MatIcon, MatMiniFabButton]
 })
 export class DialogElementsExampleDialog implements OnInit {
   currentIndex: number = 0;

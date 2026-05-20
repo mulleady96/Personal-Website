@@ -13,12 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { InvisibleDirective } from "../Directives/invisible.directive";
-import { UnderlineHoverDirective } from "../Directives/underline-hover.directive";
-import { AuthComponent } from "./auth/auth.component";
 import { CardComponent } from "./card/card.component";
-import { EmailSignUpComponent } from "./email-sign-up/email-sign-up.component";
-import { FlashCardComponent } from "./flash-card/flash-card.component";
 import {
   DialogElementsExampleDialog,
   MediaListComponent,
@@ -42,25 +37,14 @@ import { SearchButtonComponent } from "./search-button/search-button.component";
         RouterModule,
         NgOptimizedImage,
         SearchButtonComponent,
-        FlashCardComponent,
         MediaListComponent,
         DialogElementsExampleDialog,
-        UnderlineHoverDirective,
-        InvisibleDirective,
-        AuthComponent,
-        EmailSignUpComponent,
         CardComponent,
     ],
     exports: [
-        FlashCardComponent,
         MediaListComponent,
-        AuthComponent,
-        EmailSignUpComponent,
         CardComponent,
         DialogElementsExampleDialog,
-        UnderlineHoverDirective,
-        InvisibleDirective,
-
     ],
 })
 export class ComponentsModule {}

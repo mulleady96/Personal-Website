@@ -1,14 +1,13 @@
-import { Injectable } from "@angular/core";
-import { initializeApp } from "firebase/app";
+import { inject, Injectable } from "@angular/core";
 import {
-  getAuth,
+  Auth,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
   User,
-} from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+} from "@angular/fire/auth";
+import { Firestore } from "@angular/fire/firestore";
 import { BehaviorSubject, Observable } from "rxjs";
 
 // import "firebase/compat/database";
@@ -18,16 +17,15 @@ import { config } from "../credentials";
   providedIn: "root",
 })
 export class AuthService {
-  app = initializeApp(config);
-
-  db = getFirestore(this.app);
+  auth = inject(Auth);
+  db = inject(Firestore);
 
   private dataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public data$: Observable<any> = this.dataSubject.asObservable();
   constructor() {}
 
   getCurrentUser(): Promise<User | null> {
-    const auth = getAuth();
+    const auth = this.auth;
 
     return new Promise((resolve, reject) => {
       const unsubscribe = onAuthStateChanged(
@@ -64,7 +62,7 @@ export class AuthService {
   }
 
   loginWithGoogle(): Promise<any> {
-    const auth = getAuth();
+    const auth = this.auth;
     const provider = new GoogleAuthProvider();
     // provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
     return signInWithPopup(auth, provider)
@@ -94,8 +92,13 @@ export class AuthService {
       });
   }
 
+  async checkIfAdmin(user: User): Promise<boolean> {
+    const tokenResult = await user.getIdTokenResult();
+    return !!tokenResult.claims["admin"];
+  }
+
   signOut() {
-    const auth = getAuth();
+    const auth = this.auth;
     signOut(auth)
       .then(() => {
         // Sign-out successful.

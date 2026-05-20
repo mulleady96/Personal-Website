@@ -12,6 +12,8 @@ import { provideAnimationsAsync } from "@angular/platform-browser/animations/asy
 import { provideRouter, withInMemoryScrolling } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { getAuth, provideAuth } from "@angular/fire/auth";
+import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 import { getFunctions, provideFunctions } from "@angular/fire/functions";
 import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
 
@@ -41,6 +43,8 @@ bootstrapApplication(AppComponent, {
     ThemeService,
 
     provideFirebaseApp(() => initializeApp(config)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
     provideFunctions(() => getFunctions()),
     provideAnalytics(() => getAnalytics()),
     ScreenTrackingService,

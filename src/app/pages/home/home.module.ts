@@ -8,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { ComponentsModule } from "../../Components/components.module";
-import { StackedCardsComponent } from "../../Components/stacked-cards/stacked-cards.component";
 import { HomeComponent } from "./home.component";
 
 const routes: Routes = [
@@ -29,7 +28,6 @@ const routes: Routes = [
         MatIconModule,
         NgOptimizedImage,
         RouterModule.forChild(routes),
-        StackedCardsComponent,
         HomeComponent,
     ],
 })

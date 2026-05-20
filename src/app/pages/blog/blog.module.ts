@@ -17,8 +17,6 @@ import { MatCardModule } from '@angular/material/card';
 
 
 import { ComponentsModule } from "../../Components/components.module";
-import { EllipsisDirective } from "../../Directives/ellipsis.directive";
-import { TypingAnimationDirective } from "../../Directives/typing-animation.directive";
 import { BlogComponent } from "./blog.component";
 
 const routes: Routes = [
@@ -48,7 +46,7 @@ const routes: Routes = [
         MatCardModule,
         MarkdownModule.forRoot(),
         RouterModule.forChild(routes),
-        BlogComponent, TypingAnimationDirective, EllipsisDirective,
+        BlogComponent,
     ],
 })
 export class BlogModule {}

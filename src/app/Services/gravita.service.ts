@@ -1,21 +1,20 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { initializeApp } from "firebase/app";
 import {
+  Firestore,
   addDoc,
   collection,
   doc,
   DocumentData,
   getDoc,
   getDocs,
-  getFirestore,
   orderBy,
   query,
   QueryDocumentSnapshot,
   updateDoc,
   where,
-} from "firebase/firestore";
+} from "@angular/fire/firestore";
 
 // import "firebase/compat/database";
 import { config } from "../credentials";
@@ -26,9 +25,8 @@ import { config } from "../credentials";
 export class GravitaService {
   private http = inject(HttpClient);
   // public enquiryListRef: firebase.default.database.Reference;
-  app = initializeApp(config);
 
-  db = getFirestore(this.app);
+  db = inject(Firestore);
   AILimitRef = doc(this.db, "Limits", "sGNbtnG9rFj4mL2akP5O");
   AILimit: number = 0;
   private aiQueryCache$: Promise<QueryDocumentSnapshot<DocumentData, DocumentData>[]> | null = null;  

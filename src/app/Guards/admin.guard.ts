@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
-import { ADMIN_EMAILS } from '../credentials';
 
 export const adminGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
@@ -9,8 +8,11 @@ export const adminGuard: CanActivateFn = async (route, state) => {
 
   const user = await authService.getCurrentUser();
 
-  if (user && user.email && ADMIN_EMAILS.includes(user.email)) {
-    return true;
+  if (user) {
+    const isAdmin = await authService.checkIfAdmin(user);
+    if (isAdmin) {
+      return true;
+    }
   }
 
   // Not authorized, redirect to login
