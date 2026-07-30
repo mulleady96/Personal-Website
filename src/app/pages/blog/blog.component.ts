@@ -32,7 +32,7 @@ interface ResponseData {
     styleUrls: ["./blog.component.css"],
     imports: [MatMiniFabButton, MatIcon, MatCard, MarkdownComponent]
 })
-export class BlogComponent implements OnInit {
+export class BlogComponent implements OnInit, OnDestroy {
   private gravita = inject(GravitaService);
   markdownText = "";
   prompt: string[] = [];
@@ -70,14 +70,24 @@ export class BlogComponent implements OnInit {
 
   async ngOnInit() {
     await this.loadResponses();
-    const resolvedArticle = this.route.snapshot.data['article'];
-    if (resolvedArticle) {
-      this.showArticle = true;
-      // Find the index of the resolved article
-      const index = this.responses.findIndex(r => r['docId'] === resolvedArticle.docId);
-       if (index !== -1) {
-        this.selectedValue = index;
+    this.subscription = this.route.data.subscribe((data) => {
+      const resolvedArticle = data['article'];
+      if (resolvedArticle) {
+        this.showArticle = true;
+        // Find the index of the resolved article
+        const index = this.responses.findIndex(r => r['docId'] === resolvedArticle.docId);
+        if (index !== -1) {
+          this.selectedValue = index;
+        }
+      } else {
+        this.showArticle = false;
       }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 

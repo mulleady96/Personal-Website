@@ -17,19 +17,19 @@ export interface CardItem {
 }
 
 @Component({
-    selector: "app-card",
-    templateUrl: "./card.component.html",
-    styleUrl: "./card.component.scss",
-    imports: [
-        MatCard,
-        NgClass,
+  selector: "app-card",
+  templateUrl: "./card.component.html",
+  styleUrl: "./card.component.scss",
+  imports: [
+    MatCard,
+    NgClass,
 
-        NgOptimizedImage,
-        MatCardContent,
-        MatCardActions,
-        RouterLink,
-        MatButton,
-    ],
+    NgOptimizedImage,
+    MatCardContent,
+    MatCardActions,
+    RouterLink,
+    MatButton,
+  ],
 })
 export class CardComponent implements OnInit {
   @Input() cardList: CardItem[] = [];
@@ -41,19 +41,17 @@ export class CardComponent implements OnInit {
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // this.isStacked = this.breakpointObserver.isMatched("(max-width: 599px)");
   }
 
   leftArrow(currentIndex: number): void {
-    console.log(this.cardList.length - 1);
     if (currentIndex !== 0) {
       this.leftDotsCount = Array(this.currentIndex).fill(0);
       this.currentIndex--;
     }
-    console.log("left arrow clicked", currentIndex);
   }
 
   rightArrow(currentIndex: number): void {
@@ -63,7 +61,6 @@ export class CardComponent implements OnInit {
       ).fill(0);
       this.currentIndex++;
     }
-    console.log("right arrow clicked", currentIndex);
   }
 
   handleNavigation(event: MouseEvent): void {

@@ -3,38 +3,29 @@ import { inject, Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import {
   Firestore,
+  DocumentData,
+  QueryDocumentSnapshot,
+} from "@angular/fire/firestore";
+import {
   addDoc,
   collection,
   doc,
-  DocumentData,
   getDoc,
   getDocs,
   orderBy,
   query,
-  QueryDocumentSnapshot,
   updateDoc,
   where,
-} from "@angular/fire/firestore";
-
-// import "firebase/compat/database";
-import { config } from "../credentials";
+} from "firebase/firestore";
 
 @Injectable({
   providedIn: "root",
 })
 export class GravitaService {
   private http = inject(HttpClient);
-  // public enquiryListRef: firebase.default.database.Reference;
-
   db = inject(Firestore);
-  AILimitRef = doc(this.db, "Limits", "sGNbtnG9rFj4mL2akP5O");
   AILimit: number = 0;
-  private aiQueryCache$: Promise<QueryDocumentSnapshot<DocumentData, DocumentData>[]> | null = null;  
-
-  constructor() {
-    // const enquiryListRef = collection(db, "enquiry");
-    // this.enquiryListRef = firebase.default.database().ref(`/enquiry/`);
-  }
+  private aiQueryCache$: Promise<QueryDocumentSnapshot<DocumentData, DocumentData>[]> | null = null;
 
   createEnquiry(enquiryForm: FormGroup) {
     addDoc(collection(this.db, "Enquiries"), {
@@ -57,7 +48,7 @@ export class GravitaService {
         this.AILimit = data["AILimit"];
 
         if (createQuery) {
-          updateDoc(this.AILimitRef, {
+          updateDoc(limitsDocRef, {
             AILimit: this.AILimit - 1,
           });
         }
@@ -74,9 +65,6 @@ export class GravitaService {
   }
 
   async createAIQuery(sQuery: string) {
-    /** Add a new Firestore document - Limit to 100 queries per day.*/
-    // let limit = this.getLimit("sGNbtnG9rFj4mL2akP5O");
-
     try {
       await addDoc(collection(this.db, "generate"), {
         id: "bloggi",
@@ -133,10 +121,10 @@ export class GravitaService {
       if (startTime && typeof startTime.toDate === 'function') {
         startTime = startTime.toDate();
       }
-      return { 
-        docId: doc.id, 
+      return {
+        docId: doc.id,
         ...data,
-        status: { ...data['status'], startTime } 
+        status: { ...data['status'], startTime }
       };
     });
   }
@@ -144,18 +132,17 @@ export class GravitaService {
   async getArticleById(id: string) {
     const docRef = doc(this.db, "blog", id);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap);
-    
+
     if (docSnap.exists()) {
       const data = docSnap.data();
-       let startTime = data['status']?.startTime;
+      let startTime = data['status']?.startTime;
       if (startTime && typeof startTime.toDate === 'function') {
         startTime = startTime.toDate();
       }
-      return { 
-        docId: docSnap.id, 
+      return {
+        docId: docSnap.id,
         ...data,
-        status: { ...data['status'], startTime } 
+        status: { ...data['status'], startTime }
       };
     } else {
       return null;
@@ -171,7 +158,7 @@ export class GravitaService {
     // Ensure we set id: 'bloggi' so it shows up in the blog
     const docData = {
       ...data,
-      id: "bloggi", 
+      id: "bloggi",
       status: {
         startTime: new Date().toISOString(), // Use consistent timestamp format
         ...data.status
@@ -181,9 +168,9 @@ export class GravitaService {
   }
 
   async deleteArticle(id: string) {
-     // Implement if needed, though user only asked for Add/Update
-     // import { deleteDoc } from "firebase/firestore";
-     // await deleteDoc(doc(this.db, "generate", id));
+    // Implement if needed, though user only asked for Add/Update
+    // import { deleteDoc } from "firebase/firestore";
+    // await deleteDoc(doc(this.db, "generate", id));
   }
 
 }

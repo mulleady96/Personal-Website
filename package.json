@@ -39,7 +39,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@stripe/stripe-js": "^7.4.0",
     "countup.js": "^2.10.0",
-    "firebase": "^10.13.0",
+    "firebase": "^11.10.0",
     "marked": "^15.0.12",
     "mini-css-extract-plugin": "^2.9.1",
     "ngx-countup": "^13.2.0",

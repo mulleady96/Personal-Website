@@ -6,6 +6,8 @@ import {
   SnapshotMetadata,
 } from "firebase/firestore";
 import { MarkdownService } from "ngx-markdown";
+import { ActivatedRoute, Router } from "@angular/router";
+import { of } from "rxjs";
 
 import { GravitaService } from "../../Services/gravita.service";
 import { BlogComponent } from "./blog.component";
@@ -14,6 +16,8 @@ describe("Blog Component", () => {
   let component: BlogComponent;
   let gravitaService: jasmine.SpyObj<GravitaService>;
   let markdownService: jasmine.SpyObj<MarkdownService>;
+  let mockActivatedRoute: any;
+  let mockRouter: any;
 
   beforeEach(() => {
     // Create spy objects for the services
@@ -26,13 +30,24 @@ describe("Blog Component", () => {
       "render",
     ]);
 
+    mockActivatedRoute = {
+      data: of({ article: null }),
+      snapshot: { data: {} }
+    };
+
+    mockRouter = {
+      navigate: jasmine.createSpy("navigate")
+    };
+
     TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule, BlogComponent],
-    providers: [
+      imports: [HttpClientTestingModule, BlogComponent],
+      providers: [
         { provide: GravitaService, useValue: gravitaService },
         { provide: MarkdownService, useValue: markdownService },
-    ],
-});
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        { provide: Router, useValue: mockRouter }
+      ],
+    });
 
     const fixture = TestBed.createComponent(BlogComponent);
     component = fixture.componentInstance;
