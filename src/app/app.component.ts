@@ -28,6 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { PricingCardComponent } from "./Components/pricing-card/pricing-card.component";
+import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
 
 @Component({
   selector: "app-root",
@@ -44,6 +45,7 @@ import { PricingCardComponent } from "./Components/pricing-card/pricing-card.com
     MatSlideToggleModule,
     MatToolbarModule,
     PricingCardComponent,
+    ToolbarComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
@@ -94,6 +96,16 @@ export class AppComponent implements OnInit {
       ariaLabel: "Gallery",
       routerLink: "/gallery",
       icon: "collections",
+    },
+    {
+      ariaLabel: "AR Corner",
+      routerLink: "/AR-corner",
+      icon: "view_in_ar",
+    },
+    {
+      ariaLabel: "Privacy Policy",
+      routerLink: "/privacy-policy",
+      icon: "policy",
     },
   ];
 

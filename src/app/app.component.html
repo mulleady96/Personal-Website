@@ -48,30 +48,8 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
-      <mat-toolbar id="toolbar">
-        <mat-toolbar-row>
-          <div>
-            <button
-              mat-mini-fab
-              color="primary"
-              (click)="sidenav.open()"
-              aria-label="List"
-              >
-              <mat-icon>list</mat-icon>
-            </button>
-          </div>
-          <img
-            class="icon-logo"
-            [src]="imageSRC"
-            routerLink="/home"
-            alt="Andrew Mulleady Logo"
-            />
-            <div>
-              <app-pricing-card></app-pricing-card>
-            </div>
-          </mat-toolbar-row>
-        </mat-toolbar>
-        <router-outlet></router-outlet>
+      <app-toolbar [imageSRC]="imageSRC" (toggleSidenav)="sidenav.open()"></app-toolbar>
+      <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>

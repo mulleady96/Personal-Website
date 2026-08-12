@@ -65,10 +65,24 @@ export const routes: Routes = [
       ),
   },
   {
+    path: "vr-corner",
+    loadComponent: () =>
+      import("./Components/camera-kit/camera-kit.component").then(
+        (m) => m.CameraKitComponent,
+      ),
+  },
+  {
     path: "admin/login",
     loadComponent: () =>
       import("./pages/admin-dashboard/admin-login/admin-login.component").then(
         (m) => m.AdminLoginComponent
+      ),
+  },
+  {
+    path: "privacy-policy",
+    loadComponent: () =>
+      import("./pages/privacy-policy/privacy-policy.component").then(
+        (m) => m.PrivacyPolicyComponent
       ),
   },
   {

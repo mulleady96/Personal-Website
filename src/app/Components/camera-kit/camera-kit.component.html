@@ -1,0 +1,31 @@
+<div class="app-container">
+  <div class="glass-panel">
+    <header class="header">
+      <h1 class="gradient-text">Snap AR Experience</h1>
+      <p>Discover interactive lenses powered by Snap Camera Kit</p>
+    </header>
+
+    <main class="main-content">
+      <div class="camera-view">
+        <div class="debug-info">
+          Debug: SDK={{sdkStatus}} | Lenses={{lenses.length}} | Selected={{selectedLensId || 'none'}}
+        </div>
+        
+        <div class="camera-frame" #cameraContainer>
+          <!-- Canvas will be injected here -->
+        </div>
+
+        <div class="lens-selector-container">
+          <mat-form-field class="lens-dropdown">
+            <mat-label>Select a lens...</mat-label>
+            <mat-select [(ngModel)]="selectedLensId" (selectionChange)="onLensSelect()">
+              <mat-option *ngFor="let lens of lenses" [value]="lens.id">
+                {{lens.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

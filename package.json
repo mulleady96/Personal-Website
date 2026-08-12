@@ -37,6 +37,7 @@
     "@angular/service-worker": "^21.0.1",
     "@fortawesome/angular-fontawesome": "^1.0.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@snap/camera-kit": "^1.19.0",
     "@stripe/stripe-js": "^7.4.0",
     "countup.js": "^2.10.0",
     "firebase": "^11.10.0",

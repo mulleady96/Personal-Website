@@ -12,15 +12,7 @@ h2 {
   padding-left: 5px;
 }
 
-.mat-toolbar-row,
-.mat-toolbar-single-row {
-  flex-direction: row;
-  display: flex;
-  place-content: center space-around;
-  align-items: center;
-  color: rgb(45, 56, 67);
-  transition: none;
-}
+
 
 .side-menu-button {
   width: 100%;
@@ -68,24 +60,7 @@ mat-sidenav {
   border-radius: 71% 29% 24% 76% / 50% 43% 57% 50%;
 }
 
-.mat-toolbar {
-  backdrop-filter: blur(8px);
-  padding-left: 0px;
-  padding-right: 0px;
-  -webkit-backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  align-self: center;
-  top: 0;
-  left: 0;
-  position: fixed;
-  border-radius: 24px;
-  text-align: center;
-  z-index: 100; /* Ensure that your app's content doesn't overlap the toolbar */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
+
 
 .router-link-active {
   outline: 2px solid;
@@ -106,13 +81,7 @@ mat-sidenav {
   }
 }
 
-.icon-logo {
-  height: 100px;
-  mix-blend-mode: overlay;
-  // width: auto;
-  -webkit-animation: fadeInDown 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-  animation: fadeInDown 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-}
+
 
 .bottomSocial {
   padding: 10px;
@@ -122,9 +91,7 @@ mat-sidenav {
   gap: 35px;
 }
 
-img {
-  cursor: pointer;
-}
+
 
 ::-webkit-scrollbar {
   height: 1rem;
@@ -142,32 +109,4 @@ img {
   border-radius: 9999px;
 }
 
-// keyframes
-// TODO: make animations file like mixin.
-@-webkit-keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
 
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}

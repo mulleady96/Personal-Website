@@ -6,10 +6,6 @@ table {
   text-align: center;
 }
 
-.margin {
-  margin-top: 50px;
-}
-
 .mat-tab-label .mat-tab-label-content {
   display: inline-flex;
   justify-content: center;
