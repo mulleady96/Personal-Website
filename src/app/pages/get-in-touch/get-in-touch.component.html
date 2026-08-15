@@ -15,18 +15,17 @@
     </a>
   </div>
 
-  <form [formGroup]="enquiryForm">
+  <form (submit)="createEnquiry(stepper); $event.preventDefault()">
     <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
       <mat-step
-        [stepControl]="enquiryForm.get('firstStep') || fallbackControl"
-        formGroupName="firstStep"
+        [completed]="enquiryForm.firstStep().valid()"
+        [hasError]="enquiryForm.firstStep().invalid()"
         >
         <ng-template matStepLabel>Fill out your name</ng-template>
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <!-- Use formGroupName to target the correct nested group -->
-          <input matInput type="text" formControlName="name" required />
-          @if (enquiryForm.get('firstStep.name')?.hasError('required')) {
+          <input matInput type="text" [field]="enquiryForm.firstStep.name" />
+          @if (enquiryForm.firstStep.name().touched() && enquiryForm.firstStep.name().errors().length) {
             <mat-error
               >
               Name is required
@@ -34,18 +33,18 @@
           }
         </mat-form-field>
         <div>
-          <button mat-button aria-label="Next" matStepperNext>Next</button>
+          <button type="button" mat-button aria-label="Next" matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step
-        [stepControl]="enquiryForm.get('secondStep') || fallbackControl"
-        formGroupName="secondStep"
+        [completed]="enquiryForm.secondStep().valid()"
+        [hasError]="enquiryForm.secondStep().invalid()"
         >
         <ng-template matStepLabel>Fill out your e-mail</ng-template>
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" required />
-          @if (enquiryForm.get('secondStep.email')?.hasError('required')) {
+          <input matInput type="email" [field]="enquiryForm.secondStep.email" />
+          @if (enquiryForm.secondStep.email().touched() && enquiryForm.secondStep.email().errors().length) {
             <mat-error
               >
               Email is required
@@ -54,41 +53,48 @@
         </mat-form-field>
 
         <div>
-          <button mat-button aria-label="Back" matStepperPrevious>Back</button>
-          <button mat-button aria-label="Next" matStepperNext>Next</button>
+          <button type="button" mat-button aria-label="Back" matStepperPrevious>Back</button>
+          <button type="button" mat-button aria-label="Next" matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
+        <ng-template matStepLabel>Review</ng-template>
         <p>Your Details:</p>
         <p>
           Name:
           {{
-          enquiryForm.get("firstStep.name")?.value ||
+          enquiryForm.firstStep.name().value() ||
           "Please fill out your name"
           }}
         </p>
         <p>
           e-mail:
           {{
-          enquiryForm.get("secondStep.email")?.value ||
+          enquiryForm.secondStep.email().value() ||
           "Please fill out your email"
           }}
         </p>
 
         <div>
-          <button mat-button aria-label="Back" matStepperPrevious>Back</button>
-          <button mat-button aria-label="Reset" (click)="stepper.reset()">
+          <button type="button" mat-button aria-label="Back" matStepperPrevious>Back</button>
+          <button type="button" mat-button aria-label="Reset" (click)="stepper.reset(); clearForm()">
             Reset
           </button>
           <button
             mat-button
             aria-label="Send"
-            [disabled]="!this.enquiryForm.valid"
-            (click)="this.createEnquiry()"
+            [disabled]="enquiryForm().invalid()"
             >
             Send
           </button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Complete</ng-template>
+        <div style="text-align: center; padding: 2rem 0;">
+          <h2>Thank You!</h2>
+          <p>We've received your enquiry and will be in touch shortly.</p>
+          <button type="button" mat-button color="primary" (click)="stepper.reset(); clearForm()">Send Another</button>
         </div>
       </mat-step>
     </mat-stepper>

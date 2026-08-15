@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,7 +36,7 @@ import { AuthService } from '../../Services/auth.service';
           <mat-card-title>Articles</mat-card-title>
         </mat-card-header>
         <mat-list>
-          <mat-list-item *ngFor="let article of articles" (click)="editArticle(article.docId)">
+          <mat-list-item *ngFor="let article of articles()" (click)="editArticle(article.docId)">
             <mat-icon matListItemIcon>article</mat-icon>
             <div matListItemTitle>{{ article.prompt || 'Untitled' }}</div>
             <div matListItemLine>{{ article.status?.startTime | date:'medium' }}</div>
@@ -59,8 +59,7 @@ import { AuthService } from '../../Services/auth.service';
 export class AdminDashboardComponent implements OnInit {
   gravita = inject(GravitaService);
   auth = inject(AuthService);
-  cdr = inject(ChangeDetectorRef);
-  articles: any[] = [];
+  articles = signal<any[]>([]);
 
   router = inject(Router);
 
@@ -69,8 +68,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   async loadArticles() {
-    this.articles = await this.gravita.getArticles();
-    this.cdr.markForCheck();
+    this.articles.set(await this.gravita.getArticles());
   }
 
   logout() {

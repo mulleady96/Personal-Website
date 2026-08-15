@@ -1,5 +1,5 @@
 import { BreakpointObserver } from "@angular/cdk/layout";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, input, OnInit } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { MatCard, MatCardContent, MatCardActions } from "@angular/material/card";
 import { NgClass, NgOptimizedImage } from "@angular/common";
@@ -32,8 +32,8 @@ export interface CardItem {
   ],
 })
 export class CardComponent implements OnInit {
-  @Input() cardList: CardItem[] = [];
-  @Input() isStacked?: boolean = true;
+  cardList = input<CardItem[]>([]);
+  isStacked = input<boolean>(true);
   public currentIndex: number = 0;
   public leftDotsCount: number[] = [];
   public rightDotsCount: number[] = [];
@@ -55,9 +55,9 @@ export class CardComponent implements OnInit {
   }
 
   rightArrow(currentIndex: number): void {
-    if (currentIndex < this.cardList.length - 1) {
+    if (currentIndex < this.cardList().length - 1) {
       this.rightDotsCount = Array(
-        this.cardList.length - this.currentIndex,
+        this.cardList().length - this.currentIndex,
       ).fill(0);
       this.currentIndex++;
     }

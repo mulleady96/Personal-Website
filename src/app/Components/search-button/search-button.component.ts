@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, output } from "@angular/core";
 import { MatIcon } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 
@@ -19,7 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class SearchButtonComponent {
   search: boolean = false;
-  @Output() searchChange = new EventEmitter<boolean>();
+  searchChange = output<boolean>();
 
   expand() {
     this.search = !this.search;

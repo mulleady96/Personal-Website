@@ -1,4 +1,4 @@
-<div [ngClass]="{ 'dark-theme': isDarkTheme }">
+<div [ngClass]="{ 'dark-theme': isDarkTheme() }">
   <mat-sidenav-container (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')">
       <h2>
@@ -19,11 +19,11 @@
         }
       </div>
       <mat-slide-toggle
-        [checked]="isDarkTheme"
+        [checked]="isDarkTheme()"
         (change)="onThemeChange($event.checked)"
         >
         <span>
-          {{ themeDescription }}
+          {{ themeDescription() }}
         </span>
       </mat-slide-toggle>
       <div class="bottomSocial">
@@ -48,7 +48,7 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
-      <app-toolbar [imageSRC]="imageSRC" (toggleSidenav)="sidenav.open()"></app-toolbar>
+      <app-toolbar [imageSRC]="imageSRC()" (toggleSidenav)="sidenav.open()"></app-toolbar>
       <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>

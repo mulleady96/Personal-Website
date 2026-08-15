@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,8 +21,8 @@ import { PricingCardComponent } from '../pricing-card/pricing-card.component';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
-  @Input() imageSRC!: string;
-  @Output() toggleSidenav = new EventEmitter<void>();
+  imageSRC = input.required<string>();
+  toggleSidenav = output<void>();
 
   onToggleSidenav() {
     this.toggleSidenav.emit();

@@ -1,53 +1,53 @@
 <div class="rowWrap">
-  @if (cardList.length > 0 && isStacked) {
+  @if (cardList().length > 0 && isStacked()) {
     <mat-card
       (click)="handleNavigation($event)"
       (mousemove)="handleHover($event)"
       (mouseleave)="resetHover()"
       [ngClass]="{
         'highlight-left': hoverSide === 'left' && currentIndex !== 0,
-        'highlight-right': hoverSide === 'right' && currentIndex !== cardList.length - 1,
+        'highlight-right': hoverSide === 'right' && currentIndex !== cardList().length - 1,
         'highlight-left-red': hoverSide === 'left' && currentIndex === 0,
-        'highlight-right-red': hoverSide === 'right' && currentIndex === cardList.length - 1
+        'highlight-right-red': hoverSide === 'right' && currentIndex === cardList().length - 1
       }"
       >
-      @if (cardList[currentIndex]?.image) {
+      @if (cardList()[currentIndex]?.image) {
         <img
-          ngSrc="{{ cardList[currentIndex].image }}"
+          ngSrc="{{ cardList()[currentIndex].image }}"
           fill
           class="card-image-top"
-          alt="{{ cardList[currentIndex].description }}"
+          alt="{{ cardList()[currentIndex].description }}"
           priority
           />
       }
 
       <h3 class="card-heading">
-        {{ cardList[currentIndex].title }} <span>-</span>
-        {{ currentIndex + 1 }} / {{ cardList.length }}
+        {{ cardList()[currentIndex].title }} <span>-</span>
+        {{ currentIndex + 1 }} / {{ cardList().length }}
       </h3>
 
       <mat-card-content>
-        {{ cardList[currentIndex].description }}
+        {{ cardList()[currentIndex].description }}
       </mat-card-content>
       <mat-card-actions>
-        @if (cardList[currentIndex].link) {
+        @if (cardList()[currentIndex].link) {
           <a
           [routerLink]="
-            !cardList[currentIndex].externalLink
-              ? cardList[currentIndex].link
+            !cardList()[currentIndex].externalLink
+              ? cardList()[currentIndex].link
               : null
           "
             ariaCurrentWhenActive="page"
             >
-            @if (cardList[currentIndex]?.buttonText) {
+            @if (cardList()[currentIndex]?.buttonText) {
               <button
-                (click)="navigate(cardList[currentIndex])"
+                (click)="navigate(cardList()[currentIndex])"
                 mat-raised-button
                 class="mat-product-button"
-                [attr.aria-label]="cardList[currentIndex].buttonText"
+                [attr.aria-label]="cardList()[currentIndex].buttonText"
                 color="accent"
                 >
-                {{ cardList[currentIndex].buttonText }}
+                {{ cardList()[currentIndex].buttonText }}
               </button>
             }
           </a>
@@ -55,7 +55,7 @@
       </mat-card-actions>
     </mat-card>
   } @else {
-    @for (card of cardList; track card; let i = $index) {
+    @for (card of cardList(); track card; let i = $index) {
       <mat-card>
         @if (card.image) {
           <img

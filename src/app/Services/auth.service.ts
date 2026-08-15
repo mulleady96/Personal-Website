@@ -1,4 +1,4 @@
-import { inject, Injectable } from "@angular/core";
+import { inject, Injectable, signal } from "@angular/core";
 import {
   Auth,
   GoogleAuthProvider,
@@ -20,9 +20,7 @@ export class AuthService {
   auth = inject(Auth);
   db = inject(Firestore);
 
-  private dataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  public data$: Observable<any> = this.dataSubject.asObservable();
-  constructor() {}
+  currentUser = signal<User | null>(null);
 
   getCurrentUser(): Promise<User | null> {
     const auth = this.auth;
@@ -35,7 +33,7 @@ export class AuthService {
 
           if (user) {
             // User is signed in
-            this.dataSubject.next(user);
+            this.currentUser.set(user);
             resolve(user); // Resolve with the user object
           } else {
             // User is signed out
@@ -102,6 +100,7 @@ export class AuthService {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        this.currentUser.set(null);
       })
       .catch((error) => {
         console.error(error);

@@ -1,5 +1,5 @@
 <div class="blog-header-container">
-  @if (showArticle) {
+  @if (showArticle()) {
     <button
       (click)="selectedBlog(0)"
       mat-mini-fab
@@ -9,41 +9,20 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
   }
-  @if (!showArticle) {
+  @if (!showArticle()) {
     <h1>Blog</h1>
   }
-  <!-- @if (!showArticle) {
-    <app-search-button
-      (searchChange)="onSearchChange($event)"
-    ></app-search-button>
-  } -->
   </div>
-  <!-- <div class="center-alignment">
-    @if (!isLoaded) {
+
+  <div class="center-alignment">
+    @if (!isLoaded()) {
       <mat-spinner color="accent"></mat-spinner>
     }
-  </div> -->
+  </div>
 
-  <!-- <div class="center-alignment">
-    @if (search && !showArticle) {
-      <mat-chip-listbox
-        aria-label="Cutest dog breeds"
-        >
-        @for (filter of filters; track filter) {
-          <mat-chip-option
-            (click)="filterPosts(filter.name)"
-            selected="{{ filter.selected }}"
-            (selectionChange)="onChipSelectionChange($event, filter)"
-            >{{ filter.name }}</mat-chip-option
-            >
-          }
-        </mat-chip-listbox>
-      }
-    </div> -->
-
-    @if (!showArticle) {
+    @if (!showArticle()) {
       <div class="blog-responses-container">
-        @for (response of responses; track response; let i = $index) {
+        @for (response of responses(); track response; let i = $index) {
           <mat-card
             (click)="selectedBlog(i)"
             class="card blog-card"
@@ -86,9 +65,9 @@
   <!-- *ngFor="let response of markdownContent; let last = last" -->
 
   <!-- <h1>{{ response.prompt }}</h1> -->
-  @if (showArticle) {
+  @if (showArticle()) {
     <div class="padTop">
-      <markdown [data]="this.responses[selectedValue]['response']"></markdown>
+      <markdown [data]="responses()[selectedValue()]['response']"></markdown>
     </div>
   }
 </div>

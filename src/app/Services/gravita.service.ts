@@ -18,6 +18,11 @@ import {
   where,
 } from "firebase/firestore";
 
+export interface Enquiry {
+  firstStep: { name: string };
+  secondStep: { email: string };
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -27,7 +32,7 @@ export class GravitaService {
   AILimit: number = 0;
   private aiQueryCache$: Promise<QueryDocumentSnapshot<DocumentData, DocumentData>[]> | null = null;
 
-  createEnquiry(enquiryForm: FormGroup) {
+  createEnquiry(enquiryForm: Enquiry) {
     addDoc(collection(this.db, "Enquiries"), {
       enquiry: enquiryForm,
     });

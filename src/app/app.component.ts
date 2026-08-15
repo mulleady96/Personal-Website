@@ -3,12 +3,11 @@ import { OverlayContainer } from "@angular/cdk/overlay";
 import { CommonModule, Location } from "@angular/common";
 import {
   Component,
-  EventEmitter,
-  HostBinding,
   inject,
   OnInit,
-  Output,
-  ViewChild,
+  output,
+  viewChild,
+  signal,
 } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { SwUpdate } from "@angular/service-worker";
@@ -33,6 +32,9 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
 @Component({
   selector: "app-root",
   standalone: true,
+  host: {
+    '[class]': 'className()'
+  },
   imports: [
     CommonModule,
     RouterModule,
@@ -104,33 +106,29 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  @Output()
-  navToggle = new EventEmitter();
+  navToggle = output();
 
-  isDarkTheme!: boolean;
-  themeDescription: string;
-  iconValue = "nights_stay";
-  imageSRC = "assets/AM NEW Logo 2020.png";
-  storedTheme!: boolean;
-  checked!: boolean;
+  isDarkTheme = signal(false);
+  themeDescription = signal("Light Theme");
+  iconValue = signal("nights_stay");
+  imageSRC = signal("assets/AM NEW Logo 2020.png");
+  storedTheme = signal(false);
+  checked = signal(false);
 
   constructor() {
-    // initializeApp(config);
-    this.themeDescription = "Light Theme";
     this.library.addIcons(faGithub, faLinkedin, faWhatsapp);
     logEvent(this.analytics, 'app_load', { page: 'main' });
   }
 
-  @ViewChild("sidenav") sidenav!: MatSidenav;
-  @HostBinding("class")
-  className = "";
+  sidenav = viewChild<MatSidenav>("sidenav");
+  className = signal("");
 
-  reason = "";
-  openWithSwipe = false;
+  reason = signal("");
+  openWithSwipe = signal(false);
 
   close(reason: string) {
-    this.reason = reason;
-    this.sidenav.close();
+    this.reason.set(reason);
+    this.sidenav()?.close();
   }
 
   onThemeChange(checked: boolean): void {
@@ -142,7 +140,7 @@ export class AppComponent implements OnInit {
   }
 
   private updateTheme(isDark: boolean): void {
-    this.isDarkTheme = isDark;
+    this.isDarkTheme.set(isDark);
     const darkThemeClass = "dark-theme";
 
     // Update overlay container for dialogs, menus, etc.
@@ -150,18 +148,18 @@ export class AppComponent implements OnInit {
       this.overlayContainer.getContainerElement().classList;
 
     if (isDark) {
-      this.className = darkThemeClass; // Assumes HostBinding('class')
+      this.className.set(darkThemeClass); // Assumes host class binding
       overlayContainerClasses.add(darkThemeClass);
     } else {
-      this.className = "";
+      this.className.set("");
       overlayContainerClasses.remove(darkThemeClass);
     }
 
     // Update other theme-dependent properties
-    this.imageSRC = isDark
+    this.imageSRC.set(isDark
       ? "assets/AM New Logo Light 2020.png"
-      : "assets/AM NEW Logo 2020.png";
-    this.themeDescription = isDark ? "Dark Theme" : "Light Theme";
+      : "assets/AM NEW Logo 2020.png");
+    this.themeDescription.set(isDark ? "Dark Theme" : "Light Theme");
 
     // Notify the service
     this.themeService.setDarkTheme(isDark);

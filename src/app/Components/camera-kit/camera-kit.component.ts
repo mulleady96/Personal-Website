@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, viewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,7 +17,7 @@ const snapLenses = ['29b63f02-cce2-42d3-9c01-127443776680', '6fbb0c75-29db-4642-
   styleUrls: ['./camera-kit.component.scss']
 })
 export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('cameraContainer', { static: false }) cameraContainer!: ElementRef<HTMLDivElement>;
+  cameraContainer = viewChild<ElementRef<HTMLDivElement>>('cameraContainer');
   
   sdkStatus: 'loading' | 'ready' | 'error' = 'loading';
   lenses: Lens[] = [];
@@ -41,11 +41,11 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ngAfterViewInit() {
-    if (this.cameraKit && this.cameraContainer) {
+    if (this.cameraKit && this.cameraContainer()) {
       await this.initSession();
     } else {
       const checkInterval = setInterval(async () => {
-        if (this.cameraKit && this.cameraContainer) {
+        if (this.cameraKit && this.cameraContainer()) {
           clearInterval(checkInterval);
           await this.initSession();
         }
@@ -84,7 +84,7 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private async initSession() {
-    if (!this.cameraKit || !this.cameraContainer) return;
+    if (!this.cameraKit || !this.cameraContainer()) return;
     try {
       this.session = await this.cameraKit.createSession();
       
@@ -93,7 +93,7 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
       await this.session.setSource(source);
       
       this.session.play();
-      this.cameraContainer.nativeElement.appendChild(this.session.output.live);
+      this.cameraContainer()!.nativeElement.appendChild(this.session.output.live);
       
       await this.applySelectedLens();
     } catch(err) {

@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, HostListener } from "@angular/core";
+import { Component, Inject, input, OnInit, HostListener } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogClose } from "@angular/material/dialog";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
@@ -45,8 +45,7 @@ export class MediaListComponent implements OnInit {
   locationCount = 0;
   search!: boolean;
   modal!: boolean;
-  @Input()
-  name!: string;
+  name = input<string>();
 
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
 

@@ -1,12 +1,9 @@
 import { animate, style, transition, trigger } from "@angular/animations";
-import { Component, inject, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Component, inject, signal, effect, OnDestroy, OnInit } from "@angular/core";
+import { form, Field, required, email, submit } from "@angular/forms/signals";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { of } from "rxjs/internal/observable/of";
-import { Subject } from "rxjs/internal/Subject";
-import { debounceTime, switchMap } from "rxjs/operators";
 
-import { GravitaService } from "../../Services/gravita.service";
+import { GravitaService, Enquiry } from "../../Services/gravita.service";
 
 import { MatFabButton, MatButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
@@ -29,80 +26,75 @@ import { MatFormField, MatLabel, MatInput, MatError } from "@angular/material/in
             ]),
         ]),
     ],
-    imports: [MatFabButton, MatIcon, FormsModule, ReactiveFormsModule, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious]
+    imports: [MatFabButton, MatIcon, Field, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious]
 })
 export class GetInTouchComponent implements OnInit, OnDestroy {
-  @Input()
-  warning!: string;
-  public enquiryForm: FormGroup;
+  warning = signal<string>("");
+  enquiryModel = signal<Enquiry>({
+    firstStep: { name: "" },
+    secondStep: { email: "" }
+  });
+
+  enquiryForm = form(this.enquiryModel, (s) => {
+    required(s.firstStep.name);
+    required(s.secondStep.email);
+    email(s.secondStep.email);
+  });
+
   public MaxLength = 500;
   public remaining = 500;
-  private unsubscribe = new Subject<void>();
-  private _formBuilder = inject(FormBuilder);
   public gravita = inject(GravitaService);
   public snackBar = inject(MatSnackBar);
-  fallbackControl = new FormControl(null);
 
   isLinear = false;
 
   constructor() {
-    this.enquiryForm = this._formBuilder.group({
-      // Create nested form groups for each step
-      firstStep: this._formBuilder.group({
-        name: new FormControl<string | null>("", [Validators.required]),
-      }),
-      secondStep: this._formBuilder.group({
-        email: new FormControl<string | null>("", [
-          Validators.required,
-          Validators.email,
-        ]),
-      }),
+    effect((onCleanup) => {
+      const val = this.enquiryForm().value();
+      const timeout = setTimeout(() => {
+        localStorage.setItem("form", JSON.stringify(val));
+      }, 1500);
+      onCleanup(() => clearTimeout(timeout));
     });
   }
 
-  createEnquiry = () => {
-    try {
-      // call service and submit the values from form into the DB.
-      this.gravita.createEnquiry(this.enquiryForm.value);
-
-      // SnackBar success message showing the form has been submitted.
-      this.snackBar.open("Form Successfully Submitted, Thank You!", "Great", {
-        duration: 5000,
-      });
-    } catch (error) {
-      console.error(error);
-      this.snackBar.open(
-        "Unfortunately we ran into a problem.",
-        "Please try again.",
-        {
-          duration: 5000,
-        },
-      );
-    }
-    // Final step is to reset the form on submission.
-    this.enquiryForm.reset();
-    this.remaining = 500;
+  createEnquiry = (stepper: MatStepper) => {
+    submit(this.enquiryForm, async () => {
+      try {
+        await this.gravita.createEnquiry(this.enquiryModel());
+        this.snackBar.open("Form Successfully Submitted, Thank You!", "Great", { duration: 5000 });
+        stepper.next();
+        localStorage.removeItem("form"); // Clear saved form data on success
+      } catch (error) {
+        console.error(error);
+        this.snackBar.open("Unfortunately we ran into a problem.", "Please try again.", { duration: 5000 });
+      }
+    });
   };
 
   clearForm = () => {
-    // Reset form back to default values.
-    this.enquiryForm.reset();
-    // Mark as pristine
-    this.enquiryForm.markAsUntouched();
+    this.enquiryModel.set({
+      firstStep: { name: "" },
+      secondStep: { email: "" }
+    });
+    this.enquiryForm().reset();
     this.remaining = 500;
-    this.warning = "";
+    this.warning.set("");
   };
 
   ngOnInit() {
-    // Form values saved.
-    this.enquiryForm.valueChanges
-      .pipe(
-        debounceTime(1500),
-        switchMap((value) => of(value)),
-      )
-      .subscribe((value) => {
-        localStorage.setItem("form", JSON.stringify(value));
-      });
+    const storedForm = localStorage.getItem("form");
+    if (storedForm) {
+      try {
+        const parsed = JSON.parse(storedForm);
+        if (parsed.firstStep || parsed.secondStep) {
+          this.enquiryModel.set({
+            firstStep: parsed.firstStep || { name: "" },
+            secondStep: parsed.secondStep || { email: "" }
+          });
+        }
+      } catch(e) {}
+    }
   }
 
   ngOnDestroy() {}
@@ -110,6 +102,6 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
   onTextarea = (text: object) => {
     // Calculates characters remaining in textarea field.
     this.remaining = this.MaxLength - Object.keys(text).length;
-    this.warning = this.remaining <= 100 ? "orange" : "";
+    this.warning.set(this.remaining <= 100 ? "orange" : "");
   };
 }
