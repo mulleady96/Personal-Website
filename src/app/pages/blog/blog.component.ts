@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatChipSelectionChange } from "@angular/material/chips";
@@ -34,6 +35,7 @@ interface ResponseData {
 })
 export class BlogComponent implements OnInit, OnDestroy {
   private gravita = inject(GravitaService);
+  private cdr = inject(ChangeDetectorRef);
   markdownText = "";
   prompt: string[] = [];
   responses: ResponseData[] = [];
@@ -82,6 +84,7 @@ export class BlogComponent implements OnInit, OnDestroy {
       } else {
         this.showArticle = false;
       }
+      this.cdr.markForCheck();
     });
   }
 
@@ -123,6 +126,7 @@ export class BlogComponent implements OnInit, OnDestroy {
 
       this.responses.reverse();
       this.isLoaded = true;
+      this.cdr.markForCheck();
     } catch (error) {
       console.error("Error fetching data:", error);
     }

@@ -102,11 +102,6 @@ export class AppComponent implements OnInit {
       routerLink: "/AR-corner",
       icon: "view_in_ar",
     },
-    {
-      ariaLabel: "Privacy Policy",
-      routerLink: "/privacy-policy",
-      icon: "policy",
-    },
   ];
 
   @Output()

@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-
-
 import { paymentSuccessGuard } from "./Guards/payment-success.guard";
 import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 import { adminGuard } from "./Guards/admin.guard";
@@ -65,7 +63,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: "vr-corner",
+    path: "AR-corner",
     loadComponent: () =>
       import("./Components/camera-kit/camera-kit.component").then(
         (m) => m.CameraKitComponent,

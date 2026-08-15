@@ -4,7 +4,7 @@
 import {
   enableProdMode,
   importProvidersFrom,
-  provideZoneChangeDetection,
+  provideZonelessChangeDetection,
 } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
 import { provideHttpClient } from "@angular/common/http";
@@ -30,7 +30,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideRouter(routes, withInMemoryScrolling({ anchorScrolling: "enabled" })),
     provideAnimationsAsync(),
     provideHttpClient(),
