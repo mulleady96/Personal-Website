@@ -5,9 +5,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { bootstrapCameraKit, CameraKit, Lens, CameraKitSession, createMediaStreamSource } from '@snap/camera-kit';
-const API_TOKEN = "eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzYxMzEyMjM0LCJzdWIiOiJhMTE1MzI3NS01M2VhLTRlOWQtYjkwZi00NzAzMzY5ZGM2MmN-U1RBR0lOR35jODZhYzVhZC05YjBjLTRlNDEtOWE1My1lYzVhZGUxOWNjY2MifQ.nvYzfHxvV1JDHXQHCRQ5ZnJ-xWpBpgMFhekkSth1Nac";
-const LENS_GROUP_ID = "c3b9e897-b804-4522-b57d-66fb64242d91";
-const snapLenses = ['29b63f02-cce2-42d3-9c01-127443776680', '6fbb0c75-29db-4642-ba52-c9a24cebdbdd', '6f148acd-47f2-40c2-8489-ce9e79f2dbd9', '50c27549-dcb6-4317-b893-c57ffa65bd06', 'c3d0885f-4b0e-4f68-a540-61fbfc894d01'];
+import { environment } from '../../../environments/environment';
+
+const API_TOKEN = environment.cameraKit.apiToken;
+const LENS_GROUP_ID = environment.cameraKit.lensGroupId;
+const snapLenses = environment.cameraKit.snapLenses;
 
 @Component({
   selector: 'app-camera-kit',
