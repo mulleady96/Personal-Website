@@ -61,7 +61,7 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
   createEnquiry = (stepper: MatStepper) => {
     submit(this.enquiryForm, async () => {
       try {
-        await this.gravita.createEnquiry(this.enquiryModel());
+        this.gravita.createEnquiry(this.enquiryModel());
         this.snackBar.open("Form Successfully Submitted, Thank You!", "Great", { duration: 5000 });
         stepper.next();
         localStorage.removeItem("form"); // Clear saved form data on success
