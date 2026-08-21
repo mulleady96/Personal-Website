@@ -15,6 +15,7 @@
     </a>
   </div>
 
+  @if (!isSubmitted()) {
   <form (submit)="createEnquiry(stepper); $event.preventDefault()">
     <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
       <mat-step
@@ -57,23 +58,58 @@
           <button type="button" mat-button aria-label="Next" matStepperNext>Next</button>
         </div>
       </mat-step>
+      <mat-step
+        [completed]="enquiryForm.thirdStep().valid()"
+        [hasError]="enquiryForm.thirdStep().invalid()"
+        >
+        <ng-template matStepLabel>Fill out your query</ng-template>
+        <mat-form-field style="width: 100%;">
+          <mat-label>Query</mat-label>
+          <textarea
+            matInput
+            [field]="enquiryForm.thirdStep.query"
+            maxLength="500"
+            rows="5"
+            (input)="onTextarea($any($event.target).value)"
+          ></textarea>
+          <mat-hint align="end" [style.color]="warning()">
+            {{ remaining }} / {{ MaxLength }}
+          </mat-hint>
+          @if (enquiryForm.thirdStep.query().touched() && enquiryForm.thirdStep.query().errors().length) {
+            <mat-error>
+              Query is required
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <div>
+          <button type="button" mat-button aria-label="Back" matStepperPrevious>Back</button>
+          <button type="button" mat-button aria-label="Next" matStepperNext>Next</button>
+        </div>
+      </mat-step>
       <mat-step>
         <ng-template matStepLabel>Review</ng-template>
-        <p>Your Details:</p>
-        <p>
-          Name:
-          {{
-          enquiryForm.firstStep.name().value() ||
-          "Please fill out your name"
-          }}
-        </p>
-        <p>
-          e-mail:
-          {{
-          enquiryForm.secondStep.email().value() ||
-          "Please fill out your email"
-          }}
-        </p>
+        
+        <div class="review-section">
+          <div class="review-item">
+            <span class="review-label">Name</span>
+            <span class="review-value">
+              {{ enquiryForm.firstStep.name().value() || "Please fill out your name" }}
+            </span>
+          </div>
+          <div class="review-item">
+            <span class="review-label">Email</span>
+            <span class="review-value">
+              {{ enquiryForm.secondStep.email().value() || "Please fill out your email" }}
+            </span>
+          </div>
+          <div class="review-item">
+            <span class="review-label">Query</span>
+            <span class="review-value">
+              {{ enquiryForm.thirdStep.query().value() || "Please fill out your query" }}
+            </span>
+          </div>
+        </div>
 
         <div>
           <button type="button" mat-button aria-label="Back" matStepperPrevious>Back</button>
@@ -89,14 +125,13 @@
           </button>
         </div>
       </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Complete</ng-template>
-        <div style="text-align: center; padding: 2rem 0;">
-          <h2>Thank You!</h2>
-          <p>We've received your enquiry and will be in touch shortly.</p>
-          <button type="button" mat-button color="primary" (click)="stepper.reset(); clearForm()">Send Another</button>
-        </div>
-      </mat-step>
     </mat-stepper>
   </form>
+  } @else {
+  <div class="completion-message">
+    <h2>Thank You!</h2>
+    <p>We've received your enquiry and will be in touch shortly.</p>
+    <button type="button" mat-button color="primary" (click)="clearForm()">Send Another</button>
+  </div>
+  }
 </div>

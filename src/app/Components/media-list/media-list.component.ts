@@ -1,13 +1,14 @@
-import { Component, Inject, input, OnInit, HostListener } from "@angular/core";
+import { Component, Inject, input, OnInit, HostListener, ChangeDetectorRef, Pipe, PipeTransform, ChangeDetectionStrategy, signal } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogClose } from "@angular/material/dialog";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 
-import * as Images from "../../../assets/Images.json";
 import { SearchButtonComponent } from "../search-button/search-button.component";
 import { MatChipSet, MatChip } from "@angular/material/chips";
 import { MatBadge } from "@angular/material/badge";
 import { NgClass } from "@angular/common";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { GravitaService } from "../../Services/gravita.service";
 
 import { MatList } from "@angular/material/list";
 
@@ -31,20 +32,46 @@ interface MediaItem {
   type: 'image' | 'video';
 }
 
+@Pipe({
+  name: 'safeYoutubeUrl',
+  standalone: true
+})
+export class SafeYoutubeUrlPipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
+
+  transform(url: string): SafeResourceUrl {
+    let videoId = '';
+    if (url.includes('youtu.be')) {
+        videoId = url.split('/').pop() || '';
+    } else if (url.includes('youtube.com')) {
+        const params = new URLSearchParams(url.split('?')[1]);
+        videoId = params.get('v') || '';
+    }
+    
+    if (videoId) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
+    } else {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url); // Fallback
+    }
+  }
+}
+
 @Component({
     selector: "app-media-list",
     templateUrl: "./media-list.component.html",
     styleUrls: ["./media-list.component.scss"],
-    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatList, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem]
+    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatList, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, MatProgressSpinnerModule, SafeYoutubeUrlPipe],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaListComponent implements OnInit {
-  images = Images;
-  imageList: MediaItem[] = this.images.images as MediaItem[];
+  imageList: MediaItem[] = [];
+  originalImageList: MediaItem[] = [];
   count!: string;
   locations: location[] = [];
   locationCount = 0;
   search!: boolean;
   modal!: boolean;
+  isLoading = true;
   name = input<string>();
 
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
@@ -52,12 +79,13 @@ export class MediaListComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private gravitaService: GravitaService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    this.getImages();
-    this.getUniqueNames();
+    this.fetchImages();
 
     this.route.queryParams.subscribe(params => {
       if (params['unlock-collection'] !== undefined) {
@@ -132,21 +160,6 @@ export class MediaListComponent implements OnInit {
     this.filterMedia();
   }
 
-  filterMedia() {
-    const selectedLocations = this.locations.filter(l => l.selected).map(l => l.name);
-    const allSelected = selectedLocations.includes("All");
-
-    if (allSelected || selectedLocations.length === 0) {
-      this.imageList = this.images.images as MediaItem[];
-    } else {
-      this.imageList = (this.images.images as MediaItem[]).filter(item => 
-        selectedLocations.includes(item.title)
-      );
-    }
-
-    this.updateCount();
-  }
-
   updateCount() {
     const imageCount = this.imageList.filter(item => item.type === 'image' || !item.type).length;
     const videoCount = this.imageList.filter(item => item.type === 'video').length;
@@ -162,9 +175,31 @@ export class MediaListComponent implements OnInit {
     }
   }
 
-  getImages() {
-    this.imageList = this.images.images as MediaItem[];
+  async fetchImages() {
+    this.isLoading = true;
+    const media = await this.gravitaService.getMediaFromFirestore();
+    this.originalImageList = media;
+    this.imageList = [...this.originalImageList];
     this.imageList.sort((a, b) => a.title.localeCompare(b.title));
+    this.originalImageList.sort((a, b) => a.title.localeCompare(b.title));
+    this.getUniqueNames();
+    this.updateCount();
+    this.isLoading = false;
+    this.cdr.detectChanges();
+  }
+
+  filterMedia() {
+    const selectedLocations = this.locations.filter(l => l.selected).map(l => l.name);
+    const allSelected = selectedLocations.includes("All");
+
+    if (allSelected || selectedLocations.length === 0) {
+      this.imageList = [...this.originalImageList];
+    } else {
+      this.imageList = this.originalImageList.filter(item => 
+        selectedLocations.includes(item.title)
+      );
+    }
+
     this.updateCount();
   }
 
@@ -190,21 +225,6 @@ export class MediaListComponent implements OnInit {
     window.open("https://buy.stripe.com/dR6fZzaRhczXdjy3cc", "_blank");
   }
 
-  getSafeUrl(url: string): SafeResourceUrl {
-    let videoId = '';
-    if (url.includes('youtu.be')) {
-        videoId = url.split('/').pop() || '';
-    } else if (url.includes('youtube.com')) {
-        const params = new URLSearchParams(url.split('?')[1]);
-        videoId = params.get('v') || '';
-    }
-    
-    if (videoId) {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
-    } else {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(url); // Fallback
-    }
-  }
 
   openModal(image: MediaItem) {
     if (image.type === 'video') return; // Don't open modal for videos
@@ -270,32 +290,34 @@ export class MediaListComponent implements OnInit {
       z-index: 10;
     }
   `],
-    imports: [MatDialogClose, MatIcon, MatMiniFabButton]
+    imports: [MatDialogClose, MatIcon, MatMiniFabButton],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogElementsExampleDialog implements OnInit {
-  currentIndex: number = 0;
+  currentIndex = signal(0);
   images: MediaItem[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { images: MediaItem[], initialIndex: number }) {
     this.images = data.images.filter(img => img.type === 'image' || !img.type); // Ensure only images
-    this.currentIndex = this.images.findIndex(img => img === data.images[data.initialIndex]);
-    if (this.currentIndex === -1) this.currentIndex = 0;
+    let index = this.images.findIndex(img => img === data.images[data.initialIndex]);
+    if (index === -1) index = 0;
+    this.currentIndex.set(index);
   }
 
   ngOnInit() {}
 
   get currentImage(): MediaItem {
-    return this.images[this.currentIndex];
+    return this.images[this.currentIndex()];
   }
 
   next(event: Event) {
     event.stopPropagation();
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    this.currentIndex.update(v => (v + 1) % this.images.length);
   }
 
   prev(event: Event) {
     event.stopPropagation();
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+    this.currentIndex.update(v => (v - 1 + this.images.length) % this.images.length);
   }
 
   @HostListener('document:keydown', ['$event'])

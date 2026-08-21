@@ -8,7 +8,7 @@ import { GravitaService, Enquiry } from "../../Services/gravita.service";
 import { MatFabButton, MatButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatStepper, MatStep, MatStepLabel, MatStepperNext, MatStepperPrevious } from "@angular/material/stepper";
-import { MatFormField, MatLabel, MatInput, MatError } from "@angular/material/input";
+import { MatFormField, MatLabel, MatInput, MatError, MatHint } from "@angular/material/input";
 
 @Component({
     selector: "app-get-in-touch",
@@ -26,19 +26,22 @@ import { MatFormField, MatLabel, MatInput, MatError } from "@angular/material/in
             ]),
         ]),
     ],
-    imports: [MatFabButton, MatIcon, Field, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious]
+    imports: [MatFabButton, MatIcon, Field, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious, MatHint]
 })
 export class GetInTouchComponent implements OnInit, OnDestroy {
   warning = signal<string>("");
+  isSubmitted = signal<boolean>(false);
   enquiryModel = signal<Enquiry>({
     firstStep: { name: "" },
-    secondStep: { email: "" }
+    secondStep: { email: "" },
+    thirdStep: { query: "" }
   });
 
   enquiryForm = form(this.enquiryModel, (s) => {
     required(s.firstStep.name);
     required(s.secondStep.email);
     email(s.secondStep.email);
+    required(s.thirdStep.query);
   });
 
   public MaxLength = 500;
@@ -63,7 +66,7 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
       try {
         this.gravita.createEnquiry(this.enquiryModel());
         this.snackBar.open("Form Successfully Submitted, Thank You!", "Great", { duration: 5000 });
-        stepper.next();
+        this.isSubmitted.set(true);
         localStorage.removeItem("form"); // Clear saved form data on success
       } catch (error) {
         console.error(error);
@@ -75,11 +78,13 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
   clearForm = () => {
     this.enquiryModel.set({
       firstStep: { name: "" },
-      secondStep: { email: "" }
+      secondStep: { email: "" },
+      thirdStep: { query: "" }
     });
     this.enquiryForm().reset();
     this.remaining = 500;
     this.warning.set("");
+    this.isSubmitted.set(false);
   };
 
   ngOnInit() {
@@ -90,7 +95,8 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
         if (parsed.firstStep || parsed.secondStep) {
           this.enquiryModel.set({
             firstStep: parsed.firstStep || { name: "" },
-            secondStep: parsed.secondStep || { email: "" }
+            secondStep: parsed.secondStep || { email: "" },
+            thirdStep: parsed.thirdStep || { query: "" }
           });
         }
       } catch(e) {}
@@ -99,9 +105,9 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
 
-  onTextarea = (text: object) => {
+  onTextarea = (text: string) => {
     // Calculates characters remaining in textarea field.
-    this.remaining = this.MaxLength - Object.keys(text).length;
+    this.remaining = this.MaxLength - (text ? text.length : 0);
     this.warning.set(this.remaining <= 100 ? "orange" : "");
   };
 }

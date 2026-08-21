@@ -60,6 +60,16 @@
   display: flex;
   justify-content: center;
 
+  .lens-controls-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .camera-toggle-btn {
+    margin-bottom: 20px;
+  }
+
   .lens-dropdown {
     width: 100%;
     max-width: 400px;

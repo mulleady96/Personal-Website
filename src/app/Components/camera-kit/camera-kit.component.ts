@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { bootstrapCameraKit, CameraKit, Lens, CameraKitSession, createMediaStreamSource } from '@snap/camera-kit';
 import { environment } from '../../../environments/environment';
 
@@ -14,7 +15,7 @@ const snapLenses = environment.cameraKit.snapLenses;
 @Component({
   selector: 'app-camera-kit',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatIconModule, MatButtonModule],
   templateUrl: './camera-kit.component.html',
   styleUrls: ['./camera-kit.component.scss']
 })
@@ -24,12 +25,11 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   sdkStatus: 'loading' | 'ready' | 'error' = 'loading';
   lenses: Lens[] = [];
   selectedLensId: string = '';
+  facingMode: 'user' | 'environment' = 'user';
 
   private cameraKit: CameraKit | null = null;
   private session: CameraKitSession | null = null;
   private mediaStream: MediaStream | null = null;
-
-  constructor() {}
 
   async ngOnInit() {
     try {
@@ -90,16 +90,37 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
     try {
       this.session = await this.cameraKit.createSession();
       
-      this.mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
-      const source = createMediaStreamSource(this.mediaStream, { cameraType: 'user' });
-      await this.session.setSource(source);
+      await this.restartCamera();
       
-      this.session.play();
       this.cameraContainer()!.nativeElement.appendChild(this.session.output.live);
       
       await this.applySelectedLens();
     } catch(err) {
       console.error('Error initializing session:', err);
+    }
+  }
+
+  async toggleCamera() {
+    this.facingMode = this.facingMode === 'user' ? 'environment' : 'user';
+    await this.restartCamera();
+  }
+
+  private async restartCamera() {
+    if (this.mediaStream) {
+      this.mediaStream.getTracks().forEach(track => track.stop());
+    }
+    
+    this.mediaStream = await navigator.mediaDevices.getUserMedia({ 
+      video: { facingMode: this.facingMode } 
+    });
+    
+    const source = createMediaStreamSource(this.mediaStream, { 
+      cameraType: this.facingMode === 'user' ? 'user' : 'environment' 
+    });
+    
+    if (this.session) {
+      await this.session.setSource(source);
+      this.session.play();
     }
   }
 

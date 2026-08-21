@@ -26,7 +26,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { PricingCardComponent } from "./Components/pricing-card/pricing-card.component";
 import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
 
 @Component({
@@ -46,7 +45,6 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
     MatIconModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    PricingCardComponent,
     ToolbarComponent,
   ],
   templateUrl: "./app.component.html",
@@ -99,11 +97,11 @@ export class AppComponent implements OnInit {
       routerLink: "/gallery",
       icon: "collections",
     },
-    {
-      ariaLabel: "AR Corner",
-      routerLink: "/AR-corner",
-      icon: "view_in_ar",
-    },
+    // {
+    //   ariaLabel: "AR Corner",
+    //   routerLink: "/AR-corner",
+    //   icon: "view_in_ar",
+    // },
   ];
 
   navToggle = output();

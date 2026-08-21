@@ -5,8 +5,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ActivatedRoute } from "@angular/router";
 import { of } from "rxjs";
 
-import * as Images from "../../../assets/Images.json";
-import { ComponentsModule } from "../components.module";
+
 import { MediaListComponent } from "./media-list.component";
 
 describe("MediaListComponent", () => {

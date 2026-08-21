@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { Storage, ref, uploadBytesResumable, getDownloadURL } from "@angular/fire/storage";
 import {
   Firestore,
   DocumentData,
@@ -21,6 +21,16 @@ import {
 export interface Enquiry {
   firstStep: { name: string };
   secondStep: { email: string };
+  thirdStep: { query: string };
+}
+
+export interface MediaItem {
+  title: string;
+  src: string;
+  description: string;
+  date: string;
+  likes: number;
+  type: 'image' | 'video';
 }
 
 @Injectable({
@@ -28,14 +38,25 @@ export interface Enquiry {
 })
 export class GravitaService {
   private http = inject(HttpClient);
+  private storage = inject(Storage);
   db = inject(Firestore);
   AILimit: number = 0;
   private aiQueryCache$: Promise<QueryDocumentSnapshot<DocumentData, DocumentData>[]> | null = null;
+  private mediaCache: Promise<MediaItem[]> | null = null;
 
   createEnquiry(enquiryForm: Enquiry) {
     addDoc(collection(this.db, "Enquiries"), {
       enquiry: enquiryForm,
     });
+  }
+
+  async getEnquiries() {
+    const collectionRef = collection(this.db, "Enquiries");
+    const snapshot = await getDocs(collectionRef);
+    return snapshot.docs.map(doc => ({
+      docId: doc.id,
+      ...doc.data()
+    }));
   }
 
   async getLimit(documentId: string, createQuery: boolean) {
@@ -100,8 +121,59 @@ export class GravitaService {
     return this.aiQueryCache$;
   }
 
-  getImages() {
-    return this.http.get("/assets/Images.json");
+  async getMediaFromFirestore(): Promise<MediaItem[]> {
+    if (this.mediaCache) {
+      return this.mediaCache;
+    }
+
+    this.mediaCache = (async () => {
+      try {
+        const collectionRef = collection(this.db, "media");
+        const snapshot = await getDocs(collectionRef);
+        const firestoreMedia = snapshot.docs.map(doc => doc.data() as MediaItem);
+        
+        const defaultVideos: MediaItem[] = [
+          { title: "Videos", src: "https://youtu.be/R8vrdU_dc38", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" },
+          { title: "Videos", src: "https://youtu.be/YSWjwPRRsEY", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" },
+          { title: "Videos", src: "https://youtu.be/eCE0Q9jw4W0", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" },
+          { title: "Videos", src: "https://youtu.be/RAo4rkuuHuM", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" }
+        ];
+
+        return [...firestoreMedia, ...defaultVideos];
+      } catch (err) {
+        console.error("Error fetching media from Firestore:", err);
+        this.mediaCache = null; // Invalidate cache on error
+        return [];
+      }
+    })();
+
+    return this.mediaCache;
+  }
+
+  async uploadMedia(file: File, metadata: Partial<MediaItem>) {
+    try {
+      // 1. Upload to Storage
+      const storageRef = ref(this.storage, `media/${Date.now()}_${file.name}`);
+      const uploadTask = await uploadBytesResumable(storageRef, file);
+      const downloadUrl = await getDownloadURL(uploadTask.ref);
+
+      // 2. Save to Firestore
+      const mediaDoc = {
+        title: metadata.title || file.name,
+        src: downloadUrl,
+        description: metadata.description || "",
+        date: metadata.date || new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+        likes: 0,
+        type: file.type.startsWith('video/') ? 'video' : 'image'
+      };
+
+      await addDoc(collection(this.db, "media"), mediaDoc);
+      this.mediaCache = null; // Invalidate cache so new media will be fetched next time
+      return true;
+    } catch (error) {
+      console.error("Error uploading media:", error);
+      throw error;
+    }
   }
 
   getVideos() {

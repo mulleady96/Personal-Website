@@ -35,10 +35,12 @@
         }
       </nav>
     </section>
-
-    <!-- Right/Bottom Section: Cards/Features -->
     <section>
-        <app-card [cardList]="cardDetails" [isStacked]="true"></app-card>
+        @defer (on viewport) {
+          <app-card [cardList]="cardDetails" [isStacked]="true"></app-card>
+        } @placeholder {
+          <div style="min-height: 300px;"></div>
+        }
     </section>
   </div>
 </main>

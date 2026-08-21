@@ -16,12 +16,11 @@ import { getAuth, provideAuth } from "@angular/fire/auth";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
 import { getFunctions, provideFunctions } from "@angular/fire/functions";
 import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from "@angular/fire/analytics";
-
+import { getStorage, provideStorage } from "@angular/fire/storage";
 import { AppComponent } from "./app/app.component";
-import { routes } from "./app/app-routing.module";
+import { routes } from "./app/app.routes";
 import { environment } from "./environments/environment";
 import { config } from "./app/credentials";
-
 import { ThemeService } from "./app/Services/theme.service";
 
 if (environment.production) {
@@ -47,6 +46,7 @@ bootstrapApplication(AppComponent, {
     provideFirestore(() => getFirestore()),
     provideFunctions(() => getFunctions()),
     provideAnalytics(() => getAnalytics()),
+    provideStorage(() => getStorage()),
     ScreenTrackingService,
     UserTrackingService,
   ],

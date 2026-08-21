@@ -1,5 +1,4 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { Routes } from "@angular/router";
 import { paymentSuccessGuard } from "./Guards/payment-success.guard";
 import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 import { adminGuard } from "./Guards/admin.guard";
@@ -114,12 +113,4 @@ export const routes: Routes = [
   { path: "**", component: PageNotFoundComponent },
 ];
 
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      anchorScrolling: "enabled",
-    }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
+

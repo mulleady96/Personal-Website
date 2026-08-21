@@ -1,5 +1,5 @@
-@import "../src/app/styles/m3-theme.scss";
-@import "../src/app/styles/mixins.scss";
+@use "../src/app/styles/m3-theme.scss" as *;
+@use "../src/app/styles/mixins.scss" as *;
 
 .dark-theme {
   @include create-dark-theme();

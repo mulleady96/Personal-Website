@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .particle {
   position: absolute;
   border-radius: 50%;
@@ -16,9 +18,9 @@
     }
     100% {
       transform: translate3d(
-        #{random(150)}px,
-        #{random(200)}px,
-        #{random(100)}px
+        #{math.random(150)}px,
+        #{math.random(200)}px,
+        #{math.random(100)}px
       );
       opacity: 0;
     }
@@ -26,22 +28,22 @@
 
   .particle:nth-child(#{$i}) {
     animation: particle-animation-#{$i} 50s infinite;
-    $size: random(10) + 5 + px;
+    $size: math.random(10) + 5 + px;
     height: $size;
     width: $size;
     z-index: inherit;
-    opacity: calc(random(100) / 100);
+    opacity: calc(math.random(100) / 100);
     animation-delay: -$i * 300ms;
     transition: ease-in-out;
     transform: translate3d(
-      (random(90) * -10px),
-      (random(90) * -10px),
-      (random(100) * -10px)
+      (math.random(90) * -10px),
+      (math.random(90) * -10px),
+      (math.random(100) * -10px)
     );
     max-width: inherit;
   }
 
   .celebration:nth-child(#{$i}) {
-    background: hsl(random(360), 70%, 50%);
+    background: hsl(math.random(360), 70%, 50%);
   }
 }

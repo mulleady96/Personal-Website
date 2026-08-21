@@ -16,14 +16,22 @@
         </div>
 
         <div class="lens-selector-container">
-          <mat-form-field class="lens-dropdown">
-            <mat-label>Select a lens...</mat-label>
-            <mat-select [(ngModel)]="selectedLensId" (selectionChange)="onLensSelect()">
-              <mat-option *ngFor="let lens of lenses" [value]="lens.id">
-                {{lens.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="lens-controls-wrapper">
+            <mat-form-field class="lens-dropdown">
+              <mat-label>Select a lens...</mat-label>
+              <mat-select [(ngModel)]="selectedLensId" (selectionChange)="onLensSelect()">
+                @for (lens of lenses; track lens.id) {
+                  <mat-option [value]="lens.id">
+                    {{lens.name}}
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            
+            <button mat-fab color="accent" class="camera-toggle-btn" (click)="toggleCamera()" aria-label="Toggle camera">
+              <mat-icon>flip_camera_ios</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </main>
