@@ -1,5 +1,4 @@
-import { animate, style, transition, trigger } from "@angular/animations";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject, signal } from "@angular/core";
 import { CountUpOptions } from "countup.js";
 import { NgOptimizedImage } from "@angular/common";
 import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
@@ -8,30 +7,20 @@ import { RouterLinkActive, RouterLink } from "@angular/router";
 import { MatTooltip } from "@angular/material/tooltip";
 import { MatIcon } from "@angular/material/icon";
 import { CardComponent } from "../../Components/card/card.component";
+import { GravitaService } from "../../Services/gravita.service";
 
 @Component({
     // tslint:disable-next-line: quotemark
     selector: "app-home",
     templateUrl: "./home.component.html",
     styleUrls: ["./home.component.scss"],
-    animations: [
-        // Slide items up from the bottom of screen.
-        trigger("itemState", [
-            transition("void => *", [
-                style({ transform: "translateY(100%)" }),
-                animate("0.6s ease-in-out"),
-            ]),
-            transition("* => void", [
-                animate("0.6s ease-in-out", style({ transform: "translateY(100%)" })),
-            ]),
-        ]),
-    ],
     imports: [NgOptimizedImage, BubblesComponent, MatFabButton, RouterLinkActive, MatTooltip, RouterLink, MatIcon, CardComponent]
 })
 export class HomeComponent implements OnInit {
+  gravita = inject(GravitaService);
   opts!: CountUpOptions;
   showDiv = false;
-  video!: string;
+  image = signal<string>("");
   imageLoaded: boolean = true;
   cardDetails = [
     {
@@ -109,7 +98,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.useOptions();
-    this.randomVideos();
+    this.randomImages();
   }
 
   toggleDiv = () => {
@@ -123,16 +112,16 @@ export class HomeComponent implements OnInit {
     };
   };
 
-  randomVideos = () => {
-    const src = [
-      "/assets/DJI_0249.JPG",
-      "/assets/DJI_0406.JPG",
-      "/assets/Pier1.jpg",
-      "/assets/LoughInagh.JPG",
-      "/assets/Pier2.jpg",
-    ];
-    // Every page load, renders a random video.
-    this.video = src[Math.floor(Math.random() * src.length)];
+  randomImages = async () => {
+    try {
+      const media = await this.gravita.getMediaFromFirestore();
+      const images = media.filter(item => item.type !== 'video');
+      if (images.length > 0) {
+        this.image.set(images[Math.floor(Math.random() * images.length)].src);
+      }
+    } catch (e) {
+      console.error("Failed to load random image", e);
+    }
   };
 
   imageFailed() {

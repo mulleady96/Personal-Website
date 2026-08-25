@@ -8,7 +8,7 @@
     <main class="main-content">
       <div class="camera-view">
         <div class="debug-info">
-          Debug: SDK={{sdkStatus}} | Lenses={{lenses.length}} | Selected={{selectedLensId || 'none'}}
+          Debug: SDK={{sdkStatus()}} | Lenses={{lenses().length}} | Selected={{selectedLensId() || 'none'}}
         </div>
         
         <div class="camera-frame" #cameraContainer>
@@ -19,8 +19,8 @@
           <div class="lens-controls-wrapper">
             <mat-form-field class="lens-dropdown">
               <mat-label>Select a lens...</mat-label>
-              <mat-select [(ngModel)]="selectedLensId" (selectionChange)="onLensSelect()">
-                @for (lens of lenses; track lens.id) {
+              <mat-select [ngModel]="selectedLensId()" (selectionChange)="selectedLensId.set($event.value); onLensSelect()">
+                @for (lens of lenses(); track lens.id) {
                   <mat-option [value]="lens.id">
                     {{lens.name}}
                   </mat-option>

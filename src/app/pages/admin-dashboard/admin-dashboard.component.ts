@@ -14,6 +14,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { GravitaService, MediaItem } from '../../Services/gravita.service';
 import { AuthService } from '../../Services/auth.service';
+import imageCompression from 'browser-image-compression';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -169,7 +170,18 @@ export class AdminDashboardComponent implements OnInit {
     if (!this.selectedFile) return;
     this.isUploading.set(true);
     try {
-      await this.gravita.uploadMedia(this.selectedFile, this.uploadMetadata);
+      let fileToUpload = this.selectedFile;
+      
+      if (this.selectedFile.type.startsWith('image/')) {
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
+        };
+        fileToUpload = await imageCompression(this.selectedFile, options);
+      }
+
+      await this.gravita.uploadMedia(fileToUpload, this.uploadMetadata);
       this.snackBar.open('Media uploaded successfully!', 'Close', { duration: 3000 });
       this.selectedFile = null;
       this.uploadMetadata = { title: '', description: '' };

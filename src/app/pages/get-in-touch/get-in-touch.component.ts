@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, inject, signal, effect, OnDestroy, OnInit } from "@angular/core";
-import { form, Field, required, email, submit } from "@angular/forms/signals";
+import { form, Field, required, email, submit, maxLength } from "@angular/forms/signals";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { GravitaService, Enquiry } from "../../Services/gravita.service";
@@ -14,18 +14,6 @@ import { MatFormField, MatLabel, MatInput, MatError, MatHint } from "@angular/ma
     selector: "app-get-in-touch",
     templateUrl: "./get-in-touch.component.html",
     styleUrls: ["./get-in-touch.component.scss"],
-    animations: [
-        // Slide items up from the bottom of screen.
-        trigger("itemState", [
-            transition("void => *", [
-                style({ transform: "translateX(100%)" }),
-                animate("0.6s ease-in-out"),
-            ]),
-            transition("* => void", [
-                animate("0.6s ease-in-out", style({ transform: "translateX(100%)" })),
-            ]),
-        ]),
-    ],
     imports: [MatFabButton, MatIcon, Field, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious, MatHint]
 })
 export class GetInTouchComponent implements OnInit, OnDestroy {
@@ -42,6 +30,7 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
     required(s.secondStep.email);
     email(s.secondStep.email);
     required(s.thirdStep.query);
+    maxLength(s.thirdStep.query, 500);
   });
 
   public MaxLength = 500;

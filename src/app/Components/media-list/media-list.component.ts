@@ -6,7 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { SearchButtonComponent } from "../search-button/search-button.component";
 import { MatChipSet, MatChip } from "@angular/material/chips";
 import { MatBadge } from "@angular/material/badge";
-import { NgClass } from "@angular/common";
+import { NgClass, NgOptimizedImage } from "@angular/common";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { GravitaService } from "../../Services/gravita.service";
 
@@ -60,7 +60,7 @@ export class SafeYoutubeUrlPipe implements PipeTransform {
     selector: "app-media-list",
     templateUrl: "./media-list.component.html",
     styleUrls: ["./media-list.component.scss"],
-    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatList, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, MatProgressSpinnerModule, SafeYoutubeUrlPipe],
+    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, MatProgressSpinnerModule, SafeYoutubeUrlPipe, NgOptimizedImage],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaListComponent implements OnInit {

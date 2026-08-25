@@ -1,14 +1,16 @@
 <main class="home-container">
   <!-- Background Layer -->
   <div class="background-layer">
-    <img
-      ngSrc="{{ video }}"
-      fill
-      priority
-      alt="Background Ambience"
-      class="bg-image"
-      (error)="imageFailed()"
-    />
+    @if (image()) {
+      <img
+        [ngSrc]="image()"
+        fill
+        priority
+        alt="Background Ambience"
+        class="bg-image"
+        (error)="imageFailed()"
+      />
+    }
     <div class="overlay-gradient"></div>
     <app-bubbles class="bubbles-bg"></app-bubbles>
   </div>

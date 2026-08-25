@@ -154,7 +154,10 @@ export class GravitaService {
     try {
       // 1. Upload to Storage
       const storageRef = ref(this.storage, `media/${Date.now()}_${file.name}`);
-      const uploadTask = await uploadBytesResumable(storageRef, file);
+      const metadataParams = {
+        cacheControl: 'public, max-age=31536000'
+      };
+      const uploadTask = await uploadBytesResumable(storageRef, file, metadataParams);
       const downloadUrl = await getDownloadURL(uploadTask.ref);
 
       // 2. Save to Firestore

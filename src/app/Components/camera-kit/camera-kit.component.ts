@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, viewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, viewChild, AfterViewInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,10 +22,10 @@ const snapLenses = environment.cameraKit.snapLenses;
 export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   cameraContainer = viewChild<ElementRef<HTMLDivElement>>('cameraContainer');
   
-  sdkStatus: 'loading' | 'ready' | 'error' = 'loading';
-  lenses: Lens[] = [];
-  selectedLensId: string = '';
-  facingMode: 'user' | 'environment' = 'user';
+  sdkStatus = signal<'loading' | 'ready' | 'error'>('loading');
+  lenses = signal<Lens[]>([]);
+  selectedLensId = signal<string>('');
+  facingMode = signal<'user' | 'environment'>('user');
 
   private cameraKit: CameraKit | null = null;
   private session: CameraKitSession | null = null;
@@ -34,11 +34,11 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   async ngOnInit() {
     try {
       this.cameraKit = await bootstrapCameraKit({ apiToken: API_TOKEN });
-      this.sdkStatus = 'ready';
+      this.sdkStatus.set('ready');
       await this.loadLenses();
     } catch (error) {
       console.error('Failed to initialize Camera Kit:', error);
-      this.sdkStatus = 'error';
+      this.sdkStatus.set('error');
     }
   }
 
@@ -67,18 +67,20 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   private async loadLenses() {
     if (!this.cameraKit) return;
     
-    this.lenses = [];
+    const loadedLenses: Lens[] = [];
     for (const id of snapLenses) {
       try {
         const lens = await this.cameraKit.lensRepository.loadLens(id, LENS_GROUP_ID);
-        this.lenses.push(lens);
+        loadedLenses.push(lens);
       } catch (error) {
         console.warn(`Failed to load lens ${id}:`, error);
       }
     }
+    
+    this.lenses.set(loadedLenses);
 
-    if (this.lenses.length > 0) {
-      this.selectedLensId = this.lenses[0].id;
+    if (loadedLenses.length > 0) {
+      this.selectedLensId.set(loadedLenses[0].id);
       await this.applySelectedLens();
     } else {
       console.error('No lenses could be loaded. Ensure they are published to Production.');
@@ -101,7 +103,7 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async toggleCamera() {
-    this.facingMode = this.facingMode === 'user' ? 'environment' : 'user';
+    this.facingMode.set(this.facingMode() === 'user' ? 'environment' : 'user');
     await this.restartCamera();
   }
 
@@ -111,11 +113,11 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     
     this.mediaStream = await navigator.mediaDevices.getUserMedia({ 
-      video: { facingMode: this.facingMode } 
+      video: { facingMode: this.facingMode() } 
     });
     
     const source = createMediaStreamSource(this.mediaStream, { 
-      cameraType: this.facingMode === 'user' ? 'user' : 'environment' 
+      cameraType: this.facingMode() === 'user' ? 'user' : 'environment' 
     });
     
     if (this.session) {
@@ -129,8 +131,8 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private async applySelectedLens() {
-    if (!this.session || !this.selectedLensId || !this.lenses.length) return;
-    const lens = this.lenses.find(l => l.id === this.selectedLensId);
+    if (!this.session || !this.selectedLensId() || !this.lenses().length) return;
+    const lens = this.lenses().find(l => l.id === this.selectedLensId());
     if (lens) {
       try {
         await this.session.applyLens(lens);

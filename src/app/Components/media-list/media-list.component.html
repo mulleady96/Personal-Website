@@ -23,12 +23,25 @@
     <mat-spinner diameter="40"></mat-spinner>
   </div>
 } @else {
-  <mat-list>
-    <div class="media-list-container">
-      @for (image of imageList; track image) {
+<mat-menu #sharedMenu="matMenu" yPosition="above">
+  <button
+    mat-menu-item
+    (click)="Pexels()"
+    aria-label="View more on Pexels"
+    >
+    <mat-icon>link</mat-icon>Pexels
+  </button>
+  <button mat-menu-item (click)="openPricingDialog()">
+    <mat-icon>collections</mat-icon>Access Full Collection
+  </button>
+</mat-menu>
+
+<div class="media-list-container">
+      @for (image of imageList; track image.src) {
         <div class="media-list-item">
         @if (image.type === 'video') {
           <iframe
+            loading="lazy"
             [src]="image.src | safeYoutubeUrl"
             class="media-item"
             frameborder="0"
@@ -39,7 +52,7 @@
           <div class="image-wrapper">
             <button
             mat-raised-button
-              [matMenuTriggerFor]="menu"
+              [matMenuTriggerFor]="sharedMenu"
               aria-label="icon-button with menu options"
               class="menu-button"
               (click)="$event.stopPropagation()"
@@ -47,23 +60,12 @@
             {{ image.title }}
             <mat-icon>share</mat-icon>
             </button>
-            <mat-menu #menu="matMenu" yPosition="above">
-              <button
-                mat-menu-item
-                (click)="Pexels()"
-                aria-label="View more on Pexels"
-                >
-                <mat-icon>link</mat-icon>Pexels
-              </button>
-              <button mat-menu-item (click)="openPricingDialog()">
-                <mat-icon>collections</mat-icon>Access Full Collection
-              </button>
-            </mat-menu>
             <img
-              src="{{ image.src }}"
+              [ngSrc]="image.src"
+              width="1400"
+              height="900"
               (click)="openModal(image)"
               alt="Photo of {{ image.title }}"
-              loading="lazy"
               class="media-item"
             />
           </div>
@@ -71,5 +73,4 @@
         </div>
       }
     </div>
-  </mat-list>
 }
