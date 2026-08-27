@@ -67,11 +67,11 @@ import imageCompression from 'browser-image-compression';
 
         <mat-tab label="Customer Enquiries">
           @if (enquiries().length === 0) {
-            <div style="margin-top: 2rem; text-align: center;">
+            <div class="mt-8 text-center">
               <p>No customer enquiries found.</p>
             </div>
           } @else {
-            <mat-accordion class="mt-4" style="display: block;">
+            <mat-accordion class="mt-4 d-block">
               <mat-expansion-panel *ngFor="let eq of enquiries()">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
@@ -94,7 +94,7 @@ import imageCompression from 'browser-image-compression';
             </mat-card-header>
             <mat-card-content>
               <form (ngSubmit)="onUploadMedia()">
-                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                <div class="flex-col-gap-10 mt-15">
                   <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*,video/*" />
                   <mat-form-field>
                     <mat-label>Title</mat-label>
@@ -108,7 +108,7 @@ import imageCompression from 'browser-image-compression';
                     @if (!isUploading()) {
                       <mat-icon>cloud_upload</mat-icon>
                     } @else {
-                      <mat-spinner diameter="20" style="display: inline-block; margin-right: 8px;"></mat-spinner>
+                      <mat-spinner diameter="20" class="d-inline-block mr-8"></mat-spinner>
                     }
                     {{ isUploading() ? 'Uploading...' : 'Upload to Gallery' }}
                   </button>

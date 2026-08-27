@@ -1,11 +1,3 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from "@angular/animations";
-
 import { Component, inject } from "@angular/core";
 import { Functions, httpsCallable } from "@angular/fire/functions";
 import { MatBadgeModule } from "@angular/material/badge";
@@ -17,33 +9,17 @@ import { MatListModule } from "@angular/material/list";
 import { PricingDialogComponent } from "../pricing-dialog/pricing-dialog.component";
 
 @Component({
-    selector: "app-pricing-card",
-    imports: [
+  selector: "app-pricing-card",
+  imports: [
     MatBadgeModule,
     MatCardModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
-],
-    templateUrl: "./pricing-card.component.html",
-    styleUrl: "./pricing-card.component.css",
-    animations: [
-        trigger("slideUp", [
-            state("hidden", style({
-                transform: "translateY(100%)", // Start offscreen (below)
-                opacity: 0,
-            })),
-            state("visible", style({
-                transform: "translateY(0)", // End at its original position
-                opacity: 1,
-            })),
-            transition("hidden => visible", [
-                animate("300ms ease-out"), // Animation duration and easing
-            ]),
-            transition("visible => hidden", [animate("300ms ease-in")]),
-        ]),
-    ]
+    MatDialogModule,
+  ],
+  templateUrl: "./pricing-card.component.html",
+  styleUrl: "./pricing-card.component.css",
 })
 export class PricingCardComponent {
   constructor(public dialog: MatDialog) {}

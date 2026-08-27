@@ -56,7 +56,12 @@
               "includePaths": [
                 "."
               ]
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "quill-delta",
+              "browser-headers",
+              "@improbable-eng/grpc-web"
+            ]
           },
           "configurations": {
             "production": {

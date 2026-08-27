@@ -1,4 +1,3 @@
-import { animate, style, transition, trigger } from "@angular/animations";
 import { OverlayContainer } from "@angular/cdk/overlay";
 import { CommonModule, Location } from "@angular/common";
 import {
@@ -48,19 +47,7 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
     ToolbarComponent,
   ],
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
-  animations: [
-    // Slide items up from the bottom of screen.
-    trigger("itemState", [
-      transition("void => *", [
-        style({ transform: "translateY(100%)" }),
-        animate("0.6s ease-in-out"),
-      ]),
-      transition("* => void", [
-        animate("0.6s ease-in-out", style({ transform: "translateY(100%)" })),
-      ]),
-    ]),
-  ],
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements OnInit {
   private swUpdate = inject(SwUpdate);

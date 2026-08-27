@@ -19,7 +19,9 @@
     "test-ui": "npx playwright test --ui",
     "commit": "git cz",
     "deploy": "ng build --c production && npx playwright test && firebase deploy --only hosting",
-    "createTheme": "ng generate @angular/material:m3-theme"
+    "createTheme": "ng generate @angular/material:m3-theme",
+    "prettier:check": "prettier --check \"src/**/*.{js,json,css,scss,ts,html}\"",
+    "prettier:write": "prettier --write \"src/**/*.{js,json,css,scss,ts,html}\""
   },
   "private": true,
   "dependencies": {

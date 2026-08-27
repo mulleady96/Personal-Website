@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GravitaService } from '../../../Services/gravita.service';
 
 @Component({
@@ -22,7 +23,8 @@ import { GravitaService } from '../../../Services/gravita.service';
     MatInputModule,
     MatFormFieldModule,
     RouterModule,
-    QuillModule
+    QuillModule,
+    MatProgressSpinnerModule
   ],
   template: `
     <div class="container">
@@ -40,12 +42,18 @@ import { GravitaService } from '../../../Services/gravita.service';
         </mat-form-field>
 
         <p class="label">Content (Rich Text)</p>
-        <quill-editor 
-          [(ngModel)]="article.response" 
-          [styles]="{height: '400px'}"
-          placeholder="Start writing..."
-          class="quill-editor">
-        </quill-editor>
+        @defer (on viewport) {
+          <quill-editor 
+            [(ngModel)]="article.response" 
+            [styles]="{height: '400px'}"
+            placeholder="Start writing..."
+            class="quill-editor">
+          </quill-editor>
+        } @placeholder {
+          <div class="flex-center min-h-400">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+        }
 
         <div class="actions">
           <button mat-raised-button color="primary" (click)="save()">
