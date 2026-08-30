@@ -5,9 +5,7 @@
     "module": "esnext",
     "types": [],
     "paths": {
-      "core-js/es7/reflect": [
-        "node_modules/core-js/proposals/reflect-metadata"
-      ]
+      "core-js/es7/reflect": ["node_modules/core-js/proposals/reflect-metadata"]
     }
   },
   "exclude": [

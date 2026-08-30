@@ -1,6 +1,6 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../Services/auth.service';
+import { inject } from "@angular/core";
+import { CanActivateFn, Router } from "@angular/router";
+import { AuthService } from "../Services/auth.service";
 
 export const adminGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
@@ -16,6 +16,6 @@ export const adminGuard: CanActivateFn = async (route, state) => {
   }
 
   // Not authorized, redirect to login
-  router.navigate(['/admin/login']);
+  router.navigate(["/admin/login"]);
   return false;
 };

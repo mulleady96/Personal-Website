@@ -12,8 +12,6 @@ h2 {
   padding-left: 5px;
 }
 
-
-
 .side-menu-button {
   width: 100%;
   display: flex;
@@ -60,8 +58,6 @@ mat-sidenav {
   border-radius: 71% 29% 24% 76% / 50% 43% 57% 50%;
 }
 
-
-
 .router-link-active {
   outline: 2px solid;
   // animation: pulse 8s;
@@ -81,8 +77,6 @@ mat-sidenav {
   }
 }
 
-
-
 .bottomSocial {
   padding: 10px;
   display: flex;
@@ -90,8 +84,6 @@ mat-sidenav {
   place-self: center;
   gap: 35px;
 }
-
-
 
 ::-webkit-scrollbar {
   height: 1rem;
@@ -108,5 +100,3 @@ mat-sidenav {
   background-color: transparent;
   border-radius: 9999px;
 }
-
-

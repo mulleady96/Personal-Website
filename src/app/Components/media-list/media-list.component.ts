@@ -1,5 +1,21 @@
-import { Component, Inject, input, OnInit, HostListener, ChangeDetectorRef, Pipe, PipeTransform, ChangeDetectionStrategy, signal } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogClose } from "@angular/material/dialog";
+import {
+  Component,
+  Inject,
+  input,
+  OnInit,
+  HostListener,
+  ChangeDetectorRef,
+  Pipe,
+  PipeTransform,
+  ChangeDetectionStrategy,
+  signal,
+} from "@angular/core";
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogConfig,
+  MatDialogClose,
+} from "@angular/material/dialog";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 
@@ -29,39 +45,55 @@ interface MediaItem {
   description: string;
   date: string;
   likes: number;
-  type: 'image' | 'video';
+  type: "image" | "video";
 }
 
 @Pipe({
-  name: 'safeYoutubeUrl',
-  standalone: true
+  name: "safeYoutubeUrl",
+  standalone: true,
 })
 export class SafeYoutubeUrlPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
 
   transform(url: string): SafeResourceUrl {
-    let videoId = '';
-    if (url.includes('youtu.be')) {
-        videoId = url.split('/').pop() || '';
-    } else if (url.includes('youtube.com')) {
-        const params = new URLSearchParams(url.split('?')[1]);
-        videoId = params.get('v') || '';
+    let videoId = "";
+    if (url.includes("youtu.be")) {
+      videoId = url.split("/").pop() || "";
+    } else if (url.includes("youtube.com")) {
+      const params = new URLSearchParams(url.split("?")[1]);
+      videoId = params.get("v") || "";
     }
-    
+
     if (videoId) {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${videoId}`);
+      return this.sanitizer.bypassSecurityTrustResourceUrl(
+        `https://www.youtube.com/embed/${videoId}`,
+      );
     } else {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(url); // Fallback
+      return this.sanitizer.bypassSecurityTrustResourceUrl(url); // Fallback
     }
   }
 }
 
 @Component({
-    selector: "app-media-list",
-    templateUrl: "./media-list.component.html",
-    styleUrls: ["./media-list.component.scss"],
-    imports: [SearchButtonComponent, MatChipSet, MatChip, MatBadge, NgClass, MatButton, MatMenuTrigger, MatIcon, MatMenu, MatMenuItem, MatProgressSpinnerModule, SafeYoutubeUrlPipe, NgOptimizedImage],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "app-media-list",
+  templateUrl: "./media-list.component.html",
+  styleUrls: ["./media-list.component.scss"],
+  imports: [
+    SearchButtonComponent,
+    MatChipSet,
+    MatChip,
+    MatBadge,
+    NgClass,
+    MatButton,
+    MatMenuTrigger,
+    MatIcon,
+    MatMenu,
+    MatMenuItem,
+    MatProgressSpinnerModule,
+    SafeYoutubeUrlPipe,
+    NgOptimizedImage,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MediaListComponent implements OnInit {
   imageList: MediaItem[] = [];
@@ -81,14 +113,14 @@ export class MediaListComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private gravitaService: GravitaService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
     this.fetchImages();
 
-    this.route.queryParams.subscribe(params => {
-      if (params['unlock-collection'] !== undefined) {
+    this.route.queryParams.subscribe((params) => {
+      if (params["unlock-collection"] !== undefined) {
         this.openPricingDialog();
       }
     });
@@ -101,8 +133,6 @@ export class MediaListComponent implements OnInit {
   expand() {
     this.search = !this.search;
   }
-
-
 
   getUniqueNames() {
     // unique location names for chip list & count
@@ -145,13 +175,13 @@ export class MediaListComponent implements OnInit {
       location.selected = !location.selected;
 
       // Deselect "All" if it was selected
-      const allLoc = this.locations.find(l => l.name === "All");
+      const allLoc = this.locations.find((l) => l.name === "All");
       if (allLoc && allLoc.selected) {
         allLoc.selected = false;
       }
 
       // If nothing is selected after toggle, re-select "All"
-      const anySelected = this.locations.some(l => l.selected);
+      const anySelected = this.locations.some((l) => l.selected);
       if (!anySelected && allLoc) {
         allLoc.selected = true;
       }
@@ -161,17 +191,23 @@ export class MediaListComponent implements OnInit {
   }
 
   updateCount() {
-    const imageCount = this.imageList.filter(item => item.type === 'image' || !item.type).length;
-    const videoCount = this.imageList.filter(item => item.type === 'video').length;
-    
+    const imageCount = this.imageList.filter(
+      (item) => item.type === "image" || !item.type,
+    ).length;
+    const videoCount = this.imageList.filter(
+      (item) => item.type === "video",
+    ).length;
+
     const parts = [];
-    if (imageCount > 0) parts.push(`${imageCount} image${imageCount !== 1 ? 's' : ''}`);
-    if (videoCount > 0) parts.push(`${videoCount} video${videoCount !== 1 ? 's' : ''}`);
-    
+    if (imageCount > 0)
+      parts.push(`${imageCount} image${imageCount !== 1 ? "s" : ""}`);
+    if (videoCount > 0)
+      parts.push(`${videoCount} video${videoCount !== 1 ? "s" : ""}`);
+
     if (parts.length === 0) {
       this.count = "No media found";
     } else {
-      this.count = `Viewing ${parts.join(' and ')}`;
+      this.count = `Viewing ${parts.join(" and ")}`;
     }
   }
 
@@ -189,20 +225,21 @@ export class MediaListComponent implements OnInit {
   }
 
   filterMedia() {
-    const selectedLocations = this.locations.filter(l => l.selected).map(l => l.name);
+    const selectedLocations = this.locations
+      .filter((l) => l.selected)
+      .map((l) => l.name);
     const allSelected = selectedLocations.includes("All");
 
     if (allSelected || selectedLocations.length === 0) {
       this.imageList = [...this.originalImageList];
     } else {
-      this.imageList = this.originalImageList.filter(item => 
-        selectedLocations.includes(item.title)
+      this.imageList = this.originalImageList.filter((item) =>
+        selectedLocations.includes(item.title),
       );
     }
 
     this.updateCount();
   }
-
 
   openPricingDialog(): void {
     this.dialog.open(PricingDialogComponent, {
@@ -225,10 +262,9 @@ export class MediaListComponent implements OnInit {
     window.open("https://buy.stripe.com/dR6fZzaRhczXdjy3cc", "_blank");
   }
 
-
   openModal(image: MediaItem) {
-    if (image.type === 'video') return; // Don't open modal for videos
-    
+    if (image.type === "video") return; // Don't open modal for videos
+
     const index = this.imageList.indexOf(image);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = "100%";
@@ -236,22 +272,22 @@ export class MediaListComponent implements OnInit {
     dialogConfig.panelClass = "custom-dialog";
     dialogConfig.data = {
       images: this.imageList,
-      initialIndex: index
+      initialIndex: index,
     };
     this.dialog.open(DialogElementsExampleDialog, dialogConfig);
   }
 }
 
 @Component({
-    selector: "dialog-elements-example-dialog",
-    template: `
+  selector: "dialog-elements-example-dialog",
+  template: `
     <div class="dialog-container">
       <img [src]="currentImage.src" mat-dialog-close alt="Photo of scenery" />
-      
+
       <button matMiniFab class="nav-btn prev-btn" (click)="prev($event)">
         <mat-icon color="accent">chevron_left</mat-icon>
       </button>
-      
+
       <button matMiniFab class="nav-btn next-btn" (click)="next($event)">
         <mat-icon color="accent">chevron_right</mat-icon>
       </button>
@@ -261,45 +297,58 @@ export class MediaListComponent implements OnInit {
       </button>
     </div>
   `,
-  styles: [`
-    .dialog-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    img {
-      max-width: 100%;
-      max-height: 100vh;
-      object-fit: contain;
-    }
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-    }
-    .prev-btn { left: 20px; }
-    .next-btn { right: 20px; }
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-    }
-  `],
-    imports: [MatDialogClose, MatIcon, MatMiniFabButton],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  styles: [
+    `
+      .dialog-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      img {
+        max-width: 100%;
+        max-height: 100vh;
+        object-fit: contain;
+      }
+      .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+      }
+      .prev-btn {
+        left: 20px;
+      }
+      .next-btn {
+        right: 20px;
+      }
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
+      }
+    `,
+  ],
+  imports: [MatDialogClose, MatIcon, MatMiniFabButton],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogElementsExampleDialog implements OnInit {
   currentIndex = signal(0);
   images: MediaItem[] = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { images: MediaItem[], initialIndex: number }) {
-    this.images = data.images.filter(img => img.type === 'image' || !img.type); // Ensure only images
-    let index = this.images.findIndex(img => img === data.images[data.initialIndex]);
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: { images: MediaItem[]; initialIndex: number },
+  ) {
+    this.images = data.images.filter(
+      (img) => img.type === "image" || !img.type,
+    ); // Ensure only images
+    let index = this.images.findIndex(
+      (img) => img === data.images[data.initialIndex],
+    );
     if (index === -1) index = 0;
     this.currentIndex.set(index);
   }
@@ -312,20 +361,22 @@ export class DialogElementsExampleDialog implements OnInit {
 
   next(event: Event) {
     event.stopPropagation();
-    this.currentIndex.update(v => (v + 1) % this.images.length);
+    this.currentIndex.update((v) => (v + 1) % this.images.length);
   }
 
   prev(event: Event) {
     event.stopPropagation();
-    this.currentIndex.update(v => (v - 1 + this.images.length) % this.images.length);
+    this.currentIndex.update(
+      (v) => (v - 1 + this.images.length) % this.images.length,
+    );
   }
 
-  @HostListener('document:keydown', ['$event'])
+  @HostListener("document:keydown", ["$event"])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'ArrowRight') {
-      this.next(new Event('keydown'));
-    } else if (event.key === 'ArrowLeft') {
-      this.prev(new Event('keydown'));
+    if (event.key === "ArrowRight") {
+      this.next(new Event("keydown"));
+    } else if (event.key === "ArrowLeft") {
+      this.prev(new Event("keydown"));
     }
   }
 }

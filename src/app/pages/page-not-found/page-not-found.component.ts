@@ -3,8 +3,8 @@ import { MatButton } from "@angular/material/button";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
-    selector: "app-page-not-found",
-    template: `
+  selector: "app-page-not-found",
+  template: `
     <section class="center">
       <h1 class="title">Uh oh, Page Not Found!</h1>
 
@@ -20,8 +20,8 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
       </button>
     </section>
   `,
-    styleUrls: ["./page-not-found.component.scss"],
-    imports: [MatButton, RouterLink, RouterLinkActive]
+  styleUrls: ["./page-not-found.component.scss"],
+  imports: [MatButton, RouterLink, RouterLinkActive],
 })
 export class PageNotFoundComponent {
   constructor() {}

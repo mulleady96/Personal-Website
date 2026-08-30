@@ -8,9 +8,10 @@
     <main class="main-content">
       <div class="camera-view">
         <div class="debug-info">
-          Debug: SDK={{sdkStatus()}} | Lenses={{lenses().length}} | Selected={{selectedLensId() || 'none'}}
+          Debug: SDK={{ sdkStatus() }} | Lenses={{ lenses().length }} |
+          Selected={{ selectedLensId() || "none" }}
         </div>
-        
+
         <div class="camera-frame" #cameraContainer>
           <!-- Canvas will be injected here -->
         </div>
@@ -19,16 +20,27 @@
           <div class="lens-controls-wrapper">
             <mat-form-field class="lens-dropdown">
               <mat-label>Select a lens...</mat-label>
-              <mat-select [ngModel]="selectedLensId()" (selectionChange)="selectedLensId.set($event.value); onLensSelect()">
+              <mat-select
+                [ngModel]="selectedLensId()"
+                (selectionChange)="
+                  selectedLensId.set($event.value); onLensSelect()
+                "
+              >
                 @for (lens of lenses(); track lens.id) {
                   <mat-option [value]="lens.id">
-                    {{lens.name}}
+                    {{ lens.name }}
                   </mat-option>
                 }
               </mat-select>
             </mat-form-field>
-            
-            <button mat-fab color="accent" class="camera-toggle-btn" (click)="toggleCamera()" aria-label="Toggle camera">
+
+            <button
+              mat-fab
+              color="accent"
+              class="camera-toggle-btn"
+              (click)="toggleCamera()"
+              aria-label="Toggle camera"
+            >
               <mat-icon>flip_camera_ios</mat-icon>
             </button>
           </div>

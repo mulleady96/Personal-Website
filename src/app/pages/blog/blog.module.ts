@@ -11,10 +11,9 @@ import { articleResolver } from "../../resolvers/article.resolver";
 import { MarkdownModule } from "ngx-markdown";
 import { SearchButtonComponent } from "src/app/Components/search-button/search-button.component";
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
 
 import { ComponentsModule } from "../../Components/components.module";
 import { BlogComponent } from "./blog.component";
@@ -32,21 +31,21 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ComponentsModule,
-        MatProgressSpinnerModule,
-        MatProgressBarModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        SearchButtonComponent,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        MarkdownModule.forRoot(),
-        RouterModule.forChild(routes),
-        BlogComponent,
-    ],
+  imports: [
+    CommonModule,
+    ComponentsModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    SearchButtonComponent,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MarkdownModule.forRoot(),
+    RouterModule.forChild(routes),
+    BlogComponent,
+  ],
 })
 export class BlogModule {}

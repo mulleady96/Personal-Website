@@ -119,30 +119,55 @@ fa-icon {
 /* ==========================================================================
    Utility Classes (Replacing Inline Styles)
    ========================================================================== */
-   
+
 .flex-center {
-  display: flex; 
-  justify-content: center; 
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .flex-col-gap-10 {
-  display: flex; 
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
-.min-h-300 { min-height: 300px; }
-.min-h-400 { min-height: 400px; }
-.min-h-500 { min-height: 500px; }
+.min-h-300 {
+  min-height: 300px;
+}
+.min-h-400 {
+  min-height: 400px;
+}
+.min-h-500 {
+  min-height: 500px;
+}
 
-.mt-8 { margin-top: 2rem; }
-.mt-15 { margin-top: 15px; }
-.mr-8 { margin-right: 8px; }
-.mx-20 { margin-left: 20px; margin-right: 20px; }
-.m-0 { margin: 0; }
+.mt-8 {
+  margin-top: 2rem;
+}
+.mt-15 {
+  margin-top: 15px;
+}
+.mr-8 {
+  margin-right: 8px;
+}
+.mx-20 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.m-0 {
+  margin: 0;
+}
 
-.text-center { text-align: center; }
-.d-block { display: block; }
-.d-inline-block { display: inline-block; }
-.w-100 { width: 100%; }
+.text-center {
+  text-align: center;
+}
+.d-block {
+  display: block;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.w-100 {
+  width: 100%;
+}

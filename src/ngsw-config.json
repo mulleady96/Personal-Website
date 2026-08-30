@@ -16,7 +16,8 @@
           "https://fonts.googleapis.com/css?family=Major+Mono+Display|Montserrat|BioRhyme|Bungee|Quicksand|Staatliches|Bungee+Shade|Titillium+Web"
         ]
       }
-    }, {
+    },
+    {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",

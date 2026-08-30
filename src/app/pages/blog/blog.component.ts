@@ -30,10 +30,16 @@ interface ResponseData {
 }
 
 @Component({
-    selector: "app-blog",
-    templateUrl: "./blog.component.html",
-    styleUrls: ["./blog.component.css"],
-    imports: [MatMiniFabButton, MatIcon, MatCard, MarkdownComponent, MatProgressSpinner]
+  selector: "app-blog",
+  templateUrl: "./blog.component.html",
+  styleUrls: ["./blog.component.css"],
+  imports: [
+    MatMiniFabButton,
+    MatIcon,
+    MatCard,
+    MarkdownComponent,
+    MatProgressSpinner,
+  ],
 })
 export class BlogComponent implements OnInit, OnDestroy {
   private gravita = inject(GravitaService);
@@ -60,7 +66,6 @@ export class BlogComponent implements OnInit, OnDestroy {
   myTextarea = viewChild<ElementRef>("BloggiTextarea");
   router = inject(Router);
 
-
   constructor() {
     // get limit - disable input if 0.
     // this.gravita.getLimit("sGNbtnG9rFj4mL2akP5O", false).then((data) => {
@@ -73,11 +78,13 @@ export class BlogComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.loadResponses();
     this.subscription = this.route.data.subscribe((data) => {
-      const resolvedArticle = data['article'];
+      const resolvedArticle = data["article"];
       if (resolvedArticle) {
         this.showArticle.set(true);
         // Find the index of the resolved article
-        const index = this.responses().findIndex(r => r['docId'] === resolvedArticle.docId);
+        const index = this.responses().findIndex(
+          (r) => r["docId"] === resolvedArticle.docId,
+        );
         if (index !== -1) {
           this.selectedValue.set(index);
         }
@@ -114,7 +121,7 @@ export class BlogComponent implements OnInit, OnDestroy {
       // Prevent deselection by re-selecting the chip
       event.source.select();
     }
-    
+
     // Create a new array to trigger signal update
     const updatedFilters = this.filters().map((loc) => {
       return { ...loc, selected: loc.name === filter.name };
@@ -126,7 +133,10 @@ export class BlogComponent implements OnInit, OnDestroy {
     try {
       const data = await this.gravita.getAIQuery();
 
-      const mappedData = data.map((doc: any) => ({ docId: doc.id, ...doc.data() }));
+      const mappedData = data.map((doc: any) => ({
+        docId: doc.id,
+        ...doc.data(),
+      }));
       this.originalResponses.set([...mappedData]);
       this.responses.set(mappedData.reverse());
       this.isLoaded.set(true);
@@ -137,13 +147,13 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   selectedBlog(index: number) {
     if (!this.showArticle()) {
-       this.selectedValue.set(index);
-       const id = this.responses()[index]['docId'];
-       this.router.navigate(['blog', id]);
+      this.selectedValue.set(index);
+      const id = this.responses()[index]["docId"];
+      this.router.navigate(["blog", id]);
     } else {
-       this.router.navigate(['blog']);
-       // reset for when we navigate back (if component is reused, though Resolver should handle it)
-       this.showArticle.set(false);
+      this.router.navigate(["blog"]);
+      // reset for when we navigate back (if component is reused, though Resolver should handle it)
+      this.showArticle.set(false);
     }
     this.search.set(false);
   }

@@ -6,11 +6,13 @@
       (mouseleave)="resetHover()"
       [ngClass]="{
         'highlight-left': hoverSide === 'left' && currentIndex !== 0,
-        'highlight-right': hoverSide === 'right' && currentIndex !== cardList().length - 1,
+        'highlight-right':
+          hoverSide === 'right' && currentIndex !== cardList().length - 1,
         'highlight-left-red': hoverSide === 'left' && currentIndex === 0,
-        'highlight-right-red': hoverSide === 'right' && currentIndex === cardList().length - 1
+        'highlight-right-red':
+          hoverSide === 'right' && currentIndex === cardList().length - 1,
       }"
-      >
+    >
       @if (cardList()[currentIndex]?.image) {
         <img
           ngSrc="{{ cardList()[currentIndex].image }}"
@@ -18,7 +20,7 @@
           class="card-image-top"
           alt="{{ cardList()[currentIndex].description }}"
           priority
-          />
+        />
       }
 
       <h3 class="card-heading">
@@ -32,13 +34,13 @@
       <mat-card-actions>
         @if (cardList()[currentIndex].link) {
           <a
-          [routerLink]="
-            !cardList()[currentIndex].externalLink
-              ? cardList()[currentIndex].link
-              : null
-          "
+            [routerLink]="
+              !cardList()[currentIndex].externalLink
+                ? cardList()[currentIndex].link
+                : null
+            "
             ariaCurrentWhenActive="page"
-            >
+          >
             @if (cardList()[currentIndex]?.buttonText) {
               <button
                 (click)="navigate(cardList()[currentIndex])"
@@ -46,7 +48,7 @@
                 class="mat-product-button"
                 [attr.aria-label]="cardList()[currentIndex].buttonText"
                 color="accent"
-                >
+              >
                 {{ cardList()[currentIndex].buttonText }}
               </button>
             }
@@ -64,7 +66,7 @@
             class="card-image-top"
             alt="{{ card.description }}"
             priority
-            />
+          />
         }
         <h3>{{ card.title }}</h3>
         <mat-card-content>
@@ -75,7 +77,7 @@
             <a
               [routerLink]="!card.externalLink ? card.link : null"
               ariaCurrentWhenActive="page"
-              >
+            >
               @if (card.buttonText) {
                 <button
                   (click)="navigate(card)"
@@ -83,7 +85,7 @@
                   class="mat-product-button"
                   [attr.aria-label]="card.buttonText"
                   color="accent"
-                  >
+                >
                   {{ card.buttonText }}
                 </button>
               }

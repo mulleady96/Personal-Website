@@ -41,11 +41,13 @@ export const routes: Routes = [
         (m) => m.BlogDetailModule,
       ),
   },
-  { path: "download",  loadComponent: () =>
+  {
+    path: "download",
+    loadComponent: () =>
       import("./Components/pricing-card/pricing-card.component").then(
         (m) => m.PricingCardComponent,
       ),
-    },
+  },
   {
     path: "payment-success",
     loadComponent: () =>
@@ -72,14 +74,14 @@ export const routes: Routes = [
     path: "admin/login",
     loadComponent: () =>
       import("./pages/admin-dashboard/admin-login/admin-login.component").then(
-        (m) => m.AdminLoginComponent
+        (m) => m.AdminLoginComponent,
       ),
   },
   {
     path: "privacy-policy",
     loadComponent: () =>
       import("./pages/privacy-policy/privacy-policy.component").then(
-        (m) => m.PrivacyPolicyComponent
+        (m) => m.PrivacyPolicyComponent,
       ),
   },
   {
@@ -90,27 +92,25 @@ export const routes: Routes = [
         path: "",
         loadComponent: () =>
           import("./pages/admin-dashboard/admin-dashboard.component").then(
-            (m) => m.AdminDashboardComponent
+            (m) => m.AdminDashboardComponent,
           ),
       },
       {
         path: "new",
         loadComponent: () =>
           import("./pages/admin-dashboard/editor/editor.component").then(
-            (m) => m.EditorComponent
+            (m) => m.EditorComponent,
           ),
       },
       {
         path: "edit/:id",
         loadComponent: () =>
           import("./pages/admin-dashboard/editor/editor.component").then(
-            (m) => m.EditorComponent
+            (m) => m.EditorComponent,
           ),
         resolve: { article: articleResolver },
-      }
-    ]
+      },
+    ],
   },
   { path: "**", component: PageNotFoundComponent },
 ];
-
-

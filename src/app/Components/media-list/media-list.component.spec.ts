@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ActivatedRoute } from "@angular/router";
 import { of } from "rxjs";
 
-
 import { MediaListComponent } from "./media-list.component";
 
 describe("MediaListComponent", () => {
@@ -14,12 +13,17 @@ describe("MediaListComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule, MatMenuModule, BrowserAnimationsModule, MediaListComponent],
+      imports: [
+        MatDialogModule,
+        MatMenuModule,
+        BrowserAnimationsModule,
+        MediaListComponent,
+      ],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParams: of({ 'unlock-collection': 'true' }) // Mock query params
+            queryParams: of({ "unlock-collection": "true" }), // Mock query params
           },
         },
       ],
@@ -60,7 +64,11 @@ describe("MediaListComponent", () => {
   */
 
   it("should toggle selection for a location", () => {
-    const location = { name: "SomeLocation", selected: false, locationCount: 0 };
+    const location = {
+      name: "SomeLocation",
+      selected: false,
+      locationCount: 0,
+    };
     component.toggleSelection(location);
     expect(location.selected).toBeTrue();
     component.toggleSelection(location);
@@ -123,13 +131,14 @@ describe("MediaListComponent", () => {
 
   it("should open the modal with the correct image", () => {
     const dialogSpy = spyOn(component.dialog, "open").and.callThrough();
-    const image: any = { // Cast to any or verify MediaItem interface
+    const image: any = {
+      // Cast to any or verify MediaItem interface
       title: "Test Image",
       src: "test.jpg",
       description: "",
       date: "",
       likes: 0,
-      type: 'image'
+      type: "image",
     };
 
     component.openModal(image);
@@ -142,26 +151,26 @@ describe("MediaListComponent", () => {
 
     expect(image.src).toEqual(image.src);
   });
-  
-  it('should call openPricingDialog when unlock-collection query param is present', () => {
-      spyOn(component, 'openPricingDialog');
-      // Re-trigger ngoninit to simulate route param change if needed, 
-      // but mocks should be set before component creation.
-      // Since beforeEach sets it up, ngOnInit runs automatically on fixture.detectChanges() or manually called above.
-      // Wait, ngOnInit was called in beforeEach implicitly via detectChanges? No, explicit call in checks.
-      
-      // Let's create a fresh component instance for this test if possible, or spy on ngOnInit
-      // easier to just rely on the fact that ngOnInit is called in beforeEach -> fixture.detectChanges() 
-      // but Wait, the mock is static.
-      // The component is created in beforeEach. We configured useValue providing the param.
-      // So openPricingDialog should have been called upon initialization.
-      
-      // However, we can't spy on a method of the component instance *before* it's created if we use TestBed.createComponent.
-      // We can spy on the prototype? Or just check if the dialog open was called?
-      
-      // Actually dialog open is called inside openPricingDialog. Spy on dialog.open?
-      const dialogSpy = spyOn(component.dialog, 'open');
-      component.ngOnInit(); 
-      expect(dialogSpy).toHaveBeenCalled();
+
+  it("should call openPricingDialog when unlock-collection query param is present", () => {
+    spyOn(component, "openPricingDialog");
+    // Re-trigger ngoninit to simulate route param change if needed,
+    // but mocks should be set before component creation.
+    // Since beforeEach sets it up, ngOnInit runs automatically on fixture.detectChanges() or manually called above.
+    // Wait, ngOnInit was called in beforeEach implicitly via detectChanges? No, explicit call in checks.
+
+    // Let's create a fresh component instance for this test if possible, or spy on ngOnInit
+    // easier to just rely on the fact that ngOnInit is called in beforeEach -> fixture.detectChanges()
+    // but Wait, the mock is static.
+    // The component is created in beforeEach. We configured useValue providing the param.
+    // So openPricingDialog should have been called upon initialization.
+
+    // However, we can't spy on a method of the component instance *before* it's created if we use TestBed.createComponent.
+    // We can spy on the prototype? Or just check if the dialog open was called?
+
+    // Actually dialog open is called inside openPricingDialog. Spy on dialog.open?
+    const dialogSpy = spyOn(component.dialog, "open");
+    component.ngOnInit();
+    expect(dialogSpy).toHaveBeenCalled();
   });
 });

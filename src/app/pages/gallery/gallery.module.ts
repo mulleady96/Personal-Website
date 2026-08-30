@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-
 import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
 import { ComponentsModule } from "../../Components/components.module";
 import { PricingCardComponent } from "../../Components/pricing-card/pricing-card.component";
@@ -16,14 +15,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
+  imports: [
+    CommonModule,
 
-        ComponentsModule,
-        RouterModule.forChild(routes),
-        BubblesComponent,
-        PricingCardComponent,
-        GalleryComponent,
-    ],
+    ComponentsModule,
+    RouterModule.forChild(routes),
+    BubblesComponent,
+    PricingCardComponent,
+    GalleryComponent,
+  ],
 })
 export class GalleryModule {}

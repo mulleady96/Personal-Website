@@ -5,34 +5,31 @@
       mat-mini-fab
       color="accent"
       class="backButton"
-      >
+    >
       <mat-icon>arrow_back</mat-icon>
     </button>
   }
   @if (!showArticle()) {
     <h1>Blog</h1>
   }
-  </div>
+</div>
 
-  <div class="center-alignment">
-    @if (!isLoaded()) {
-      <mat-spinner color="accent"></mat-spinner>
+<div class="center-alignment">
+  @if (!isLoaded()) {
+    <mat-spinner color="accent"></mat-spinner>
+  }
+</div>
+
+@if (!showArticle()) {
+  <div class="blog-responses-container">
+    @for (response of responses(); track response; let i = $index) {
+      <mat-card (click)="selectedBlog(i)" class="card blog-card">
+        <markdown [data]="response['response']"></markdown>
+      </mat-card>
     }
   </div>
+}
 
-    @if (!showArticle()) {
-      <div class="blog-responses-container">
-        @for (response of responses(); track response; let i = $index) {
-          <mat-card
-            (click)="selectedBlog(i)"
-            class="card blog-card"
-            >
-            <markdown [data]="response['response']"></markdown>
-          </mat-card>
-        }
-      </div>
-    }
-    
 <div class="blog-content-container mx-20">
   @if (showArticle()) {
     <div class="padTop">

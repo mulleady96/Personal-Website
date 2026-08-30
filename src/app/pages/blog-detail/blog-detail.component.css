@@ -1,77 +1,77 @@
 div {
-    text-align: center justify;
-    justify-content: center;
-    display: inline-block;
+  text-align: center justify;
+  justify-content: center;
+  display: inline-block;
 }
 
 article {
-    justify-content: center;
+  justify-content: center;
 }
 
 .left-column-button {
-   position: sticky;
-   top: 0;
-   /* left: 10%; */
+  position: sticky;
+  top: 0;
+  /* left: 10%; */
 }
 
 h2 {
-    position: sticky;
-    top: 0;
-    padding-bottom: 5px;
-    background-color: aliceblue;
-    width: 100%;
-    text-align: center;
+  position: sticky;
+  top: 0;
+  padding-bottom: 5px;
+  background-color: aliceblue;
+  width: 100%;
+  text-align: center;
 }
 
 code {
-    color: aliceblue;
+  color: aliceblue;
 }
 
 pre {
-    white-space: pre-wrap;
-    background: rgb(53, 53, 53);
+  white-space: pre-wrap;
+  background: rgb(53, 53, 53);
 }
 
 .blog-detail-container {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
 }
 
 .left-column {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    flex: 20%;
-    align-items: center;
-    align-content: stretch;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 20%;
+  align-items: center;
+  align-content: stretch;
 }
 
 .centre-column {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    flex: 60%;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 60%;
+  align-items: center;
+  justify-content: center;
 }
 
 .right-column {
-    display: none; /* fxShow="false" */
-    flex-direction: column;
-    flex-wrap: wrap;
-    flex: 20%;
-    align-items: flex-end;
+  display: none; /* fxShow="false" */
+  flex-direction: column;
+  flex-wrap: wrap;
+  flex: 20%;
+  align-items: flex-end;
 }
 
 @media screen and (max-width: 599px) {
-    .left-column {
-        flex: 5%;
-    }
+  .left-column {
+    flex: 5%;
+  }
 }
 
 @media screen and (min-width: 600px) {
-    .right-column {
-        display: flex; /* fxShow.gt-sm */
-    }
+  .right-column {
+    display: flex; /* fxShow.gt-sm */
+  }
 }

@@ -1,7 +1,11 @@
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { Component, input, OnInit } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { MatCard, MatCardContent, MatCardActions } from "@angular/material/card";
+import {
+  MatCard,
+  MatCardContent,
+  MatCardActions,
+} from "@angular/material/card";
 import { NgClass, NgOptimizedImage } from "@angular/common";
 
 import { MatButton } from "@angular/material/button";
@@ -41,7 +45,7 @@ export class CardComponent implements OnInit {
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // this.isStacked = this.breakpointObserver.isMatched("(max-width: 599px)");

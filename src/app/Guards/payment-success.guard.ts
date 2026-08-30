@@ -13,11 +13,13 @@ export const paymentSuccessGuard: CanActivateFn = async (route, state) => {
     return false;
   }
 
- 
   return checkPaymentSuccess(sessionId, router);
 };
 
-async function checkPaymentSuccess(sessionId: string, router: Router): Promise<boolean> {
+async function checkPaymentSuccess(
+  sessionId: string,
+  router: Router,
+): Promise<boolean> {
   const stripe = await loadStripe(environment.stripe.publishable_key);
   // @ts-ignore - retrieveOrder might be missing from types or custom
   const session = await stripe?.retrieveOrder(sessionId);

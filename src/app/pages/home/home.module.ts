@@ -4,9 +4,9 @@ import { RouterModule, Routes } from "@angular/router";
 import { CountUpModule } from "ngx-countup";
 import { BubblesComponent } from "src/app/Components/bubbles/bubbles.component";
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from "@angular/material/button";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatIconModule } from "@angular/material/icon";
 import { ComponentsModule } from "../../Components/components.module";
 import { HomeComponent } from "./home.component";
 
@@ -18,17 +18,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        CountUpModule,
-        ComponentsModule,
-        BubblesComponent,
-        MatButtonModule,
-        MatTooltipModule,
-        MatIconModule,
-        NgOptimizedImage,
-        RouterModule.forChild(routes),
-        HomeComponent,
-    ],
+  imports: [
+    CommonModule,
+    CountUpModule,
+    ComponentsModule,
+    BubblesComponent,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
+    NgOptimizedImage,
+    RouterModule.forChild(routes),
+    HomeComponent,
+  ],
 })
 export class HomeModule {}

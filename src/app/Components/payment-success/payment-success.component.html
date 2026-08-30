@@ -5,19 +5,24 @@
       <h2>Payment Successful!</h2>
       <p class="subtitle">Thank you for your purchase.</p>
     </div>
-    
+
     <mat-card-content class="success-content">
       <div class="album-link-container">
         <a mat-flat-button color="accent" [href]="albumLink" target="_blank">
           <mat-icon>photo_album</mat-icon> Open Photo Album
         </a>
-        <p class="sub-text">Be sure to bookmark the album link for future use.</p>
+        <p class="sub-text">
+          Be sure to bookmark the album link for future use.
+        </p>
       </div>
-      
-      <hr class="divider">
-      
-      <p class="m-0">Your receipt has automatically been downloaded to your device. Please keep it in a safe place.</p>
-      
+
+      <hr class="divider" />
+
+      <p class="m-0">
+        Your receipt has automatically been downloaded to your device. Please
+        keep it in a safe place.
+      </p>
+
       <div class="action-buttons">
         <button mat-stroked-button color="primary" (click)="downloadReceipt()">
           <mat-icon>download</mat-icon> Download Receipt Again
@@ -26,11 +31,12 @@
 
       <div class="help-container">
         <p class="help-text">
-          If you have any questions or can't find your download, please reach out via the 
+          If you have any questions or can't find your download, please reach
+          out via the
           <a routerLink="/enquire">Contact</a> form.
         </p>
       </div>
-      
+
       @if (error) {
         <div class="error-container">
           <mat-icon color="warn">error</mat-icon>

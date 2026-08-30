@@ -7,10 +7,10 @@ import { MatIcon } from "@angular/material/icon";
 // import * as moment from 'moment';
 
 @Component({
-    selector: "app-blog-detail",
-    templateUrl: "./blog-detail.component.html",
-    styleUrls: ["./blog-detail.component.css"],
-    imports: [MatButton, MatIconButton, MatIcon]
+  selector: "app-blog-detail",
+  templateUrl: "./blog-detail.component.html",
+  styleUrls: ["./blog-detail.component.css"],
+  imports: [MatButton, MatIconButton, MatIcon],
 })
 export class BlogDetailComponent implements OnInit {
   constructor(private location: Location) {}

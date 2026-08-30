@@ -19,7 +19,7 @@
   <div class="content-layer">
     <!-- Left/Top Section: Welcome & Navigation -->
     <section class="hero-section">
-      <h1 class="heading-welcome">Welcome</h1>   
+      <h1 class="heading-welcome">Welcome</h1>
       <nav class="action-buttons">
         @for (button of navigationButtons; track button) {
           <button
@@ -38,11 +38,11 @@
       </nav>
     </section>
     <section>
-        @defer (on viewport) {
-          <app-card [cardList]="cardDetails" [isStacked]="true"></app-card>
-        } @placeholder {
-          <div class="min-h-300"></div>
-        }
+      @defer (on viewport) {
+        <app-card [cardList]="cardDetails" [isStacked]="true"></app-card>
+      } @placeholder {
+        <div class="min-h-300"></div>
+      }
     </section>
   </div>
 </main>

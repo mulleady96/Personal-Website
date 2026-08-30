@@ -12,7 +12,7 @@
             routerLinkActive="router-link-active"
             [attr.aria-label]="button.ariaLabel"
             routerLink="{{ button.routerLink }}"
-            >
+          >
             <mat-icon color="accent">{{ button.icon }}</mat-icon>
             {{ button.ariaLabel }}
           </button>
@@ -21,7 +21,7 @@
       <mat-slide-toggle
         [checked]="isDarkTheme()"
         (change)="onThemeChange($event.checked)"
-        >
+      >
         <span>
           {{ themeDescription() }}
         </span>
@@ -31,7 +31,7 @@
           href="https://github.com/mulleady96"
           target="_blank"
           rel="noreferrer"
-          >
+        >
           <button mat-mini-fab color="accent" aria-label="Github button">
             <fa-icon [icon]="['fab', 'github']"></fa-icon>
           </button>
@@ -40,7 +40,7 @@
           href="https://www.linkedin.com/in/andrew-mulleady-a6222a171/"
           target="_blank"
           rel="noreferrer"
-          >
+        >
           <button mat-mini-fab color="accent" aria-label="LinkedIn">
             <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
           </button>
@@ -48,8 +48,11 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
-      <app-toolbar [imageSRC]="imageSRC()" (toggleSidenav)="sidenav.open()"></app-toolbar>
+      <app-toolbar
+        [imageSRC]="imageSRC()"
+        (toggleSidenav)="sidenav.open()"
+      ></app-toolbar>
       <router-outlet></router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

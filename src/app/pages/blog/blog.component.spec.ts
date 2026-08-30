@@ -32,11 +32,11 @@ describe("Blog Component", () => {
 
     mockActivatedRoute = {
       data: of({ article: null }),
-      snapshot: { data: {} }
+      snapshot: { data: {} },
     };
 
     mockRouter = {
-      navigate: jasmine.createSpy("navigate")
+      navigate: jasmine.createSpy("navigate"),
     };
 
     TestBed.configureTestingModule({
@@ -45,7 +45,7 @@ describe("Blog Component", () => {
         { provide: GravitaService, useValue: gravitaService },
         { provide: MarkdownService, useValue: markdownService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
-        { provide: Router, useValue: mockRouter }
+        { provide: Router, useValue: mockRouter },
       ],
     });
 

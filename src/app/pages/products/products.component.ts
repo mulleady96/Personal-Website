@@ -3,10 +3,10 @@ import { Component } from "@angular/core";
 import { CardComponent } from "../../Components/card/card.component";
 
 @Component({
-    selector: "app-products",
-    templateUrl: "./products.component.html",
-    styleUrls: ["./products.component.scss"],
-    imports: [CardComponent]
+  selector: "app-products",
+  templateUrl: "./products.component.html",
+  styleUrls: ["./products.component.scss"],
+  imports: [CardComponent],
 })
 export class ProductsComponent {
   portfolioDetails = [
@@ -54,7 +54,7 @@ export class ProductsComponent {
       title: "F1 Lights Out",
       description:
         "F1 Lights Out is a snapchat lense made on Lens Studio, where you can test your reaction speed.",
-      
+
       image: "assets/snapcode-lights-out.png",
       buttonText: "Scan with Snapchat",
       externalLink: false,

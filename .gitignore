@@ -40,6 +40,7 @@ src/.well-known
 /functions
 credentials.ts
 src/environments/
+src/.lighthouseci
 
 # System files
 .DS_Store

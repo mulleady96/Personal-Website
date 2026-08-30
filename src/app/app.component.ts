@@ -13,17 +13,24 @@ import { SwUpdate } from "@angular/service-worker";
 import { RouterModule } from "@angular/router";
 
 import { MatCheckboxModule } from "@angular/material/checkbox";
-import { FontAwesomeModule, FaIconLibrary } from "@fortawesome/angular-fontawesome";
-import { faGithub, faLinkedin, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from "@fortawesome/angular-fontawesome";
+import {
+  faGithub,
+  faLinkedin,
+  faWhatsapp,
+} from "@fortawesome/free-brands-svg-icons";
 import { Analytics, logEvent } from "@angular/fire/analytics";
 
 import { ThemeService } from "./Services/theme.service";
 import { ComponentsModule } from "./Components/components.module";
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
 
@@ -31,7 +38,7 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
   selector: "app-root",
   standalone: true,
   host: {
-    '[class]': 'className()'
+    "[class]": "className()",
   },
   imports: [
     CommonModule,
@@ -47,7 +54,7 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
     ToolbarComponent,
   ],
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
   private swUpdate = inject(SwUpdate);
@@ -102,7 +109,7 @@ export class AppComponent implements OnInit {
 
   constructor() {
     this.library.addIcons(faGithub, faLinkedin, faWhatsapp);
-    logEvent(this.analytics, 'app_load', { page: 'main' });
+    logEvent(this.analytics, "app_load", { page: "main" });
   }
 
   sidenav = viewChild<MatSidenav>("sidenav");
@@ -141,9 +148,11 @@ export class AppComponent implements OnInit {
     }
 
     // Update other theme-dependent properties
-    this.imageSRC.set(isDark
-      ? "assets/AM New Logo Light 2020.png"
-      : "assets/AM NEW Logo 2020.png");
+    this.imageSRC.set(
+      isDark
+        ? "assets/AM New Logo Light 2020.png"
+        : "assets/AM NEW Logo 2020.png",
+    );
     this.themeDescription.set(isDark ? "Dark Theme" : "Light Theme");
 
     // Notify the service
@@ -159,8 +168,9 @@ export class AppComponent implements OnInit {
       initialThemeState = JSON.parse(storedTheme);
     } else {
       // Check system preference
-      initialThemeState = window.matchMedia && 
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
+      initialThemeState =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
 
     // Set the initial theme based on the stored value or system preference
@@ -178,4 +188,3 @@ export class AppComponent implements OnInit {
     }
   }
 }
-

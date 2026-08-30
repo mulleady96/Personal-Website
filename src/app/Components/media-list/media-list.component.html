@@ -1,4 +1,3 @@
-
 <app-search-button (searchChange)="onSearchChange($event)"></app-search-button>
 @if (search) {
   <div class="search-chip-container">
@@ -9,7 +8,7 @@
           matBadge="{{ location.locationCount }}"
           (click)="toggleSelection(location)"
           [ngClass]="{ selected: location.selected }"
-          >
+        >
           {{ location.name }}
         </mat-chip>
       }
@@ -23,23 +22,19 @@
     <mat-spinner diameter="40"></mat-spinner>
   </div>
 } @else {
-<mat-menu #sharedMenu="matMenu" yPosition="above">
-  <button
-    mat-menu-item
-    (click)="Pexels()"
-    aria-label="View more on Pexels"
-    >
-    <mat-icon>link</mat-icon>Pexels
-  </button>
-  <button mat-menu-item (click)="openPricingDialog()">
-    <mat-icon>collections</mat-icon>Access Full Collection
-  </button>
-</mat-menu>
+  <mat-menu #sharedMenu="matMenu" yPosition="above">
+    <button mat-menu-item (click)="Pexels()" aria-label="View more on Pexels">
+      <mat-icon>link</mat-icon>Pexels
+    </button>
+    <button mat-menu-item (click)="openPricingDialog()">
+      <mat-icon>collections</mat-icon>Access Full Collection
+    </button>
+  </mat-menu>
 
-<div class="media-list-container">
-      @for (image of imageList; track image.src) {
-        <div class="media-list-item">
-        @if (image.type === 'video') {
+  <div class="media-list-container">
+    @for (image of imageList; track image.src) {
+      <div class="media-list-item">
+        @if (image.type === "video") {
           <iframe
             loading="lazy"
             [src]="image.src | safeYoutubeUrl"
@@ -51,14 +46,14 @@
         } @else {
           <div class="image-wrapper">
             <button
-            mat-raised-button
+              mat-raised-button
               [matMenuTriggerFor]="sharedMenu"
               aria-label="icon-button with menu options"
               class="menu-button"
               (click)="$event.stopPropagation()"
-              >
-            {{ image.title }}
-            <mat-icon>share</mat-icon>
+            >
+              {{ image.title }}
+              <mat-icon>share</mat-icon>
             </button>
             <img
               [ngSrc]="image.src"
@@ -70,7 +65,7 @@
             />
           </div>
         }
-        </div>
-      }
-    </div>
+      </div>
+    }
+  </div>
 }

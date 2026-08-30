@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 
 import { RouterModule, Routes } from "@angular/router";
 
-
 import { ComponentsModule } from "../../Components/components.module";
 import { ProductsComponent } from "./products.component";
 import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
@@ -16,14 +15,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
+  imports: [
+    CommonModule,
 
-
-        ComponentsModule,
-        RouterModule.forChild(routes),
-        BubblesComponent,
-        ProductsComponent,
-    ],
+    ComponentsModule,
+    RouterModule.forChild(routes),
+    BubblesComponent,
+    ProductsComponent,
+  ],
 })
 export class ProductsModule {}

@@ -1,6 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from "@angular/fire/storage";
+import {
+  Storage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "@angular/fire/storage";
 import {
   Firestore,
   DocumentData,
@@ -30,7 +35,7 @@ export interface MediaItem {
   description: string;
   date: string;
   likes: number;
-  type: 'image' | 'video';
+  type: "image" | "video";
 }
 
 @Injectable({
@@ -41,7 +46,9 @@ export class GravitaService {
   private storage = inject(Storage);
   db = inject(Firestore);
   AILimit: number = 0;
-  private aiQueryCache$: Promise<QueryDocumentSnapshot<DocumentData, DocumentData>[]> | null = null;
+  private aiQueryCache$: Promise<
+    QueryDocumentSnapshot<DocumentData, DocumentData>[]
+  > | null = null;
   private mediaCache: Promise<MediaItem[]> | null = null;
 
   createEnquiry(enquiryForm: Enquiry) {
@@ -53,9 +60,9 @@ export class GravitaService {
   async getEnquiries() {
     const collectionRef = collection(this.db, "Enquiries");
     const snapshot = await getDocs(collectionRef);
-    return snapshot.docs.map(doc => ({
+    return snapshot.docs.map((doc) => ({
       docId: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
   }
 
@@ -130,13 +137,43 @@ export class GravitaService {
       try {
         const collectionRef = collection(this.db, "media");
         const snapshot = await getDocs(collectionRef);
-        const firestoreMedia = snapshot.docs.map(doc => doc.data() as MediaItem);
-        
+        const firestoreMedia = snapshot.docs.map(
+          (doc) => doc.data() as MediaItem,
+        );
+
         const defaultVideos: MediaItem[] = [
-          { title: "Videos", src: "https://youtu.be/R8vrdU_dc38", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" },
-          { title: "Videos", src: "https://youtu.be/YSWjwPRRsEY", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" },
-          { title: "Videos", src: "https://youtu.be/eCE0Q9jw4W0", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" },
-          { title: "Videos", src: "https://youtu.be/RAo4rkuuHuM", description: "A placeholder for video content", date: "14th February 2026", likes: 0, type: "video" }
+          {
+            title: "Videos",
+            src: "https://youtu.be/R8vrdU_dc38",
+            description: "A placeholder for video content",
+            date: "14th February 2026",
+            likes: 0,
+            type: "video",
+          },
+          {
+            title: "Videos",
+            src: "https://youtu.be/YSWjwPRRsEY",
+            description: "A placeholder for video content",
+            date: "14th February 2026",
+            likes: 0,
+            type: "video",
+          },
+          {
+            title: "Videos",
+            src: "https://youtu.be/eCE0Q9jw4W0",
+            description: "A placeholder for video content",
+            date: "14th February 2026",
+            likes: 0,
+            type: "video",
+          },
+          {
+            title: "Videos",
+            src: "https://youtu.be/RAo4rkuuHuM",
+            description: "A placeholder for video content",
+            date: "14th February 2026",
+            likes: 0,
+            type: "video",
+          },
         ];
 
         return [...firestoreMedia, ...defaultVideos];
@@ -155,9 +192,13 @@ export class GravitaService {
       // 1. Upload to Storage
       const storageRef = ref(this.storage, `media/${Date.now()}_${file.name}`);
       const metadataParams = {
-        cacheControl: 'public, max-age=31536000'
+        cacheControl: "public, max-age=31536000",
       };
-      const uploadTask = await uploadBytesResumable(storageRef, file, metadataParams);
+      const uploadTask = await uploadBytesResumable(
+        storageRef,
+        file,
+        metadataParams,
+      );
       const downloadUrl = await getDownloadURL(uploadTask.ref);
 
       // 2. Save to Firestore
@@ -165,9 +206,15 @@ export class GravitaService {
         title: metadata.title || file.name,
         src: downloadUrl,
         description: metadata.description || "",
-        date: metadata.date || new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+        date:
+          metadata.date ||
+          new Date().toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }),
         likes: 0,
-        type: file.type.startsWith('video/') ? 'video' : 'image'
+        type: file.type.startsWith("video/") ? "video" : "image",
       };
 
       await addDoc(collection(this.db, "media"), mediaDoc);
@@ -187,24 +234,24 @@ export class GravitaService {
 
   async getArticles() {
     const collectionRef = collection(this.db, "blog");
-    // Get all bloggi posts, ordered by time. 
+    // Get all bloggi posts, ordered by time.
     // You might want to remove the 'where' clause if you want to see everything
     const q = query(
       collectionRef,
       where("id", "==", "bloggi"),
-      orderBy("status.startTime", "desc") // Newest first
+      orderBy("status.startTime", "desc"), // Newest first
     );
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => {
+    return snapshot.docs.map((doc) => {
       const data = doc.data();
-      let startTime = data['status']?.startTime;
-      if (startTime && typeof startTime.toDate === 'function') {
+      let startTime = data["status"]?.startTime;
+      if (startTime && typeof startTime.toDate === "function") {
         startTime = startTime.toDate();
       }
       return {
         docId: doc.id,
         ...data,
-        status: { ...data['status'], startTime }
+        status: { ...data["status"], startTime },
       };
     });
   }
@@ -215,14 +262,14 @@ export class GravitaService {
 
     if (docSnap.exists()) {
       const data = docSnap.data();
-      let startTime = data['status']?.startTime;
-      if (startTime && typeof startTime.toDate === 'function') {
+      let startTime = data["status"]?.startTime;
+      if (startTime && typeof startTime.toDate === "function") {
         startTime = startTime.toDate();
       }
       return {
         docId: docSnap.id,
         ...data,
-        status: { ...data['status'], startTime }
+        status: { ...data["status"], startTime },
       };
     } else {
       return null;
@@ -241,8 +288,8 @@ export class GravitaService {
       id: "bloggi",
       status: {
         startTime: new Date().toISOString(), // Use consistent timestamp format
-        ...data.status
-      }
+        ...data.status,
+      },
     };
     await addDoc(collection(this.db, "blog"), docData);
   }
@@ -252,5 +299,4 @@ export class GravitaService {
     // import { deleteDoc } from "firebase/firestore";
     // await deleteDoc(doc(this.db, "generate", id));
   }
-
 }

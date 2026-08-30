@@ -10,11 +10,20 @@ import { CardComponent } from "../../Components/card/card.component";
 import { GravitaService } from "../../Services/gravita.service";
 
 @Component({
-    // tslint:disable-next-line: quotemark
-    selector: "app-home",
-    templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.scss"],
-    imports: [NgOptimizedImage, BubblesComponent, MatFabButton, RouterLinkActive, MatTooltip, RouterLink, MatIcon, CardComponent]
+  // tslint:disable-next-line: quotemark
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
+  imports: [
+    NgOptimizedImage,
+    BubblesComponent,
+    MatFabButton,
+    RouterLinkActive,
+    MatTooltip,
+    RouterLink,
+    MatIcon,
+    CardComponent,
+  ],
 })
 export class HomeComponent implements OnInit {
   gravita = inject(GravitaService);
@@ -115,7 +124,7 @@ export class HomeComponent implements OnInit {
   randomImages = async () => {
     try {
       const media = await this.gravita.getMediaFromFirestore();
-      const images = media.filter(item => item.type !== 'video');
+      const images = media.filter((item) => item.type !== "video");
       if (images.length > 0) {
         this.image.set(images[Math.floor(Math.random() * images.length)].src);
       }

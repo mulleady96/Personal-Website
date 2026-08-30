@@ -24,9 +24,9 @@ describe("HomeComponent", () => {
     ]);
 
     await TestBed.configureTestingModule({
-    imports: [NoopAnimationsModule, HomeComponent],
-    providers: [{ provide: MediaService, useValue: mediaServiceSpy }],
-}).compileComponents();
+      imports: [NoopAnimationsModule, HomeComponent],
+      providers: [{ provide: MediaService, useValue: mediaServiceSpy }],
+    }).compileComponents();
   });
 
   beforeEach(() => {

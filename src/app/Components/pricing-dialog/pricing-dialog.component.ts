@@ -1,4 +1,3 @@
-
 import { Component, inject } from "@angular/core";
 import { Functions, httpsCallable } from "@angular/fire/functions";
 import { MatBadgeModule } from "@angular/material/badge";
@@ -9,12 +8,12 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { environment } from "src/environments/environment";
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @Component({
-    selector: "app-pricing-dialog",
-    imports: [
+  selector: "app-pricing-dialog",
+  imports: [
     MatBadgeModule,
     MatCardModule,
     MatListModule,
@@ -22,10 +21,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatError,
     MatDialogModule,
-    MatFormFieldModule
-],
-    templateUrl: "./pricing-dialog.component.html",
-    styleUrls: ["./pricing-dialog.component.css"]
+    MatFormFieldModule,
+  ],
+  templateUrl: "./pricing-dialog.component.html",
+  styleUrls: ["./pricing-dialog.component.css"],
 })
 export class PricingDialogComponent {
   isLoading = false;

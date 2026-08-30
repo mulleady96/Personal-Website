@@ -1,20 +1,61 @@
 import { animate, style, transition, trigger } from "@angular/animations";
-import { Component, inject, signal, effect, OnDestroy, OnInit } from "@angular/core";
-import { form, Field, required, email, submit, maxLength } from "@angular/forms/signals";
+import {
+  Component,
+  inject,
+  signal,
+  effect,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
+import {
+  form,
+  Field,
+  required,
+  email,
+  submit,
+  maxLength,
+} from "@angular/forms/signals";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { GravitaService, Enquiry } from "../../Services/gravita.service";
 
 import { MatFabButton, MatButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
-import { MatStepper, MatStep, MatStepLabel, MatStepperNext, MatStepperPrevious } from "@angular/material/stepper";
-import { MatFormField, MatLabel, MatInput, MatError, MatHint } from "@angular/material/input";
+import {
+  MatStepper,
+  MatStep,
+  MatStepLabel,
+  MatStepperNext,
+  MatStepperPrevious,
+} from "@angular/material/stepper";
+import {
+  MatFormField,
+  MatLabel,
+  MatInput,
+  MatError,
+  MatHint,
+} from "@angular/material/input";
 
 @Component({
-    selector: "app-get-in-touch",
-    templateUrl: "./get-in-touch.component.html",
-    styleUrls: ["./get-in-touch.component.scss"],
-    imports: [MatFabButton, MatIcon, Field, MatStepper, MatStep, MatStepLabel, MatFormField, MatLabel, MatInput, MatError, MatButton, MatStepperNext, MatStepperPrevious, MatHint]
+  selector: "app-get-in-touch",
+  templateUrl: "./get-in-touch.component.html",
+  styleUrls: ["./get-in-touch.component.scss"],
+  imports: [
+    MatFabButton,
+    MatIcon,
+    Field,
+    MatStepper,
+    MatStep,
+    MatStepLabel,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatButton,
+    MatStepperNext,
+    MatStepperPrevious,
+    MatHint,
+  ],
 })
 export class GetInTouchComponent implements OnInit, OnDestroy {
   warning = signal<string>("");
@@ -22,7 +63,7 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
   enquiryModel = signal<Enquiry>({
     firstStep: { name: "" },
     secondStep: { email: "" },
-    thirdStep: { query: "" }
+    thirdStep: { query: "" },
   });
 
   enquiryForm = form(this.enquiryModel, (s) => {
@@ -54,12 +95,18 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
     submit(this.enquiryForm, async () => {
       try {
         this.gravita.createEnquiry(this.enquiryModel());
-        this.snackBar.open("Form Successfully Submitted, Thank You!", "Great", { duration: 5000 });
+        this.snackBar.open("Form Successfully Submitted, Thank You!", "Great", {
+          duration: 5000,
+        });
         this.isSubmitted.set(true);
         localStorage.removeItem("form"); // Clear saved form data on success
       } catch (error) {
         console.error(error);
-        this.snackBar.open("Unfortunately we ran into a problem.", "Please try again.", { duration: 5000 });
+        this.snackBar.open(
+          "Unfortunately we ran into a problem.",
+          "Please try again.",
+          { duration: 5000 },
+        );
       }
     });
   };
@@ -68,7 +115,7 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
     this.enquiryModel.set({
       firstStep: { name: "" },
       secondStep: { email: "" },
-      thirdStep: { query: "" }
+      thirdStep: { query: "" },
     });
     this.enquiryForm().reset();
     this.remaining = 500;
@@ -85,10 +132,10 @@ export class GetInTouchComponent implements OnInit, OnDestroy {
           this.enquiryModel.set({
             firstStep: parsed.firstStep || { name: "" },
             secondStep: parsed.secondStep || { email: "" },
-            thirdStep: parsed.thirdStep || { query: "" }
+            thirdStep: parsed.thirdStep || { query: "" },
           });
         }
-      } catch(e) {}
+      } catch (e) {}
     }
   }
 
