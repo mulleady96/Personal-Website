@@ -17,7 +17,7 @@ import { environment } from "../../../environments/environment";
 })
 export class PaymentSuccessComponent implements OnInit {
   private mediaService = inject(MediaService);
-  private analytics = inject(Analytics);
+  private analytics = inject(Analytics, { optional: true });
   isDownloading = false;
   downloadComplete = false;
   error: string | null = null;
@@ -42,7 +42,9 @@ export class PaymentSuccessComponent implements OnInit {
 
   ngOnInit(): void {
     this.downloadReceipt();
-    logEvent(this.analytics, "payment_success", { page: "payment-success" });
+    if (this.analytics) {
+      logEvent(this.analytics, "payment_success", { page: "payment-success" });
+    }
   }
 
   downloadReceipt(): void {

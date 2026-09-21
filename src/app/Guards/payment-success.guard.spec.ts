@@ -1,3 +1,4 @@
+import { Functions } from '@angular/fire/functions';
 import { TestBed } from "@angular/core/testing";
 import { CanActivateFn } from "@angular/router";
 
@@ -10,7 +11,8 @@ describe("paymentSuccessGuard", () => {
     );
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [{ provide: Functions, useValue: {} }],});
   });
 
   it("should be created", () => {

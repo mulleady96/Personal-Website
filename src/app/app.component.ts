@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
   private location = inject(Location);
   private overlayContainer = inject(OverlayContainer);
   private library = inject(FaIconLibrary);
-  private analytics = inject(Analytics);
+  private analytics = inject(Analytics, { optional: true });
 
   title = "Andrew Mulleady";
   navigationButtons = [
@@ -91,11 +91,11 @@ export class AppComponent implements OnInit {
       routerLink: "/gallery",
       icon: "collections",
     },
-    // {
-    //   ariaLabel: "AR Corner",
-    //   routerLink: "/AR-corner",
-    //   icon: "view_in_ar",
-    // },
+    {
+      ariaLabel: "AR Corner",
+      routerLink: "/AR-corner",
+      icon: "view_in_ar",
+    },
   ];
 
   navToggle = output();
@@ -109,7 +109,9 @@ export class AppComponent implements OnInit {
 
   constructor() {
     this.library.addIcons(faGithub, faLinkedin, faWhatsapp);
-    logEvent(this.analytics, "app_load", { page: "main" });
+    if (this.analytics) {
+      logEvent(this.analytics, "app_load", { page: "main" });
+    }
   }
 
   sidenav = viewChild<MatSidenav>("sidenav");

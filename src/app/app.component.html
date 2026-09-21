@@ -18,15 +18,15 @@
           </button>
         }
       </div>
-      <mat-slide-toggle
-        [checked]="isDarkTheme()"
-        (change)="onThemeChange($event.checked)"
-      >
-        <span>
-          {{ themeDescription() }}
-        </span>
-      </mat-slide-toggle>
       <div class="bottomSocial">
+        <mat-slide-toggle
+          [checked]="isDarkTheme()"
+          (change)="onThemeChange($event.checked)"
+        >
+          <span>
+            {{ themeDescription() }}
+          </span>
+        </mat-slide-toggle>
         <a
           href="https://github.com/mulleady96"
           target="_blank"
@@ -43,6 +43,11 @@
         >
           <button mat-mini-fab color="accent" aria-label="LinkedIn">
             <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
+          </button>
+        </a>
+        <a routerLink="/privacy-policy">
+          <button mat-mini-fab color="accent" aria-label="Privacy Policy">
+            <mat-icon>info</mat-icon>
           </button>
         </a>
       </div>

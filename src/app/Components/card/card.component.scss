@@ -22,6 +22,7 @@ mat-card {
     12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
   border-radius: 50px;
+  margin: 1.5rem;
 }
 
 mat-card-content {
@@ -72,6 +73,10 @@ mat-card-actions {
   position: relative !important;
 }
 
+.snap-card-img {
+  object-fit: contain !important;
+}
+
 .avatar-image {
   width: 50%;
   height: 150px;
@@ -106,4 +111,76 @@ h3 {
 h4 {
   text-align: center;
   font-family: "Quicksand";
+}
+
+.pagination-pill {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(109, 187, 148, 0.15);
+  color: #6dbb94;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  z-index: 10;
+}
+
+.typographic-card {
+  display: flex !important;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem !important;
+
+  .card-heading {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    margin-top: auto;
+    background: linear-gradient(45deg, #6dbb94, #2a9d8f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    text-align: center;
+  }
+
+  mat-card-content {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: auto;
+  }
+}
+
+.hover-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(109, 187, 148, 0.2);
+  color: #6dbb94;
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(109, 187, 148, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
 }

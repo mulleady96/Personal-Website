@@ -1,3 +1,4 @@
+import { Functions } from '@angular/fire/functions';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { SearchButtonComponent } from "./search-button.component";
@@ -8,6 +9,7 @@ describe("SearchButtonComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [{ provide: Functions, useValue: {} }],
       imports: [SearchButtonComponent],
     }).compileComponents();
 

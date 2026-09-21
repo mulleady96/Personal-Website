@@ -46,7 +46,7 @@ export class GravitaService {
   private storage = inject(Storage);
   db = inject(Firestore);
   AILimit: number = 0;
-  private aiQueryCache$: Promise<
+  private blogCache$: Promise<
     QueryDocumentSnapshot<DocumentData, DocumentData>[]
   > | null = null;
   private mediaCache: Promise<MediaItem[]> | null = null;
@@ -97,35 +97,16 @@ export class GravitaService {
     }
   }
 
-  async createAIQuery(sQuery: string) {
-    try {
-      await addDoc(collection(this.db, "generate"), {
-        id: "bloggi",
-        prompt: sQuery,
-      }).then(() => {
-        this.getLimit("sGNbtnG9rFj4mL2akP5O", true);
-        // Invalidate cache so next fetch gets the new data
-        this.aiQueryCache$ = null;
-      });
-    } catch (error) {
-      console.log("Error generating prompt.", error);
-    }
-  }
-
-  async getAIQuery() {
-    if (this.aiQueryCache$) {
-      return this.aiQueryCache$;
+  async getBlogCache() {
+    if (this.blogCache$) {
+      return this.blogCache$;
     }
 
     const collectionRef = collection(this.db, "blog");
-    const q = query(
-      collectionRef,
-      where("id", "==", "bloggi"),
-      orderBy("status.startTime"),
-    );
+    const q = query(collectionRef, orderBy("status.startTime"));
 
-    this.aiQueryCache$ = getDocs(q).then((snapshot) => snapshot.docs);
-    return this.aiQueryCache$;
+    this.blogCache$ = getDocs(q).then((snapshot) => snapshot.docs);
+    return this.blogCache$;
   }
 
   async getMediaFromFirestore(): Promise<MediaItem[]> {
@@ -234,14 +215,7 @@ export class GravitaService {
 
   async getArticles() {
     const collectionRef = collection(this.db, "blog");
-    // Get all bloggi posts, ordered by time.
-    // You might want to remove the 'where' clause if you want to see everything
-    const q = query(
-      collectionRef,
-      where("id", "==", "bloggi"),
-      orderBy("status.startTime", "desc"), // Newest first
-    );
-    const snapshot = await getDocs(q);
+    const snapshot = await getDocs(collectionRef);
     return snapshot.docs.map((doc) => {
       const data = doc.data();
       let startTime = data["status"]?.startTime;

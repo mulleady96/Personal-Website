@@ -29,10 +29,13 @@
     <button mat-menu-item (click)="openPricingDialog()">
       <mat-icon>collections</mat-icon>Access Full Collection
     </button>
+    <button mat-menu-item (click)="selectedImageForMenu && shareImage(selectedImageForMenu)">
+      <mat-icon>share</mat-icon>Share
+    </button>
   </mat-menu>
 
   <div class="media-list-container">
-    @for (image of imageList; track image.src) {
+    @for (image of imageList; track image.src; let i = $index) {
       <div class="media-list-item">
         @if (image.type === "video") {
           <iframe
@@ -50,7 +53,7 @@
               [matMenuTriggerFor]="sharedMenu"
               aria-label="icon-button with menu options"
               class="menu-button"
-              (click)="$event.stopPropagation()"
+              (click)="$event.stopPropagation(); selectedImageForMenu = image"
             >
               {{ image.title }}
               <mat-icon>share</mat-icon>
@@ -59,6 +62,7 @@
               [ngSrc]="image.src"
               width="1400"
               height="900"
+              [priority]="i === 0"
               (click)="openModal(image)"
               alt="Photo of {{ image.title }}"
               class="media-item"

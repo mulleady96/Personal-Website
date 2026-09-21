@@ -1,69 +1,93 @@
 <div class="rowWrap">
   @if (cardList().length > 0 && isStacked()) {
-    <mat-card
-      (click)="handleNavigation($event)"
-      (mousemove)="handleHover($event)"
-      (mouseleave)="resetHover()"
-      [ngClass]="{
-        'highlight-left': hoverSide === 'left' && currentIndex !== 0,
-        'highlight-right':
-          hoverSide === 'right' && currentIndex !== cardList().length - 1,
-        'highlight-left-red': hoverSide === 'left' && currentIndex === 0,
-        'highlight-right-red':
-          hoverSide === 'right' && currentIndex === cardList().length - 1,
-      }"
-    >
-      @if (cardList()[currentIndex]?.image) {
-        <img
-          ngSrc="{{ cardList()[currentIndex].image }}"
-          fill
-          class="card-image-top"
-          alt="{{ cardList()[currentIndex].description }}"
-          priority
-        />
-      }
-
-      <h3 class="card-heading">
-        {{ cardList()[currentIndex].title }} <span>-</span>
-        {{ currentIndex + 1 }} / {{ cardList().length }}
-      </h3>
-
-      <mat-card-content>
-        {{ cardList()[currentIndex].description }}
-      </mat-card-content>
-      <mat-card-actions>
-        @if (cardList()[currentIndex].link) {
-          <a
-            [routerLink]="
-              !cardList()[currentIndex].externalLink
-                ? cardList()[currentIndex].link
-                : null
-            "
-            ariaCurrentWhenActive="page"
+    <div class="deck-container" style="position: relative; margin: 1.5rem; max-width: 22rem;">
+      @for (card of cardList(); track card; let i = $index) {
+        @if (i >= currentIndex && i <= currentIndex + 2) {
+          <mat-card
+            [style.position]="i === currentIndex ? 'relative' : 'absolute'"
+            [style.top.px]="i === currentIndex ? 0 : (i - currentIndex) * 12"
+            [style.left.px]="i === currentIndex ? 0 : (i - currentIndex) * 12"
+            [style.z-index]="10 - (i - currentIndex)"
+            [style.margin]="'0'"
+            [style.transform]="'scale(' + (1 - (i - currentIndex) * 0.02) + ')'"
+            [style.opacity]="1 - (i - currentIndex) * 0.15"
+            [style.pointer-events]="i === currentIndex ? 'auto' : 'none'"
+            (click)="i === currentIndex ? handleNavigation($event) : null"
+            (mousemove)="i === currentIndex ? handleHover($event) : null"
+            (mouseleave)="i === currentIndex ? resetHover() : null"
+            [ngClass]="{
+              'highlight-left': i === currentIndex && hoverSide === 'left' && currentIndex !== 0,
+              'highlight-right': i === currentIndex && hoverSide === 'right' && currentIndex !== cardList().length - 1,
+              'highlight-left-red': i === currentIndex && hoverSide === 'left' && currentIndex === 0,
+              'highlight-right-red': i === currentIndex && hoverSide === 'right' && currentIndex === cardList().length - 1,
+              'typographic-card': !card.image
+            }"
+            style="transition: all 0.3s ease; width: 100%; box-sizing: border-box;"
           >
-            @if (cardList()[currentIndex]?.buttonText) {
-              <button
-                (click)="navigate(cardList()[currentIndex])"
-                mat-raised-button
-                class="mat-product-button"
-                [attr.aria-label]="cardList()[currentIndex].buttonText"
-                color="accent"
-              >
-                {{ cardList()[currentIndex].buttonText }}
-              </button>
+            @if (i === currentIndex && hoverSide === 'left' && currentIndex !== 0) {
+              <div class="hover-arrow left-arrow">
+                <mat-icon>chevron_left</mat-icon>
+              </div>
             }
-          </a>
+            @if (i === currentIndex && hoverSide === 'right' && currentIndex !== cardList().length - 1) {
+              <div class="hover-arrow right-arrow">
+                <mat-icon>chevron_right</mat-icon>
+              </div>
+            }
+            <div class="pagination-pill">{{ i + 1 }} / {{ cardList().length }}</div>
+            @if (card.image) {
+              <img
+                ngSrc="{{ card.image }}"
+                fill
+                class="card-image-top"
+                [class.snap-card-img]="card.type === 'snap'"
+                alt="{{ card.description }}"
+                priority
+              />
+            }
+
+            <h3 class="card-heading">
+              {{ card.title }}
+            </h3>
+
+            <mat-card-content>
+              {{ card.description }}
+            </mat-card-content>
+            <mat-card-actions>
+              @if (card.link) {
+                <a
+                  [routerLink]="!card.externalLink ? card.link : null"
+                  ariaCurrentWhenActive="page"
+                >
+                  @if (card.buttonText) {
+                    <button
+                      (click)="navigate(card)"
+                      mat-raised-button
+                      class="mat-product-button"
+                      [attr.aria-label]="card.buttonText"
+                      color="accent"
+                      [disabled]="i !== currentIndex"
+                    >
+                      {{ card.buttonText }}
+                    </button>
+                  }
+                </a>
+              }
+            </mat-card-actions>
+          </mat-card>
         }
-      </mat-card-actions>
-    </mat-card>
+      }
+    </div>
   } @else {
     @for (card of cardList(); track card; let i = $index) {
-      <mat-card>
+      <mat-card [class.typographic-card]="!card.image">
+        <div class="pagination-pill">{{ i + 1 }} / {{ cardList().length }}</div>
         @if (card.image) {
           <img
             ngSrc="{{ card.image }}"
             fill
             class="card-image-top"
+            [class.snap-card-img]="card.type === 'snap'"
             alt="{{ card.description }}"
             priority
           />

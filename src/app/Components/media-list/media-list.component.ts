@@ -104,6 +104,7 @@ export class MediaListComponent implements OnInit {
   search!: boolean;
   modal!: boolean;
   isLoading = true;
+  selectedImageForMenu?: MediaItem;
   name = input<string>();
 
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
@@ -262,6 +263,19 @@ export class MediaListComponent implements OnInit {
     window.open("https://buy.stripe.com/dR6fZzaRhczXdjy3cc", "_blank");
   }
 
+  shareImage(image: MediaItem) {
+    if (navigator.share) {
+      navigator.share({
+        title: image.title,
+        text: "Check out this photo!",
+        url: image.src,
+      }).catch((error) => console.log("Error sharing", error));
+    } else {
+      navigator.clipboard.writeText(image.src);
+      alert("Image link copied to clipboard!");
+    }
+  }
+
   openModal(image: MediaItem) {
     if (image.type === "video") return; // Don't open modal for videos
 
@@ -282,6 +296,7 @@ export class MediaListComponent implements OnInit {
   selector: "dialog-elements-example-dialog",
   template: `
     <div class="dialog-container">
+      <div class="image-title">{{ currentImage.title }}</div>
       <img [src]="currentImage.src" mat-dialog-close alt="Photo of scenery" />
 
       <button matMiniFab class="nav-btn prev-btn" (click)="prev($event)">
@@ -311,6 +326,17 @@ export class MediaListComponent implements OnInit {
         max-width: 100%;
         max-height: 100vh;
         object-fit: contain;
+      }
+      .image-title {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        z-index: 20;
       }
       .nav-btn {
         position: absolute;

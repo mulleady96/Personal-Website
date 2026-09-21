@@ -47,6 +47,7 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   lenses = signal<Lens[]>([]);
   selectedLensId = signal<string>("");
   facingMode = signal<"user" | "environment">("user");
+  isProduction = environment.production;
 
   private cameraKit: CameraKit | null = null;
   private session: CameraKitSession | null = null;

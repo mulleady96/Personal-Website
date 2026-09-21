@@ -34,51 +34,32 @@ export class HomeComponent implements OnInit {
   cardDetails = [
     {
       id: 1,
-      title: "Design",
+      title: "Experience AR",
       description:
-        "This will involve studying your brand, your competitors and your market. Identifying key designs that you admire from well-known brands. From this we can create bespoke UI/UX designs that will engage your audience, by being both easy to use and appealing on the eye.",
-      pictureClass: "designImage",
-      link: "/portfolio",
-      buttonText: "View Designs",
+        "Step into the future with our augmented reality experiences.",
+      pictureClass: "productionImage",
+      link: "/AR-corner",
+      buttonText: "Open AR",
       externalLink: false,
     },
     {
       id: 2,
-      title: "Development",
-      description:
-        "Once the final design has been agreed, checkpoints will be established whereby you will be able to test the application as it's progressing. Providing feedback on the design & functionality throughout.",
-      pictureClass: "devImage",
-      link: "/portfolio",
-      buttonText: "View Portfolio",
+      title: "Latest blog",
+      description: "Loading latest blog...",
+      pictureClass: "designImage",
+      link: "/blog",
+      buttonText: "Read Blog",
       externalLink: false,
     },
     {
       id: 3,
-      title: "Analytics",
+      title: "New Photo Gallery",
       description:
-        "We can provide comprehensive statistical reports on how your website is performing.",
-      pictureClass: "productionImage",
-    },
-  ];
-
-  guaranteeDetails = [
-    {
-      id: 1,
-      title: "Industry Standard",
-      description:
-        " We use the latest front-end frameworks along with cloud based backend technologies. Your app will be responsive and intuitive regardless of how intensive demand may be.",
-    },
-    {
-      id: 1,
-      title: "SEO Score",
-      description:
-        "Search Engine Optimisation is essential in order to appear high up in browser search results, allowing you to engage more potential customers.",
-    },
-    {
-      id: 1,
-      title: "Platform Independent",
-      description:
-        "Your new website will be optimised for all browsers and mobile devices. Delivered at a low cost that will be manageable, for you and your business.",
+        "Explore our collection of high quality photographs in the gallery.",
+      pictureClass: "devImage",
+      link: "/gallery",
+      buttonText: "View Gallery",
+      externalLink: false,
     },
   ];
 
@@ -108,6 +89,22 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.useOptions();
     this.randomImages();
+    this.loadLatestBlog();
+  }
+
+  async loadLatestBlog() {
+    try {
+      const docs = await this.gravita.getBlogCache();
+      if (docs && docs.length > 0) {
+        const latestDoc = docs[docs.length - 1];
+        const latest = { docId: latestDoc.id, ...(latestDoc.data() as any) };
+        this.cardDetails[1].description =
+          latest.prompt || "Check out our latest insights!";
+        this.cardDetails[1].link = `/blog/${latest.docId}`;
+      }
+    } catch (e) {
+      console.error("Failed to load latest blog", e);
+    }
   }
 
   toggleDiv = () => {

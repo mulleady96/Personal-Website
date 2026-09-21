@@ -7,10 +7,12 @@
 
     <main class="main-content">
       <div class="camera-view">
-        <div class="debug-info">
-          Debug: SDK={{ sdkStatus() }} | Lenses={{ lenses().length }} |
-          Selected={{ selectedLensId() || "none" }}
-        </div>
+        @if (!isProduction) {
+          <div class="debug-info">
+            Debug: SDK={{ sdkStatus() }} | Lenses={{ lenses().length }} |
+            Selected={{ selectedLensId() || "none" }}
+          </div>
+        }
 
         <div class="camera-frame" #cameraContainer>
           <!-- Canvas will be injected here -->

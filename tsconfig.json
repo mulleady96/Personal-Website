@@ -25,7 +25,10 @@
       "@playwright/test": [
         "./node_modules/@playwright/test"
       ]
-    }
+    },
+    "types": [
+      "vitest/globals"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

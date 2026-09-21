@@ -1,5 +1,7 @@
 import { BreakpointObserver } from "@angular/cdk/layout";
-import { Component, input, OnInit } from "@angular/core";
+import { Component, input, OnInit, inject, computed } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { map } from "rxjs/operators";
 import { Router, RouterLink } from "@angular/router";
 import {
   MatCard,
@@ -9,6 +11,7 @@ import {
 import { NgClass, NgOptimizedImage } from "@angular/common";
 
 import { MatButton } from "@angular/material/button";
+import { MatIcon } from "@angular/material/icon";
 
 export interface CardItem {
   id: number;
@@ -18,6 +21,7 @@ export interface CardItem {
   image?: string | undefined;
   buttonText?: string;
   externalLink?: boolean;
+  type?: string;
 }
 
 @Component({
@@ -33,23 +37,38 @@ export interface CardItem {
     MatCardActions,
     RouterLink,
     MatButton,
+    MatIcon,
   ],
 })
 export class CardComponent implements OnInit {
+  private breakpointObserver = inject(BreakpointObserver);
+
   cardList = input<CardItem[]>([]);
-  isStacked = input<boolean>(true);
+  isStackedInput = input<boolean | undefined>(undefined, { alias: "isStacked" });
+  
+  private responsiveIsStacked = toSignal(
+    this.breakpointObserver
+      .observe("(max-width: 600px)")
+      .pipe(map((result) => result.matches)),
+    { initialValue: true },
+  );
+
+  isStacked = computed(() => {
+    const override = this.isStackedInput();
+    if (override !== undefined) {
+      return override; // Force the behavior if explicitly provided
+    }
+    return this.responsiveIsStacked(); // Otherwise fallback to responsive behavior
+  });
+
   public currentIndex: number = 0;
   public leftDotsCount: number[] = [];
   public rightDotsCount: number[] = [];
   public hoverSide: "left" | "right" | null = null;
-  constructor(
-    private router: Router,
-    private breakpointObserver: BreakpointObserver,
-  ) {}
 
-  ngOnInit(): void {
-    // this.isStacked = this.breakpointObserver.isMatched("(max-width: 599px)");
-  }
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {}
 
   leftArrow(currentIndex: number): void {
     if (currentIndex !== 0) {

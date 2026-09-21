@@ -48,6 +48,7 @@ export class ProductsComponent {
       image: "assets/snapcode-apple-catcher.png",
       buttonText: "Scan with Snapchat",
       externalLink: false,
+      type: "snap",
     },
     {
       id: 5,
@@ -58,6 +59,7 @@ export class ProductsComponent {
       image: "assets/snapcode-lights-out.png",
       buttonText: "Scan with Snapchat",
       externalLink: false,
+      type: "snap",
     },
     {
       id: 6,
@@ -67,6 +69,7 @@ export class ProductsComponent {
       image: "assets/snapcode-pirelli-cap.png",
       buttonText: "Scan with Snapchat",
       externalLink: false,
+      type: "snap",
     },
   ];
 }

@@ -6,6 +6,10 @@ import { ActivatedRoute } from "@angular/router";
 import { of } from "rxjs";
 
 import { MediaListComponent } from "./media-list.component";
+import { MockGravitaService, MockMatDialog } from "../../testing/mocks";
+import { GravitaService } from "../../Services/gravita.service";
+import { MatDialog } from "@angular/material/dialog";
+import { vi, describe, beforeEach, it, expect } from 'vitest';
 
 describe("MediaListComponent", () => {
   let component: MediaListComponent;
@@ -26,6 +30,8 @@ describe("MediaListComponent", () => {
             queryParams: of({ "unlock-collection": "true" }), // Mock query params
           },
         },
+        { provide: GravitaService, useClass: MockGravitaService },
+        { provide: MatDialog, useClass: MockMatDialog }
       ],
     }).compileComponents();
 
@@ -47,32 +53,31 @@ describe("MediaListComponent", () => {
   it("should toggle the search state when expand is called", () => {
     component.search = false;
     component.expand();
-    expect(component.search).toBeTrue();
+    expect(component.search).toBe(true);
   });
 
-  // Replaced sortByName test with toggleSelection logic or removed if irrelevant
-  // Since sortByName is gone, removing the test for now or replacing it with filterMedia logic check if possible.
-  /*
-  it("should filter images based on selected location", () => {
-    const location = "SomeLocation"; // replace with an actual location from your mock data
-    component.sortByName(location);
-    expect(
-      component.imageList.every((image: any) => image.title === location),
-    ).toBeTrue();
-    expect(component.count).toContain(location);
+  it("should handle location chip selection and filtering", async () => {
+    await component.fetchImages(); // Load data first
+    const location = component.locations.find(l => l.name !== 'All');
+    
+    if (location) {
+      component.toggleSelection(location);
+      expect(location.selected).toBe(true);
+      expect(component.locations.find(l => l.name === 'All')?.selected).toBe(false);
+      expect(component.imageList.every(img => img.title === location.name)).toBe(true);
+    }
   });
-  */
 
   it("should toggle selection for a location", () => {
     const location = {
-      name: "SomeLocation",
+      name: "Location1",
       selected: false,
       locationCount: 0,
     };
     component.toggleSelection(location);
-    expect(location.selected).toBeTrue();
+    expect(location.selected).toBe(true);
     component.toggleSelection(location);
-    expect(location.selected).toBeFalse();
+    expect(location.selected).toBe(false);
   });
 
   it("should deselect all locations when a specific location is selected", () => {
@@ -89,30 +94,30 @@ describe("MediaListComponent", () => {
     // Check that 'All' is deselected
     expect(
       component.locations.find((loc) => loc.name === "All")!.selected,
-    ).toBeFalse();
+    ).toBe(false);
 
     // Check that 'Location1' is now selected
     expect(
       component.locations.find((loc) => loc.name === "Location1")!.selected,
-    ).toBeTrue();
+    ).toBe(true);
 
     // Check that 'Location2' remains deselected
     expect(
       component.locations.find((loc) => loc.name === "Location2")!.selected,
-    ).toBeFalse();
+    ).toBe(false);
   });
 
   it("should open WhatsApp with the correct URL", () => {
-    spyOn(window, "open");
+    vi.spyOn(window, "open").mockImplementation(() => null);
     component.WhatsApp();
     expect(window.open).toHaveBeenCalledWith(
-      jasmine.stringMatching(/https:\/\/api\.whatsapp\.com\/send\?text=/),
+      expect.stringMatching(/https:\/\/api\.whatsapp\.com\/send\?text=/),
       "_blank",
     );
   });
 
   it("should open Pexels with the correct URL", () => {
-    spyOn(window, "open");
+    vi.spyOn(window, "open").mockImplementation(() => null);
     component.Pexels();
     expect(window.open).toHaveBeenCalledWith(
       "https://www.pexels.com/@andrew-mulleady-24039905",
@@ -121,7 +126,7 @@ describe("MediaListComponent", () => {
   });
 
   it("should open Stripe Tip page with the correct URL", () => {
-    spyOn(window, "open");
+    vi.spyOn(window, "open").mockImplementation(() => null);
     component.Tip();
     expect(window.open).toHaveBeenCalledWith(
       "https://buy.stripe.com/dR6fZzaRhczXdjy3cc",
@@ -129,47 +134,58 @@ describe("MediaListComponent", () => {
     );
   });
 
+  it("should share image when share is supported", async () => {
+    const mockImage: any = { src: "test.jpg", title: "Test" };
+    (navigator as any).share = vi.fn().mockResolvedValue(undefined);
+
+    await component.shareImage(mockImage);
+    expect(navigator.share).toHaveBeenCalledWith({
+      title: mockImage.title,
+      text: "Check out this photo!",
+      url: mockImage.src,
+    });
+  });
+
+  it("should copy link to clipboard when share is not supported", async () => {
+    const mockImage: any = { src: "test.jpg", title: "Test" };
+    (navigator as any).share = undefined;
+    (navigator as any).clipboard = { writeText: vi.fn().mockResolvedValue(undefined) };
+    vi.spyOn(window, 'alert').mockImplementation(() => {});
+
+    await component.shareImage(mockImage);
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(mockImage.src);
+    expect(window.alert).toHaveBeenCalledWith("Image link copied to clipboard!");
+  });
+
+  it("should not open the modal for video items", () => {
+    const dialogSpy = vi.spyOn(component.dialog, "open");
+    dialogSpy.mockClear();
+    const video: any = { type: "video" };
+    component.openModal(video);
+    expect(dialogSpy).not.toHaveBeenCalled();
+  });
+
   it("should open the modal with the correct image", () => {
-    const dialogSpy = spyOn(component.dialog, "open").and.callThrough();
-    const image: any = {
-      // Cast to any or verify MediaItem interface
+    const dialogSpy = vi.spyOn(component.dialog, "open");
+    dialogSpy.mockClear();
+    const image = component.imageList.find(img => img.type === "image") || {
       title: "Test Image",
       src: "test.jpg",
       description: "",
+      location: "",
       date: "",
       likes: 0,
-      type: "image",
+      type: "image" as const
     };
 
     component.openModal(image);
-
     expect(dialogSpy).toHaveBeenCalled();
-
-    // Cast the data to the Image type to avoid the TypeScript error
-    const dialogConfig = dialogSpy.calls.mostRecent()
-      .args[1] as MatDialogConfig<any>;
-
+    const config = dialogSpy.mock.calls[0][1] as MatDialogConfig;
     expect(image.src).toEqual(image.src);
   });
 
   it("should call openPricingDialog when unlock-collection query param is present", () => {
-    spyOn(component, "openPricingDialog");
-    // Re-trigger ngoninit to simulate route param change if needed,
-    // but mocks should be set before component creation.
-    // Since beforeEach sets it up, ngOnInit runs automatically on fixture.detectChanges() or manually called above.
-    // Wait, ngOnInit was called in beforeEach implicitly via detectChanges? No, explicit call in checks.
-
-    // Let's create a fresh component instance for this test if possible, or spy on ngOnInit
-    // easier to just rely on the fact that ngOnInit is called in beforeEach -> fixture.detectChanges()
-    // but Wait, the mock is static.
-    // The component is created in beforeEach. We configured useValue providing the param.
-    // So openPricingDialog should have been called upon initialization.
-
-    // However, we can't spy on a method of the component instance *before* it's created if we use TestBed.createComponent.
-    // We can spy on the prototype? Or just check if the dialog open was called?
-
-    // Actually dialog open is called inside openPricingDialog. Spy on dialog.open?
-    const dialogSpy = spyOn(component.dialog, "open");
+    const dialogSpy = vi.spyOn(component.dialog, "open");
     component.ngOnInit();
     expect(dialogSpy).toHaveBeenCalled();
   });

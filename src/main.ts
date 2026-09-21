@@ -51,9 +51,13 @@ bootstrapApplication(AppComponent, {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideFunctions(() => getFunctions()),
-    provideAnalytics(() => getAnalytics()),
     provideStorage(() => getStorage()),
-    ScreenTrackingService,
-    UserTrackingService,
+    ...(environment.production
+      ? [
+          provideAnalytics(() => getAnalytics()),
+          ScreenTrackingService,
+          UserTrackingService,
+        ]
+      : []),
   ],
 }).catch((err) => console.error(err));

@@ -80,9 +80,10 @@ mat-sidenav {
 .bottomSocial {
   padding: 10px;
   display: flex;
+  flex-flow: row wrap;
   bottom: 20px;
   place-self: center;
-  gap: 35px;
+  gap: 10px;
 }
 
 ::-webkit-scrollbar {

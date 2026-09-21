@@ -131,7 +131,7 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   async loadResponses() {
     try {
-      const data = await this.gravita.getAIQuery();
+      const data = await this.gravita.getBlogCache();
 
       const mappedData = data.map((doc: any) => ({
         docId: doc.id,

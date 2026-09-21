@@ -35,13 +35,6 @@ export const routes: Routes = [
       import("./pages/gallery/gallery.module").then((m) => m.GalleryModule),
   },
   {
-    path: "BlogDetail",
-    loadChildren: () =>
-      import("./pages/blog-detail/blog-detail.module").then(
-        (m) => m.BlogDetailModule,
-      ),
-  },
-  {
     path: "download",
     loadComponent: () =>
       import("./Components/pricing-card/pricing-card.component").then(
