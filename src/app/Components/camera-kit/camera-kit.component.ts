@@ -6,7 +6,10 @@ import {
   viewChild,
   AfterViewInit,
   signal,
+  computed,
+  inject,
 } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
@@ -48,6 +51,23 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   selectedLensId = signal<string>("");
   facingMode = signal<"user" | "environment">("user");
   isProduction = environment.production;
+
+  // Map of lens IDs to their respective snapcode image URLs
+  snapcodes: Record<string, string> = {
+    "29297842-a25e-4af8-b054-2be90bcd29c6": "assets/snapcode-dobble.png",
+    "29b63f02-cce2-42d3-9c01-127443776680": "assets/snapcode-matrix.png",
+    "6fbb0c75-29db-4642-ba52-c9a24cebdbdd": "assets/snapcode-apple-catcher.png",
+    "6f148acd-47f2-40c2-8489-ce9e79f2dbd9": "assets/snapcode-pirelli-cap.png",
+    "50c27549-dcb6-4317-b893-c57ffa65bd06": "assets/snapcode-lights-out.png",
+    "c3d0885f-4b0e-4f68-a540-61fbfc894d01": "assets/snapcode-shootout.png",
+  };
+
+  selectedSnapcode = computed(() => {
+    const id = this.selectedLensId();
+    return id && this.snapcodes[id] ? this.snapcodes[id] : "";
+  });
+
+  private route = inject(ActivatedRoute);
 
   private cameraKit: CameraKit | null = null;
   private session: CameraKitSession | null = null;
@@ -105,7 +125,12 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
     this.lenses.set(loadedLenses);
 
     if (loadedLenses.length > 0) {
-      this.selectedLensId.set(loadedLenses[0].id);
+      const queryLensId = this.route.snapshot.queryParamMap.get("lensId");
+      if (queryLensId && loadedLenses.find((l) => l.id === queryLensId)) {
+        this.selectedLensId.set(queryLensId);
+      } else {
+        this.selectedLensId.set(loadedLenses[0].id);
+      }
       await this.applySelectedLens();
     } else {
       console.error(

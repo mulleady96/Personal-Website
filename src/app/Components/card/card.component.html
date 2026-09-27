@@ -1,6 +1,23 @@
 <div class="rowWrap">
   @if (cardList().length > 0 && isStacked()) {
-    <div class="deck-container" style="position: relative; margin: 1.5rem; max-width: 22rem;">
+    <div class="carousel-wrapper" style="display: flex; align-items: center; justify-content: center; gap: 1rem; width: 100%;">
+      <button
+        mat-mini-fab
+        color="accent"
+        class="carousel-nav-btn"
+        [class.disabled-arrow]="currentIndex === 0"
+        [attr.aria-disabled]="currentIndex === 0"
+        [attr.tabindex]="currentIndex === 0 ? -1 : 0"
+        (click)="currentIndex !== 0 ? leftArrow(currentIndex) : null"
+        aria-label="Previous card"
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+
+      <div
+        class="deck-container"
+        style="position: relative; margin: 1.5rem; max-width: 22rem; width: 100%;"
+      >
       @for (card of cardList(); track card; let i = $index) {
         @if (i >= currentIndex && i <= currentIndex + 2) {
           <mat-card
@@ -12,29 +29,20 @@
             [style.transform]="'scale(' + (1 - (i - currentIndex) * 0.02) + ')'"
             [style.opacity]="1 - (i - currentIndex) * 0.15"
             [style.pointer-events]="i === currentIndex ? 'auto' : 'none'"
-            (click)="i === currentIndex ? handleNavigation($event) : null"
-            (mousemove)="i === currentIndex ? handleHover($event) : null"
-            (mouseleave)="i === currentIndex ? resetHover() : null"
+            [attr.inert]="i !== currentIndex ? true : null"
             [ngClass]="{
-              'highlight-left': i === currentIndex && hoverSide === 'left' && currentIndex !== 0,
-              'highlight-right': i === currentIndex && hoverSide === 'right' && currentIndex !== cardList().length - 1,
-              'highlight-left-red': i === currentIndex && hoverSide === 'left' && currentIndex === 0,
-              'highlight-right-red': i === currentIndex && hoverSide === 'right' && currentIndex === cardList().length - 1,
-              'typographic-card': !card.image
+              'typographic-card': !card.image,
             }"
-            style="transition: all 0.3s ease; width: 100%; box-sizing: border-box;"
+            style="
+              transition: all 0.3s ease;
+              width: 100%;
+              box-sizing: border-box;
+            "
           >
-            @if (i === currentIndex && hoverSide === 'left' && currentIndex !== 0) {
-              <div class="hover-arrow left-arrow">
-                <mat-icon>chevron_left</mat-icon>
-              </div>
-            }
-            @if (i === currentIndex && hoverSide === 'right' && currentIndex !== cardList().length - 1) {
-              <div class="hover-arrow right-arrow">
-                <mat-icon>chevron_right</mat-icon>
-              </div>
-            }
-            <div class="pagination-pill">{{ i + 1 }} / {{ cardList().length }}</div>
+
+            <div class="pagination-pill">
+              {{ i + 1 }} / {{ cardList().length }}
+            </div>
             @if (card.image) {
               <img
                 ngSrc="{{ card.image }}"
@@ -57,6 +65,7 @@
               @if (card.link) {
                 <a
                   [routerLink]="!card.externalLink ? card.link : null"
+                  [queryParams]="card.queryParams"
                   ariaCurrentWhenActive="page"
                 >
                   @if (card.buttonText) {
@@ -77,6 +86,20 @@
           </mat-card>
         }
       }
+      </div>
+
+      <button
+        mat-mini-fab
+        color="accent"
+        class="carousel-nav-btn"
+        [class.disabled-arrow]="currentIndex === cardList().length - 1"
+        [attr.aria-disabled]="currentIndex === cardList().length - 1"
+        [attr.tabindex]="currentIndex === cardList().length - 1 ? -1 : 0"
+        (click)="currentIndex !== cardList().length - 1 ? rightArrow(currentIndex) : null"
+        aria-label="Next card"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
     </div>
   } @else {
     @for (card of cardList(); track card; let i = $index) {
@@ -100,6 +123,7 @@
           @if (card.link) {
             <a
               [routerLink]="!card.externalLink ? card.link : null"
+              [queryParams]="card.queryParams"
               ariaCurrentWhenActive="page"
             >
               @if (card.buttonText) {

@@ -12,16 +12,6 @@ export class ProductsComponent {
   portfolioDetails = [
     {
       id: 1,
-      title: "Playwright-broad-utils",
-      description:
-        "Utility npm package that allows you to assert all Images are rendered on a page, all external links load and capture web socket messages.",
-      link: "https://www.npmjs.com/package/playwright-broad-utils?activeTab=readme",
-      image: "assets/Playwright.Logo.svg",
-      buttonText: "View Package",
-      externalLink: true,
-    },
-    {
-      id: 2,
       title: "Pierre Gasly Game",
       description:
         "Fun game that resembles Pierre Gasly's pre-race procedure, where he catches falling tennis balls.",
@@ -46,7 +36,9 @@ export class ProductsComponent {
       description:
         "Apple Catcher is a snapchat lense made on Lens Studio, where you have to catch falling apples.",
       image: "assets/snapcode-apple-catcher.png",
-      buttonText: "Scan with Snapchat",
+      link: "/AR-corner",
+      queryParams: { lensId: "6fbb0c75-29db-4642-ba52-c9a24cebdbdd" },
+      buttonText: "Experience in AR",
       externalLink: false,
       type: "snap",
     },
@@ -57,7 +49,9 @@ export class ProductsComponent {
         "F1 Lights Out is a snapchat lense made on Lens Studio, where you can test your reaction speed.",
 
       image: "assets/snapcode-lights-out.png",
-      buttonText: "Scan with Snapchat",
+      link: "/AR-corner",
+      queryParams: { lensId: "50c27549-dcb6-4317-b893-c57ffa65bd06" },
+      buttonText: "Experience in AR",
       externalLink: false,
       type: "snap",
     },
@@ -67,7 +61,9 @@ export class ProductsComponent {
       description:
         "Snapchat lense made on Lens Studio, where you can wear various different Pirelli caps.",
       image: "assets/snapcode-pirelli-cap.png",
-      buttonText: "Scan with Snapchat",
+      link: "/AR-corner",
+      queryParams: { lensId: "6f148acd-47f2-40c2-8489-ce9e79f2dbd9" },
+      buttonText: "Experience in AR",
       externalLink: false,
       type: "snap",
     },

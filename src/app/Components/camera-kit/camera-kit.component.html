@@ -20,6 +20,13 @@
 
         <div class="lens-selector-container">
           <div class="lens-controls-wrapper">
+            @if (selectedSnapcode()) {
+              <img
+                [src]="selectedSnapcode()"
+                alt="Snapcode"
+                class="snapcode-img"
+              />
+            }
             <mat-form-field class="lens-dropdown">
               <mat-label>Select a lens...</mat-label>
               <mat-select

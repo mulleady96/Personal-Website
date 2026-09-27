@@ -10,7 +10,7 @@ import {
 } from "@angular/material/card";
 import { NgClass, NgOptimizedImage } from "@angular/common";
 
-import { MatButton } from "@angular/material/button";
+import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 
 export interface CardItem {
@@ -22,6 +22,7 @@ export interface CardItem {
   buttonText?: string;
   externalLink?: boolean;
   type?: string;
+  queryParams?: Record<string, string>;
 }
 
 @Component({
@@ -37,6 +38,7 @@ export interface CardItem {
     MatCardActions,
     RouterLink,
     MatButton,
+    MatMiniFabButton,
     MatIcon,
   ],
 })
@@ -64,7 +66,6 @@ export class CardComponent implements OnInit {
   public currentIndex: number = 0;
   public leftDotsCount: number[] = [];
   public rightDotsCount: number[] = [];
-  public hoverSide: "left" | "right" | null = null;
 
   constructor(private router: Router) {}
 
@@ -86,31 +87,6 @@ export class CardComponent implements OnInit {
     }
   }
 
-  handleNavigation(event: MouseEvent): void {
-    const cardWidth = (event.currentTarget as HTMLElement).clientWidth;
-    const clickPosition = event.offsetX;
-
-    if (clickPosition < cardWidth / 2) {
-      this.leftArrow(this.currentIndex);
-    } else {
-      this.rightArrow(this.currentIndex);
-    }
-  }
-
-  handleHover(event: MouseEvent): void {
-    const cardWidth = (event.currentTarget as HTMLElement).clientWidth;
-    const hoverPosition = event.offsetX;
-
-    if (hoverPosition < cardWidth / 2) {
-      this.hoverSide = "left";
-    } else {
-      this.hoverSide = "right";
-    }
-  }
-
-  resetHover(): void {
-    this.hoverSide = null;
-  }
 
   navigate(card: CardItem): void {
     if (card.externalLink) {
