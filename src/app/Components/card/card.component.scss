@@ -22,7 +22,7 @@ mat-card {
     12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
   border-radius: 50px;
-  margin: 1.5rem;
+  grid-area: 1 / 1;
 }
 
 mat-card-content {
@@ -43,7 +43,9 @@ mat-card-actions {
   display: flex;
   align-items: center;
   white-space: break-spaces;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  text-align: left;
+  margin: 15px 15px 10px;
 }
 
 .card-image-top {
@@ -119,7 +121,6 @@ h4 {
     font-size: 2.2rem;
     font-weight: 900;
     line-height: 1.2;
-    margin-bottom: 1rem;
     background: linear-gradient(45deg, #6dbb94, #2a9d8f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -150,4 +151,32 @@ h4 {
     opacity: 0.3;
     cursor: not-allowed;
   }
+}
+
+.card-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 15px 15px;
+  box-sizing: border-box;
+
+  .cta-link,
+  .cta-placeholder {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 15px;
+  }
+
+  .nav-placeholder {
+    width: 40px;
+  }
+}
+
+.deck-container {
+  display: grid;
+  position: relative;
+  max-width: 22rem;
+  width: 100%;
 }
