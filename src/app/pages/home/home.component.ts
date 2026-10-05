@@ -10,7 +10,6 @@ import { CardComponent } from "../../Components/card/card.component";
 import { GravitaService } from "../../Services/gravita.service";
 
 @Component({
-  // tslint:disable-next-line: quotemark
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"],
@@ -40,7 +39,7 @@ export class HomeComponent implements OnInit {
       pictureClass: "productionImage",
       link: "/AR-corner",
       buttonText: "Open AR",
-      externalLink: false,
+      externalLink: true,
     },
     {
       id: 2,
@@ -49,7 +48,7 @@ export class HomeComponent implements OnInit {
       pictureClass: "designImage",
       link: "/blog",
       buttonText: "Read Blog",
-      externalLink: false,
+      externalLink: true,
     },
     {
       id: 3,
@@ -59,7 +58,7 @@ export class HomeComponent implements OnInit {
       pictureClass: "devImage",
       link: "/gallery",
       buttonText: "View Gallery",
-      externalLink: false,
+      externalLink: true,
     },
   ];
 

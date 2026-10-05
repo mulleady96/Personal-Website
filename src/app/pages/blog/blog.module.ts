@@ -15,7 +15,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatCardModule } from "@angular/material/card";
 
-import { ComponentsModule } from "../../Components/components.module";
 import { BlogComponent } from "./blog.component";
 
 const routes: Routes = [
@@ -33,7 +32,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    ComponentsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatSelectModule,

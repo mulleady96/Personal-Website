@@ -41,36 +41,20 @@ export interface CardItem {
 })
 export class CardComponent implements OnInit {
   cardList = input<CardItem[]>([]);
-  isStackedInput = input<boolean | undefined>(undefined, { alias: "isStacked" });
-
-  isStacked = computed(() => {
-    const override = this.isStackedInput();
-    if (override !== undefined) {
-      return override; // Force the behavior if explicitly provided
-    }
-    return true; // Use carousel layout by default on all screen sizes
-  });
-
   public currentIndex: number = 0;
-  public leftDotsCount: number[] = [];
-  public rightDotsCount: number[] = [];
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
   leftArrow(currentIndex: number): void {
-    if (currentIndex !== 0) {
-      this.leftDotsCount = Array(this.currentIndex).fill(0);
+    if (currentIndex > 0) {
       this.currentIndex--;
     }
   }
 
   rightArrow(currentIndex: number): void {
     if (currentIndex < this.cardList().length - 1) {
-      this.rightDotsCount = Array(
-        this.cardList().length - this.currentIndex,
-      ).fill(0);
       this.currentIndex++;
     }
   }

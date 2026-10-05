@@ -1,5 +1,5 @@
 <div class="rowWrap">
-  @if (cardList().length > 0 && isStacked()) {
+  @if (cardList().length > 0) {
     <div class="deck-container">
       @for (card of cardList(); track card; let i = $index) {
         <mat-card
@@ -100,46 +100,5 @@
         </mat-card>
       }
     </div>
-  } @else {
-    @for (card of cardList(); track card; let i = $index) {
-      <mat-card [class.typographic-card]="!card.image">
-        <div class="pagination-pill">{{ i + 1 }} / {{ cardList().length }}</div>
-        @if (card.image) {
-          <img
-            ngSrc="{{ card.image }}"
-            fill
-            class="card-image-top"
-            [class.snap-card-img]="card.type === 'snap'"
-            alt="{{ card.description }}"
-            priority
-          />
-        }
-        <h3>{{ card.title }}</h3>
-        <mat-card-content>
-          {{ card.description }}
-        </mat-card-content>
-        <mat-card-actions>
-          @if (card.link) {
-            <a
-              [routerLink]="!card.externalLink ? card.link : null"
-              [queryParams]="card.queryParams"
-              ariaCurrentWhenActive="page"
-            >
-              @if (card.buttonText) {
-                <button
-                  (click)="navigate(card)"
-                  mat-raised-button
-                  class="mat-product-button"
-                  [attr.aria-label]="card.buttonText"
-                  color="accent"
-                >
-                  {{ card.buttonText }}
-                </button>
-              }
-            </a>
-          }
-        </mat-card-actions>
-      </mat-card>
-    }
   }
 </div>

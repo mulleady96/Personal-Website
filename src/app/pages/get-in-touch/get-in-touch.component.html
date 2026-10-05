@@ -20,7 +20,10 @@
       <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
         <mat-step
           [completed]="enquiryForm.firstStep().valid()"
-          [hasError]="enquiryForm.firstStep().invalid()"
+          [hasError]="
+            enquiryForm.firstStep().invalid() &&
+            enquiryForm.firstStep.name().touched()
+          "
         >
           <ng-template matStepLabel>Fill out your name</ng-template>
           <mat-form-field>
@@ -41,7 +44,10 @@
         </mat-step>
         <mat-step
           [completed]="enquiryForm.secondStep().valid()"
-          [hasError]="enquiryForm.secondStep().invalid()"
+          [hasError]="
+            enquiryForm.secondStep().invalid() &&
+            enquiryForm.secondStep.email().touched()
+          "
         >
           <ng-template matStepLabel>Fill out your e-mail</ng-template>
           <mat-form-field>
@@ -75,7 +81,10 @@
         </mat-step>
         <mat-step
           [completed]="enquiryForm.thirdStep().valid()"
-          [hasError]="enquiryForm.thirdStep().invalid()"
+          [hasError]="
+            enquiryForm.thirdStep().invalid() &&
+            enquiryForm.thirdStep.query().touched()
+          "
         >
           <ng-template matStepLabel>Fill out your query</ng-template>
           <mat-form-field class="w-100">

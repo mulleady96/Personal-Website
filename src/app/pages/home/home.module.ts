@@ -7,7 +7,7 @@ import { BubblesComponent } from "src/app/Components/bubbles/bubbles.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatIconModule } from "@angular/material/icon";
-import { ComponentsModule } from "../../Components/components.module";
+import { CardComponent } from "../../Components/card/card.component";
 import { HomeComponent } from "./home.component";
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CountUpModule,
-    ComponentsModule,
+    CardComponent,
     BubblesComponent,
     MatButtonModule,
     MatTooltipModule,

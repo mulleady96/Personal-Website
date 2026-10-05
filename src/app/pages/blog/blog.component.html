@@ -30,9 +30,9 @@
   </div>
 }
 
-<div class="blog-content-container mx-20">
+<div class="blog-content-container">
   @if (showArticle()) {
-    <div class="padTop">
+    <div class="blog-body">
       <markdown [data]="responses()[selectedValue()]['response']"></markdown>
     </div>
   }

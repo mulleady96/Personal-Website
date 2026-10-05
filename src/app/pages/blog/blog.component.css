@@ -47,9 +47,8 @@ app-auth {
 }
 
 .backButton {
-  position: fixed;
-  top: 70px;
-  left: 10px;
+  margin: 1rem 0 1rem 1rem;
+  margin-right: auto;
 }
 
 ::-webkit-scrollbar {
@@ -66,16 +65,6 @@ app-auth {
 ::-webkit-scrollbar-track {
   background-color: transparent;
   border-radius: 9999px;
-}
-
-.padTop {
-  padding-top: 4rem;
-}
-
-.bloggiButton {
-  /* position: absolute; */
-  /* top: 70px; */
-  /* left: 10px; */
 }
 
 .center-alignment {
@@ -98,7 +87,7 @@ mat-chip-listbox {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
@@ -111,11 +100,24 @@ mat-chip-listbox {
 .blog-content-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
 }
 
-.padTop {
-  padding-top: 4rem;
-  flex: 50%;
+.blog-body {
+  max-width: 800px;
+  width: 100%;
+  text-align: left;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media screen and (min-width: 960px) {
+  .blog-body {
+    text-align: justify;
+  }
 }
 
 @media screen and (min-width: 960px) {

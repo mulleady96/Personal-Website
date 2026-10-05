@@ -25,7 +25,7 @@ import {
 import { Analytics, logEvent } from "@angular/fire/analytics";
 
 import { ThemeService } from "./Services/theme.service";
-import { ComponentsModule } from "./Components/components.module";
+
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -45,7 +45,6 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
     RouterModule,
     MatCheckboxModule,
     FontAwesomeModule,
-    ComponentsModule,
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,

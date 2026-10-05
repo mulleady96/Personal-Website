@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { BubblesComponent } from "../../Components/bubbles/bubbles.component";
-import { ComponentsModule } from "../../Components/components.module";
+import { MediaListComponent } from "../../Components/media-list/media-list.component";
 import { PricingCardComponent } from "../../Components/pricing-card/pricing-card.component";
 import { GalleryComponent } from "./gallery.component";
 
@@ -17,8 +17,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-
-    ComponentsModule,
+    MediaListComponent,
     RouterModule.forChild(routes),
     BubblesComponent,
     PricingCardComponent,
