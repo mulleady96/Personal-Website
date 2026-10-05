@@ -9,6 +9,7 @@ import {
   PipeTransform,
   ChangeDetectionStrategy,
   signal,
+  inject,
 } from "@angular/core";
 import {
   MAT_DIALOG_DATA,
@@ -24,10 +25,8 @@ import { MatChipSet, MatChip } from "@angular/material/chips";
 import { MatBadge } from "@angular/material/badge";
 import { NgClass, NgOptimizedImage } from "@angular/common";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { GravitaService } from "../../Services/gravita.service";
-
-import { MatList } from "@angular/material/list";
-
 import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatMenuTrigger, MatMenu, MatMenuItem } from "@angular/material/menu";
 import { MatIcon } from "@angular/material/icon";
@@ -90,6 +89,7 @@ export class SafeYoutubeUrlPipe implements PipeTransform {
     MatMenu,
     MatMenuItem,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     SafeYoutubeUrlPipe,
     NgOptimizedImage,
   ],
@@ -108,6 +108,8 @@ export class MediaListComponent implements OnInit {
   name = input<string>();
 
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
+
+  private snackBar = inject(MatSnackBar);
 
   constructor(
     public dialog: MatDialog,
@@ -264,16 +266,16 @@ export class MediaListComponent implements OnInit {
   }
 
   shareImage(image: MediaItem) {
-    if (navigator.share) {
-      navigator.share({
-        title: image.title,
-        text: "Check out this photo!",
-        url: image.src,
-      }).catch((error) => console.log("Error sharing", error));
-    } else {
-      navigator.clipboard.writeText(image.src);
-      alert("Image link copied to clipboard!");
-    }
+    navigator.clipboard
+      .writeText(image.src)
+      .then(() => {
+        this.snackBar.open("Link copied!", "Close", {
+          duration: 3000,
+        });
+      })
+      .catch((error) => {
+        console.error("Error copying link", error);
+      });
   }
 
   openModal(image: MediaItem) {

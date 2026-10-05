@@ -9,25 +9,4 @@ import { MediaListComponent } from "../../Components/media-list/media-list.compo
   styleUrls: ["./gallery.component.css"],
   imports: [MediaListComponent],
 })
-export class GalleryComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-  ) {}
-
-  time!: number;
-  postedAgo!: string;
-
-  ngOnInit() {
-    // this.postTimeAgo();
-  }
-
-  navigateDetail() {
-    // this.router.navigate["/BlogDetail"];
-  }
-
-  // postTimeAgo() {
-  //   this.postedAgo = moment([2019, 3, 14]).fromNow();
-  //   return this.postedAgo;
-  // }
-}
+export class GalleryComponent {}
