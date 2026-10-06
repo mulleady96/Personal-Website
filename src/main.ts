@@ -6,10 +6,11 @@ import {
   provideZonelessChangeDetection,
 } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
-import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClient, withFetch } from "@angular/common/http";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { provideRouter, withInMemoryScrolling } from "@angular/router";
-import { ServiceWorkerModule } from "@angular/service-worker";
+import { provideMarkdown } from "ngx-markdown";
+import { provideServiceWorker } from "@angular/service-worker";
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { getAuth, provideAuth } from "@angular/fire/auth";
 import { getFirestore, provideFirestore } from "@angular/fire/firestore";
@@ -39,12 +40,12 @@ bootstrapApplication(AppComponent, {
       withInMemoryScrolling({ anchorScrolling: "enabled" }),
     ),
     provideAnimationsAsync(),
-    provideHttpClient(),
-    importProvidersFrom(
-      ServiceWorkerModule.register("ngsw-worker.js", {
-        enabled: environment.production,
-      }),
-    ),
+    provideHttpClient(withFetch()),
+    provideMarkdown(),
+    provideServiceWorker("ngsw-worker.js", {
+      enabled: environment.production,
+      registrationStrategy: "registerWhenStable:30000"
+    }),
     ThemeService,
 
     provideFirebaseApp(() => initializeApp(config)),

@@ -9,30 +9,41 @@ export const routes: Routes = [
 
   {
     path: "home",
-    loadChildren: () =>
-      import("./pages/home/home.module").then((m) => m.HomeModule),
+    loadComponent: () =>
+      import("./pages/home/home.component").then((m) => m.HomeComponent),
   },
   {
     path: "blog",
-    loadChildren: () =>
-      import("./pages/blog/blog.module").then((m) => m.BlogModule),
+    children: [
+      {
+        path: "",
+        loadComponent: () =>
+          import("./pages/blog/blog.component").then((m) => m.BlogComponent),
+      },
+      {
+        path: ":id",
+        loadComponent: () =>
+          import("./pages/blog/blog.component").then((m) => m.BlogComponent),
+        resolve: { article: articleResolver },
+      },
+    ],
   },
   {
     path: "portfolio",
-    loadChildren: () =>
-      import("./pages/products/products.module").then((m) => m.ProductsModule),
+    loadComponent: () =>
+      import("./pages/products/products.component").then((m) => m.ProductsComponent),
   },
   {
     path: "enquire",
-    loadChildren: () =>
-      import("./pages/get-in-touch/get-in-touch.module").then(
-        (m) => m.GetInTouchModule,
+    loadComponent: () =>
+      import("./pages/get-in-touch/get-in-touch.component").then(
+        (m) => m.GetInTouchComponent,
       ),
   },
   {
     path: "gallery",
-    loadChildren: () =>
-      import("./pages/gallery/gallery.module").then((m) => m.GalleryModule),
+    loadComponent: () =>
+      import("./pages/gallery/gallery.component").then((m) => m.GalleryComponent),
   },
   {
     path: "download",
