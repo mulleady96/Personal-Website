@@ -1,0 +1,30 @@
+<div class="snap-login-container">
+  @if (loginService.snapUser()) {
+    <div class="snap-profile">
+      <div matBadge="{{ loginService.snapUser()?.rewardsPoints }}" matBadgePosition="above after" matBadgeColor="accent">
+        <img [src]="loginService.snapUser()?.bitmojiUrl" alt="Bitmoji" />
+      </div>
+      <span>{{ loginService.snapUser()?.displayName }}</span>
+    </div>
+    <button
+      class="margin-top"
+      mat-stroked-button
+      color="warn"
+      (click)="loginService.logout()"
+    >
+      <mat-icon>logout</mat-icon> Logout
+    </button>
+  } @else {
+    <button
+      mat-button
+      class="snap-login-btn"
+      color="accent"
+      (click)="loginService.loginWithSnapchat()"
+    >
+      <span class="snap-login-content">
+        <fa-icon [icon]="['fab', 'snapchat']" size="lg"></fa-icon>
+        Login with Snapchat
+      </span>
+    </button>
+  }
+</div>

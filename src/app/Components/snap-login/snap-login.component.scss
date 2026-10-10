@@ -1,0 +1,33 @@
+.snap-login-container {
+  padding: 16px 0;
+  text-align: center;
+  width: 100%;
+}
+.snap-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+.snap-profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.snap-profile span {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.snap-login-btn {
+  width: 100%;
+}
+.snap-login-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.margin-top {
+  margin-top: 10px;
+}

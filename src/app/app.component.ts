@@ -36,6 +36,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatBadgeModule } from "@angular/material/badge";
 
 import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
+import { SnapLoginComponent } from "./Components/snap-login/snap-login.component";
 
 @Component({
   selector: "app-root",
@@ -55,6 +56,7 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
     MatToolbarModule,
     MatBadgeModule,
     ToolbarComponent,
+    SnapLoginComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],

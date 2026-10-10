@@ -9,6 +9,7 @@ import { GravitaService } from "../../Services/gravita.service";
 import { LoginService } from "../../Services/login.service";
 import { ChallengeService } from "../../Services/challenge.service";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
+import { SnapLoginComponent } from "../../Components/snap-login/snap-login.component";
 
 @Component({
   selector: "app-challenges",
@@ -21,6 +22,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    SnapLoginComponent,
   ],
   template: `
     <div class="challenges-container text-center">
@@ -37,6 +39,7 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
             <p>
               Please log in with Snapchat to view and track your challenges.
             </p>
+            <app-snap-login></app-snap-login>
           </mat-card-content>
         </mat-card>
       } @else {
