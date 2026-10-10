@@ -273,4 +273,14 @@ export class GravitaService {
     // import { deleteDoc } from "firebase/firestore";
     // await deleteDoc(doc(this.db, "generate", id));
   }
+
+  async createChallenge(data: any) {
+    await addDoc(collection(this.db, "challenges"), data);
+  }
+
+  async getChallenges(): Promise<any[]> {
+    const collectionRef = collection(this.db, "challenges");
+    const snapshot = await getDocs(collectionRef);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  }
 }

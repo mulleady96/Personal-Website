@@ -1,10 +1,11 @@
-import { Component, input, output } from "@angular/core";
+import { Component, input, output, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { PricingCardComponent } from "../pricing-card/pricing-card.component";
+import { LoginService } from "../../Services/login.service";
 
 @Component({
   selector: "app-toolbar",
@@ -21,6 +22,7 @@ import { PricingCardComponent } from "../pricing-card/pricing-card.component";
   styleUrls: ["./toolbar.component.scss"],
 })
 export class ToolbarComponent {
+  loginService = inject(LoginService);
   imageSRC = input.required<string>();
   toggleSidenav = output<void>();
 

@@ -116,5 +116,12 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: "challenges",
+    loadComponent: () =>
+      import("./pages/challenges/challenges.component").then(
+        (m) => m.ChallengesComponent,
+      ),
+  },
   { path: "**", component: PageNotFoundComponent },
 ];

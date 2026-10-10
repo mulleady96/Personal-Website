@@ -1,9 +1,36 @@
 <div [ngClass]="{ 'dark-theme': isDarkTheme() }">
   <mat-sidenav-container (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')">
-      <h2>
-        {{ title }}
-      </h2>
+      @if (!loginService.snapUser()) {
+        <h2>
+          {{ title }}
+        </h2>
+      }
+      <div class="snap-login-container">
+        @if (loginService.snapUser()) {
+          <div class="snap-profile" style="display: flex; flex-direction: column; align-items: center;">
+            <div matBadge="{{ loginService.snapUser()?.rewardsPoints }}" matBadgePosition="above after" matBadgeColor="accent">
+              <img [src]="loginService.snapUser()?.bitmojiUrl" alt="Bitmoji" />
+            </div>
+            <span style="margin: 10px 0;">{{ loginService.snapUser()?.displayName }}</span>
+            <button mat-stroked-button color="warn" (click)="loginService.logout()">
+              <mat-icon>logout</mat-icon> Logout
+            </button>
+          </div>
+        } @else {
+          <button
+            mat-button
+            class="snap-login-btn"
+            color="accent"
+            (click)="loginService.loginWithSnapchat()"
+          >
+            <span class="snap-login-content">
+              <fa-icon [icon]="['fab', 'snapchat']" size="lg"></fa-icon>
+              Login with Snapchat
+            </span>
+          </button>
+        }
+      </div>
       <div class="nav-buttons-container">
         @for (button of navigationButtons; track button) {
           <button
@@ -54,7 +81,7 @@
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
       <app-toolbar
-        [imageSRC]="imageSRC()"
+        [imageSRC]="loginService.snapUser()?.bitmojiUrl || imageSRC()"
         (toggleSidenav)="sidenav.open()"
       ></app-toolbar>
       <router-outlet></router-outlet>

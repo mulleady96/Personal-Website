@@ -31,6 +31,8 @@ import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatMenuTrigger, MatMenu, MatMenuItem } from "@angular/material/menu";
 import { MatIcon } from "@angular/material/icon";
 import { PricingDialogComponent } from "../pricing-dialog/pricing-dialog.component";
+import { LoginService } from "../../Services/login.service";
+import { ChallengeService } from "../../Services/challenge.service";
 
 type location = {
   name: string;
@@ -110,6 +112,8 @@ export class MediaListComponent implements OnInit {
   message = "Wow! Check this photo out at https://andrewmulleady.ie/gallery";
 
   private snackBar = inject(MatSnackBar);
+  private loginService = inject(LoginService);
+  private challengeService = inject(ChallengeService);
 
   constructor(
     public dialog: MatDialog,
@@ -268,10 +272,13 @@ export class MediaListComponent implements OnInit {
   shareImage(image: MediaItem) {
     navigator.clipboard
       .writeText(image.src)
-      .then(() => {
+      .then(async () => {
         this.snackBar.open("Link copied!", "Close", {
           duration: 3000,
         });
+
+        // Trigger automatic challenge completion for "share_image"
+        this.challengeService.triggerAction('share_image');
       })
       .catch((error) => {
         console.error("Error copying link", error);

@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { MatSelectModule } from "@angular/material/select";
 import { GravitaService, MediaItem } from "../../Services/gravita.service";
 import { AuthService } from "../../Services/auth.service";
 import imageCompression from "browser-image-compression";
@@ -40,6 +41,7 @@ import imageCompression from "browser-image-compression";
     MatSnackBarModule,
     MatTabsModule,
     MatExpansionModule,
+    MatSelectModule,
   ],
   template: `
     <div class="container">
@@ -153,6 +155,57 @@ import imageCompression from "browser-image-compression";
             </mat-card-content>
           </mat-card>
         </mat-tab>
+
+        <mat-tab label="Challenges">
+          <mat-card class="mt-4">
+            <mat-card-header>
+              <mat-card-title>Create New Challenge</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <form (ngSubmit)="onCreateChallenge()">
+                <div class="flex-col-gap-10 mt-15">
+                  <mat-form-field>
+                    <mat-label>Challenge Title</mat-label>
+                    <input matInput [(ngModel)]="newChallenge.title" name="c_title" required />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Duration</mat-label>
+                    <mat-select [(ngModel)]="newChallenge.duration" name="c_duration" required>
+                      <mat-option value="daily">Daily</mat-option>
+                      <mat-option value="weekly">Weekly</mat-option>
+                      <mat-option value="monthly">Monthly</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Action Trigger (e.g., 'upload_photo')</mat-label>
+                    <input matInput [(ngModel)]="newChallenge.actionTrigger" name="c_actionTrigger" required />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Rewards Points</mat-label>
+                    <input matInput type="number" [(ngModel)]="newChallenge.rewardsPoints" name="c_rewardsPoints" required />
+                  </mat-form-field>
+
+                  <button
+                    mat-raised-button
+                    color="accent"
+                    type="submit"
+                    [disabled]="isCreatingChallenge() || !newChallenge.title || !newChallenge.actionTrigger || !newChallenge.rewardsPoints"
+                  >
+                    @if (isCreatingChallenge()) {
+                      <mat-spinner diameter="20" class="d-inline-block mr-8"></mat-spinner>
+                      Creating...
+                    } @else {
+                      <mat-icon>emoji_events</mat-icon> Create Challenge
+                    }
+                  </button>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
       </mat-tab-group>
     </div>
   `,
@@ -217,6 +270,32 @@ export class AdminDashboardComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+  }
+
+  newChallenge = {
+    title: "",
+    duration: "daily",
+    actionTrigger: "",
+    rewardsPoints: 50,
+  };
+  isCreatingChallenge = signal(false);
+
+  async onCreateChallenge() {
+    this.isCreatingChallenge.set(true);
+    try {
+      await this.gravita.createChallenge(this.newChallenge);
+      this.snackBar.open("Challenge created successfully!", "Close", { duration: 3000 });
+      this.newChallenge = {
+        title: "",
+        duration: "daily",
+        actionTrigger: "",
+        rewardsPoints: 50,
+      };
+    } catch (err: any) {
+      this.snackBar.open("Failed to create challenge: " + err.message, "Close", { duration: 3000 });
+    } finally {
+      this.isCreatingChallenge.set(false);
+    }
   }
 
   async onUploadMedia() {

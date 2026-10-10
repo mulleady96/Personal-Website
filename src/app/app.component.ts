@@ -21,16 +21,19 @@ import {
   faGithub,
   faLinkedin,
   faWhatsapp,
+  faSnapchat,
 } from "@fortawesome/free-brands-svg-icons";
 import { Analytics, logEvent } from "@angular/fire/analytics";
 
 import { ThemeService } from "./Services/theme.service";
+import { LoginService } from "./Services/login.service";
 
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatBadgeModule } from "@angular/material/badge";
 
 import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
 
@@ -50,6 +53,7 @@ import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
     MatIconModule,
     MatSlideToggleModule,
     MatToolbarModule,
+    MatBadgeModule,
     ToolbarComponent,
   ],
   templateUrl: "./app.component.html",
@@ -95,6 +99,11 @@ export class AppComponent implements OnInit {
       routerLink: "/AR-corner",
       icon: "view_in_ar",
     },
+    {
+      ariaLabel: "Challenges",
+      routerLink: "/challenges",
+      icon: "emoji_events",
+    },
   ];
 
   navToggle = output();
@@ -106,8 +115,10 @@ export class AppComponent implements OnInit {
   storedTheme = signal(false);
   checked = signal(false);
 
+  public loginService = inject(LoginService);
+
   constructor() {
-    this.library.addIcons(faGithub, faLinkedin, faWhatsapp);
+    this.library.addIcons(faGithub, faLinkedin, faWhatsapp, faSnapchat);
     if (this.analytics) {
       logEvent(this.analytics, "app_load", { page: "main" });
     }
@@ -118,6 +129,7 @@ export class AppComponent implements OnInit {
 
   reason = signal("");
   openWithSwipe = signal(false);
+
 
   close(reason: string) {
     this.reason.set(reason);
@@ -176,6 +188,9 @@ export class AppComponent implements OnInit {
 
     // Set the initial theme based on the stored value or system preference
     this.updateTheme(initialThemeState);
+
+    // Call handleTokenCallback to check for an implicit flow token in the URL hash
+    this.loginService.handleTokenCallback();
 
     // SW - Reload fresh instance of app, if new version is available.
     if (this.swUpdate.isEnabled) {
