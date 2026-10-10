@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from "@angular/core";
+import { Component, inject, signal, OnInit, OnDestroy } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
@@ -78,14 +78,21 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
                 >
                 @if (isCompleted(challenge)) {
                   <div
-                    style="color: #4caf50; display: flex; align-items: center; gap: 5px; font-weight: 500;"
+                    style="display: flex; flex-direction: column; align-items: flex-end;"
                   >
-                    <mat-icon>check_circle</mat-icon> Completed
+                    <div
+                      style="color: #4caf50; display: flex; align-items: center; gap: 5px; font-weight: 500;"
+                    >
+                      <mat-icon>check_circle</mat-icon> Completed
+                    </div>
+                    @if (getTimeRemaining(challenge)) {
+                      <span style="font-size: 0.75rem; margin-top: 4px;">
+                        Available in: {{ getTimeRemaining(challenge) }}
+                      </span>
+                    }
                   </div>
                 } @else {
-                  <div
-                    style="color: #999; display: flex; align-items: center; gap: 5px;"
-                  >
+                  <div style="display: flex; align-items: center; gap: 5px;">
                     <mat-icon>radio_button_unchecked</mat-icon> Incomplete
                   </div>
                 }
@@ -168,16 +175,27 @@ import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
     `,
   ],
 })
-export class ChallengesComponent implements OnInit {
+export class ChallengesComponent implements OnInit, OnDestroy {
   gravita = inject(GravitaService);
   loginService = inject(LoginService);
   challengeService = inject(ChallengeService);
   snackBar = inject(MatSnackBar);
 
   challenges = signal<any[]>([]);
+  currentTime = signal<number>(Date.now());
+  private timer: any;
 
   ngOnInit() {
     this.loadChallenges();
+    this.timer = setInterval(() => {
+      this.currentTime.set(Date.now());
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
   }
 
   async loadChallenges() {
@@ -191,5 +209,34 @@ export class ChallengesComponent implements OnInit {
 
   isCompleted(challenge: any): boolean {
     return this.challengeService.isChallengeCompleted(challenge);
+  }
+
+  getTimeRemaining(challenge: any): string | null {
+    const user = this.loginService.snapUser();
+    if (!user || !user.dailyChallenges) return null;
+
+    const record = user.dailyChallenges.find((c: any) =>
+      typeof c === "string" ? c === challenge.id : c.id === challenge.id,
+    );
+
+    if (!record || typeof record === "string") return null;
+
+    let durationMs = 0;
+    if (challenge.duration === "daily") durationMs = 24 * 60 * 60 * 1000;
+    else if (challenge.duration === "weekly")
+      durationMs = 7 * 24 * 60 * 60 * 1000;
+    else if (challenge.duration === "monthly")
+      durationMs = 30 * 24 * 60 * 60 * 1000;
+
+    const expiryTime = record.completedAt + durationMs;
+    const diff = expiryTime - this.currentTime();
+
+    if (diff <= 0) return null;
+
+    const h = Math.floor(diff / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    return `${h}h ${m}m ${s}s`;
   }
 }
