@@ -23,6 +23,25 @@ h2 {
   flex-direction: column;
 }
 
+.nav-sub-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #71767b;
+  padding: 12px 10px 4px 10px;
+  text-transform: uppercase;
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  margin: 12px 0 8px 0;
+}
+.dark-theme hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
 ::ng-deep .mat-drawer-container {
   height: 100vh;
   background-color: #dad4d4;
@@ -31,7 +50,7 @@ h2 {
 mat-sidenav {
   display: flex;
   width: 180px;
-  padding: 12px 5px 12px 5px;
+  padding: 12px 8px 12px 8px;
   border-radius: 0px 25px 25px 0px;
   top: 25px;
   bottom: 25px;
@@ -101,5 +120,3 @@ mat-sidenav {
   background-color: transparent;
   border-radius: 9999px;
 }
-
-

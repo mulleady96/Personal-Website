@@ -1,0 +1,189 @@
+<div class="challenges-container text-center">
+  <h1>Daily Challenges</h1>
+  <p class="subtitle">Complete these tasks to earn rewards points!</p>
+
+  <mat-tab-group
+    [selectedIndex]="activeTabIndex()"
+    (selectedIndexChange)="activeTabIndex.set($event)"
+    animationDuration="200ms"
+  >
+    <!-- TAB 1: Challenges -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary" class="tab-icon">flag</mat-icon>
+        <span>Challenges</span>
+      </ng-template>
+
+      <div class="tab-content">
+        @if (!loginService.currentUser()) {
+          <mat-card class="login-warning">
+            <mat-card-content class="flex-center login-warning-content">
+              <mat-icon color="primary">lock</mat-icon>
+              <p>Please log in to view and track your challenges.</p>
+              <app-login [showChallenges]="false"></app-login>
+            </mat-card-content>
+          </mat-card>
+        } @else {
+          <div class="challenges-grid">
+            @for (challenge of challenges(); track challenge.id) {
+              <mat-card class="challenge-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="challenge-avatar">
+                    <mat-progress-spinner
+                      mode="determinate"
+                      [value]="isCompleted(challenge) ? 100 : 0"
+                      color="primary"
+                      diameter="48"
+                      class="challenge-spinner"
+                    ></mat-progress-spinner>
+                    <div class="challenge-points-badge flex-center">
+                      <span class="points-val">+{{ challenge.rewardsPoints }}</span>
+                    </div>
+                  </div>
+                  <mat-card-title>{{ challenge.title }}</mat-card-title>
+                  <mat-card-subtitle>
+                    {{ challenge.duration | titlecase }} Challenge
+                  </mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-actions align="end">
+                  @if (isCompleted(challenge)) {
+                    <div class="status-completed">
+                      <div class="completed-badge">
+                        <mat-icon color="primary">check_circle</mat-icon> Completed
+                      </div>
+                      @if (getTimeRemaining(challenge)) {
+                        <span class="cooldown-time">
+                          Available in: {{ getTimeRemaining(challenge) }}
+                        </span>
+                      }
+                    </div>
+                  } @else {
+                    <div class="status-incomplete">
+                      <mat-icon>radio_button_unchecked</mat-icon> Incomplete
+                    </div>
+                  }
+                </mat-card-actions>
+              </mat-card>
+            }
+
+            @if (challenges().length === 0) {
+              <p class="empty-msg">No active challenges at the moment. Check back later!</p>
+            }
+          </div>
+        }
+      </div>
+    </mat-tab>
+
+    <!-- TAB 2: Prizes -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary" class="tab-icon">emoji_events</mat-icon>
+        <span>Prizes</span>
+      </ng-template>
+
+      <div class="tab-content">
+        <!-- Current Points Tally Card -->
+        <mat-card class="tally-card">
+          <mat-card-header>
+            <div mat-card-avatar class="tally-avatar">
+              <mat-icon color="primary">emoji_events</mat-icon>
+            </div>
+            <mat-card-title>
+              <span class="points-val">{{ currentPoints() }}</span> Points
+            </mat-card-title>
+            <mat-card-subtitle>
+              Current Points Tally &bull; {{ userTier().name }} &bull; {{ unlockedPrizesCount() }}/{{ prizes().length }} Prizes Unlocked
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            @if (nextPrize(); as next) {
+              <div class="milestone-row">
+                <div class="milestone-text">
+                  <span>Next Reward: {{ next.title }}</span>
+                  <span>{{ getPointsNeeded(next) }} pts needed</span>
+                </div>
+                <mat-progress-bar
+                  mode="determinate"
+                  [value]="nextPrizeProgress()"
+                  color="primary"
+                ></mat-progress-bar>
+              </div>
+            } @else {
+              <p class="all-unlocked-text">
+                <mat-icon color="primary">check_circle</mat-icon>
+                All rewards unlocked!
+              </p>
+            }
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <button mat-button color="primary" (click)="selectTab(0)">
+              <mat-icon>add_task</mat-icon> Earn More Points
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        @if (!loginService.currentUser()) {
+          <mat-card class="login-warning">
+            <mat-card-content class="flex-center login-warning-content">
+              <mat-icon color="primary">lock</mat-icon>
+              <p>Please log in to track your points and claim unlocked prizes.</p>
+              <app-login [showChallenges]="false"></app-login>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        <!-- Rewards Cards Grid -->
+        <div class="challenges-grid">
+          @for (prize of prizes(); track prize.id) {
+            <mat-card class="reward-card" [class.unlocked]="isUnlocked(prize)">
+              <mat-card-header>
+                <div mat-card-avatar class="reward-avatar">
+                  <mat-icon color="primary">{{ prize.icon }}</mat-icon>
+                </div>
+                <mat-card-title>{{ prize.title }}</mat-card-title>
+                <mat-card-subtitle>
+                  {{ prize.pointsRequired }} Points &bull; {{ prize.category }}
+                </mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-content>
+                <p class="reward-desc">{{ prize.description }}</p>
+
+                <div class="progress-section">
+                  <div class="progress-label">
+                    <span>Progress ({{ getRewardProgress(prize) }}%)</span>
+                    <span>{{ currentPoints() }} / {{ prize.pointsRequired }} pts</span>
+                  </div>
+                  <mat-progress-bar
+                    mode="determinate"
+                    [value]="getRewardProgress(prize)"
+                    color="primary"
+                  ></mat-progress-bar>
+                </div>
+              </mat-card-content>
+
+              <mat-card-actions align="end">
+                @if (isClaimed(prize)) {
+                  <button mat-button disabled>
+                    <mat-icon color="primary">check</mat-icon> Claimed
+                  </button>
+                } @else if (isUnlocked(prize)) {
+                  <button mat-flat-button color="primary" (click)="claimPrize(prize)">
+                    <mat-icon>redeem</mat-icon> Claim Reward
+                  </button>
+                } @else {
+                  <span class="locked-text">
+                    <mat-icon>lock</mat-icon> {{ getPointsNeeded(prize) }} pts needed
+                  </span>
+                }
+              </mat-card-actions>
+            </mat-card>
+          }
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

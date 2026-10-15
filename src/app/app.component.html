@@ -1,27 +1,96 @@
 <div [ngClass]="{ 'dark-theme': isDarkTheme() }">
   <mat-sidenav-container (backdropClick)="close('backdrop')">
     <mat-sidenav #sidenav (keydown.escape)="close('escape')">
-      @if (!loginService.snapUser()) {
+      @if (!loginService.currentUser()) {
         <h2>
           {{ title }}
         </h2>
       }
-      <app-snap-login></app-snap-login>
+      <app-login></app-login>
       <div class="nav-buttons-container">
-        @for (button of navigationButtons; track button) {
-          <button
-            class="side-menu-button"
-            mat-button
-            routerLinkActive="router-link-active"
-            [attr.aria-label]="button.ariaLabel"
-            routerLink="{{ button.routerLink }}"
-          >
-            <mat-icon color="accent">{{ button.icon }}</mat-icon>
-            {{ button.ariaLabel }}
-          </button>
-        }
+        <span class="nav-sub-heading">GENERAL</span>
+
+        <button
+          class="side-menu-button"
+          mat-button
+          routerLinkActive="router-link-active"
+          aria-label="Home"
+          routerLink="/home"
+        >
+          <mat-icon color="accent">home</mat-icon>
+          Home
+        </button>
+
+        <button
+          class="side-menu-button"
+          mat-button
+          routerLinkActive="router-link-active"
+          aria-label="Portfolio"
+          routerLink="/portfolio"
+        >
+          <mat-icon color="accent">desktop_mac</mat-icon>
+          Portfolio
+        </button>
+
+        <button
+          class="side-menu-button"
+          mat-button
+          routerLinkActive="router-link-active"
+          aria-label="Blog"
+          routerLink="/blog"
+        >
+          <mat-icon color="accent">article</mat-icon>
+          Blog
+        </button>
+
+        <button
+          class="side-menu-button"
+          mat-button
+          routerLinkActive="router-link-active"
+          aria-label="Get In Touch"
+          routerLink="/enquire"
+        >
+          <mat-icon color="accent">edit</mat-icon>
+          Get In Touch
+        </button>
+
+        <span class="nav-sub-heading">EXPLORE</span>
+
+        <button
+          class="side-menu-button"
+          mat-button
+          routerLinkActive="router-link-active"
+          aria-label="Gallery"
+          routerLink="/gallery"
+        >
+          <mat-icon color="accent">collections</mat-icon>
+          Gallery
+        </button>
+
+        <button
+          class="side-menu-button"
+          mat-button
+          routerLinkActive="router-link-active"
+          aria-label="AR Corner"
+          routerLink="/AR-corner"
+        >
+          <mat-icon color="accent">view_in_ar</mat-icon>
+          AR Corner
+        </button>
       </div>
       <div class="bottomSocial">
+        <hr />
+        @if (loginService.currentUser()) {
+          <button
+            class="side-menu-button logout-button"
+            mat-button
+            (click)="loginService.logout()"
+            aria-label="Logout"
+          >
+            <mat-icon color="warn">logout</mat-icon>
+            Logout
+          </button>
+        }
         <mat-slide-toggle
           [checked]="isDarkTheme()"
           (change)="onThemeChange($event.checked)"
@@ -57,7 +126,11 @@
     </mat-sidenav>
     <mat-sidenav-content (swiperight)="sidenav.open()">
       <app-toolbar
-        [imageSRC]="loginService.snapUser()?.bitmojiUrl || imageSRC()"
+        [imageSRC]="
+          loginService.currentUser()?.bitmojiUrl ||
+          loginService.currentUser()?.photoUrl ||
+          imageSRC()
+        "
         (toggleSidenav)="sidenav.open()"
       ></app-toolbar>
       <router-outlet></router-outlet>

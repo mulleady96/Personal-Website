@@ -1,0 +1,84 @@
+<div class="login-container">
+  @if (loginService.currentUser(); as user) {
+    <div class="user-profile">
+      <div
+        class="avatar-wrapper"
+        [matBadge]="user.rewardsPoints ?? 0"
+        matBadgePosition="above after"
+        matBadgeColor="accent"
+      >
+        <img
+          class="user-avatar"
+          [src]="user.bitmojiUrl || user.photoUrl"
+          [alt]="user.provider === 'google' ? 'Google Profile' : 'Bitmoji'"
+          (error)="onAvatarError($event)"
+        />
+      </div>
+      <div class="user-details">
+        @if (user.provider === "google") {
+          <span class="user-identifier email-text" [title]="user.email || ''">{{
+            user.email
+          }}</span>
+        } @else {
+          <span class="user-identifier" [title]="user.displayName || ''">{{
+            user.displayName
+          }}</span>
+        }
+        @if (showChallenges()) {
+          <button
+            class="challenges-btn"
+            mat-icon-button
+            color="accent"
+            routerLink="/challenges"
+            routerLinkActive="router-link-active"
+            aria-label="Challenges"
+            [matBadge]="challengeService.liveChallengesCount()"
+            matBadgeColor="accent"
+          >
+            <mat-icon>emoji_events</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="login-actions">
+      <span class="sign-in-label">Sign in with:</span>
+      <div class="provider-row">
+        <div class="auth-buttons">
+          <button
+            mat-mini-fab
+            color="accent"
+            (click)="loginService.loginWithGoogle()"
+            aria-label="Sign in with Google"
+            title="Sign in with Google"
+          >
+            <fa-icon [icon]="faGoogle" size="lg"></fa-icon>
+          </button>
+          <button
+            mat-mini-fab
+            color="accent"
+            (click)="loginService.loginWithSnapchat()"
+            aria-label="Login with Snapchat"
+            title="Login with Snapchat"
+          >
+            <fa-icon [icon]="faSnapchat" size="lg"></fa-icon>
+          </button>
+        </div>
+        @if (showChallenges()) {
+          <button
+            class="challenges-btn logged-out-challenges"
+            mat-icon-button
+            color="accent"
+            routerLink="/challenges"
+            routerLinkActive="router-link-active"
+            aria-label="Challenges"
+            matBadge="new"
+            matBadgeColor="accent"
+          >
+            <mat-icon>emoji_events</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>

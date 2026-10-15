@@ -1,30 +1,66 @@
 <div class="snap-login-container">
-  @if (loginService.snapUser()) {
+  @if (loginService.snapUser(); as snapUser) {
     <div class="snap-profile">
-      <div matBadge="{{ loginService.snapUser()?.rewardsPoints }}" matBadgePosition="above after" matBadgeColor="accent">
-        <img [src]="loginService.snapUser()?.bitmojiUrl" alt="Bitmoji" />
+      <div
+        matBadge="{{ snapUser.rewardsPoints }}"
+        matBadgePosition="above after"
+        matBadgeColor="accent"
+      >
+        <img [src]="snapUser.bitmojiUrl" alt="Bitmoji" />
       </div>
-      <span>{{ loginService.snapUser()?.displayName }}</span>
+      <span>{{ snapUser.displayName }}</span>
     </div>
-    <button
-      class="margin-top"
-      mat-stroked-button
-      color="warn"
-      (click)="loginService.logout()"
-    >
-      <mat-icon>logout</mat-icon> Logout
-    </button>
+    <div class="snap-actions">
+      <button
+        class="logout-btn"
+        mat-stroked-button
+        color="warn"
+        (click)="loginService.logout()"
+      >
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+      @if (showChallenges()) {
+        <button
+          class="challenges-btn"
+          mat-icon-button
+          color="accent"
+          routerLink="/challenges"
+          routerLinkActive="router-link-active"
+          aria-label="Challenges"
+          [matBadge]="challengeService.liveChallengesCount()"
+          matBadgeColor="accent"
+        >
+          <mat-icon>emoji_events</mat-icon>
+        </button>
+      }
+    </div>
   } @else {
-    <button
-      mat-button
-      class="snap-login-btn"
-      color="accent"
-      (click)="loginService.loginWithSnapchat()"
-    >
-      <span class="snap-login-content">
-        <fa-icon [icon]="['fab', 'snapchat']" size="lg"></fa-icon>
-        Login with Snapchat
-      </span>
-    </button>
+    <div class="snap-actions">
+      <button
+        mat-button
+        class="snap-login-btn"
+        color="accent"
+        (click)="loginService.loginWithSnapchat()"
+      >
+        <span class="snap-login-content">
+          <fa-icon [icon]="['fab', 'snapchat']" size="lg"></fa-icon>
+          Login with Snapchat
+        </span>
+      </button>
+      @if (showChallenges()) {
+        <button
+          class="challenges-btn"
+          mat-icon-button
+          color="accent"
+          routerLink="/challenges"
+          routerLinkActive="router-link-active"
+          aria-label="Challenges"
+          matBadge="new"
+          matBadgeColor="accent"
+        >
+          <mat-icon>emoji_events</mat-icon>
+        </button>
+      }
+    </div>
   }
 </div>

@@ -18,16 +18,46 @@
   font-weight: bold;
   font-size: 1.1em;
 }
-.snap-login-btn {
+.snap-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 10px;
   width: 100%;
+
+  .logout-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    font-size: 0.85rem;
+
+    mat-icon {
+      margin-right: 4px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .snap-login-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 0 6px;
+  }
+
+  .challenges-btn {
+    flex-shrink: 0;
+  }
 }
 .snap-login-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-}
-
-.margin-top {
-  margin-top: 10px;
+  gap: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }

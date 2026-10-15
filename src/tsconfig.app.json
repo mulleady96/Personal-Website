@@ -5,6 +5,9 @@
     "module": "esnext",
     "types": [],
     "paths": {
+      "@Services/*": ["src/app/Services/*"],
+      "@Components/*": ["src/app/Components/*"],
+      "@app/*": ["src/app/*"],
       "core-js/es7/reflect": ["node_modules/core-js/proposals/reflect-metadata"]
     }
   },

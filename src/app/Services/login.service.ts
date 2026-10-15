@@ -1,26 +1,165 @@
 import { Injectable, signal, inject } from "@angular/core";
-import { Firestore, doc, getDoc, setDoc, updateDoc } from "@angular/fire/firestore";
+import { Firestore, doc, getDoc, setDoc } from "@angular/fire/firestore";
+import {
+  Auth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+  User,
+} from "@angular/fire/auth";
 
-export interface SnapUser {
-  externalId?: string;
-  displayName: string;
-  bitmojiUrl: string;
-  rewardsPoints?: number;
-  dailyChallenges?: any[];
+export interface UserChallengeRecord {
+  id: string;
+  completedAt: number;
 }
+
+export type AuthProviderType = "snapchat" | "google";
+
+export interface AppUser {
+  provider: AuthProviderType;
+  externalId?: string;
+  displayName?: string;
+  email?: string;
+  photoUrl: string;
+  bitmojiUrl?: string;
+  rewardsPoints?: number;
+  dailyChallenges?: (UserChallengeRecord | string)[];
+  claimedPrizes?: string[];
+}
+
+export type SnapUser = AppUser;
 
 @Injectable({
   providedIn: "root",
 })
 export class LoginService {
-  snapUser = signal<SnapUser | null>(null);
+  currentUser = signal<AppUser | null>(null);
+
+  // Backward compatibility alias for existing references
+  get snapUser() {
+    return this.currentUser;
+  }
+
   private firestore = inject(Firestore);
+  private auth = inject(Auth);
 
   constructor() {
-    // Load from local storage if available
-    const storedUser = localStorage.getItem('snapUser');
+    // 1. Load from local storage if available
+    const storedUser = localStorage.getItem("appUser") || localStorage.getItem("snapUser");
     if (storedUser) {
-      this.snapUser.set(JSON.parse(storedUser));
+      try {
+        const parsed = JSON.parse(storedUser) as AppUser;
+        if (!parsed.photoUrl && parsed.bitmojiUrl) {
+          parsed.photoUrl = parsed.bitmojiUrl;
+        }
+        if (!parsed.bitmojiUrl && parsed.photoUrl) {
+          parsed.bitmojiUrl = parsed.photoUrl;
+        }
+        if (!parsed.provider) {
+          parsed.provider = "snapchat";
+        }
+        this.currentUser.set(parsed);
+      } catch (err) {
+        console.error("Error parsing stored user", err);
+      }
+    }
+
+    // 2. Listen to Firebase Auth state for Google sign-in
+    onAuthStateChanged(this.auth, async (fbUser: User | null) => {
+      if (fbUser) {
+        const current = this.currentUser();
+        if (!current || current.provider === "google") {
+          await this.syncGoogleUser(fbUser);
+        }
+      } else {
+        if (this.currentUser()?.provider === "google") {
+          this.currentUser.set(null);
+          localStorage.removeItem("appUser");
+        }
+      }
+    });
+  }
+
+  async syncGoogleUser(fbUser: User): Promise<AppUser> {
+    const externalId = fbUser.uid;
+    const displayName = fbUser.displayName ?? "";
+    const email = fbUser.email ?? "";
+    const photoUrl = fbUser.photoURL ?? "";
+
+    let rewardsPoints = 50;
+    let dailyChallenges: (UserChallengeRecord | string)[] = [];
+
+    const initialUser: AppUser = {
+      provider: "google",
+      externalId,
+      displayName,
+      email,
+      photoUrl,
+      rewardsPoints,
+      dailyChallenges,
+    };
+
+    if (!this.currentUser()) {
+      this.currentUser.set(initialUser);
+      localStorage.setItem("appUser", JSON.stringify(initialUser));
+    }
+
+    try {
+      const userDocRef = doc(this.firestore, `users/${externalId}`);
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (userSnapshot.exists()) {
+        const userData = userSnapshot.data() as Partial<AppUser>;
+        rewardsPoints = userData.rewardsPoints ?? 0;
+        dailyChallenges = userData.dailyChallenges ?? [];
+        const claimedPrizes = userData.claimedPrizes ?? [];
+
+        const updatedUser: AppUser = {
+          provider: "google",
+          externalId,
+          displayName,
+          email,
+          photoUrl,
+          rewardsPoints,
+          dailyChallenges,
+          claimedPrizes,
+        };
+        this.currentUser.set(updatedUser);
+        localStorage.setItem("appUser", JSON.stringify(updatedUser));
+        return updatedUser;
+      } else {
+        await setDoc(userDocRef, {
+          provider: "google",
+          externalId,
+          displayName,
+          email,
+          photoUrl,
+          rewardsPoints: 50,
+          dailyChallenges: [],
+          claimedPrizes: [],
+        });
+        this.currentUser.set(initialUser);
+        localStorage.setItem("appUser", JSON.stringify(initialUser));
+        return initialUser;
+      }
+    } catch (dbError) {
+      console.error("Error communicating with Firestore for Google user:", dbError);
+      return initialUser;
+    }
+  }
+
+  async loginWithGoogle(): Promise<AppUser | null> {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(this.auth, provider);
+      if (result.user) {
+        return await this.syncGoogleUser(result.user);
+      }
+      return null;
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+      return null;
     }
   }
 
@@ -52,19 +191,22 @@ export class LoginService {
       if (result.data?.me) {
         const externalId = result.data.me.externalId;
         const displayName = result.data.me.displayName;
-        const bitmojiUrl = result.data.me.bitmoji.avatar;
-        
+        const bitmojiUrl = result.data.me.bitmoji?.avatar || result.data.me.bitmojiUrl || "";
+
         let rewardsPoints = 50;
-        let dailyChallenges: any[] = [];
+        let dailyChallenges: (UserChallengeRecord | string)[] = [];
 
         // 1. Immediately show the user in the UI (optimistic update)
-        this.snapUser.set({
+        const optimisticUser: AppUser = {
+          provider: "snapchat",
           externalId,
           displayName,
+          photoUrl: bitmojiUrl,
           bitmojiUrl,
           rewardsPoints,
-          dailyChallenges
-        });
+          dailyChallenges,
+        };
+        this.currentUser.set(optimisticUser);
 
         // 2. Try to sync with Firestore
         try {
@@ -72,39 +214,50 @@ export class LoginService {
           const userSnapshot = await getDoc(userDocRef);
 
           if (userSnapshot.exists()) {
-            const userData = userSnapshot.data() as SnapUser;
+            const userData = userSnapshot.data() as Partial<AppUser>;
             rewardsPoints = userData.rewardsPoints ?? 0;
             dailyChallenges = userData.dailyChallenges ?? [];
-            
-            // Update UI with their true existing points
-            const updatedUser = {
+            const claimedPrizes = userData.claimedPrizes ?? [];
+            const resolvedBitmoji = bitmojiUrl || userData.bitmojiUrl || userData.photoUrl || "";
+
+            const updatedUser: AppUser = {
+              provider: "snapchat",
               externalId,
               displayName,
-              bitmojiUrl,
+              photoUrl: resolvedBitmoji,
+              bitmojiUrl: resolvedBitmoji,
               rewardsPoints,
-              dailyChallenges
+              dailyChallenges,
+              claimedPrizes,
             };
-            this.snapUser.set(updatedUser);
-            localStorage.setItem('snapUser', JSON.stringify(updatedUser));
+            this.currentUser.set(updatedUser);
+            localStorage.setItem("appUser", JSON.stringify(updatedUser));
+            localStorage.setItem("snapUser", JSON.stringify(updatedUser));
           } else {
-            // New user gets 50 welcome points
             await setDoc(userDocRef, {
+              provider: "snapchat",
               externalId,
               displayName,
+              photoUrl: bitmojiUrl,
               bitmojiUrl,
               rewardsPoints,
-              dailyChallenges
+              dailyChallenges,
+              claimedPrizes: [],
             });
-            
-            const newUser = {
+
+            const newUser: AppUser = {
+              provider: "snapchat",
               externalId,
               displayName,
+              photoUrl: bitmojiUrl,
               bitmojiUrl,
               rewardsPoints,
-              dailyChallenges
+              dailyChallenges,
+              claimedPrizes: [],
             };
-            this.snapUser.set(newUser);
-            localStorage.setItem('snapUser', JSON.stringify(newUser));
+            this.currentUser.set(newUser);
+            localStorage.setItem("appUser", JSON.stringify(newUser));
+            localStorage.setItem("snapUser", JSON.stringify(newUser));
           }
         } catch (dbError) {
           console.error("Error communicating with Firestore (Check your Database Rules!):", dbError);
@@ -117,19 +270,22 @@ export class LoginService {
 
   loginWithSnapchat() {
     const publicClientId = "82960528-533c-49a2-a59c-be449a40a3cb";
-    // Using exactly the string you whitelisted to ensure it matches perfectly:
     const redirectUri = "http://localhost:4200/";
     const scope =
       "https://auth.snapchat.com/oauth2/api/user.display_name https://auth.snapchat.com/oauth2/api/user.bitmoji.avatar";
 
-
-    // Notice response_type=token for Implicit Grant Flow
     const authUrl = `https://accounts.snapchat.com/accounts/oauth2/auth?client_id=${publicClientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=token&scope=${encodeURIComponent(scope)}`;
     window.location.href = authUrl;
   }
 
-  logout() {
-    this.snapUser.set(null);
-    localStorage.removeItem('snapUser');
+  async logout(): Promise<void> {
+    try {
+      await signOut(this.auth);
+    } catch (err) {
+      console.error("Error signing out of Firebase Auth:", err);
+    }
+    this.currentUser.set(null);
+    localStorage.removeItem("appUser");
+    localStorage.removeItem("snapUser");
   }
 }

@@ -1,0 +1,122 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.avatar-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  gap: 6px;
+}
+
+.user-identifier {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  max-width: 100%;
+}
+
+.email-text {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.25;
+  text-align: center;
+  max-width: 100%;
+}
+
+.challenges-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.login-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 4px 2px;
+
+  .sign-in-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #9ba1a6;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  .provider-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .auth-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .logged-out-challenges {
+    flex-shrink: 0;
+  }
+}
+

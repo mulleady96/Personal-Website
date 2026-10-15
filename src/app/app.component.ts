@@ -22,11 +22,13 @@ import {
   faLinkedin,
   faWhatsapp,
   faSnapchat,
+  faGoogle,
 } from "@fortawesome/free-brands-svg-icons";
 import { Analytics, logEvent } from "@angular/fire/analytics";
 
 import { ThemeService } from "./Services/theme.service";
 import { LoginService } from "./Services/login.service";
+import { ChallengeService } from "./Services/challenge.service";
 
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatButtonModule } from "@angular/material/button";
@@ -36,7 +38,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatBadgeModule } from "@angular/material/badge";
 
 import { ToolbarComponent } from "./Components/toolbar/toolbar.component";
-import { SnapLoginComponent } from "./Components/snap-login/snap-login.component";
+import { LoginComponent } from "./Components/login/login.component";
 
 @Component({
   selector: "app-root",
@@ -56,7 +58,7 @@ import { SnapLoginComponent } from "./Components/snap-login/snap-login.component
     MatToolbarModule,
     MatBadgeModule,
     ToolbarComponent,
-    SnapLoginComponent,
+    LoginComponent,
   ],
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
@@ -101,11 +103,6 @@ export class AppComponent implements OnInit {
       routerLink: "/AR-corner",
       icon: "view_in_ar",
     },
-    {
-      ariaLabel: "Challenges",
-      routerLink: "/challenges",
-      icon: "emoji_events",
-    },
   ];
 
   navToggle = output();
@@ -118,9 +115,10 @@ export class AppComponent implements OnInit {
   checked = signal(false);
 
   public loginService = inject(LoginService);
+  public challengeService = inject(ChallengeService);
 
   constructor() {
-    this.library.addIcons(faGithub, faLinkedin, faWhatsapp, faSnapchat);
+    this.library.addIcons(faGithub, faLinkedin, faWhatsapp, faSnapchat, faGoogle);
     if (this.analytics) {
       logEvent(this.analytics, "app_load", { page: "main" });
     }

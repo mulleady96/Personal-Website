@@ -25,6 +25,12 @@
       "@Services/*": [
         "./src/app/Services/*"
       ],
+      "@Components/*": [
+        "./src/app/Components/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
       "@playwright/test": [
         "./node_modules/@playwright/test"
       ]
