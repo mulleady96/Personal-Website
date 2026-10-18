@@ -25,6 +25,8 @@
                 [src]="selectedSnapcode()"
                 alt="Snapcode"
                 class="snapcode-img"
+                title="Click to scan Snapcode"
+                (click)="onSnapcodeScan()"
               />
             }
             <mat-form-field class="lens-dropdown">

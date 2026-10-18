@@ -24,8 +24,10 @@
               fill
               class="card-image-top"
               [class.snap-card-img]="card.type === 'snap'"
+              [title]="card.type === 'snap' ? 'Click to scan Snapcode' : ''"
               alt="{{ card.description }}"
               priority
+              (click)="onCardImageClick(card)"
             />
           }
 

@@ -1,0 +1,19 @@
+<div class="snapcode-dialog-container text-center">
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content class="flex-center snapcode-dialog-content">
+    <img
+      [src]="data.snapcodeSrc"
+      [alt]="data.title + ' Snapcode'"
+      class="snapcode-preview-img"
+    />
+    <p class="scan-instruction">
+      Open Snapchat and point your camera at this Snapcode to unlock the AR
+      lens!
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <button mat-flat-button color="primary" mat-dialog-close>
+      <mat-icon>check</mat-icon> Done
+    </button>
+  </mat-dialog-actions>
+</div>

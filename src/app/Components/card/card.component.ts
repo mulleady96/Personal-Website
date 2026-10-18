@@ -1,4 +1,4 @@
-import { Component, input, OnInit, computed } from "@angular/core";
+import { Component, inject, input, OnInit } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import {
   MatCard,
@@ -9,6 +9,9 @@ import { NgClass, NgOptimizedImage } from "@angular/common";
 
 import { MatButton, MatMiniFabButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { ChallengeService } from "@Services/challenge.service";
+import { SnapcodeDialogComponent } from "@Components/snapcode-dialog/snapcode-dialog.component";
 
 export interface CardItem {
   id: number;
@@ -29,7 +32,6 @@ export interface CardItem {
   imports: [
     MatCard,
     NgClass,
-
     NgOptimizedImage,
     MatCardContent,
     MatCardActions,
@@ -37,11 +39,15 @@ export interface CardItem {
     MatButton,
     MatMiniFabButton,
     MatIcon,
+    MatDialogModule,
   ],
 })
 export class CardComponent implements OnInit {
   cardList = input<CardItem[]>([]);
   public currentIndex: number = 0;
+
+  private dialog = inject(MatDialog);
+  private challengeService = inject(ChallengeService);
 
   constructor(private router: Router) {}
 
@@ -59,6 +65,18 @@ export class CardComponent implements OnInit {
     }
   }
 
+  onCardImageClick(card: CardItem): void {
+    if (card.type === "snap" && card.image) {
+      this.dialog.open(SnapcodeDialogComponent, {
+        width: "320px",
+        data: {
+          snapcodeSrc: card.image,
+          title: card.title,
+        },
+      });
+      this.challengeService.triggerAction("AR_scan");
+    }
+  }
 
   navigate(card: CardItem): void {
     if (card.externalLink) {

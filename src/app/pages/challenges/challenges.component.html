@@ -37,7 +37,9 @@
                       class="challenge-spinner"
                     ></mat-progress-spinner>
                     <div class="challenge-points-badge flex-center">
-                      <span class="points-val">+{{ challenge.rewardsPoints }}</span>
+                      <span class="points-val"
+                        >+{{ challenge.rewardsPoints }}</span
+                      >
                     </div>
                   </div>
                   <mat-card-title>{{ challenge.title }}</mat-card-title>
@@ -50,7 +52,8 @@
                   @if (isCompleted(challenge)) {
                     <div class="status-completed">
                       <div class="completed-badge">
-                        <mat-icon color="primary">check_circle</mat-icon> Completed
+                        <mat-icon color="primary">check_circle</mat-icon>
+                        Completed
                       </div>
                       @if (getTimeRemaining(challenge)) {
                         <span class="cooldown-time">
@@ -68,7 +71,9 @@
             }
 
             @if (challenges().length === 0) {
-              <p class="empty-msg">No active challenges at the moment. Check back later!</p>
+              <p class="empty-msg">
+                No active challenges at the moment. Check back later!
+              </p>
             }
           </div>
         }
@@ -93,7 +98,8 @@
               <span class="points-val">{{ currentPoints() }}</span> Points
             </mat-card-title>
             <mat-card-subtitle>
-              Current Points Tally &bull; {{ userTier().name }} &bull; {{ unlockedPrizesCount() }}/{{ prizes().length }} Prizes Unlocked
+              Current Points Tally &bull; {{ userTier().name }} &bull;
+              {{ unlockedPrizesCount() }}/{{ prizes().length }} Prizes Unlocked
             </mat-card-subtitle>
           </mat-card-header>
 
@@ -129,7 +135,9 @@
           <mat-card class="login-warning">
             <mat-card-content class="flex-center login-warning-content">
               <mat-icon color="primary">lock</mat-icon>
-              <p>Please log in to track your points and claim unlocked prizes.</p>
+              <p>
+                Please log in to track your points and claim unlocked prizes.
+              </p>
               <app-login [showChallenges]="false"></app-login>
             </mat-card-content>
           </mat-card>
@@ -155,7 +163,10 @@
                 <div class="progress-section">
                   <div class="progress-label">
                     <span>Progress ({{ getRewardProgress(prize) }}%)</span>
-                    <span>{{ currentPoints() }} / {{ prize.pointsRequired }} pts</span>
+                    <span
+                      >{{ currentPoints() }} /
+                      {{ prize.pointsRequired }} pts</span
+                    >
                   </div>
                   <mat-progress-bar
                     mode="determinate"
@@ -167,16 +178,46 @@
 
               <mat-card-actions align="end">
                 @if (isClaimed(prize)) {
-                  <button mat-button disabled>
-                    <mat-icon color="primary">check</mat-icon> Claimed
-                  </button>
+                  @if (prize.link) {
+                    <a
+                      mat-flat-button
+                      color="primary"
+                      [href]="prize.link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <mat-icon>photo_album</mat-icon> Open Photo Album
+                    </a>
+                  } @else {
+                    <button mat-button disabled>
+                      <mat-icon color="primary">check</mat-icon> Claimed
+                    </button>
+                  }
                 } @else if (isUnlocked(prize)) {
-                  <button mat-flat-button color="primary" (click)="claimPrize(prize)">
-                    <mat-icon>redeem</mat-icon> Claim Reward
-                  </button>
+                  @if (prize.link) {
+                    <a
+                      mat-flat-button
+                      color="primary"
+                      [href]="prize.link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      (click)="claimPrize(prize)"
+                    >
+                      <mat-icon>redeem</mat-icon> Claim Reward
+                    </a>
+                  } @else {
+                    <button
+                      mat-flat-button
+                      color="primary"
+                      (click)="claimPrize(prize)"
+                    >
+                      <mat-icon>redeem</mat-icon> Claim Reward
+                    </button>
+                  }
                 } @else {
                   <span class="locked-text">
-                    <mat-icon>lock</mat-icon> {{ getPointsNeeded(prize) }} pts needed
+                    <mat-icon>lock</mat-icon> {{ getPointsNeeded(prize) }} pts
+                    needed
                   </span>
                 }
               </mat-card-actions>

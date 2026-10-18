@@ -1,0 +1,25 @@
+@use "../../styles/mixins.scss" as *;
+
+.snapcode-dialog-container {
+  padding: 8px 0;
+}
+
+.snapcode-dialog-content {
+  flex-direction: column;
+  gap: 16px;
+}
+
+.snapcode-preview-img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.scan-instruction {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  max-width: 260px;
+}

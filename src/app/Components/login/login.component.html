@@ -7,6 +7,15 @@
         matBadgePosition="above after"
         matBadgeColor="accent"
       >
+        @if (isVerified()) {
+          <span
+            class="verified-badge flex-center"
+            title="Supporter Badge"
+            aria-label="Verified Supporter"
+          >
+            <mat-icon color="primary">verified</mat-icon>
+          </span>
+        }
         <img
           class="user-avatar"
           [src]="user.bitmojiUrl || user.photoUrl"

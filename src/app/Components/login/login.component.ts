@@ -1,16 +1,16 @@
-import { Component, inject, input } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
+import { Component, computed, inject, input } from "@angular/core";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { RouterModule } from "@angular/router";
 import {
-  FontAwesomeModule,
   FaIconLibrary,
+  FontAwesomeModule,
 } from "@fortawesome/angular-fontawesome";
-import { faSnapchat, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { LoginService } from "../../Services/login.service";
-import { ChallengeService } from "../../Services/challenge.service";
+import { faGoogle, faSnapchat } from "@fortawesome/free-brands-svg-icons";
+import { ChallengeService } from "@Services/challenge.service";
+import { LoginService } from "@Services/login.service";
 
 @Component({
   selector: "app-login",
@@ -30,6 +30,9 @@ export class LoginComponent {
   public loginService = inject(LoginService);
   public challengeService = inject(ChallengeService);
   public showChallenges = input<boolean>(true);
+  public isVerified = computed<boolean>(() =>
+    this.challengeService.isPrizeClaimed("badge-supporter"),
+  );
 
   public readonly faGoogle = faGoogle;
   public readonly faSnapchat = faSnapchat;

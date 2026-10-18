@@ -57,6 +57,12 @@ mat-card-actions {
 
 .snap-card-img {
   object-fit: contain !important;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.04);
+  }
 }
 
 .avatar-image {

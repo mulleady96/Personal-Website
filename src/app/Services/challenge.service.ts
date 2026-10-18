@@ -1,12 +1,13 @@
-import { Injectable, inject, signal, computed } from "@angular/core";
+import { computed, inject, Injectable, signal } from "@angular/core";
+import { doc, Firestore, updateDoc } from "@angular/fire/firestore";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { environment } from "@environments/environment";
+import { GravitaService } from "@Services/gravita.service";
 import {
+  AppUser,
   LoginService,
   UserChallengeRecord,
-  AppUser,
 } from "@Services/login.service";
-import { GravitaService } from "@Services/gravita.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Firestore, doc, updateDoc } from "@angular/fire/firestore";
 
 export interface Challenge {
   id: string;
@@ -24,12 +25,13 @@ export interface Prize {
   icon: string;
   category: "Digital Perk" | "Merch" | "Experience" | "VIP";
   badge?: string;
+  link?: string;
 }
 
 export const DEFAULT_PRIZES: Prize[] = [
   {
     id: "badge-supporter",
-    title: "Gravita Supporter Badge",
+    title: "Supporter Badge",
     description:
       "Unlock an exclusive verified supporter badge on your profile and avatar flair.",
     pointsRequired: 100,
@@ -50,11 +52,12 @@ export const DEFAULT_PRIZES: Prize[] = [
   {
     id: "unlock-premium-photo-collection",
     title: "Unlock Premium Photo Collection",
-    description: "Unlock a premium photo collection for use in your own snaps.",
+    description: "Unlock a premium photo collection for your own use worth €5.",
     pointsRequired: 500,
     icon: "loyalty",
     category: "Digital Perk",
     badge: "Physical",
+    link: environment.photoAlbumLink,
   },
 ];
 
@@ -169,7 +172,9 @@ export class ChallengeService {
             ? this.challenges()
             : await this.loadChallenges();
         const actionChallenge = challenges.find(
-          (c: Challenge) => c.actionTrigger === actionTrigger,
+          (c: Challenge) =>
+            c.actionTrigger?.trim().toLowerCase() ===
+            actionTrigger.trim().toLowerCase(),
         );
         if (actionChallenge && !this.isChallengeCompleted(actionChallenge)) {
           await this.completeChallenge(actionChallenge);

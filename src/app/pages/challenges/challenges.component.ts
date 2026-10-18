@@ -1,23 +1,27 @@
+import { CommonModule, TitleCasePipe } from "@angular/common";
 import {
   Component,
-  inject,
-  signal,
   computed,
-  OnInit,
+  inject,
   OnDestroy,
+  OnInit,
+  signal,
 } from "@angular/core";
-import { CommonModule, TitleCasePipe } from "@angular/common";
-import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTabsModule } from "@angular/material/tabs";
+import { LoginComponent } from "@Components/login/login.component";
+import {
+  Challenge,
+  ChallengeService,
+  Prize,
+} from "@Services/challenge.service";
 import { GravitaService } from "@Services/gravita.service";
 import { LoginService, UserChallengeRecord } from "@Services/login.service";
-import { ChallengeService, Challenge, Prize } from "@Services/challenge.service";
-import { LoginComponent } from "@Components/login/login.component";
 
 export interface UserTier {
   name: string;
@@ -59,7 +63,8 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   );
 
   activeChallengesCount = computed<number>(
-    () => this.challenges().filter((c: Challenge) => !this.isCompleted(c)).length,
+    () =>
+      this.challenges().filter((c: Challenge) => !this.isCompleted(c)).length,
   );
 
   unlockedPrizesCount = computed<number>(() => {
@@ -176,8 +181,9 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     const user = this.loginService.currentUser();
     if (!user || !user.dailyChallenges) return null;
 
-    const record = user.dailyChallenges.find((c: UserChallengeRecord | string) =>
-      typeof c === "string" ? c === challenge.id : c.id === challenge.id,
+    const record = user.dailyChallenges.find(
+      (c: UserChallengeRecord | string) =>
+        typeof c === "string" ? c === challenge.id : c.id === challenge.id,
     );
 
     if (!record || typeof record === "string") return null;

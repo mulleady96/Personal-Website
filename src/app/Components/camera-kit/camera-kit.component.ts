@@ -1,29 +1,32 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ElementRef,
-  viewChild,
-  AfterViewInit,
-  signal,
-  computed,
-  inject,
-} from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+  viewChild,
+} from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { MatSelectModule } from "@angular/material/select";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialog, MatDialogModule } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
-import { MatButtonModule } from "@angular/material/button";
+import { MatSelectModule } from "@angular/material/select";
+import { ActivatedRoute } from "@angular/router";
+import { SnapcodeDialogComponent } from "@Components/snapcode-dialog/snapcode-dialog.component";
+import { environment } from "@environments/environment";
+import { ChallengeService } from "@Services/challenge.service";
 import {
   bootstrapCameraKit,
   CameraKit,
-  Lens,
   CameraKitSession,
   createMediaStreamSource,
+  Lens,
 } from "@snap/camera-kit";
-import { environment } from "../../../environments/environment";
 
 const API_TOKEN = environment.cameraKit.apiToken;
 const LENS_GROUP_ID = environment.cameraKit.lensGroupId;
@@ -39,6 +42,7 @@ const snapLenses = environment.cameraKit.snapLenses;
     MatSelectModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   templateUrl: "./camera-kit.component.html",
   styleUrls: ["./camera-kit.component.scss"],
@@ -68,6 +72,8 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
   });
 
   private route = inject(ActivatedRoute);
+  private dialog = inject(MatDialog);
+  private challengeService = inject(ChallengeService);
 
   private cameraKit: CameraKit | null = null;
   private session: CameraKitSession | null = null;
@@ -182,6 +188,24 @@ export class CameraKitComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async onLensSelect() {
     await this.applySelectedLens();
+  }
+
+  onSnapcodeScan(): void {
+    const snapcodeSrc = this.selectedSnapcode();
+    if (!snapcodeSrc) return;
+
+    const currentLens = this.lenses().find(
+      (l) => l.id === this.selectedLensId(),
+    );
+    this.dialog.open(SnapcodeDialogComponent, {
+      width: "320px",
+      data: {
+        snapcodeSrc,
+        title: currentLens?.name || "Snap AR Lens",
+      },
+    });
+
+    this.challengeService.triggerAction("AR_scan");
   }
 
   private async applySelectedLens() {
