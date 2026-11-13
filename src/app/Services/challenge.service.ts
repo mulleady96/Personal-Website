@@ -1,5 +1,11 @@
 import { computed, inject, Injectable, signal } from "@angular/core";
-import { doc, Firestore, updateDoc } from "@angular/fire/firestore";
+import {
+  arrayUnion,
+  doc,
+  Firestore,
+  setDoc,
+  updateDoc,
+} from "@angular/fire/firestore";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { environment } from "@environments/environment";
 import { GravitaService } from "@Services/gravita.service";
@@ -28,6 +34,8 @@ export interface Prize {
   link?: string;
 }
 
+export const PHOTO_ALBUM_PRIZE_ID = "unlock-premium-photo-collection";
+
 export const DEFAULT_PRIZES: Prize[] = [
   {
     id: "badge-supporter",
@@ -50,7 +58,7 @@ export const DEFAULT_PRIZES: Prize[] = [
     badge: "Exclusive",
   },
   {
-    id: "unlock-premium-photo-collection",
+    id: PHOTO_ALBUM_PRIZE_ID,
     title: "Unlock Premium Photo Collection",
     description: "Unlock a premium photo collection for your own use worth €5.",
     pointsRequired: 500,
@@ -84,8 +92,10 @@ export class ChallengeService {
   unlockedPrizesCount = computed<number>(() => {
     const user = this.loginService.currentUser();
     const currentPoints = user?.rewardsPoints ?? 0;
-    return this.prizes().filter((p: Prize) => currentPoints >= p.pointsRequired)
-      .length;
+    const claimed = user?.claimedPrizes ?? [];
+    return this.prizes().filter(
+      (p: Prize) => currentPoints >= p.pointsRequired || claimed.includes(p.id),
+    ).length;
   });
 
   constructor() {
@@ -198,6 +208,46 @@ export class ChallengeService {
   isPrizeClaimed(prizeId: string): boolean {
     const user = this.loginService.currentUser();
     return !!user?.claimedPrizes?.includes(prizeId);
+  }
+
+  async markPrizeClaimed(prizeId: string): Promise<boolean> {
+    const user = this.loginService.currentUser();
+    if (!user) {
+      return false;
+    }
+
+    const currentClaimed = user.claimedPrizes ?? [];
+    if (currentClaimed.includes(prizeId)) {
+      return true;
+    }
+
+    const newClaimed = [...currentClaimed, prizeId];
+    const updatedUser: AppUser = {
+      ...user,
+      claimedPrizes: newClaimed,
+    };
+
+    this.loginService.currentUser.set(updatedUser);
+    localStorage.setItem("appUser", JSON.stringify(updatedUser));
+    localStorage.setItem("snapUser", JSON.stringify(updatedUser));
+
+    if (user.externalId) {
+      try {
+        const userDocRef = doc(this.firestore, `users/${user.externalId}`);
+        await setDoc(
+          userDocRef,
+          { claimedPrizes: arrayUnion(prizeId) },
+          { merge: true },
+        );
+      } catch (e) {
+        console.warn(
+          "Could not sync claimed prize to Firestore, saving locally",
+          e,
+        );
+      }
+    }
+
+    return true;
   }
 
   async claimPrize(prize: Prize): Promise<boolean> {

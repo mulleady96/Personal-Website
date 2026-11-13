@@ -1,13 +1,18 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { provideRouter } from "@angular/router";
-import { provideNoopAnimations } from "@angular/platform-browser/animations";
 import { provideHttpClient } from "@angular/common/http";
 import { signal } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ChallengesComponent } from "./challenges.component";
-import { ChallengeService, Prize, DEFAULT_PRIZES } from "@Services/challenge.service";
-import { LoginService, AppUser } from "@Services/login.service";
+import { provideNoopAnimations } from "@angular/platform-browser/animations";
+import { provideRouter } from "@angular/router";
+import { ChallengesComponent } from "@app/pages/challenges/challenges.component";
+import {
+  ChallengeService,
+  DEFAULT_PRIZES,
+  PHOTO_ALBUM_PRIZE_ID,
+  Prize,
+} from "@Services/challenge.service";
 import { GravitaService } from "@Services/gravita.service";
+import { AppUser, LoginService } from "@Services/login.service";
 
 class MockLoginService {
   currentUser = signal<AppUser | null>(null);
@@ -123,5 +128,30 @@ describe("ChallengesComponent", () => {
 
     loginService.currentUser.set({ ...baseUser, rewardsPoints: 2000 });
     expect(component.userTier().name).toBe("Platinum Legend");
+  });
+
+  it("should treat the photo album prize as unlocked and 100% claimed even below 500 points", () => {
+    challengeService.isPrizeClaimed.mockImplementation(
+      (id: string) => id === PHOTO_ALBUM_PRIZE_ID,
+    );
+    loginService.currentUser.set({
+      provider: "google",
+      externalId: "user-album",
+      email: "album@example.com",
+      photoUrl: "",
+      rewardsPoints: 50,
+      claimedPrizes: [PHOTO_ALBUM_PRIZE_ID],
+    });
+    fixture.detectChanges();
+
+    const albumPrize = DEFAULT_PRIZES.find(
+      (p: Prize) => p.id === PHOTO_ALBUM_PRIZE_ID,
+    ) as Prize;
+
+    expect(component.isClaimed(albumPrize)).toBe(true);
+    expect(component.isUnlocked(albumPrize)).toBe(true);
+    expect(component.getRewardProgress(albumPrize)).toBe(100);
+    expect(component.getPointsNeeded(albumPrize)).toBe(0);
+    expect(component.unlockedPrizesCount()).toBe(1);
   });
 });

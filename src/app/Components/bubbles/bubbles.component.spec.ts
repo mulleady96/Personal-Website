@@ -1,5 +1,5 @@
-import { Functions } from '@angular/fire/functions';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { Functions } from "@angular/fire/functions";
 
 import { BubblesComponent } from "./bubbles.component";
 

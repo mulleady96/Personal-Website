@@ -3,15 +3,17 @@
 
 .dark-theme {
   @include create-dark-theme();
+  color: var(--mat-sys-on-surface);
 
   .mat-card-title {
-    color: white !important;
+    color: var(--mat-sys-on-surface) !important;
   }
 }
 
 html,
 body {
   @include create-light-theme();
+  color: var(--mat-sys-on-surface);
   height: 100%;
   width: 100%;
   margin: 0;

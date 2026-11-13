@@ -163,10 +163,14 @@
                 <div class="progress-section">
                   <div class="progress-label">
                     <span>Progress ({{ getRewardProgress(prize) }}%)</span>
-                    <span
-                      >{{ currentPoints() }} /
-                      {{ prize.pointsRequired }} pts</span
-                    >
+                    @if (isClaimed(prize)) {
+                      <span>Claimed</span>
+                    } @else {
+                      <span
+                        >{{ currentPoints() }} /
+                        {{ prize.pointsRequired }} pts</span
+                      >
+                    }
                   </div>
                   <mat-progress-bar
                     mode="determinate"
@@ -178,6 +182,9 @@
 
               <mat-card-actions align="end">
                 @if (isClaimed(prize)) {
+                  <button mat-button disabled>
+                    <mat-icon color="primary">check</mat-icon> Claimed
+                  </button>
                   @if (prize.link) {
                     <a
                       mat-flat-button
@@ -188,10 +195,6 @@
                     >
                       <mat-icon>photo_album</mat-icon> Open Photo Album
                     </a>
-                  } @else {
-                    <button mat-button disabled>
-                      <mat-icon color="primary">check</mat-icon> Claimed
-                    </button>
                   }
                 } @else if (isUnlocked(prize)) {
                   @if (prize.link) {

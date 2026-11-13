@@ -1,13 +1,14 @@
-import { Injectable, signal, inject } from "@angular/core";
-import { Firestore, doc, getDoc, setDoc } from "@angular/fire/firestore";
+import { inject, Injectable, signal } from "@angular/core";
 import {
   Auth,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
-  onAuthStateChanged,
   User,
 } from "@angular/fire/auth";
+import { doc, Firestore, getDoc, setDoc } from "@angular/fire/firestore";
+import { Router } from "@angular/router";
 
 export interface UserChallengeRecord {
   id: string;
@@ -43,6 +44,7 @@ export class LoginService {
 
   private firestore = inject(Firestore);
   private auth = inject(Auth);
+  private router = inject(Router);
 
   constructor() {
     // 1. Load from local storage if available
@@ -109,11 +111,18 @@ export class LoginService {
       const userDocRef = doc(this.firestore, `users/${externalId}`);
       const userSnapshot = await getDoc(userDocRef);
 
+      const localClaimed =
+        this.currentUser()?.externalId === externalId
+          ? (this.currentUser()?.claimedPrizes ?? [])
+          : [];
+
       if (userSnapshot.exists()) {
         const userData = userSnapshot.data() as Partial<AppUser>;
         rewardsPoints = userData.rewardsPoints ?? 0;
         dailyChallenges = userData.dailyChallenges ?? [];
-        const claimedPrizes = userData.claimedPrizes ?? [];
+        const claimedPrizes = Array.from(
+          new Set([...(userData.claimedPrizes ?? []), ...localClaimed]),
+        );
 
         const updatedUser: AppUser = {
           provider: "google",
@@ -129,19 +138,28 @@ export class LoginService {
         localStorage.setItem("appUser", JSON.stringify(updatedUser));
         return updatedUser;
       } else {
-        await setDoc(userDocRef, {
-          provider: "google",
-          externalId,
-          displayName,
-          email,
-          photoUrl,
-          rewardsPoints: 50,
-          dailyChallenges: [],
-          claimedPrizes: [],
-        });
-        this.currentUser.set(initialUser);
-        localStorage.setItem("appUser", JSON.stringify(initialUser));
-        return initialUser;
+        const claimedPrizes = [...localClaimed];
+        const newUser: AppUser = {
+          ...initialUser,
+          claimedPrizes,
+        };
+        await setDoc(
+          userDocRef,
+          {
+            provider: "google",
+            externalId,
+            displayName,
+            email,
+            photoUrl,
+            rewardsPoints: 50,
+            dailyChallenges: [],
+            claimedPrizes,
+          },
+          { merge: true },
+        );
+        this.currentUser.set(newUser);
+        localStorage.setItem("appUser", JSON.stringify(newUser));
+        return newUser;
       }
     } catch (dbError) {
       console.error("Error communicating with Firestore for Google user:", dbError);
@@ -163,15 +181,21 @@ export class LoginService {
     }
   }
 
-  handleTokenCallback() {
+  async handleTokenCallback(): Promise<void> {
     const hash = window.location.hash.substring(1);
     const params = new URLSearchParams(hash);
     const accessToken = params.get("access_token");
 
     if (accessToken) {
-      this.fetchSnapchatUser(accessToken);
       // Clean up the URL
       window.history.replaceState({}, document.title, window.location.pathname);
+      await this.fetchSnapchatUser(accessToken);
+
+      const redirectUrl = sessionStorage.getItem("postLoginRedirect");
+      if (redirectUrl) {
+        sessionStorage.removeItem("postLoginRedirect");
+        await this.router.navigateByUrl(redirectUrl);
+      }
     }
   }
 
@@ -213,11 +237,18 @@ export class LoginService {
           const userDocRef = doc(this.firestore, `users/${externalId}`);
           const userSnapshot = await getDoc(userDocRef);
 
+          const localClaimed =
+            this.currentUser()?.externalId === externalId
+              ? (this.currentUser()?.claimedPrizes ?? [])
+              : [];
+
           if (userSnapshot.exists()) {
             const userData = userSnapshot.data() as Partial<AppUser>;
             rewardsPoints = userData.rewardsPoints ?? 0;
             dailyChallenges = userData.dailyChallenges ?? [];
-            const claimedPrizes = userData.claimedPrizes ?? [];
+            const claimedPrizes = Array.from(
+              new Set([...(userData.claimedPrizes ?? []), ...localClaimed]),
+            );
             const resolvedBitmoji = bitmojiUrl || userData.bitmojiUrl || userData.photoUrl || "";
 
             const updatedUser: AppUser = {
@@ -234,16 +265,21 @@ export class LoginService {
             localStorage.setItem("appUser", JSON.stringify(updatedUser));
             localStorage.setItem("snapUser", JSON.stringify(updatedUser));
           } else {
-            await setDoc(userDocRef, {
-              provider: "snapchat",
-              externalId,
-              displayName,
-              photoUrl: bitmojiUrl,
-              bitmojiUrl,
-              rewardsPoints,
-              dailyChallenges,
-              claimedPrizes: [],
-            });
+            const claimedPrizes = [...localClaimed];
+            await setDoc(
+              userDocRef,
+              {
+                provider: "snapchat",
+                externalId,
+                displayName,
+                photoUrl: bitmojiUrl,
+                bitmojiUrl,
+                rewardsPoints,
+                dailyChallenges,
+                claimedPrizes,
+              },
+              { merge: true },
+            );
 
             const newUser: AppUser = {
               provider: "snapchat",
@@ -253,7 +289,7 @@ export class LoginService {
               bitmojiUrl,
               rewardsPoints,
               dailyChallenges,
-              claimedPrizes: [],
+              claimedPrizes,
             };
             this.currentUser.set(newUser);
             localStorage.setItem("appUser", JSON.stringify(newUser));
@@ -268,7 +304,10 @@ export class LoginService {
     }
   }
 
-  loginWithSnapchat() {
+  loginWithSnapchat(redirectAfterLogin?: string): void {
+    if (redirectAfterLogin) {
+      sessionStorage.setItem("postLoginRedirect", redirectAfterLogin);
+    }
     const publicClientId = "82960528-533c-49a2-a59c-be449a40a3cb";
     const redirectUri = "http://localhost:4200/";
     const scope =

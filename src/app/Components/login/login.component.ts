@@ -30,6 +30,7 @@ export class LoginComponent {
   public loginService = inject(LoginService);
   public challengeService = inject(ChallengeService);
   public showChallenges = input<boolean>(true);
+  public postLoginRedirect = input<string | null>(null);
   public isVerified = computed<boolean>(() =>
     this.challengeService.isPrizeClaimed("badge-supporter"),
   );
@@ -40,6 +41,10 @@ export class LoginComponent {
   constructor() {
     const library = inject(FaIconLibrary);
     library.addIcons(faGoogle, faSnapchat);
+  }
+
+  onSnapchatLogin(): void {
+    this.loginService.loginWithSnapchat(this.postLoginRedirect() ?? undefined);
   }
 
   onAvatarError(event: Event) {

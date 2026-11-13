@@ -69,12 +69,16 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
   unlockedPrizesCount = computed<number>(() => {
     const pts = this.currentPoints();
-    return this.prizes().filter((p: Prize) => pts >= p.pointsRequired).length;
+    return this.prizes().filter(
+      (p: Prize) => pts >= p.pointsRequired || this.isClaimed(p),
+    ).length;
   });
 
   nextPrize = computed<Prize | null>(() => {
     const pts = this.currentPoints();
-    const locked = this.prizes().filter((p: Prize) => pts < p.pointsRequired);
+    const locked = this.prizes().filter(
+      (p: Prize) => pts < p.pointsRequired && !this.isClaimed(p),
+    );
     if (locked.length === 0) return null;
     return locked.reduce(
       (min: Prize, curr: Prize) =>
@@ -150,7 +154,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   }
 
   getRewardProgress(prize: Prize): number {
-    if (prize.pointsRequired <= 0) return 100;
+    if (this.isClaimed(prize) || prize.pointsRequired <= 0) return 100;
     return Math.min(
       100,
       Math.round((this.currentPoints() / prize.pointsRequired) * 100),
@@ -158,11 +162,14 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   }
 
   getPointsNeeded(prize: Prize): number {
+    if (this.isClaimed(prize)) return 0;
     return Math.max(0, prize.pointsRequired - this.currentPoints());
   }
 
   isUnlocked(prize: Prize): boolean {
-    return this.currentPoints() >= prize.pointsRequired;
+    return (
+      this.isClaimed(prize) || this.currentPoints() >= prize.pointsRequired
+    );
   }
 
   isClaimed(prize: Prize): boolean {

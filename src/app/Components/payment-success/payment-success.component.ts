@@ -1,13 +1,16 @@
-import { Component, inject, OnInit } from "@angular/core";
-
-import { RouterModule } from "@angular/router";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { MatCardModule } from "@angular/material/card";
-
-import { MediaService } from "../../Services/media.service"; // Adjust path if needed
+import { Component, effect, inject, OnInit } from "@angular/core";
 import { Analytics, logEvent } from "@angular/fire/analytics";
-import { environment } from "../../../environments/environment";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
+import { RouterModule } from "@angular/router";
+import { environment } from "@environments/environment";
+import {
+  ChallengeService,
+  PHOTO_ALBUM_PRIZE_ID,
+} from "@Services/challenge.service";
+import { LoginService } from "@Services/login.service";
+import { MediaService } from "@Services/media.service";
 
 @Component({
   selector: "app-payment-success",
@@ -17,6 +20,8 @@ import { environment } from "../../../environments/environment";
 })
 export class PaymentSuccessComponent implements OnInit {
   private mediaService = inject(MediaService);
+  private loginService = inject(LoginService);
+  private challengeService = inject(ChallengeService);
   private analytics = inject(Analytics, { optional: true });
   isDownloading = false;
   downloadComplete = false;
@@ -40,8 +45,15 @@ export class PaymentSuccessComponent implements OnInit {
   // 2. Define a filename, using the helper function to include today's date.
   myDatedFilename = `receipt-photo-album-${this.getTodaysDateFormatted()}.txt`;
 
+  constructor() {
+    effect(() => {
+      if (this.loginService.currentUser()) {
+        void this.challengeService.markPrizeClaimed(PHOTO_ALBUM_PRIZE_ID);
+      }
+    });
+  }
+
   ngOnInit(): void {
-    this.downloadReceipt();
     if (this.analytics) {
       logEvent(this.analytics, "payment_success", { page: "payment-success" });
     }

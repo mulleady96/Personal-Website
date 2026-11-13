@@ -1,18 +1,25 @@
-import { Component, inject } from "@angular/core";
+import { Component, effect, inject } from "@angular/core";
 import { Functions, httpsCallable } from "@angular/fire/functions";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
-import { MatError } from "@angular/material/form-field";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { MatError, MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
-import { loadStripe, Stripe } from "@stripe/stripe-js";
-import { environment } from "src/environments/environment";
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatFormFieldModule } from "@angular/material/form-field";
+import { Router } from "@angular/router";
+import { LoginComponent } from "@Components/login/login.component";
+import { environment } from "@environments/environment";
+import {
+  ChallengeService,
+  PHOTO_ALBUM_PRIZE_ID,
+} from "@Services/challenge.service";
+import { LoginService } from "@Services/login.service";
+import { loadStripe } from "@stripe/stripe-js";
 
 @Component({
   selector: "app-pricing-dialog",
+  standalone: true,
   imports: [
     MatBadgeModule,
     MatCardModule,
@@ -22,26 +29,52 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatError,
     MatDialogModule,
     MatFormFieldModule,
+    LoginComponent,
   ],
   templateUrl: "./pricing-dialog.component.html",
-  styleUrls: ["./pricing-dialog.component.css"],
+  styleUrls: ["./pricing-dialog.component.scss"],
 })
 export class PricingDialogComponent {
+  public loginService = inject(LoginService);
+  private challengeService = inject(ChallengeService);
+  private functions: Functions = inject(Functions);
+  private router = inject(Router);
+  private dialogRef = inject(MatDialogRef<PricingDialogComponent>, {
+    optional: true,
+  });
+  private readonly wasLoggedInInitially = Boolean(
+    this.loginService.currentUser(),
+  );
+
   isLoading = false;
   error: string | null = null;
-  private functions: Functions = inject(Functions);
+
+  constructor() {
+    effect(() => {
+      const user = this.loginService.currentUser();
+      if (!this.wasLoggedInInitially && user) {
+        this.navigateToPaymentSuccess();
+      }
+    });
+  }
+
+  navigateToPaymentSuccess(): void {
+    void this.challengeService.markPrizeClaimed(PHOTO_ALBUM_PRIZE_ID);
+    this.dialogRef?.close();
+    void this.router.navigate(["/payment-success"]);
+  }
 
   async redirectToCheckout(): Promise<void> {
     this.isLoading = true;
     this.error = null;
 
     // 1. Call our new Firebase Function to create the checkout session
-    const createSession = httpsCallable(
+    const createSession = httpsCallable<void, { id: string }>(
       this.functions,
       "createStripeCheckoutSession",
     );
     try {
-      const result = (await createSession()) as { data: { id: string } };
+      const result = await createSession();
       const sessionId = result.data.id;
 
       // 2. Redirect to Stripe's hosted checkout page

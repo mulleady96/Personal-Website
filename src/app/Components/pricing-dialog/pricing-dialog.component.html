@@ -1,11 +1,22 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>Unlock the Full Collection</mat-card-title>
-    <mat-card-subtitle>One-Time payment</mat-card-subtitle>
+    <mat-card-subtitle>
+      @if (loginService.currentUser()) {
+        Free with your account
+      } @else {
+        One-Time payment
+      }
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="display-container">
-      <span class="amount">€5</span>
+      @if (loginService.currentUser()) {
+        <span class="original-amount">€5</span>
+        <span class="amount free-amount">Free</span>
+      } @else {
+        <span class="amount">€5</span>
+      }
     </div>
     <mat-list>
       <mat-list-item>
@@ -21,24 +32,52 @@
         <span>Lifetime access to new content</span>
       </mat-list-item>
     </mat-list>
+
+    @if (!loginService.currentUser()) {
+      <button
+        mat-raised-button
+        color="primary"
+        class="purchase-button w-100"
+        (click)="redirectToCheckout()"
+        [disabled]="isLoading"
+      >
+        @if (!isLoading) {
+          <span>Buy Now</span>
+        }
+        @if (isLoading) {
+          <span>Redirecting to payment...</span>
+        }
+      </button>
+      @if (error) {
+        <mat-error class="checkout-error text-center">{{ error }}</mat-error>
+      }
+
+      <div class="or-divider">
+        <span>or</span>
+      </div>
+    }
+
+    <div class="free-login-section flex-col-gap-10 text-center">
+      @if (!loginService.currentUser()) {
+        <p class="free-login-prompt m-0">
+          Sign in to receive the photo album for free
+        </p>
+        <app-login
+          [showChallenges]="false"
+          postLoginRedirect="/payment-success"
+        ></app-login>
+      } @else {
+        <app-login [showChallenges]="false"></app-login>
+        <button
+          mat-flat-button
+          color="primary"
+          class="purchase-button w-100"
+          (click)="navigateToPaymentSuccess()"
+        >
+          <mat-icon>photo_album</mat-icon>
+          <span>Get Free Photo Album</span>
+        </button>
+      }
+    </div>
   </mat-card-content>
-  <mat-card-actions>
-    <button
-      mat-raised-button
-      color="primary"
-      class="purchase-button"
-      (click)="redirectToCheckout()"
-      [disabled]="isLoading"
-    >
-      @if (!isLoading) {
-        <span>Buy Now</span>
-      }
-      @if (isLoading) {
-        <span>Redirecting to payment...</span>
-      }
-    </button>
-  </mat-card-actions>
-  @if (error) {
-    <mat-error>{{ error }}</mat-error>
-  }
 </mat-card>

@@ -159,9 +159,11 @@ $dark-theme: mat.define-theme(
 
 @mixin create-light-theme() {
   @include mat.all-component-themes($light-theme);
+  @include mat.system-level-colors($light-theme);
 }
 
 @mixin create-dark-theme() {
   // This mixin only generates the color styles now (we use light theme by default).
   @include mat.all-component-colors($dark-theme);
+  @include mat.system-level-colors($dark-theme);
 }
